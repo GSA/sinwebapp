@@ -1,0 +1,6 @@
+applications:
+    - name: sinwebapp
+path: ./
+buildpack: https://github.com/cloudfoundry/python-buildpack.git
+stack: cflinuxfs3
+command: bash init-sinwebapp.sh

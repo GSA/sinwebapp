@@ -1,0 +1,1 @@
+gunicorn sinapp.wsgi:application
