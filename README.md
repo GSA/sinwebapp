@@ -5,7 +5,6 @@ Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured pyt
 Steps to get up and running:<br>
 1. Open local.env and edit UAA_CLIENT_ID and UAA_CLIENT_SECRET to the service credentials provided by cloud.gov identity provider
     - Message me for the ID and SECRET!
-2. From project's root directory, run <br><br> 
-        
-<div style="margin-left: 10px;">docker-compose up</div>  
+2. From project's root directory, run <br> 
+>docker-compose up  
      
