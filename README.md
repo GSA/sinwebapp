@@ -1,4 +1,4 @@
-<b>Still in Progress!!!</b>
+# <b>Still in Progress!!!</b>
 
 Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured python library <i>cg-django-uaa</i> to authenticate user.
 
@@ -10,7 +10,7 @@ Steps to get up and running:<br>
 2. From project's root directory, run 
 >docker-compose up  
      
-# CloudFoundry
+## CloudFoundry
 
 1. Stage the app without starting it
 
@@ -34,7 +34,7 @@ No need to bind <i>sin-sql</i> service to app, since it is included in the manif
 > cf restage
 > cf start
 
-# TODO
+## TODO
 - [ ] reset service-key redirect uri on cloud.gov
 - [ ] determine how to protect certain endpoints from unauthenticated individuals
 - [ ] create users with roles in database
