@@ -52,7 +52,7 @@ Again, this uses the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_I
 - [ ] bind roles to html on redirect page after successful login 
 
 ## Useful Links
-[Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/)
-[Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/)
-[CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html)
-[Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)
+- [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/)
+- [Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/)
+- [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html)
+- [Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)
