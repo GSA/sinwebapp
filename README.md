@@ -9,7 +9,7 @@ Steps to get up and running:<br>
 >docker-compose up  
      
 # TODO
-[ ] reset service-key redirect uri on cloud.gov
-[ ] determine how to protect certain endpoints from unauthenticated individuals
-[ ] create users with roles in database
-[ ] bind roles to html on redirect page after successful login 
+- [ ] reset service-key redirect uri on cloud.gov
+- [ ] determine how to protect certain endpoints from unauthenticated individuals
+- [ ] create users with roles in database
+- [ ] bind roles to html on redirect page after successful login 
