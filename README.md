@@ -13,12 +13,12 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 > env: ENVIRONMENT: cloud
 
-You will also find two other environment variables in the <i>local.env</i> file, UAA_CLIENT_ID and UAA_CLIENT_SECRET. The UAA_CLIENT_ID and UAA_CLIENT_SECRET do not matter for local deployments; they are only there to maintain minimal differences in the codebase for cloud and local deployments. In other words, they make life easier. 
+You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local deployments; they are only there to maintain minimal differences in the codebase for cloud and local deployments. In other words, they make life easier. 
 
 2. From project's root directory, run 
 >docker-compose up  
     
-This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> and orchestrate it with <i>postgres</i> image. The database credentials are set up in the <i>docker-compose.yml</i> file, but are hard-coded into the <i>Dockerfile</i> through an environment variable <i>VCAP_SERVICES</i> in order to mimic a CloudFoundry deployment.
+This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> and orchestrate it with <u>postgres</u> image. The database credentials are set up in the <i>docker-compose.yml</i> file, but are hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic a CloudFoundry deployment.
 
 ## CloudFoundry
 
