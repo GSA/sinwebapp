@@ -7,5 +7,5 @@ Steps to get up and running:<br>
     - Message me for the ID and SECRET!
 2. From project's root directory, run <br><br> 
         
-<a text-indent: 10px>docker-compose up</a>  
+<div text-indent: 10px>docker-compose up</div>  
      
