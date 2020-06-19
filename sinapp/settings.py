@@ -12,23 +12,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os, json
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+print("------------","SETTINGS.PY","-----------------")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'thisismyriflethisismygun'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
@@ -74,11 +65,9 @@ WSGI_APPLICATION = 'sinapp.wsgi.application'
 
 ALLOWED_HOSTS = ['*']
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+# Database Configuration
 db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
-print("------","SETTINGS.PY","DATABASE","CONFIGURATION","------")
+print("-----------","DATABASE","CONFIGURATION","-------------")
 print("Database Host: ", db_creds['host'])
 print("Database Name: ", db_creds['db_name'])
 print("Database Username: ", db_creds['username'])
@@ -95,10 +84,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -114,10 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
+# Localization Configuration
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -130,9 +112,9 @@ USE_TZ = True
 
 # cloud.gov OAuth2 properties
 app_env = os.getenv('ENVIRONMENT')
-print("-------------","APPLICATION","ENVIRONMENT","------------")
+print("-------------","APPLICATION","ENVIRONMENT","-----------")
 print(app_env)
-print("--------------------------------------------------")
+print("-------------------------------------------------")
 
 AUTHENTICATION_BACKENDS = [
     'uaa_client.authentication.UaaBackend'
@@ -146,22 +128,24 @@ UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
 
 UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 
-print("-------------","UAA","CONFIGURATION","---------------")
+print("--------------","UAA","CONFIGURATION","----------------")
 if app_env == 'local':
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
+    print("UAA_AUTH_URL: ", UAA_AUTH_URL)
+    print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
 elif app_env == 'cloud':
     UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
     UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
+    print("UAA_AUTH_URL: ", UAA_AUTH_URL)
+    print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
 else:
     print("No ENVIRONMENT variable detected!")
-print("------------------------------------------------")
+print("-------------------------------------------------")
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+# Static Configuration
 STATIC_URL = '/static/'
 
 STATICFILES_DIR = [
