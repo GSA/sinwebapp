@@ -1,4 +1,4 @@
-# <b>Still in Progress!!!</b>
+# <b>SIN Web App: A Work In Progress</b>
 
 Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured python library <i>cg-django-uaa</i> to authenticate user.
 
@@ -12,7 +12,7 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 > env: ENVIRONMENT: cloud
 
-The UAA_CLIENT_ID and UAA_CLIENT_SECRET do not matter for local deployments are only there to maintain minimal differences in the codebase for cloud and local deployments. 
+The UAA_CLIENT_ID and UAA_CLIENT_SECRET do not matter for local deployments; they are only there to maintain minimal differences in the codebase for cloud and local deployments. In other words, they make life easier. 
 
 2. From project's root directory, run 
 >docker-compose up  
