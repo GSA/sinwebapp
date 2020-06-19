@@ -2,7 +2,7 @@
 
 Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured python library <i>cg-django-uaa</i> to authenticate user.
 
-Note the <i>manifest.yml<i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>
+Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>
 ## Local 
 
 1. Open local.env and edit UAA_CLIENT_ID and UAA_CLIENT_SECRET to the service credentials provided by cloud.gov identity provider
