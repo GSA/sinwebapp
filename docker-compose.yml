@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+    sin_web_app:
+        build: ./
+        ports: 
+            - "8000:8000"
+        links:
+            - "sin_postgres"
+        depends_on: 
+            - "sin_postgres"
+        env_file:
+            - local.env
+    sin_postgres:
+        image: "postgres:latest"
+        ports: 
+            - "5432:5432"
+        environment:
+            - POSTGRES_DB=sinwebapp
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=root

@@ -78,6 +78,11 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
+print("------","SETTINGS.PY ","DATABASE CONFIGURATION","------")
+print("Database Host: ", db_creds['host'])
+print("Database Name: ", db_creds['db_name'])
+print("Database Username: ", db_creds['username'])
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -130,6 +135,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = 'uaa_client:login'
+
+LOGIN_REDIRECT_URL = '/success'
 
 UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
 
