@@ -77,7 +77,7 @@ ALLOWED_HOSTS = ['*']
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-db_creds = json.loads(os.environ('VCAP_SERVICES'))['aws-rds'][0]['credentials']
+db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
