@@ -2,7 +2,7 @@
 
 This is a sample app that uses a <u>cloud.gov</u> OAuth2 client and a pre-configured python library specifically for that client, <i>cg-django-uaa</i>, to authenticate users.
 
-Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>, so when it is pushed to the cloud, it will live at [https://sinwebapp.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route.
+Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u>, so when it is pushed to the cloud, it will live at [https://sinwebapp.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route.
 
 ## Local 
 
