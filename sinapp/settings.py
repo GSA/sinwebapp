@@ -130,15 +130,15 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = 'uaa_client:login'
 
-UAA_CLIENT_ID = 'test'
+UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
 
-UAA_CLIENT_SECRET = 'test'
+UAA_CLIENT_SECRET = os.getnev('UAA_CLIENT_SECRET')
 
-UAA_AUTH_URL = 'test'
+UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
 
-UAA_TOKEN_URL = 'test'
+UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
 
-
+UAA_APPROVED_DOMAINS = ['gsa.gov']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
