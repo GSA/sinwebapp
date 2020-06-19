@@ -46,3 +46,9 @@ No need to bind <i>sin-sql</i> service to app, since it is included in the manif
 - [x] determine how to protect certain endpoints from unauthenticated individuals
 - [ ] create users with roles in database
 - [ ] bind roles to html on redirect page after successful login 
+
+## Useful Links
+[Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/)
+[Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/)
+[CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html)
+[Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)
