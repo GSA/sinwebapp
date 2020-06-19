@@ -17,8 +17,8 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b>
 
 2. Create cloud-gov identity provider service and service key and then bind it to app (replace BASE_URL with web app URL)
 
-> cf create-service cloud-gov-identity-provider sin-oauth sinwebapp
-> cf create-service-key sinwebapp sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'
+> cf create-service cloud-gov-identity-provider oauth-client sin-oauth
+> cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'
 > cf bind-service sinwebapp sin-oauth 
 
 The first line is of the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_INSTANCE', where SERVICE_PLAN is the type of service being implemented, SERVICE_INSTANCE is the name of the particular service created and the APP_INSTANCE is the application space is which the service is made available.
