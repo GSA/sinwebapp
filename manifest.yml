@@ -3,4 +3,6 @@ applications:
 path: ./
 buildpack: https://github.com/cloudfoundry/python-buildpack.git
 stack: cflinuxfs3
+services:
+    - sin-sql
 command: bash init-sinwebapp.sh

@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,14 +77,15 @@ ALLOWED_HOSTS = ['*']
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+db_creds = json.loads(os.environ('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST':'',
-        'NAME': 'sinwebapp',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'PORT': '5432'
+        'HOST': db_creds['host'],
+        'NAME': db_creds['db_name'],
+        'USER': db_creds['username'],
+        'PASSWORD': db_creds['password'],
+        'PORT': db_creds['port']
     }
 }
 
