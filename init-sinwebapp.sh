@@ -3,6 +3,7 @@ python manage.py migrate
 
 if [ "$1" == "local" ]
 then 
+    python manage.py collectstatic --noinput
     echo "> Binding Server To Non-Loopback Address for Local Configuration..."
     gunicorn sinapp.wsgi:application --bind=0.0.0.0
 else

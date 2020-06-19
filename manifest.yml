@@ -6,3 +6,5 @@ stack: cflinuxfs3
 services:
     - sin-sql
 command: bash init-sinwebapp.sh
+env:
+    ENVIRONMENT: cloud

@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't*y-cc5d5ga0d_=%&@#7%q+92894#$nbz2=3u=_&f79=#^bku2'
+SECRET_KEY = 'thisismyriflethisismygun'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,7 +82,7 @@ print("------","SETTINGS.PY","DATABASE","CONFIGURATION","------")
 print("Database Host: ", db_creds['host'])
 print("Database Name: ", db_creds['db_name'])
 print("Database Username: ", db_creds['username'])
-print("--------------------------------------------------")
+print("-------------------------------------------------")
 
 DATABASES = {
     'default': {
@@ -129,9 +129,12 @@ USE_L10N = True
 USE_TZ = True
 
 # cloud.gov OAuth2 properties
+app_env = os.getenv('ENVIRONMENT')
+print("-------------","APPLICATION","ENVIRONMENT","------------")
+print(app_env)
+print("--------------------------------------------------")
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend', 
     'uaa_client.authentication.UaaBackend'
 ]
 
@@ -143,9 +146,16 @@ UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
 
 UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 
-UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
-
-UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
+print("-------------","UAA","CONFIGURATION","---------------")
+if app_env == 'local':
+    UAA_AUTH_URL = 'fake:'
+    UAA_TOKEN_URL = 'fake:'
+elif app_env == 'cloud':
+    UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
+    UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
+else:
+    print("No ENVIRONMENT variable detected!")
+print("------------------------------------------------")
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
 
