@@ -132,7 +132,7 @@ LOGIN_URL = 'uaa_client:login'
 
 UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
 
-UAA_CLIENT_SECRET = os.getnev('UAA_CLIENT_SECRET')
+UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 
 UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
 
