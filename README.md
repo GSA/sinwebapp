@@ -5,7 +5,7 @@ Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured pyt
 Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>
 ## Local 
 
-1. Create a local.env file in project's root directory and verify the following variable is set,
+1. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 > ENVIRONMENT=local
 
 This will be loaded into the <i>settings.py</i> configuration file and allow certain settings to be parsed for their respective environments, <i>local</i> or <i>cloud</i>. Note in the <i>manifest.yml</i> for CloudFoundry, an environment variable is set,
