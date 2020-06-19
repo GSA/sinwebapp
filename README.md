@@ -2,7 +2,7 @@
 
 Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured python library <i>cg-django-uaa</i> to authenticate user.
 
-Steps to get up and running:<br>
+Note the <i>manifest.yml<i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>
 ## Local 
 
 1. Open local.env and edit UAA_CLIENT_ID and UAA_CLIENT_SECRET to the service credentials provided by cloud.gov identity provider
@@ -21,6 +21,10 @@ Steps to get up and running:<br>
 > cf create-service-key sinwebapp sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'
 > cf bind-service sinwebapp sin-oauth 
 
+The first line is of the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_INSTANCE', where SERVICE_PLAN is the type of service being implemented, SERVICE_INSTANCE is the name of the particular service created and the APP_INSTANCE is the application space is which the service is made available.
+
+The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
+
 3. Retrieve client ID and client secret from service key,
 
 > cf service-key sinwebapp sin-key
@@ -34,7 +38,7 @@ Steps to get up and running:<br>
 
 > cf create-service aws-rds medium-psql sin-sql 
 
-No need to bind <i>sin-sql</i> service to app, since it is included in the manifest.
+Again, this uses the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_INSTANCE' just like in step 2. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
 
 6. Restage and start the app
 
