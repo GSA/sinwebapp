@@ -13,7 +13,7 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 > env: ENVIRONMENT: cloud
 
-You will also find two other environment variables in the local.env, UAA_CLIENT_ID and UAA_CLIENT_SECRET. The UAA_CLIENT_ID and UAA_CLIENT_SECRET do not matter for local deployments; they are only there to maintain minimal differences in the codebase for cloud and local deployments. In other words, they make life easier. 
+You will also find two other environment variables in the <i>local.env</i> file, UAA_CLIENT_ID and UAA_CLIENT_SECRET. The UAA_CLIENT_ID and UAA_CLIENT_SECRET do not matter for local deployments; they are only there to maintain minimal differences in the codebase for cloud and local deployments. In other words, they make life easier. 
 
 2. From project's root directory, run 
 >docker-compose up  
