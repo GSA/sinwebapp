@@ -18,7 +18,7 @@ You will also find two other environment variables in the <i>local.env</i> file,
 2. From project's root directory, run 
 >docker-compose up  
     
-This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> and orchestrate it with <u>postgres</u> image. The database credentials are set up in the <i>docker-compose.yml</i> file, but are hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic a CloudFoundry deployment.
+This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> and orchestrate it with <u>postgres</u> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
 
 ## CloudFoundry
 
