@@ -1,11 +1,10 @@
 <b>Still in Progress!!!</b>
 
-Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured 
-python library <i>cg-django-uaa</i> to authenticate user.
+Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured python library <i>cg-django-uaa</i> to authenticate user.
 
 Steps to get up and running:<br>
-    - Open local.env and edit UAA_CLIENT_ID and UAA_CLIENT_SECRET
+    1. Open local.env and edit UAA_CLIENT_ID and UAA_CLIENT_SECRET to the service credentials provided by cloud.gov identity provider
         - Message me for the ID and SECRET!
-    - From project's root directory, run <br><br> 
-        docker-compose up 
+    2. From project's root directory, run <br><br> 
+        docker-compose up  
      
