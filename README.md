@@ -1,8 +1,9 @@
 # <b>SIN Web App: A Work In Progress</b>
 
-Sample app that uses cloud.gov login OAuth2 endpoints and the pre-configured python library <i>cg-django-uaa</i> to authenticate user.
+This is a sample app that uses a <u>cloud.gov</u> OAuth2 client and a pre-configured python library specifically for that client, <i>cg-django-uaa</i>, to authenticate users.
 
-Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>
+Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u><br>, so when it is pushed to the cloud, it will live at [https://sinwebapp.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route.
+
 ## Local 
 
 1. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
