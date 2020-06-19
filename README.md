@@ -27,7 +27,7 @@ The second line generates a key so that the application instance can leverage th
 
 3. Retrieve client ID and client secret from service key,
 
-> cf service-key sinwebapp sin-key
+> cf service-key sin-oauth sin-key
 
 4. Django reads the client ID and client secret from Environment Variables. In the local setup, these are contained in the <i>local.env</i>. To set them on CloudFoundry, execute these commands,
 
