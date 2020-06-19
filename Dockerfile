@@ -15,9 +15,6 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
      "port": "5432", \
      "username": "postgres" \ 
     }}]}'
-# Edit these ENVs to correspond to Cloud.Gov service credentials
-ENV UAA_CLIENT_ID='client id goes here'
-ENV UAA_CLIENT_SECRET='client secret goes here'
 
 COPY /authentication/ /home/sinwebapp/authentication/
 COPY /sinapp/ /home/sinwebapp/sinapp/
