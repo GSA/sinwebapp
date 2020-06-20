@@ -60,6 +60,8 @@ Again, this uses the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_I
 - [x] reset service-key redirect uri on cloud.gov
 - [x] determine how to protect certain endpoints from unauthenticated individuals
 - [ ] create users with roles in database
+- [ ] create session middleware to store OAuth2 code and convert it to token
+- [ ] retrieve user email from token and compare it against database to find roles
 - [ ] bind roles to html on redirect page after successful login 
 
 ## Useful Links
