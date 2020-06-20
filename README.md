@@ -32,7 +32,7 @@ This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> a
 > cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'
 > cf bind-service sinwebapp sin-oauth 
 
-The first line is of the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_INSTANCE', where SERVICE_PLAN is the type of service being implemented, SERVICE_INSTANCE is the name of the particular service created and the APP_INSTANCE is the application space is which the service in made available.
+The first line is of the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>SERVICE_INSTANCE</u> <u>APP_INSTANCE</u>'</i>, where <u>SERVICE_PLAN</u> is the type of service being implemented, <u>SERVICE_INSTANCE</u> is the name of the particular service created and the (<u>APP_INSTANCE</u> is the application space is which the service in made available.
 
 The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
 
@@ -49,7 +49,7 @@ The second line generates a key so that the application instance can leverage th
 
 > cf create-service aws-rds medium-psql sin-sql 
 
-Again, this uses the form 'cf create-service SERVICE_PLAN SERVICE_INSTANCE APP_INSTANCE' just like in step 2. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
+Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>SERVICE_INSTANCE</u> <u>APP_INSTANCE</u>'</i> just like in step 2, since we are creating a service in an application space. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
 
 6. Restage and start the app
 

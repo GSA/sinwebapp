@@ -11,10 +11,10 @@ class UserInfoMiddleware:
 
         # DEBUG output
         if settings.DEBUG:
-            print('Intercepted Request Path:', path)
+            print('UserInfoMiddelware:','Intercepted Request Path:', path)
             if path == '/auth/callback':
-                print('Detected OAuth Callback...')
-                print('OAuth CallBack Code Parameter:', request.GET.get('code',"nothing"))
+                print('UserInfoMiddelware:','Detected OAuth Callback...')
+                print('UserInfoMiddelware:','OAuth CallBack Code Parameter:', request.GET.get('code',"nothing"))
 
         # Retrieve Code From Callback and Store in Sessoin
         if path == '/auth/callback':
@@ -30,7 +30,7 @@ class UserInfoMiddleware:
 
             # DEBUG output
             if settings.DEBUG:
-                print('Encoded Code Post:', post_data)
+                print('UserInfoMiddelware:','Toekn Post Data:', post_data)
                 
         response = self.get_response(request)
 
