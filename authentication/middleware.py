@@ -1,5 +1,5 @@
 from django.http.request import HttpRequest
-from . import settings
+from ..sinapp import settings
 
 class UserInfoMiddleware:
     def __init__(self, get_response):
