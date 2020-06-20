@@ -14,23 +14,12 @@ class UserInfoMiddleware:
             print('UserInfoMiddelware:','Intercepted Request Path:', path)
             if path == '/auth/callback':
                 print('UserInfoMiddelware:','Detected OAuth Callback...')
-                print('UserInfoMiddelware:','OAuth CallBack Code Parameter:', request.GET.get('code',"nothing"))
+                print('UserInfoMiddelware:','OAuth CallBack Code Parameter:', request.GET.get('code'))
 
         # Retrieve Code From Callback and Store in Sessoin
         if path == '/auth/callback':
             code = request.GET.get('code')
-            post_data = urlencode({
-                'code': code, 
-                'grant_type': 'authorization_code',
-                'response_type': 'token',
-                'client_id': settings.UAA_CLIENT_ID,
-                'client_secret': settings.UAA_CLIENT_SECRET,
-            })
-            request.session['token_post_data'] = post_data
-
-            # DEBUG output
-            if settings.DEBUG:
-                print('UserInfoMiddelware:','Toekn Post Data:', post_data)
+            request.session['token_code'] = code
                 
         response = self.get_response(request)
 
