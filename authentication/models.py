@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Role(model.Models):
+class Role(models.Models):
     role_name: models.CharField(max_length=50)
 
 class User(models.Model):
