@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os, json
 
-print("------------","SETTINGS.PY","-----------------")
+print("----------------","SETTINGS.PY","-------------------")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'thisismyriflethisismygun'
@@ -37,7 +37,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'sinapp.middleware.UserInfoMiddleware'
+    'authentication.middleware.UserInfoMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'uaa_client.middleware.UaaRefreshMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
