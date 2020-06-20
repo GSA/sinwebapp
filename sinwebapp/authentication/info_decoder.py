@@ -1,28 +1,11 @@
-import requests
-import jwt
 from core import settings
+from django.contrib.auth.models import User
 
 def decodeUserInfo(request):
-    post_code = request.session['token_code']
-    post_data = {
-        'code': post_code, 
-        'grant_type': 'authorization_code',
-        'response_type': 'token',
-        'client_id': settings.UAA_CLIENT_ID,
-        'client_secret': settings.UAA_CLIENT_SECRET,
-    }
+    
+    for key, value in request.session.items():
+        print('{} => {}'.format(key, value))
 
-    if settings.DEBUG:
-        print('decoreUserInfo:', 'Token Code:', post_code)
-        print('decodeUserInfo:', 'settings.UAA_TOKEN_URL:', settings.UAA_TOKEN_URL)
-        print('decodeUserInfo:', 'Token Post Data:', post_data)
-
-    post = requests.post(settings.UAA_TOKEN_URL, post_data)
-    post_response = post.text
-
-    if settings.DEBUG:
-        print('decodeUserInfo:', 'Token Post Response: ', post_response)
-
-    # exchange code for token
-    # TODO: decode token
-    # TODO: save user info in session 
+    user_id = request.session['_auth_user_id']
+    this_user = User.objects.get(id=user_id)
+    print(this_user.email)
