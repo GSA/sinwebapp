@@ -13,6 +13,7 @@ def decodeUserInfo(request):
     }
 
     if settings.DEBUG:
+        print('decoreUserInfo:', 'Token Code:', post_code)
         print('decodeUserInfo:', 'settings.UAA_TOKEN_URL:', settings.UAA_TOKEN_URL)
         print('decodeUserInfo:', 'Token Post Data:', post_data)
 
@@ -21,7 +22,7 @@ def decodeUserInfo(request):
 
     if settings.DEBUG:
         print('decodeUserInfo:', 'Token Post Response: ', post_response)
-        
+
     # exchange code for token
     # TODO: decode token
     # TODO: save user info in session 
