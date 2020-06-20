@@ -25,8 +25,8 @@ class UserInfoMiddleware:
                 'response_type': 'token',
                 'client_id': settings.UAA_CLIENT_ID,
                 'client_secret': settings.UAA_CLIENT_SECRET,
-            }).encode('utf-8')
-            request.session['encoded_token_post'] = post_data
+            })
+            request.session['token_post_data'] = post_data
 
             # DEBUG output
             if settings.DEBUG:

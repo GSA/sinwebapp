@@ -3,7 +3,7 @@ FROM python
 WORKDIR /home/
 RUN mkdir /sinwebapp/
 WORKDIR /home/sinwebapp/
-RUN mkdir ./authentication/ && mkdir ./sinapp/ && mkdir ./static/
+RUN mkdir ./authentication/ && mkdir ./core/ && mkdir ./static/
 
 # Configured to mimic CloudFoundry deployment for minimal changes 
 # between local and cloud deployments.
@@ -16,11 +16,11 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
      "username": "postgres" \ 
     }}]}'
 
-COPY /authentication/ /home/sinwebapp/authentication/
-COPY /sinapp/ /home/sinwebapp/sinapp/
-COPY /static/ /home/sinwebapp/static/
-COPY requirements.txt /home/sinwebapp/requirements.txt
-COPY manage.py /home/sinwebapp/
+COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
+COPY /sinwebapp/core/ /home/sinwebapp/core/
+COPY /sinwebapp/static/ /home/sinwebapp/static/
+COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
+COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY init-sinwebapp.sh /home/sinwebapp/
 
 RUN pip install -r ./requirements.txt

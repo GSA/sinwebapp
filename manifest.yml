@@ -1,6 +1,6 @@
 applications:
     - name: sinwebapp
-path: ./
+path: ./sinwebapp/
 buildpack: https://github.com/cloudfoundry/python-buildpack.git
 stack: cflinuxfs3
 services:
