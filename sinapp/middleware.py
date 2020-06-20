@@ -1,9 +1,9 @@
 from django.http.request import HttpRequest
-from ..sinapp import settings
+from . import settings
 
 class UserInfoMiddleware:
     def __init__(self, get_response):
-        self.response = get_response
+        self.get_response = get_response
 
     def __call__(self, request: HttpRequest):
 
@@ -14,6 +14,6 @@ class UserInfoMiddleware:
             print('request path', path)
             print('oauth code', code)
 
-        response = self.get_response
+        response = self.get_response(request)
 
         return response
