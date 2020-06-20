@@ -1,43 +1,37 @@
 from urllib.parse import urlencode
-from urllib.request import urlopen
-import jwt
 from django.http.request import HttpRequest
 from . import settings
 
 class UserInfoMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.token_exchange_url = 'https://uaa.fr.cloud.gov/oauth/token'
 
     def __call__(self, request: HttpRequest):
         path=request.path
 
         # DEBUG output
         if settings.DEBUG:
-            print('Intercepted Incoming Request Path:', path)
+            print('Intercepted Request Path:', path)
             if path == '/auth/callback':
                 print('Detected OAuth Callback...')
                 print('OAuth CallBack Code Parameter:', request.GET.get('code',"nothing"))
 
-        # Retrieve User Info From Token
+        # Retrieve Code From Callback and Store in Sessoin
         if path == '/auth/callback':
             code = request.GET.get('code')
-            params = urlencode({
+            post_data = urlencode({
                 'code': code, 
                 'grant_type': 'authorization_code',
                 'response_type': 'token',
                 'client_id': settings.UAA_CLIENT_ID,
                 'client_secret': settings.UAA_CLIENT_SECRET,
+            }).encode('utf-8')
+            request.session['encoded_token_post'] = post_data
 
-            })
-            post = urlopen(self.token_exchange_url, params)
-            post_response = post.read()
-            print(post_response)
-
-            # exchange code for token
-            # decode token
-            # save user info in session 
-
+            # DEBUG output
+            if settings.DEBUG:
+                print('Encoded Code Post:', post_data)
+                
         response = self.get_response(request)
 
         return response
