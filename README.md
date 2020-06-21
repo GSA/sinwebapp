@@ -64,6 +64,10 @@ Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>S
 - [ ] retrieve user email from token and compare it against database to find roles
 - [ ] bind roles to html on redirect page after successful login 
 
+## Thoughts
+
+Currently have a (unimplemented) model for Users and Roles, but I'm pretty sure the default Django authentication backend can do this out of the box: https://docs.djangoproject.com/en/3.0/topics/auth/default/
+
 ## Useful Links
 - [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
 - [Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>

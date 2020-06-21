@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from authentication.user_info import retrieveUserEmail
+from django.contrib.auth import logout
 
 def login_page(request):
     return render(request, 'login_splash.html')
 
 @login_required
 def login_success(request):
-    user_email = retrieveUserEmail(request)
-    return render(request, 'login_success.html', {'user_email': user_email})
+    context= { 'user_email': request.user.email }
+    return render(request, 'login_success.html', context)
     
 def logout_page(request):
+    logout(request)
     return render(request, 'logout_splash.html')
