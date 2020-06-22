@@ -42,7 +42,7 @@ The second line generates a key so that the application instance can leverage th
 
 4. Django reads the client ID and client secret from Environment Variables. In the local setup, these are contained in the <i>local.env</i>. To set them on CloudFoundry, execute these commands,
 
-> cf set-env sinwebapp UAA_CLIENT_ID "client id goes here"
+> cf set-env sinwebapp UAA_CLIENT_ID "client id goes here"<br>
 > cf set-env sinwebapp UAA_CLIENT_SECRET "client secret goes here"
 
 5. Create a PostgresSql service,
