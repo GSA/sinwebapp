@@ -85,7 +85,7 @@ Groups have an attribute <b>permissions</b>, which we can declare in this file, 
 We can define any type of permissions we want and give it to the whole group, like so,
 
 > new_permission = Permission.objects.get(name='new_permission')<br> 
-> newgroup.permissions.add(can_fm_list)
+> newgroup.permissions.add(new_permission)
 
 We can then import the Django auth Users class,
 
