@@ -66,9 +66,9 @@ Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>S
 ## Thoughts
 
 ### Roles
-(Django Authentication Documentation)[https://docs.djangoproject.com/en/3.0/topics/auth/default/]<br><br>
+[Django Authentication Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/)<br><br>
 
-Roles can be implemented with the Groups object class provided by the Django authentication backend: (Groups class documentation)[https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group] <br><br>
+Roles can be implemented with the Groups object class provided by the Django authentication backend: [Groups class documentation](https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group) <br><br>
 
 First, create a python file in the <i>core</i> directory that we will provide to the initialization script, <i>init-sinwebapp.sh</i>. Then import the Groups class from the Django authentication library into that file,
 
@@ -78,7 +78,7 @@ We can define three <i>Groups</i>: Admin, Approvers and Users, like so,
 
 > new_group = Group.objects.get(name='new_group_name') 
 
-Groups have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. (Permissions class documentation)[https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization]. <i>Permissions</i> are another class we will need to import,
+Groups have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. [Permissions class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization). <i>Permissions</i> are another class we will need to import,
 
 > import django.contrib.auth.models.Permissions
 
@@ -91,7 +91,7 @@ We can then import the Django auth Users class,
 
 > import django.contrib.auth.models.Users
 
-Users are the finally piece of the puzzle. (User class documentation)[https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects]. And then add Users to these groups like so,
+Users are the finally piece of the puzzle. [User class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects). And then add Users to these groups like so,
 
 > new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
 > new_group.user_set.add(your_user)
