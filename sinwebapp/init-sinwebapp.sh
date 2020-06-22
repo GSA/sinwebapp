@@ -1,6 +1,3 @@
-echo "> Migrating Django Database Files..."
-python manage.py migrate
-
 if [ "$1" == "local" ]
 then 
     python manage.py collectstatic --noinput
