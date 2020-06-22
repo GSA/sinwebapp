@@ -28,11 +28,11 @@ This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> a
 
 2. Create cloud-gov identity provider service and service key and then bind it to app (replace BASE_URL with web app URL),
 
-> cf create-service cloud-gov-identity-provider oauth-client sin-oauth
-> cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'
-> cf bind-service sinwebapp sin-oauth 
+> cf create-service cloud-gov-identity-provider oauth-client sin-oauth <br>
+> cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
+> cf bind-service sinwebapp sin-oauth <br>
 
-The first line is of the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>SERVICE_INSTANCE</u> <u>APP_INSTANCE</u>'</i>, where <u>SERVICE_PLAN</u> is the type of service being implemented, <u>SERVICE_INSTANCE</u> is the name of the particular service created and the (<u>APP_INSTANCE</u> is the application space is which the service in made available.
+The first line is of the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>SERVICE_INSTANCE</u> <u>APP_INSTANCE</u>'</i>, where <u>SERVICE_PLAN</u> is the type of service being implemented, <u>SERVICE_INSTANCE</u> is the name of the particular service created and the <u>APP_INSTANCE</u> is the application space is which the service in made available.
 
 The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
 
