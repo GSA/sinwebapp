@@ -64,7 +64,11 @@ Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>S
 
 ## Thoughts
 
-Roles can be implemented with the Groups object type provided by the Django authentication backend: https://docs.djangoproject.com/en/3.0/topics/auth/default/
+### Roles
+Roles can be implemented with the Groups object type provided by the Django authentication backend: https://docs.djangoproject.com/en/3.0/topics/auth/default/<br>
+
+### Local deployments
+The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes UAA_TOKEN_URL and UAA_AUTH_URL to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <u>ENVIRONMENT</u> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
 
 ## Useful Links
 - [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
