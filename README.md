@@ -1,8 +1,8 @@
 # <b>SIN Web App: A Work In Progress</b>
 
-This is a sample app that uses a <u>cloud.gov</u> OAuth2 client and a pre-configured python library specifically for that client, <i>cg-django-uaa</i>, to authenticate users.
+This is a sample app that uses a <b>cloud.gov</b> OAuth2 client and a pre-configured python library specifically for that client, <i>cg-django-uaa</i>, to authenticate users.
 
-Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b></u>, so when it is pushed to the cloud, it will live at [https://sinwebapp.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route.
+Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, so when it is pushed to the cloud, it will live at [https://sinwebapp.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route.
 
 ## Local 
 
@@ -19,7 +19,7 @@ You will also find two other environment variables in the <i>local.env</i> file,
 2. From project's root directory, run 
 >docker-compose up  
     
-This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> and orchestrate it with <u>postgres</u> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
+This will build the <b><b>sinwebapp</b></b> locally from the <i>Dockerfile</i> and orchestrate it with <b>postgres</b> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
 
 ## CloudFoundry
 
@@ -33,7 +33,7 @@ This will build the <u><b>sinwebapp</u></b> locally from the <i>Dockerfile</i> a
 > cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 > cf bind-service sinwebapp sin-oauth <br>
 
-The first line is of the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>SERVICE_INSTANCE</u> <u>APP_INSTANCE</u>'</i>, where <u>SERVICE_PLAN</u> is the type of service being implemented, <u>SERVICE_INSTANCE</u> is the name of the particular service created and the <u>APP_INSTANCE</u> is the application space is which the service in made available.
+The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space is which the service in made available.
 
 The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
 
@@ -50,7 +50,7 @@ The second line generates a key so that the application instance can leverage th
 
 > cf create-service aws-rds medium-psql sin-sql 
 
-Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>SERVICE_INSTANCE</u> <u>APP_INSTANCE</u>'</i> just like in step 2, since we are creating a service in an application space. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
+Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i> just like in step 2, since we are creating a service in an application space. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
 
 6. Restage and start the app
 
@@ -71,17 +71,17 @@ Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>S
 [Permissions class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization)<br>
 [User class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
 
-Roles can be implemented with the <u>Groups</u>, <u>Permissions</u> and <u>Users</u> object classes provided by the Django authentication backend. <br>
+Roles can be implemented with the <b>Groups</b>, <b>Permissions</b> and <b>Users</b> object classes provided by the Django authentication backend. <br>
 
 First, create a python file in the <i>core</i> directory that we will provide to the initialization script, <i>init-sinwebapp.sh</i>. Then import the Groups class from the Django authentication library into that file,
 
 > import django.contrib.auth.models.Group 
 
-We can define three <u>Groups</u>: Admin, Approvers and Users, like so,
+We can define three <b>Groups</b>: Admin, Approvers and Users, like so,
 
 > new_group = Group.objects.create(name='new_group_name') 
 
-<u>Groups</u> have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. <u>Permissions</u> are another class we will need to import,
+<b>Groups</b> have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. <b>Permissions</b> are another class we will need to import,
 
 > import django.contrib.auth.models.Permissions
 
@@ -90,17 +90,17 @@ We can define any type of permissions we want and give it to the whole group, li
 > new_permission = Permission.objects.create(name='new_permission')<br> 
 > new_group.permissions.add(new_permission)
 
-We can then import the Django auth <u>Users</u> class,
+We can then import the Django auth <b>Users</b> class,
 
 > import django.contrib.auth.models.Users
 
-<u>Users</u> are the finally piece of the puzzle. Add Users to these groups like so,
+<b>Users</b> are the finally piece of the puzzle. Add Users to these groups like so,
 
 > new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
 > new_group.user_set.add(your_user)
 
 ### Local deployments
-The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes <b>UAA_TOKEN_URL</b> and <b>UAA_AUTH_URL</b> to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <u>ENVIRONMENT</u> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
+The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes <b>UAA_TOKEN_URL</b> and <b>UAA_AUTH_URL</b> to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <b>ENVIRONMENT</b> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
 
 ## Useful Links
 - [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
