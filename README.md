@@ -71,17 +71,17 @@ Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>S
 [Permissions class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization)<br>
 [User class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
 
-Roles can be implemented with the Groups, Permissions and Users object classes provided by the Django authentication backend. <br>
+Roles can be implemented with the <u>Groups</u>, <u>Permissions</u> and <u>Users</u> object classes provided by the Django authentication backend. <br>
 
 First, create a python file in the <i>core</i> directory that we will provide to the initialization script, <i>init-sinwebapp.sh</i>. Then import the Groups class from the Django authentication library into that file,
 
 > import django.contrib.auth.models.Group 
 
-We can define three <i>Groups</i>: Admin, Approvers and Users, like so,
+We can define three <u>Groups</u>: Admin, Approvers and Users, like so,
 
 > new_group = Group.objects.create(name='new_group_name') 
 
-Groups have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. <i>Permissions</i> are another class we will need to import,
+<u>Groups</u> have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. <u>Permissions</u> are another class we will need to import,
 
 > import django.contrib.auth.models.Permissions
 
@@ -90,17 +90,17 @@ We can define any type of permissions we want and give it to the whole group, li
 > new_permission = Permission.objects.create(name='new_permission')<br> 
 > new_group.permissions.add(new_permission)
 
-We can then import the Django auth Users class,
+We can then import the Django auth <u>Users</u> class,
 
 > import django.contrib.auth.models.Users
 
-Users are the finally piece of the puzzle. Add Users to these groups like so,
+<u>Users</u> are the finally piece of the puzzle. Add Users to these groups like so,
 
 > new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
 > new_group.user_set.add(your_user)
 
 ### Local deployments
-The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes UAA_TOKEN_URL and UAA_AUTH_URL to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <u>ENVIRONMENT</u> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
+The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes <b>UAA_TOKEN_URL</b> and <b>UAA_AUTH_URL</b> to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <u>ENVIRONMENT</u> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
 
 ## Useful Links
 - [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
