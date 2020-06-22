@@ -76,7 +76,7 @@ First, create a python file in the <i>core</i> directory that we will provide to
 
 We can define three <i>Groups</i>: Admin, Approvers and Users, like so,
 
-> new_group = Group.objects.get(name='new_group_name') 
+> new_group = Group.objects.create(name='new_group_name') 
 
 Groups have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. [Permissions class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization). <i>Permissions</i> are another class we will need to import,
 
@@ -84,7 +84,7 @@ Groups have an attribute <b>permissions</b>, which we can declare in this file, 
 
 We can define any type of permissions we want and give it to the whole group, like so,
 
-> new_permission = Permission.objects.get(name='new_permission')<br> 
+> new_permission = Permission.objects.create(name='new_permission')<br> 
 > newgroup.permissions.add(new_permission)
 
 We can then import the Django auth Users class,
