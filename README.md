@@ -6,7 +6,8 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <u><b>sinwebapp</b>
 
 ## Local 
 
-1. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
+1. The <i>docker-compose.yml</i> sets up the local application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
+
 > ENVIRONMENT=local
 
 This will be loaded into the <i>settings.py</i> configuration file and allow certain settings to be parsed for their respective environments, <i>local</i> or <i>cloud</i>. Note in the <i>manifest.yml</i> for CloudFoundry, an environment variable is set,
@@ -65,7 +66,35 @@ Again, this command uses the form <i>'cf create-service <u>SERVICE_PLAN</u> <u>S
 ## Thoughts
 
 ### Roles
-Roles can be implemented with the Groups object type provided by the Django authentication backend: https://docs.djangoproject.com/en/3.0/topics/auth/default/<br>
+(Django Authentication Documentation)[https://docs.djangoproject.com/en/3.0/topics/auth/default/]<br><br>
+
+Roles can be implemented with the Groups object class provided by the Django authentication backend: (Groups class documentation)[https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group] <br><br>
+
+First, create a python file in the <i>core</i> directory that we will provide to the initialization script, <i>init-sinwebapp.sh</i>. Then import the Groups class from the Django authentication library into that file,
+
+> import django.contrib.auth.models.Group 
+
+We can define three <i>Groups</i>: Admin, Approvers and Users, like so,
+
+> new_group = Group.objects.get(name='new_group_name') 
+
+Groups have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. (Permissions class documentation)[https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization]. <i>Permissions</i> are another class we will need to import,
+
+> import django.contrib.auth.models.Permissions
+
+We can define any type of permissions we want and give it to the whole group, like so,
+
+> new_permission = Permission.objects.get(name='new_permission')<br> 
+> newgroup.permissions.add(can_fm_list)
+
+We can then import the Django auth Users class,
+
+> import django.contrib.auth.models.Users
+
+Users are the finally piece of the puzzle. (User class documentation)[https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects]. And then add Users to these groups like so,
+
+> new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
+> new_group.user_set.add(your_user)
 
 ### Local deployments
 The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes UAA_TOKEN_URL and UAA_AUTH_URL to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <u>ENVIRONMENT</u> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
