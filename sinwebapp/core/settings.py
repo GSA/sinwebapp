@@ -13,6 +13,21 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os, json
 
 print("----------------","SETTINGS.PY","-------------------")
+
+APP_ENV = os.getenv('ENVIRONMENT')
+
+print("-------------","APPLICATION","ENVIRONMENT","-----------")
+print(APP_ENV)
+print("-------------------------------------------------")
+
+if APP_ENV is not None:
+    db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
+    print("-----------","DATABASE","CONFIGURATION","-------------")
+    print("Database Host: ", db_creds['host'])
+    print("Database Name: ", db_creds['db_name'])
+    print("Database Username: ", db_creds['username'])
+    print("-------------------------------------------------")
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'thisismyriflethisismygun'
@@ -67,23 +82,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 ALLOWED_HOSTS = ['*']
 
 # Database Configuration
-db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
-print("-----------","DATABASE","CONFIGURATION","-------------")
-print("Database Host: ", db_creds['host'])
-print("Database Name: ", db_creds['db_name'])
-print("Database Username: ", db_creds['username'])
-print("-------------------------------------------------")
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': db_creds['host'],
-        'NAME': db_creds['db_name'],
-        'USER': db_creds['username'],
-        'PASSWORD': db_creds['password'],
-        'PORT': db_creds['port']
+if APP_ENV is None:
+    DATABASE = {
+        'default':{
+            'ENGINE' : 'django.db.backends.postgresql',
+            'HOST': 'localhost',
+            'USER': 'postgres',
+            'PASSWORD': 'root',
+            'PORT': '5432'
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': db_creds['host'],
+            'NAME': db_creds['db_name'],
+            'USER': db_creds['username'],
+            'PASSWORD': db_creds['password'],
+            'PORT': db_creds['port']
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -112,11 +131,6 @@ USE_L10N = True
 USE_TZ = True
 
 # cloud.gov OAuth2 properties
-app_env = os.getenv('ENVIRONMENT')
-print("-------------","APPLICATION","ENVIRONMENT","-----------")
-print(app_env)
-print("-------------------------------------------------")
-
 AUTHENTICATION_BACKENDS = [
     'uaa_client.authentication.UaaBackend'
 ]
@@ -130,12 +144,12 @@ UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
 UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 
 print("--------------","UAA","CONFIGURATION","----------------")
-if app_env == 'local':
+if APP_ENV == 'local':
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
     print("UAA_AUTH_URL: ", UAA_AUTH_URL)
     print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
-elif app_env == 'cloud':
+elif APP_ENV == 'cloud':
     UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
     UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
     print("UAA_AUTH_URL: ", UAA_AUTH_URL)
