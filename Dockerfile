@@ -10,7 +10,7 @@ RUN mkdir ./authentication/ && mkdir ./core/ && mkdir ./static/
 ENV VCAP_SERVICES='{ "aws-rds": [{ \
     "credentials": { \
      "db_name": "sinwebapp", \
-     "host": "sin_postgres", \
+     "host": "database", \
      "password": "root", \
      "port": "5432", \
      "username": "postgres" \ 
@@ -27,4 +27,4 @@ COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
 
 EXPOSE 8000
 
-CMD ["bash","./init-sinwebapp.sh","local"]
+CMD ["bash","./init-sinwebapp.sh","container"]

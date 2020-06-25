@@ -1,16 +1,16 @@
 version: "3.8"
 services:
-    sin_web_app:
+    web:
         build: ./
         ports: 
             - "8000:8000"
         links:
-            - "sin_postgres"
+            - "database"
         depends_on: 
-            - "sin_postgres"
+            - "database"
         env_file:
             - local.env
-    sin_postgres:
+    database:
         image: "postgres:latest"
         ports: 
             - "5432:5432"
