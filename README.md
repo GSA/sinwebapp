@@ -99,7 +99,7 @@ We can then import the Django auth <b>Users</b> class,
 > new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
 > new_group.user_set.add(your_user)
 
-<b> Update, 6/25:
+<b> Update, 6/25:</b>
 
 I added the necessary configurations for making sure our custom defined Groups, Permissions and Users will be converted into Django migration files and alter the postgresql database when we trigger the 'python manage.py migrate' command upon initialization. There are three functions underneath the file <i>authenication/db_config.py</i>, <b>init_groups</b>, <b>init_permissions</b> and <b>init_users</b>. These three functions are imported into <i>authentication/migrations/0001_initial.py</i>, where they are queued in the migration task list.
 
