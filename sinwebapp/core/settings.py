@@ -17,16 +17,25 @@ print("----------------","SETTINGS.PY","-------------------")
 APP_ENV = os.getenv('ENVIRONMENT')
 
 print("-------------","APPLICATION","ENVIRONMENT","-----------")
-print(APP_ENV)
+print("> ENVIRONMENT: ",APP_ENV)
 print("-------------------------------------------------")
 
 if APP_ENV is not None:
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
-    print("-----------","DATABASE","CONFIGURATION","-------------")
-    print("Database Host: ", db_creds['host'])
-    print("Database Name: ", db_creds['db_name'])
-    print("Database Username: ", db_creds['username'])
-    print("-------------------------------------------------")
+else: 
+    db_creds={
+        'host': 'localhost',
+        'db_name': 'sinwebapp',
+        'username': 'postgres',
+        'password': 'root',
+        'port': '5432'
+    }
+
+print("-----------","DATABASE","CONFIGURATION","-------------")
+print(" > Database Host: ", db_creds['host'])
+print(" > Database Name: ", db_creds['db_name'])
+print(" > Database Username: ", db_creds['username'])
+print("-------------------------------------------------")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -82,27 +91,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 ALLOWED_HOSTS = ['*']
 
 # Database Configuration
-if APP_ENV is None:
-    DATABASE = {
-        'default':{
-            'ENGINE' : 'django.db.backends.postgresql',
-            'HOST': 'localhost',
-            'USER': 'postgres',
-            'PASSWORD': 'root',
-            'PORT': '5432'
-        }
+
+DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'HOST': db_creds['host'],
+    'NAME': db_creds['db_name'],
+    'USER': db_creds['username'],
+    'PASSWORD': db_creds['password'],
+    'PORT': db_creds['port']
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': db_creds['host'],
-            'NAME': db_creds['db_name'],
-            'USER': db_creds['username'],
-            'PASSWORD': db_creds['password'],
-            'PORT': db_creds['port']
-        }
-    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -139,23 +138,27 @@ LOGIN_URL = 'uaa_client:login'
 
 LOGIN_REDIRECT_URL = '/success'
 
-UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
-
-UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
+if APP_ENV is not None:
+    UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
+    UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
+else:
+    UAA_CLIENT_ID = 'fakeclientid'
+    UAA_CLIENT_SECRET = 'fakeclientsecret'
 
 print("--------------","UAA","CONFIGURATION","----------------")
+print('> Setting Up CallBack URLs...')
 if APP_ENV == 'local':
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
-    print("UAA_AUTH_URL: ", UAA_AUTH_URL)
-    print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
 elif APP_ENV == 'cloud':
     UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
     UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
-    print("UAA_AUTH_URL: ", UAA_AUTH_URL)
-    print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
-else:
-    print("No ENVIRONMENT variable detected!")
+elif APP_ENV is None:
+    UAA_AUTH_URL = 'fake:'
+    UAA_TOKEN_URL = 'fake:'
+
+print("UAA_AUTH_URL: ", UAA_AUTH_URL)
+print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
 print("-------------------------------------------------")
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
