@@ -12,13 +12,27 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os, json
 
-print("----------------","SETTINGS.PY","-------------------")
+import logging
+
+LOGGER = logging.getLogger("Settings.py")
+LOGGER.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+LOGGER.addHandler(ch)
+
+LOGGER.info("-------------------------------------------------")
+LOGGER.info('SETTINGS.PY Confgiruation')
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOGGER.info("-------------------------------------------------")
+LOGGER.info("# Directory Location %s", BASE_DIR)
 
 APP_ENV = os.getenv('ENVIRONMENT')
 
-print("-------------","APPLICATION","ENVIRONMENT","-----------")
-print("> ENVIRONMENT: ",APP_ENV)
-print("-------------------------------------------------")
+LOGGER.info("-------------------------------------------------")
+LOGGER.info("# Application Environment")
+LOGGER.info('> ENVIRONMENT: %s', APP_ENV)
 
 if APP_ENV is not None:
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
@@ -31,22 +45,17 @@ else:
         'port': '5432'
     }
 
-print("-----------","DATABASE","CONFIGURATION","-------------")
-print(" > Database Host: ", db_creds['host'])
-print(" > Database Name: ", db_creds['db_name'])
-print(" > Database Username: ", db_creds['username'])
-print("-------------------------------------------------")
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print("-------------","DIRECTORY","LOCATION","---------------")
-print(BASE_DIR)
-print("-------------------------------------------------")
+LOGGER.info("-------------------------------------------------")
+LOGGER.info("# Database Configuration")
+LOGGER.info('> Database Host: %s', db_creds['host'])
+LOGGER.info('> Database Name: %s', db_creds['db_name'])
+LOGGER.info('> Database Username: %s', db_creds['username'])
 
 SECRET_KEY = 'thisismyriflethisismygun'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
@@ -148,8 +157,9 @@ else:
     UAA_CLIENT_ID = 'fakeclientid'
     UAA_CLIENT_SECRET = 'fakeclientsecret'
 
-print("--------------","UAA","CONFIGURATION","----------------")
-print('> Setting Up CallBack URLs...')
+LOGGER.info("-------------------------------------------------")
+LOGGER.info("# UAA Configuratoin")
+
 if APP_ENV == 'local':
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
@@ -160,9 +170,8 @@ elif APP_ENV is None:
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
 
-print("UAA_AUTH_URL: ", UAA_AUTH_URL)
-print("UAA_TOKEN_URL: ", UAA_TOKEN_URL)
-print("-------------------------------------------------")
+LOGGER.info('> UAA_AUTH_URL: %s', UAA_AUTH_URL)
+LOGGER.info('> UAA_TOKEN_URL: %s', UAA_TOKEN_URL)
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
 
@@ -174,3 +183,5 @@ STATICFILES_DIR = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+LOGGER.info("-------------------------------------------------")
