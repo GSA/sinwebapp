@@ -99,6 +99,10 @@ We can then import the Django auth <b>Users</b> class,
 > new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
 > new_group.user_set.add(your_user)
 
+<b> Update, 6/25:
+
+I added the necessary configurations for making sure our custom defined Groups, Permissions and Users will be converted into Django migration files and alter the postgresql database when we trigger the 'python manage.py migrate' command upon initialization. There are three functions underneath the file <i>authenication/db_config.py</i>, <b>init_groups</b>, <b>init_permissions</b> and <b>init_users</b>. These three functions are imported into <i>authentication/migrations/0001_initial.py</i>, where they are queued in the migration task list.
+
 ### Local deployments
 The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes <b>UAA_TOKEN_URL</b> and <b>UAA_AUTH_URL</b> to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <b>ENVIRONMENT</b> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
 
@@ -107,3 +111,7 @@ The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By 
 - [Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
 - [Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
+- [Django: Data Migrations](https://docs.djangoproject.com/en/3.0/topics/migrations/#data-migrations)
+
+## Relevant Stack Discussions
+-  [Django, Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
