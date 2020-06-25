@@ -38,7 +38,7 @@ print(" > Database Username: ", db_creds['username'])
 print("-------------------------------------------------")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print("-----------","DIRECTORY","LOCATION","-------------")
+print("-------------","DIRECTORY","LOCATION","---------------")
 print(BASE_DIR)
 print("-------------------------------------------------")
 
