@@ -17,7 +17,9 @@ import logging
 LOGGER = logging.getLogger("Settings.py")
 LOGGER.setLevel(logging.INFO)
 ch = logging.StreamHandler()
+format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ch.setLevel(logging.INFO)
+ch.setFormatter(format)
 LOGGER.addHandler(ch)
 
 LOGGER.info("-------------------------------------------------")
