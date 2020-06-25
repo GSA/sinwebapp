@@ -14,6 +14,7 @@ def log_config():
     LOGGER.info('SETTINGS.PY Confgiruation')
     LOGGER.info("-------------------------------------------------")
     LOGGER.info("# Directory Location %s", config.BASE_DIR)
+    LOGGER.info('> Debug : %s', config.DEBUG)
     LOGGER.info("-------------------------------------------------")
     LOGGER.info("# Application Environment")
     LOGGER.info('> ENVIRONMENT: %s', config.APP_ENV)
@@ -26,6 +27,7 @@ def log_config():
     LOGGER.info("# UAA Configuratoin")
     LOGGER.info('> UAA_AUTH_URL: %s', config.UAA_AUTH_URL)
     LOGGER.info('> UAA_TOKEN_URL: %s', config.UAA_TOKEN_URL)
+    LOGGER.info('> LOGIN_REDIRECT_URL : %s', config.LOGIN_REDIRECT_URL)
     LOGGER.info("-------------------------------------------------")
 
 if __name__ == "__main__":

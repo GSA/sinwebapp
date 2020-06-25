@@ -18,9 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 APP_ENV = os.getenv('ENVIRONMENT')
 
-if APP_ENV is not None:
+if APP_ENV == 'cloud' or APP_ENV == 'container':
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
-else: 
+else:
+    # app is being run locally 
     db_creds={
         'host': 'localhost',
         'db_name': 'sinwebapp',
@@ -31,7 +32,11 @@ else:
 
 SECRET_KEY = 'thisismyriflethisismygun'
 
-DEBUG = True
+if APP_ENV == "cloud":
+    DEBUG = False
+else: 
+    DEBUG = True
+    WEB_CONCURRENCY = 3
 
 ALLOWED_HOSTS = ['*']
 
@@ -93,21 +98,6 @@ DATABASES = {
     }
 }
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
 # Localization Configuration
 LANGUAGE_CODE = 'en-us'
 
@@ -128,22 +118,18 @@ LOGIN_URL = 'uaa_client:login'
 
 LOGIN_REDIRECT_URL = '/success'
 
-if APP_ENV is not None:
+if APP_ENV == 'cloud':
+    UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'
+    UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
+    UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
     UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
     UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 else:
+    UAA_LOGOUT_URL = '/logout',
+    UAA_AUTH_URL = 'fake:'
+    UAA_TOKEN_URL = 'fake:'
     UAA_CLIENT_ID = 'fakeclientid'
-    UAA_CLIENT_SECRET = 'fakeclientsecret'
-
-if APP_ENV == 'local':
-    UAA_AUTH_URL = 'fake:'
-    UAA_TOKEN_URL = 'fake:'
-elif APP_ENV == 'cloud':
-    UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
-    UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
-elif APP_ENV is None:
-    UAA_AUTH_URL = 'fake:'
-    UAA_TOKEN_URL = 'fake:'
+    UAA_CLIENT_SECRET = 'fake-uaa-provider-client-secret'
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
 
