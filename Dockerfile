@@ -21,7 +21,7 @@ COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/static/ /home/sinwebapp/static/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 COPY /sinwebapp/manage.py /home/sinwebapp/
-COPY init-sinwebapp.sh /home/sinwebapp/
+COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
 
 RUN pip install -r ./requirements.txt
 
