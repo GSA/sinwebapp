@@ -3,6 +3,8 @@ echo "> Migrating Django Database Files..."
 python manage.py makemigrations
 python manage.py migrate 
 
+python ./debug.py
+
 if [ "$1" == "local" ]
 then 
     python manage.py collectstatic --noinput

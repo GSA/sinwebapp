@@ -14,27 +14,9 @@ import os, json
 
 import logging
 
-LOGGER = logging.getLogger("Settings.py")
-LOGGER.setLevel(logging.INFO)
-ch = logging.StreamHandler()
-format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-ch.setLevel(logging.INFO)
-ch.setFormatter(format)
-LOGGER.addHandler(ch)
-
-LOGGER.info("-------------------------------------------------")
-LOGGER.info('SETTINGS.PY Confgiruation')
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-LOGGER.info("-------------------------------------------------")
-LOGGER.info("# Directory Location %s", BASE_DIR)
-
 APP_ENV = os.getenv('ENVIRONMENT')
-
-LOGGER.info("-------------------------------------------------")
-LOGGER.info("# Application Environment")
-LOGGER.info('> ENVIRONMENT: %s', APP_ENV)
 
 if APP_ENV is not None:
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
@@ -46,12 +28,6 @@ else:
         'password': 'root',
         'port': '5432'
     }
-
-LOGGER.info("-------------------------------------------------")
-LOGGER.info("# Database Configuration")
-LOGGER.info('> Database Host: %s', db_creds['host'])
-LOGGER.info('> Database Name: %s', db_creds['db_name'])
-LOGGER.info('> Database Username: %s', db_creds['username'])
 
 SECRET_KEY = 'thisismyriflethisismygun'
 
@@ -159,9 +135,6 @@ else:
     UAA_CLIENT_ID = 'fakeclientid'
     UAA_CLIENT_SECRET = 'fakeclientsecret'
 
-LOGGER.info("-------------------------------------------------")
-LOGGER.info("# UAA Configuratoin")
-
 if APP_ENV == 'local':
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
@@ -171,9 +144,6 @@ elif APP_ENV == 'cloud':
 elif APP_ENV is None:
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
-
-LOGGER.info('> UAA_AUTH_URL: %s', UAA_AUTH_URL)
-LOGGER.info('> UAA_TOKEN_URL: %s', UAA_TOKEN_URL)
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
 
@@ -185,5 +155,3 @@ STATICFILES_DIR = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-LOGGER.info("-------------------------------------------------")
