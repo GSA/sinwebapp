@@ -1,5 +1,5 @@
 
-from django.contrib.auth.models import Group, Users, Permissions
+from django.contrib.auth.models import Group, User, Permission
 
 def init_groups():
 

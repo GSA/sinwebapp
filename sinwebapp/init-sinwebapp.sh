@@ -7,7 +7,7 @@ if [ "$1" == "local" ]
 then 
     python manage.py collectstatic --noinput
     echo ">> LOCAL Environment Detected"
-    echo ">>  Binding Server To Non-Loopback Address for Local Configuration..."
+    echo ">> Binding Server To Non-Loopback Address for Local Configuration..."
     gunicorn core.wsgi:application --bind=0.0.0.0
 else
     echo ">> CLOUD Environment Detected"

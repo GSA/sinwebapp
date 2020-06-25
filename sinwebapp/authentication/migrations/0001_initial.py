@@ -6,7 +6,7 @@ from authentication.db_config import init_groups, init_permissions, init_users
 class Migration(migrations.Migration):
 
     dependencies = [
-        'authentication', '0001_initial'
+        'sinwebapp.authentication', '0001_initial'
     ]
 
     operations = [

@@ -18,7 +18,6 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
 
 COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
-COPY /sinwebapp/static/ /home/sinwebapp/static/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
