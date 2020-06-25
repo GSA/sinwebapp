@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 from django.conf.urls import url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,3 +25,8 @@ urlpatterns = [
     path('', include('authentication.urls')),
     url(r'^auth/', include('uaa_client.urls', namespace='uaa_client'))
 ]
+
+if settings.APP_ENV == 'local':
+    urlpatterns += staticfiles_urlpatterns()
+
+# TODO: configure static service for production

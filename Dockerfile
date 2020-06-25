@@ -16,14 +16,14 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
      "username": "postgres" \ 
     }}]}'
 
+COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
+RUN pip install -r ./requirements.txt
+
 COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
-COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
-
-RUN pip install -r ./requirements.txt
 
 EXPOSE 8000
 

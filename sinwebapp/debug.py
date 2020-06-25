@@ -26,6 +26,7 @@ def log_config():
     LOGGER.info("# UAA Configuratoin")
     LOGGER.info('> UAA_AUTH_URL: %s', config.UAA_AUTH_URL)
     LOGGER.info('> UAA_TOKEN_URL: %s', config.UAA_TOKEN_URL)
+    LOGGER.info("-------------------------------------------------")
 
 if __name__ == "__main__":
     log_config()
