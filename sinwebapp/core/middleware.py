@@ -1,7 +1,7 @@
 from urllib.parse import urlencode
 from django.http.request import HttpRequest
 from . import settings
-import logging
+import logging, re
 
 
 class DebugMiddleware:
@@ -15,8 +15,12 @@ class DebugMiddleware:
         if settings.DEBUG:
             self.LOGGER.info('Intercepted Request Path: %s', path)
             
-            if path == '/auth/callback':
-                self.LOGGER.info('Detected OAuth Callback...')
+            if re.search('auth.+', path):
+                self.LOGGER.info('Detected OAuth Request/Callback...')
+                for key, value in request.session.items():
+                    if value is not None:
+                        self.LOGGER.info('    Session Variable %s : %s', key, value)
+                self.LOGGER.info('Next URL: %s', request.GET.get('next', ''))
                 self.LOGGER.info('OAuth CallBack Code Parameter: %s', request.GET.get('code'))
                 self.LOGGER.info('OAuth CallBack State Parameter %s', request.GET.get('state'))
                 
