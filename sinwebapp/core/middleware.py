@@ -13,14 +13,14 @@ class DebugMiddleware:
         path=request.path
 
         if settings.DEBUG:
-            logger.info("-------------------------------------------------")
-            self.LOGGER.info('Intercepted Request Path: %s', path)
+            self.logger.info("-------------------------------------------------")
+            self.logger.info('Intercepted Request Path: %s', path)
             
             if re.search('auth.+', path):
-                self.LOGGER.info('Detected OAuth Request/Callback...')
+                self.logger.info('Detected OAuth Request/Callback...')
                 for key, value in request.session.items():
                     if value is not None:
-                        self.LOGGER.info('...Session Variable %s : %s', key, value)
+                        self.logger.info('...Session Variable %s : %s', key, value)
                 self.logger.info('Next URL: %s', request.GET.get('next', ''))
                 self.logger.info('OAuth CallBack Code Parameter: %s', request.GET.get('code'))
                 self.logger.info('OAuth CallBack State Parameter %s', request.GET.get('state'))

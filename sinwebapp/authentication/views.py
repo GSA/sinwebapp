@@ -12,7 +12,4 @@ def login_success(request):
     
 def logout(request):
     logout(request)
-    return redirect('/done')
-
-def logout_splash(request):
     return render(request, 'logout_splash.html')

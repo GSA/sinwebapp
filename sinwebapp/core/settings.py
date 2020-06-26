@@ -117,6 +117,7 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = 'uaa_client:login'
 
 LOGIN_REDIRECT_URL = '/success'
+LOGOUT_REDIRECT_URL = '/logout-splash'
 
 if APP_ENV == 'cloud':
     UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'

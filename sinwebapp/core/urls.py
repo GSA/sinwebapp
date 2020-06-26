@@ -22,11 +22,11 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     # App Urls
-    path('', include('authentication.urls')),
+    path('', include('authentication.urls', namespace='authentication')),
     url(r'^auth/', include('uaa_client.urls', namespace='uaa_client'))
 ]
 
-if settings.APP_ENV == 'local':
+if settings.APP_ENV == 'container' or settings.APP_ENV == 'local':
     urlpatterns += staticfiles_urlpatterns()
 
 # TODO: configure static service for production
