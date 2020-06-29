@@ -1,5 +1,6 @@
 echo "> Migrating Django Database Files..."
 
+python manage.py clearsessions
 python manage.py makemigrations
 python manage.py migrate 
 

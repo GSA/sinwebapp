@@ -33,7 +33,7 @@ else:
 SECRET_KEY = 'thisismyriflethisismygun'
 
 if APP_ENV == "cloud":
-    DEBUG = False
+    DEBUG = True
 else: 
     DEBUG = True
     WEB_CONCURRENCY = 3
@@ -117,7 +117,6 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = 'uaa_client:login'
 
 LOGIN_REDIRECT_URL = '/success'
-LOGOUT_REDIRECT_URL = '/logout-splash'
 
 if APP_ENV == 'cloud':
     UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'
@@ -126,7 +125,6 @@ if APP_ENV == 'cloud':
     UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
     UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 else:
-    UAA_LOGOUT_URL = '/logout',
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
     UAA_CLIENT_ID = 'fakeclientid'
