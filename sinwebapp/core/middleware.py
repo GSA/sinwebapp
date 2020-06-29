@@ -7,7 +7,7 @@ from debug import DebugLogger
 class DebugMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.logger = DebugLogger("DebugMiddleware").get_logger()
+        self.logger = DebugLogger("core.middleware.DebugMiddleware").get_logger()
 
     def __call__(self, request: HttpRequest):
 
