@@ -1,18 +1,60 @@
 
 from django.contrib.auth.models import Group, User, Permission
 
-def init_groups(apps, schema_editor):
+def init_groups():
 
-    # create groups here
-    pass
+#read_only
+group, created = Group.objects.get_or_create(name='read_only')
+if created:
+group.permissions.add(can_read_sin)
+logger.info('read_only Group created')
 
-def init_permissions(apps, schema_editor):
+#submitter
+group, created = Group.objects.get_or_create(name='submitter')
+if created:
+group.permissions.add(can_edit_sin)
+logger.info('Submitter Group created')
 
-    # create permissions here
-    pass
+#reviewer
+group, created = Group.objects.get_or_create(name='reviewer')
+if created:
+group.permissions.add(can_edit_sin)
+logger.info('Reviewer Group created')
 
-def init_users(apps, schema_editor):
+#approver
+group, created = Group.objects.get_or_create(name='approver')
+if created:
+group.permissions.add(can_edit_sin)
+logger.info('Approver Group created')
 
-    # create users here
-    pass
-    
+#admin
+group, created = Group.objects.get_or_create(name='admin_user')
+if created:
+group.permissions.add(can_edit_sin, can_edit_users)
+logger.info('Admin Group created')
+
+def init_permissions():
+
+User = apps.get_model('auth', 'User')
+Permission = apps.get_model('auth', 'Permission')
+db_alias = schema_editor.connection.alias
+Permission.objects.using(db_alias).bulk_create([
+Permission(codename='can_read_sin', name='Can view SIN data'),
+Permission(codename='can_edit_sin', name='Can edit SIN data'),
+Permission(codename='can_edit_users', name='Can edit Users')
+])
+
+def init_users():
+
+# create users here
+pass
+
+class Migration(migrations.Migration):
+
+dependencies = [
+('sinwebapp', '0001_initial'),
+]
+
+operations = [
+migrations.RunPython(add_group_permissions),
+]
