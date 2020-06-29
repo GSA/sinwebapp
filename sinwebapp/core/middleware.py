@@ -10,21 +10,19 @@ class DebugMiddleware:
         self.logger = DebugLogger("DebugMiddleware").get_logger()
 
     def __call__(self, request: HttpRequest):
-        path=request.path
 
         if settings.DEBUG:
             self.logger.info("-------------------------------------------------")
-            self.logger.info('Intercepted Request Path: %s', path)
-            
-            if re.search('auth.+', path):
-                self.logger.info('Detected OAuth Request/Callback...')
-                for key, value in request.session.items():
-                    if value is not None:
-                        self.logger.info('...Session Variable %s : %s', key, value)
-                self.logger.info('Next URL: %s', request.GET.get('next', ''))
-                self.logger.info('OAuth CallBack Code Parameter: %s', request.GET.get('code'))
-                self.logger.info('OAuth CallBack State Parameter %s', request.GET.get('state'))
-                
+            self.logger.info('> Request Path: %s', request.path)
+            self.logger.info('> Request Host: %s', request.META["HTTP_HOST"])
+
+            for key, value in request.GET.items():
+                self.logger.info('>> Request Parameter %s = %s', key, value)
+
+            for key, value in request.session.items():
+                if value is not None:
+                    self.logger.info('>>> Session Variable %s = %s', key, value)
+   
         response = self.get_response(request)
 
         return response
