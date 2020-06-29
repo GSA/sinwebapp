@@ -5,9 +5,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def init_groups():
-    # admin
-    admin, created = Group.objects.get_or_create(name='admin_user')
+def init_groups(apps, schema_editor):
+    # admin_user
+    admin_user, created = Group.objects.get_or_create(name='admin_user')
     if created:
         logger.info('Admin Group created')
 
@@ -34,7 +34,7 @@ def init_groups():
 def init_permissions(apps, schema_editor):
     pass
 
-def init_users():
+def init_users(apps, schema_editor):
 
     # create users here
     pass
