@@ -1,13 +1,16 @@
-# TODO: login and target org/space
+# SCRIPT ARGUMENTS 
+# 1: CF Username
+# 2: CF Password
 
 ROUTE="https://sinwebapp.app.cloud.gov"
 LOGIN_REDIRECT="auth"
 LOGOUT_REDIRECT="logout"
 OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$ROUTE/$LOGIN_REDIRECT\",\"$ROUTE/$LOGOUT_REDIRECT\"]}"
 
+cf login -a api.fr.cloud.gov -u $1 -p $2 -o sandbox-gsa
+
 cf create-service aws-rds medium-psql sin-sql
 # TODO: wait for sql service to be created. Takes a bit.
-
 cf create-service cloud-gov-identity-provider oauth-client sin-oauth
 cf create-service-key sin-oauth sin-key -c $OAUTH_SERVICE_ARG
 
