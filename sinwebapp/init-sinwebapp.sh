@@ -1,8 +1,18 @@
 echo "> Migrating Django Database Files..."
 
 python manage.py clearsessions
-python manage.py makemigrations
-python manage.py migrate 
+
+python manage.py migrate --fake authentication zero
+python manage.py migrate --fake-initial
+
+# If first cloud deployment, comment out the above line
+# and uncomment the line below.
+
+# python manage.py migrate 
+
+# If the schema already exists in the connected sql service, 
+# then doing a migrate without the --fake-initial flag
+# will attempt to recreate the schema and error out.
 
 python ./debug.py
 

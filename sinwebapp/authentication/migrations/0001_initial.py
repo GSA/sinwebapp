@@ -11,6 +11,5 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(init_groups),
         migrations.RunPython(init_permissions),
-        migrations.RunPython(init_users),
-        migrations.RunPython(init_group_permissions)
+        migrations.RunPython(init_users)
     ]

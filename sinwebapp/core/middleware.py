@@ -7,9 +7,8 @@ from debug import DebugLogger
 class DebugMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.dl=DebugLogger("core.middleware.DebugMiddleware")
-        self.logger=dl.get_logger()
-
+        self.logger=DebugLogger("core.middleware.DebugMiddleware").get_logger()
+        
     def __call__(self, request: HttpRequest):
 
         if settings.DEBUG:
