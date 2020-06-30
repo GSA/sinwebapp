@@ -1,6 +1,6 @@
 # SCRIPT ARGUMENTS 
-# 1: CF Username
-# 2: CF Password
+# $1: CF Username
+# $2: CF Password
 
 ROUTE="https://sinwebapp.app.cloud.gov"
 LOGIN_REDIRECT="auth"

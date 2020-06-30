@@ -18,7 +18,7 @@ class DebugLogger():
 
     def get_logger(self):
         return self.logger
-
+        
     def log_settings(self):
         self.logger.info("-------------------------------------------------")
         self.logger.info('SETTINGS.PY Configuration')

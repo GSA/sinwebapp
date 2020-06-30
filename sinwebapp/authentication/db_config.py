@@ -5,8 +5,7 @@ from debug import DebugLogger
 
 def init_groups(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_groups").get_logger()
-    logger.info("-------------------------------------------------")
-    logger.info("Initializing Groups...")
+    logger.info("> Initializing Groups...")
 
     admin_user = Group.objects.get_or_create(name='admin_user')
     read_only = Group.objects.get_or_create(name='read_only')
@@ -16,8 +15,7 @@ def init_groups(apps, schema_editor):
 
 def init_permissions(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_permissions").get_logger()
-    logger.info("-------------------------------------------------")
-    logger.info("Initializing Permissions...")
+    logger.info("> Initializing Permissions...")
 
     ct = ContentType.objects.get_for_model(User)
     read_sin = Permission.objects.get_or_create(name="Can read SIN", content_type=ct, codename="read_sin")
@@ -27,8 +25,7 @@ def init_permissions(apps, schema_editor):
 
 def init_users(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_users").get_logger()
-    logger.info("-------------------------------------------------")
-    logger.info("Initializing Users...")
+    logger.info("> Initializing Users...")
 
     # name,email,pass
     read_only_user = User.objects.create_user('read_only_user', 'read_only_user@gsa.gov', 'read_only_user')

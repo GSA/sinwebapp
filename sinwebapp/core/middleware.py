@@ -7,12 +7,12 @@ from debug import DebugLogger
 class DebugMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.logger = DebugLogger("core.middleware.DebugMiddleware").get_logger()
+        self.dl=DebugLogger("core.middleware.DebugMiddleware")
+        self.logger=dl.get_logger()
 
     def __call__(self, request: HttpRequest):
 
         if settings.DEBUG:
-            self.logger.info("-------------------------------------------------")
             self.logger.info('> Request Path: %s', request.path)
             self.logger.info('> Request Host: %s', request.META["HTTP_HOST"])
 
