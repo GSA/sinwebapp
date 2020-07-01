@@ -37,7 +37,7 @@ cf create-service-key sin-oauth sin-key -c $OAUTH_SERVICE_ARG
 echo "> Pushing app to cloud with no-start flag..."
 cf push --no-start
 
-echo "> Binding OAuth Client to app"
+echo "> Binding OAuth Client to app..."
 cf bind-service sinwebapp sin-oauth -c $OAUTH_SERVICE_ARG
 
 SERVICE_KEY ="$(cf service-key sin-oauth sin-key)"
@@ -46,7 +46,7 @@ CLIENT_ID = echo $SERVICE_KEY | python -c \
 CLIENT_SECRET = echo $SERVICE_KEY | python -c \
     'import json,sys;print json.load(sys.stdin)["client_secret"]'
 
-echo "> OAuth Client Credentialss"
+echo "> OAuth Client Credentials"
 echo ">> Client ID: $CLIENT_ID"
 echo ">> Client Secret: $CLIENT_SECRET"
 echo "> Storing OAuth Client Credentials In Cloud Environment Variables..."
