@@ -1,8 +1,26 @@
-<head>
+{% load static %}
 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> SIN Web Form Home</title>
+    <base href="/">
+
+    <link rel="stylesheet" href = "{ % static 'frontend/styles.css'">
 </head>
+
 <body>
+    <app-root></app-root>
+    <script type="text/javascript" src="{ % static 'frontend/runtime.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
+
+
+
     You successfully logged in.<br>
     Your email is: {{ user_email }}<br><br>
     <a href = '/logout'>Logout</a>
 </body>
+
+</html>
