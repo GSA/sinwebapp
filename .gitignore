@@ -1,2 +1,3 @@
 *.pyc
 sinwebapp/static/*
+frontend/node_modules/*
