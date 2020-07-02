@@ -13,6 +13,9 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
      "username": "postgres" \ 
     }}]}'
 
+## DEPENDENCIES
+RUN apt-get update -y && apt-get install -y curl
+
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
 RUN mkdir /sinwebapp/ && mkdir /frontend/
@@ -24,7 +27,8 @@ WORKDIR /home/frontend/
 COPY /frontend/  /home/frontend/
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli@8.2.0
+RUN npm install
 RUN ng build --prod --output-hashing none
 
 ## BUILD BACKEND
@@ -36,7 +40,6 @@ COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
-
 
 EXPOSE 8000
 
