@@ -87,4 +87,5 @@ The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By 
 - [Django: User Class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
 
 ## Relevant Stack Discussions
--  [Django, Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
+- [Django, Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
+- [Creating JSON HttpResponse In Django](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)

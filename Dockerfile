@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.7.7-slim-stretch
 
 ## ENVIRONMENT VARIABLES
     ## VCAP_SERVICES: Delivers Database Credentials to App
@@ -29,13 +29,14 @@ RUN ng build --prod --output-hashing none
 
 ## BUILD BACKEND
 WORKDIR /home/sinwebapp/
-COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
-RUN pip install -r ./requirements.txt
 COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
+COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
+RUN pip install -r ./requirements.txt
+
 
 EXPOSE 8000
 
