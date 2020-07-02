@@ -1,7 +1,7 @@
 FROM python
 
 WORKDIR /home/
-RUN mkdir /sinwebapp/
+RUN mkdir /sinwebapp/ && mkdir /frontend/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && mkdir ./static/
 
@@ -16,6 +16,15 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
      "username": "postgres" \ 
     }}]}'
 
+# Front-End
+WORKDIR /home/frontend/
+COPY /frontend/  /home/frontend/
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get install -y nodejs
+RUN npm install -g @angular/cli
+RUN ng build --prod --output-hashing none
+
+# Back-End
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
 

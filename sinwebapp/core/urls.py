@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^auth/', include('uaa_client.urls', namespace='uaa_client'))
 ]
 
-if settings.DEBUG:
-    urlpatterns += staticfiles_urlpatterns()
+# if settings.DEBUG:
+  #  urlpatterns += staticfiles_urlpatterns()
 
 # TODO: configure static service for production
