@@ -8,7 +8,7 @@
 # the 'rebuild' flag as the third argument will cause this script to wipe the existing
 # environment and start fresh. 
 
-if [[ $(pwd) =~ "cf"]] 
+if [[ $(pwd) =~ "scripts" ]] 
 then
     cd ..
 fi

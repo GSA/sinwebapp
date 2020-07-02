@@ -1,8 +1,13 @@
+echo pwd
 if [[ $(pwd) =~ "scripts" ]]
 then
+    echo '> In scripts directory, moving to frontend directory...'
     cd ../frontend
-elif [[ $(pwd) =~ "sinwebapp"]]
+elif [[ $(pwd) =~ "sinwebapp" ]]
+then
+    echo '> In root directory, moving to frontend directory...'
     cd frontend
 fi
 
-ng build
+echo "> Building Angular frontend..."
+ng build --prod
