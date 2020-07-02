@@ -71,46 +71,7 @@ Once the frontend is build, you can push the application to CloudFoundry.
 - [ ] bind roles to html on redirect page after successful login 
 - [ ] create pipeline to build frontend and deploy to cloud
 
-## Thoughts
-
-### Roles
-[Django Authentication Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/)<br>
-[Groups class documentation](https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group)<br>
-[Permissions class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization)<br>
-[User class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
-
-Roles can be implemented with the <b>Groups</b>, <b>Permissions</b> and <b>Users</b> object classes provided by the Django authentication backend. <br>
-
-First, create a python file in the <i>core</i> directory that we will provide to the initialization script, <i>init-sinwebapp.sh</i>. Then import the Groups class from the Django authentication library into that file,
-
-> import django.contrib.auth.models.Group 
-
-We can define three <b>Groups</b>: Admin, Approvers and Users, like so,
-
-> new_group = Group.objects.create(name='new_group_name') 
-
-<b>Groups</b> have an attribute <b>permissions</b>, which we can declare in this file, that will define the scope of what they are allowed to do. <b>Permissions</b> are another class we will need to import,
-
-> import django.contrib.auth.models.Permissions
-
-We can define any type of permissions we want and give it to the whole group, like so,
-
-> new_permission = Permission.objects.create(name='new_permission')<br> 
-> new_group.permissions.add(new_permission)
-
-We can then import the Django auth <b>Users</b> class,
-
-> import django.contrib.auth.models.Users
-
-<b>Users</b> are the finally piece of the puzzle. Add Users to these groups like so,
-
-> new_user = User.objects.create_user('new_user', 'new_user@fakeemail.com', 'new_password')
-> new_group.user_set.add(your_user)
-
-<b> Update, 6/25:</b>
-
-I added the necessary configurations for making sure our custom defined Groups, Permissions and Users will be converted into Django migration files and alter the postgresql database when we trigger the 'python manage.py migrate' command upon initialization. There are three functions underneath the file <i>authenication/db_config.py</i>, <b>init_groups</b>, <b>init_permissions</b> and <b>init_users</b>. These three functions are imported into <i>authentication/migrations/0001_initial.py</i>, where they are queued in the migration task list.
-
+## Bugs 
 ### Local deployments
 The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes <b>UAA_TOKEN_URL</b> and <b>UAA_AUTH_URL</b> to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <b>ENVIRONMENT</b> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
 
@@ -120,6 +81,10 @@ The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By 
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
 - [Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
 - [Django: Data Migrations](https://docs.djangoproject.com/en/3.0/topics/migrations/#data-migrations)
+- [Django: Authentication Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/)<br>
+- [Django: Groups Class documentation](https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group)<br>
+- [Django: Permissions Class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization)<br>
+- [Django: User Class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
 
 ## Relevant Stack Discussions
 -  [Django, Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
