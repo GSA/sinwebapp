@@ -42,7 +42,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
     'uaa_client',
     'django.contrib.admin',
     'django.contrib.auth',
