@@ -57,11 +57,19 @@ Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>S
 > cf restage
 > cf start
 
+## Frontend
+
+Currently, there is no build pipeline that will automatically compile and deploy the Angular frontend to the cloud. For the time being, when deploying the application to the cloud, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
+
+Once the frontend is build, you can push the application to CloudFoundry.
+
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
 - [x] determine how to protect certain endpoints from unauthenticated individuals
-- [ ] create users with roles in database
+- [x] create users with roles in database
+- [x] integrate angular frontend application with django backend framework
 - [ ] bind roles to html on redirect page after successful login 
+- [ ] create pipeline to build frontend and deploy to cloud
 
 ## Thoughts
 
