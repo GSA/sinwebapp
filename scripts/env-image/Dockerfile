@@ -3,7 +3,7 @@ FROM debian
 WORKDIR /home/
 
 # Install dependencies
-RUN apt-get update -y && apt-get install -y wget dpkg curl 
+RUN apt-get update -y && apt-get install -y curl 
 
 # Install CloudFoundry Command Line Interface
 RUN curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" | tar -zx

@@ -7,15 +7,17 @@
     <title> SIN Web Form Home</title>
     <base href="/">
 
-    <link rel="stylesheet" href = "{% static 'frontend/styles.css'">
+    <link rel="stylesheet" href = "{% static 'frontend/styles.css' %}" >
 </head>
 
 <body>
     <app-root></app-root>
-    <script type="text/javascript" src="{% static 'frontend/runtime.js' %}"></script>
-    <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
-
+    <script type="text/javascript" src="{% static 'frontend/runtime-es5.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/runtime-es2015.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/main-es5.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/main-es2015.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/polyfills-es5.js' %}"></script>
+    <script type="text/javascript" src="{% static 'frontend/polyfills-es2015.js' %}"></script>
 
 
     You successfully logged in.<br>

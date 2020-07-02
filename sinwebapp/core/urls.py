@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^auth/', include('uaa_client.urls', namespace='uaa_client'))
 ]
 
-if settings.APP_ENV == 'container' or settings.APP_ENV == 'local':
+if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
 
 # TODO: configure static service for production
