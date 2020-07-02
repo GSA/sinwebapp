@@ -1,21 +1,12 @@
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-echo $DIR
+cd $SCRIPT_DIR/../frontend
+echo $(pwd)
 
-if [[ $(pwd) =~ "scripts" ]]
-then
-    echo '> In /sinwebapp/scripts/ directory, moving to /sinwebapp/frontend/ directory...'
-    cd ../frontend
-elif [[ $(pwd) =~ "sinwebapp" ]]
-then
-    echo '> In root /sinwebapp/ directory, moving to /sinwebapp/frontend/ directory...'
-    cd frontend
-fi
-
-if [ -d '../sinwebapp/static/frontend' ]
+if [ -d "$SCRIPT_DIR/../sinwebapp/static/frontend" ]
 then
     echo '> Cleaning /sinwebapp/static/frontend folder...'
-    rm -r ../sinwebapp/static/frontend/*
+    rm -r $SCRIPT_DIR/../sinwebapp/static/frontend/*
 fi
 
 echo "> Building Angular frontend..."

@@ -1,28 +1,34 @@
-# SCRIPT ARGUMENTS 
-# $1: CloudFoundry Username
-# $2: CloudFoundry Password
-# $3: rebuild flag
+## SCRIPT ARGUMENTS 
+## $1: CloudFoundry Username
+## $2: CloudFoundry Password
+## $3: Cloud Space
+## $4: Cloud Route
+## $5: rebuild flag
 
-# Description: This script will login to the CloudFoundry environment, initialize
-# service instances, bind them to the app and set environment variables. Passing in
-# the 'rebuild' flag as the third argument will cause this script to wipe the existing
-# environment and start fresh. 
+## DESCRIPTION
+# This script will login to the CloudFoundry environment, initialize service instances, 
+# bind them to the app and set environment variables. Passing in the 'rebuild' flag as 
+# the third argument will cause this script to wipe the existing environment and start 
+# a fresh environment. 
 
-if [[ $(pwd) =~ "scripts" ]] 
-then
-    cd ..
-fi
+## EXAMPLE USAGE
+    # 1: $ ./build-cloud.sh fakeuser fakepassword dev https://sinwebapp.app.cloud.gov 
+        # This will build a new cloud environment
+    # 2: $ ./build-cloud.sh fakeuser fakepassword dev http:s//sinwebapp.app.cloud.gov rebuild
+        # This will take down the current environment on the cloud and build a new one.
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROUTE="https://sinwebapp.app.cloud.gov"
 LOGIN_REDIRECT="auth"
 LOGOUT_REDIRECT="logout"
-OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$ROUTE/$LOGIN_REDIRECT\",\"$ROUTE/$LOGOUT_REDIRECT\"]}"
-CLOUD_ORG="sandbox-gsa"
+OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$4/$LOGIN_REDIRECT\",\"$4/$LOGOUT_REDIRECT\"]}"
+CLOUD_ORG="fas-calc"
 
+cd $SCRIPT_DIR/..
 echo "> Logging Into CloudFoundry..."
-cf login -a api.fr.cloud.gov -u $1 -p $2 -o $CLOUD_ORG
+cf login -a api.fr.cloud.gov -u $1 -p $2 -o $CLOUD_ORG -s $3
 
-if [ $3 == "rebuild" ]
+if [ $5 == "rebuild" ]
 then
     cf delete-service-key sin-oauth sin-key -f
     cf unbind-service sinwebapp sin-oauth
