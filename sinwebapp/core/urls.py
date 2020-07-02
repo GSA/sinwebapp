@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # App Urls
     path('', include('authentication.urls', namespace='authentication')),
-    url(r'^auth/', include('uaa_client.urls', namespace='uaa_client'))
+    path('api/', include('api.urls', namespace='api')),
+    path('auth/', include('uaa_client.urls', namespace='uaa_client'))
 ]
