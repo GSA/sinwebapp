@@ -1,8 +1,14 @@
+# Server and Framework Dependencies
 django>=2.2.13
 gunicorn==20.0.4
+whitenoise==5.1.0
+
+# Database Dependencies
 psycopg2-binary==2.8.5
+
+# Http Dependencies
 django-cors-headers==3.4.0
+django-referrer-policy==1.0.0
 djangorestframework==3.11.0
 cg-django-uaa==2.0.0
-whitenoise==5.1.0
 requests>=2.20.0

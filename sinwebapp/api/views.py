@@ -10,4 +10,6 @@ def user_info(request):
         response = JsonResponse({
             'error': "No user signed in"
         })
+    #response["Access-Control-Allow-Origin"] = "*"
+    #response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
     return response

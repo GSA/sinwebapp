@@ -43,25 +43,37 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'api.apps.ApiConfig',
+
     'uaa_client',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
+    
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    
     'core.middleware.DebugMiddleware',
+    
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'uaa_client.middleware.UaaRefreshMiddleware',
+    
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -111,6 +123,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Header properties
+CORS_ORIGIN_ALLOW_ALL = True
+
+REFERRER_POLICY = 'origin'
 
 # cloud.gov OAuth2 properties
 AUTHENTICATION_BACKENDS = [

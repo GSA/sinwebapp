@@ -20,6 +20,7 @@ export class UserDisplayComponent implements OnInit {
   getUser(): void {
     this.userService.getUser().subscribe(user=>{
       this.user = user;
+      console.log(user)
     })
   }
 }

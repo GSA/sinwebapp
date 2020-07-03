@@ -4,20 +4,20 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-echo "> Cleaning application"
+echo "> Cleaning Application..."
 bash $SCRIPT_DIR/clean-application.sh
 
-echo "> Copying initialization script into app directory..."
+echo "> Copying Initialization Script Into App Directory..."
 cp $SCRIPT_DIR/init-sinwebapp.sh $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 
-echo "> Invoking 'build-frontend.sh' script..."
+echo "> Invoking 'build-frontend.sh' Script..."
 bash $SCRIPT_DIR/build-frontend.sh
 
-echo "> Pushing to the cloud..."
+echo "> Pushing To The Cloud..."
 cd $SCRIPT_DIR/..
 cf push
 cd $SCRIPT_DIR
 
-echo "> Cleaning up..."
+echo "> Cleaning Up..."
 rm $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 bash $SCRIPT_DIR/clean-application.sh
