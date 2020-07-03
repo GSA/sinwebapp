@@ -63,6 +63,14 @@ Currently, there is no build pipeline that will automatically compile and deploy
 
 Once the frontend is build, you can push the application to CloudFoundry.
 
+In other words, if you add code to the frontend, be sure to run this command from the project's root directory:
+
+> bash ./scripts/build-frontend.sh
+
+Before pushing to the cloud,
+
+> cf push
+
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
 - [x] determine how to protect certain endpoints from unauthenticated individuals

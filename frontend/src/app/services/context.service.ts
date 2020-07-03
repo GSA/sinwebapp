@@ -9,7 +9,7 @@ const CLOUD: number = 1
 export class ContextService {
 
   BASE_URL = "https://sinwebapp.app.cloud/gov"
-  USER_ENDPOINT = "/api/user"
+  USER_ENDPOINT = "api/user"
 
   constructor() { }
 

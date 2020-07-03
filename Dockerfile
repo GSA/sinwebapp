@@ -37,7 +37,7 @@ COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
-COPY /sinwebapp/init-sinwebapp.sh /home/sinwebapp/
+COPY /sinwebapp/scripts/init-sinwebapp.sh /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
 

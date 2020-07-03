@@ -1,3 +1,8 @@
+# Executes from sinwebapp/sinwebapp directory (where manage.py is located).
+# Gets copied over to project folder in the push-to-cloud.sh script and then
+# removed once the push is over. Implemented this way for organizational 
+# reasons. (I like to keep all my scripts in one folder.)
+
 echo "> Migrating Django Database Files..."
 
 python manage.py clearsessions
