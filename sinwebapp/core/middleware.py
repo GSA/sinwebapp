@@ -21,6 +21,11 @@ class DebugMiddleware:
             for key, value in request.session.items():
                 if value is not None:
                     self.logger.info('>>> Session Variable %s = %s', key, value)
+
+            if hasattr(request, 'user'):
+                self.logger.info('>>>> Session User: %s', request.user)
+                for key, value in request.user.items():
+                    self.logger.info('>>> Session User %s = %s', key, value)
    
         response = self.get_response(request)
 
