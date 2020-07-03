@@ -71,6 +71,10 @@ Before pushing to the cloud,
 
 > cf push
 
+The BASH script, <i>/scripts/push-to-cf.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>
+
+> bash ./scripts/push-to-cf.sh
+
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
 - [x] determine how to protect certain endpoints from unauthenticated individuals

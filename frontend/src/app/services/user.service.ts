@@ -14,8 +14,8 @@ export class UserService {
               private context: ContextService) { }
 
   public getUser() : Observable<User> {
-    return this.http.get<User[]>(this.context.getUserUrl().toString()).pipe(
-            map(res=> res[0]),
+    console.log("UserService.getUser: Retrieving User...")
+    return this.http.get<User>(this.context.getUserUrl().toString()).pipe(
             catchError(this.handleError<User>("getUser"))
           );
   }

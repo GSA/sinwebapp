@@ -1,3 +1,10 @@
+# ARGUMENTS
+# FLAGS
+# clean
+# build
+# trail
+# TODO: determine number of arguments and parse them
+
 # Cleans the application, copies over scripts into cloud application folder,
 # installs frontend dependencies, builds frontend and then pushes to the 
 # cloud.
@@ -19,5 +26,4 @@ cf push
 cd $SCRIPT_DIR
 
 echo "> Cleaning Up..."
-rm $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 bash $SCRIPT_DIR/clean-application.sh

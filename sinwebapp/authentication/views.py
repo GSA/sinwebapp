@@ -7,8 +7,7 @@ def login_page(request):
 
 @login_required
 def login_success_page(request):
-    context= { 'user_email': request.user.email }
-    return render(request, 'login_success.html', context)
+    return render(request, 'login_success.html')
     
 def logout_page(request):
     logout(request)
