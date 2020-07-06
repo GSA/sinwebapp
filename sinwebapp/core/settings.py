@@ -73,7 +73,7 @@ MIDDLEWARE = [
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'uaa_client.middleware.UaaRefreshMiddleware',
-    
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -138,17 +138,17 @@ LOGIN_URL = 'uaa_client:login'
 
 LOGIN_REDIRECT_URL = '/success'
 
+UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
+
+UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
+
 if APP_ENV == 'cloud':
     UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'
     UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
     UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
-    UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
-    UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
 else:
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
-    UAA_CLIENT_ID = 'fakeclientid'
-    UAA_CLIENT_SECRET = 'fake-uaa-provider-client-secret'
 
 UAA_APPROVED_DOMAINS = ['gsa.gov']
 

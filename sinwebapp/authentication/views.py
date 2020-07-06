@@ -7,6 +7,7 @@ def login_page(request):
 
 @login_required
 def login_success_page(request):
+    print("Request User",request.user)
     return render(request, 'login_success.html')
     
 def logout_page(request):

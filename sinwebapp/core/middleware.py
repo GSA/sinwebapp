@@ -24,8 +24,6 @@ class DebugMiddleware:
 
             if hasattr(request, 'user'):
                 self.logger.info('>>>> Session User: %s', request.user)
-                for key, value in request.user.items():
-                    self.logger.info('>>> Session User %s = %s', key, value)
    
         response = self.get_response(request)
 

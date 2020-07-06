@@ -4,7 +4,11 @@ This is a sample app that uses a <b>cloud.gov</b> OAuth2 client and a pre-config
 
 Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, so when it is pushed to the cloud, it will live at [https://sinwebapp.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route.
 
-## Local 
+## Local Environment
+
+Prerequisites: 
+- Docker : Install [here](https://www.docker.com/products/docker-desktop)
+- Git for Windows (If you're on a Windows OS): Install [here](https://git-scm.com/download/win)
 
 1. The <i>docker-compose.yml</i> sets up the local application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 
@@ -16,12 +20,17 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
 
+The final environment variable is VCAP_SERVICES. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, UAA_CLIENT_SECRET and UAA_CLIENT_ID.
+
 2. From project's root directory, run 
 >docker-compose up  
     
 This will build the <b><b>sinwebapp</b></b> locally from the <i>Dockerfile</i> and orchestrate it with <b>postgres</b> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
 
-## CloudFoundry
+## CloudFoundry Environment
+
+Prerequisites:
+- cf CLI : Install [here](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
 1. Stage the app without starting it
 
@@ -57,7 +66,7 @@ Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>S
 > cf restage
 > cf start
 
-## Frontend
+## Building and Pushing
 
 Currently, there is no build pipeline that will automatically compile and deploy the Angular frontend to the cloud. For the time being, when deploying the application to the cloud, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
 
@@ -74,6 +83,32 @@ Before pushing to the cloud,
 The BASH script, <i>/scripts/push-to-cf.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>
 
 > bash ./scripts/push-to-cf.sh
+
+## Work Flows
+
+The artifacts from the Angular build are outputted into the <i>/sinwebapp/static/</i> directory, where the Django web framework serves them up through <b>gunicorn</b>. The HTML templates in the Django backend are configured to load in these artifacts; since the Angular app enters through these Django templates, there is no <i>index.html</i> in the <i>/frontend/</i> folder. In other words, each Angular app launched from a different Django template is an entirely distinct instance of a separate Angular application.
+
+
+## Django Backend Endpoints
+
+Listed below are the current routes used by each component of the application, the Angular frontend and the Django backend,
+
+- /
+- /logout
+- /success
+
+Application API Endpoints
+- /api/user
+
+Third Party Endpoints
+- /auth/login
+- /auth/callback
+- /fake/oauth/authorize
+- /fake/oauth/token
+
+### Angular Frontend Routes
+
+
 
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov

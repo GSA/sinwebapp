@@ -14,13 +14,14 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
     }}]}'
 
 ## DEPENDENCIES
-RUN apt-get update -y && apt-get install -y curl
+RUN apt-get update -y && apt-get install -y curl wait-for-it
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
 RUN mkdir /sinwebapp/ && mkdir /frontend/
 WORKDIR /home/sinwebapp/
-RUN mkdir ./authentication/ && mkdir ./core/ && mkdir ./static/
+RUN mkdir ./authentication/ && mkdir ./core/ && \
+    mkdir ./static/ && mkdir ./dependencies/ && mkdir ./api/
 
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
@@ -33,13 +34,15 @@ RUN ng build --prod --output-hashing none
 
 ## BUILD BACKEND
 WORKDIR /home/sinwebapp/
+COPY /sinwebapp/dependencies/ /home/sinwebapp/dependencies/
+COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
+RUN pip install -r ./requirements.txt
 COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
+COPY /sinwebapp/api/ /home/sinwebapp/api/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
-COPY /sinwebapp/scripts/init-sinwebapp.sh /home/sinwebapp/
-COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
-RUN pip install -r ./requirements.txt
+COPY /scripts/init-sinwebapp.sh /home/sinwebapp/
 
 EXPOSE 8000
 
