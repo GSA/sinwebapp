@@ -38,7 +38,7 @@ To run the containers as detached, i.e. in the background.
 
 3. Remove the containers with the following command,
 
-> docker-compose stop
+> docker-compose stop<br>
 > docker-compose down
 
 ## CloudFoundry Environment
@@ -84,7 +84,7 @@ Keep these secret and safe!
 
 7. Restage and start the app
 
-> cf restage
+> cf restage<br>
 > cf start
 
 ## Frontend
