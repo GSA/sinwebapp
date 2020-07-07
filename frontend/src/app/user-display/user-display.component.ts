@@ -4,8 +4,7 @@ import { UserService } from '../services/user.service'
 
 @Component({
   selector: 'app-user-display',
-  templateUrl: './user-display.component.html',
-  styleUrls: ['./user-display.component.css']
+  templateUrl: './user-display.component.html'
 })
 export class UserDisplayComponent implements OnInit {
 

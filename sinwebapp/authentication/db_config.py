@@ -25,27 +25,6 @@ def init_permissions(apps, schema_editor):
     review_sin = Permission.objects.get_or_create(name='Review SIN', content_type=ct, codename='review_sin')
     approve_sin = Permission.objects.get_or_create(name='Approve SIN', content_type=ct, codename='approve_sin')
 
-def init_users(apps, schema_editor):
-    logger = DebugLogger("authentication.db_config.init_users").get_logger()
-    logger.info("> Initializing Sample Users...")
-
-        # name,email,pass @TODO change to actual email addresses that can be tested
-    read_only_user = User.objects.create_user('read_only_user', 'read_only_user@gsa.gov', 'read_only_user')
-    read_only_group = Group.objects.get(name='read_only_group')
-    read_only_group.user_set.add(read_only_user)
-
-    submitter_user = User.objects.create_user('submitter_user', 'submitter_user@gsa.gov', 'submitter_user')
-    submitter_group = Group.objects.get(name='submitter_group')
-    submitter_group.user_set.add(submitter_user)
-
-    reviewer_user = User.objects.create_user('reviewer_user', 'reviewer_user@gsa.gov', 'reviewer_user')
-    reviewer_group = Group.objects.get(name='reviewer_group')
-    reviewer_group.user_set.add(reviewer_user)
-
-    approver_user = User.objects.create_user('approver_user', 'approver_user@gsa.gov', 'approver_user')
-    approver_group = Group.objects.get(name='approver_group')
-    approver_group.user_set.add(approver_user)
-
 def init_group_permissions(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_group_permissions").get_logger()
     logger.info("> Initializing Group Permissions...")

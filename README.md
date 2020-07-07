@@ -91,6 +91,10 @@ Keep these secret and safe!
 
 In the <i>/frontend/environments/</i> directory, there is a TypeScript file that controls the Angular Service HTTP routing. When the variable <b>production</b> is set to true, Angular services will direct their HTTP calls to the backend on the cloud. When <b>production</b> is set to false, Angulars services will direct their HTTP calls to the localhost backend. Be sure to set this variable to the proper value during development and when pushing to production!
 
+### Context
+
+The <b>production</b> environment variable for the Angular application affects the <i>ContextService</i>. The <i>ContextService</i> is injected into other service instances to provide application-wide configuration, such as URLs to the backend API and other application properties that change based on the type of the deployment: <b>local</b> or <b>production</b>. 
+
 ## Building and Pushing
 
 Currently, there is no build pipeline that will automatically compile and deploy the Angular frontend to the cloud. For the time being, when deploying the application to the cloud, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 

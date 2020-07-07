@@ -1,7 +1,12 @@
 # Executes from sinwebapp/sinwebapp directory (where manage.py is located).
-# Gets copied over to project folder in the push-to-cloud.sh script.
+# Gets copied over to project folder in the push-to-cf.sh script.
 # Implemented this way for organizational  reasons. 
 # (I like to keep all my scripts in one folder.)
+
+# ARGUMENTS
+# 1: local, container or cloud: specifies the type of environment to initialize in.
+#
+# TODO: pass in argument to determine how migrations should proceed.
 
 if [ "$1" == "cloud" ]
 then
@@ -10,20 +15,19 @@ then
 fi
 
 echo -e "> \e[4minit-sinwebapp.sh\e[0m: Migrating Django Database Files..."
-# python manage.py migrate --fake authentication zero
-# python manage.py migrate --fake-initial
+python manage.py migrate --fake authentication zero
+python manage.py migrate --fake-initial
+
+# If the schema already exists in the connected sql service, then doing a migrate without the --fake-initial flag
+# will attempt to recreate the schema and error out. If first cloud deployment, comment out the above line
+# and uncomment the line below. This will perform the migrations on a fresh database
+
+# TODO: pass in flag to automate this 
+
+# python manage.py migrate 
 
 echo -e "> \e[4minit-sinwebapp.sh\e[0m: Setting $DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL As Superuser..."
 python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput --email $DJANGO_SUPERUSER_EMAIL
-
-# If first cloud deployment, comment out the above line
-# and uncomment the line below.
-
-python manage.py migrate 
-
-# If the schema already exists in the connected sql service, 
-# then doing a migrate without the --fake-initial flag
-# will attempt to recreate the schema and error out.
 
 python ./debug.py
 

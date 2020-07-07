@@ -62,6 +62,9 @@ CLIENT_SECRET = echo $SERVICE_KEY | python -c \
 cf set-env sinwebapp UAA_CLIENT_ID $CLIENT_ID
 cf set-env sinwebapp UAA_CLIENT_SECRET $CLIENT_SECRET
 
+# TODO: set DJANGO_SUPERUSER_USERNAME, DJANGO_SUPERUSER_PASSWORD, 
+    # DJANGO_SUPERUSER_EMAIL
+
 formatted_print 'Restaging And Starting App...' $SCRIPT_NAME
 cf restage
 

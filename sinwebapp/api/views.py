@@ -9,6 +9,7 @@ def user_info(request):
     logger.info('Request Email: %s', request.user.email)
     logger.info('Request First Name: %s', request.user.first_name)
     logger.info('Request Last Name: %s', request.user.last_name)
+    logger.info('Request User Groups: %s', request.user.groups)
 
     if hasattr(request.user, 'email'):
         response = JsonResponse({
