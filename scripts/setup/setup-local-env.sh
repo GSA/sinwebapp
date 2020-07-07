@@ -6,8 +6,8 @@ pip3 install django
 curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs
 npm install -g @angular/cli@8.2.0
 
-cd $SCRIPT_DIR/../frontend/
+cd $SCRIPT_DIR/../../frontend/
 npm install
 
-cd $SCRIPT_DIR/../sinwebapp/
+cd $SCRIPT_DIR/../../sinwebapp/
 pip install -r requirements.txt

@@ -1,35 +1,35 @@
-## SCRIPT ARGUMENTS 
-## $1: CloudFoundry Username
-## $2: CloudFoundry Password
-## $3: Cloud Space
-## $4: Cloud Route
-## $5: rebuild flag
+### ARGUMENTS 
+## REQUIRED
+# $1: Cloud Org - The organization the applications lives at on CloudFoundry
+# $2: Cloud Space - The space the applications lives at on CloundFoundry
+# $3: Cloud Route - The URL the application lives at on CloudFoundry
+## OPTIONAL
+## $4: rebuild flag - deletes and recreates old instances of CloudFoundry services
 
-## DESCRIPTION
-# This script will login to the CloudFoundry environment, initialize service instances, 
-# bind them to the app and set environment variables. Passing in the 'rebuild' flag as 
-# the third argument will cause this script to wipe the existing environment and start 
-# a fresh environment. 
+### DESCRIPTION
+## This script will target the CloudFoundry environment, initialize service instances, 
+## bind them to the app and set environment variables. Passing in the 'rebuild' flag as 
+## the third argument will cause this script to wipe the existing environment and start 
+## a fresh environment. 
 
-## EXAMPLE USAGE
-    # 1: $ ./build-cloud.sh fakeuser fakepassword dev https://sinwebapp.app.cloud.gov 
+### EXAMPLE USAGE (from project root directory)
+    ## 1: $ ./scripts/setup/setup-cloud-env.sh fakeuser fakepassword fsa-calc dev https://sinwebapp.app.cloud.gov 
         # This will build a new cloud environment
-    # 2: $ ./build-cloud.sh fakeuser fakepassword dev http:s//sinwebapp.app.cloud.gov rebuild
+    ## 2: $ ./scripts/setup/setup-cloud-env.sh fakeuser fakepassword fsa-calc dev http:s//sinwebapp.app.cloud.gov rebuild
         # This will take down the current environment on the cloud and build a new one.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 LOGIN_REDIRECT="auth"
 LOGOUT_REDIRECT="logout"
-OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$4/$LOGIN_REDIRECT\",\"$4/$LOGOUT_REDIRECT\"]}"
-CLOUD_ORG="fas-calc"
-SCRIPT_NAME='build-cloud.sh'
-source "$SCRIPT_DIR/helpers/utilities.sh"
+OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$3/$LOGIN_REDIRECT\",\"$3/$LOGOUT_REDIRECT\"]}"
+SCRIPT_NAME='setup-cloud-env.sh'
+source "$SCRIPT_DIR/../helpers/utilities.sh"
 
-cd $SCRIPT_DIR/..
-formatted_print 'Logging Into CloudFoundry' $SCRIPT_NAME
-cf login -a api.fr.cloud.gov -u $1 -p $2 -o $CLOUD_ORG -s $3
+cd $SCRIPT_DIR/../..
+formatted_print 'Targetting CloudFoundry Organization Space...' $SCRIPT_NAME
+cf target -o $1 -s $2
 
-if [ $5 == "rebuild" ]
+if [ "$4" == "rebuild" ]
 then
     cf delete-service-key sin-oauth sin-key -f
     cf unbind-service sinwebapp sin-oauth
