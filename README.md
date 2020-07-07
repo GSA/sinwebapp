@@ -89,13 +89,13 @@ Keep these secret and safe!
 
 ### Environment
 
-In the <i>/frontend/environments/</i> directory, there is a TypeScript file that controls the Angular Service HTTP routing. When the variable <b>production</b> is set to true, Angular services will direct their HTTP calls to the backend on the cloud. When <b>production</b> is set to false, Angulars services will direct their HTTP calls to the localhost backend. Be sure to set this variable to the proper value during development and pushing to production!
+In the <i>/frontend/environments/</i> directory, there is a TypeScript file that controls the Angular Service HTTP routing. When the variable <b>production</b> is set to true, Angular services will direct their HTTP calls to the backend on the cloud. When <b>production</b> is set to false, Angulars services will direct their HTTP calls to the localhost backend. Be sure to set this variable to the proper value during development and when pushing to production!
 
 ## Building and Pushing
 
 Currently, there is no build pipeline that will automatically compile and deploy the Angular frontend to the cloud. For the time being, when deploying the application to the cloud, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
 
-Once the frontend is build, you can push the application to CloudFoundry.
+Once the frontend is built, you can push the application to CloudFoundry.
 
 In other words, if you add code to the frontend, be sure to run this command from the project's root directory:
 
@@ -105,7 +105,7 @@ Before pushing to the cloud,
 
 > cf push
 
-The BASH script, <i>/scripts/push-to-cf.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>
+These commands are so frequent they have been further condensed into another BASH script. The BASH script, <i>/scripts/push-to-cf.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>.
 
 > bash ./scripts/push-to-cf.sh
 
@@ -121,6 +121,7 @@ The file <i>/sinwebapp/authentication/db_config.py</i> creates Groups, Permissio
 
 Listed below are the current routes used by each component of the application, the Angular frontend and the Django backend,
 
+Django Static HTML Endpoint
 - /
 - /logout
 - /success
@@ -134,9 +135,10 @@ Third Party Endpoints
 - /fake/oauth/authorize
 - /fake/oauth/token
 
-### Angular Frontend Routes
+Frontend Routes
+- 404: ?
 
-### Superuser
+## Superuser
 
 The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>local.env</i> file, while the cloud environment variables need to be set with the <i>cf cli</i>
 
