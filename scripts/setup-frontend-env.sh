@@ -1,8 +1,9 @@
 # ARGUMENTS
 # $1: local, container, cloud
 # 
-# Description: This script copies the appropriate environment Angular file
-# into a file the angular.json will recognize during the build process.
+# DESCRIPTION
+# This script copies the appropriate environment Angular file into a 
+# file the angular.json will recognize during the build process.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='setup-frontend-env.sh'

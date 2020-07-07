@@ -1,11 +1,12 @@
+# ARGUMENTS
+# 1: local, container or cloud: specifies the type of environment to initialize in.
+
+# DESCRIPTION
 # Executes from sinwebapp/sinwebapp directory (where manage.py is located).
 # Gets copied over to project folder in the push-to-cf.sh script.
 # Implemented this way for organizational  reasons. 
 # (I like to keep all my scripts in one folder.)
 
-# ARGUMENTS
-# 1: local, container or cloud: specifies the type of environment to initialize in.
-#
 # TODO: pass in argument to determine how migrations should proceed.
 
 if [ "$1" == "cloud" ]
