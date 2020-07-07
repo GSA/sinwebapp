@@ -34,7 +34,6 @@ RUN ng build --prod --output-hashing none
 
 ## BUILD BACKEND
 WORKDIR /home/sinwebapp/
-COPY /sinwebapp/dependencies/ /home/sinwebapp/dependencies/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
 COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/

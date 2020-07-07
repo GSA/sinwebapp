@@ -25,10 +25,19 @@ The next environment variable is VCAP_SERVICES. An environment variable with thi
 You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables DJANGO_SUPERUSER and DJANGO_SUPERUSER_PASSWORD set the credentials for this user. 
 
 2. From project's root directory, run 
->docker-compose up  
+> docker-compose up  
     
 This will build the <b><b>sinwebapp</b></b> locally from the <i>Dockerfile</i> and orchestrate it with <b>postgres</b> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
 
+You can execute
+
+> docker-compose up -d
+
+To run the containers as detached, i.e. in the background.
+
+3. Remove the containers with the following command,
+
+> docker-compose down
 
 ## CloudFoundry Environment
 
@@ -75,6 +84,12 @@ Keep these secret and safe!
 
 > cf restage
 > cf start
+
+## Frontend
+
+### Environment
+
+In the <i>/frontend/environments/</i> directory, there is a TypeScript file that controls the Angular Service HTTP routing. When the variable <b>production<b> is set to true, Angular services will direct their HTTP calls to the backend on the cloud. When <b>production</b> is set to false, Angulars services will direct their HTTP calls to the localhost backend. Be sure to set this variable to the proper value during development and pushing to production!
 
 ## Building and Pushing
 
