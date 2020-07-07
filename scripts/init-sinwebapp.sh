@@ -3,13 +3,18 @@
 # Implemented this way for organizational  reasons. 
 # (I like to keep all my scripts in one folder.)
 
-echo "> Migrating Django Database Files..."
+if [ "$1" == "cloud" ]
+then
+    echo ">> Clearing Sessions..."
+    python manage.py clearsessions
+fi
 
-python manage.py clearsessions
-
-python manage.py createsuperuser --noinput
+echo ">> Migrating Django Database Files..."
 python manage.py migrate --fake authentication zero
 python manage.py migrate --fake-initial
+
+echo ">> Setting $DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL As Superuser..."
+python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput --email $DJANGO_SUPERUSER_EMAIL
 
 # If first cloud deployment, comment out the above line
 # and uncomment the line below.
@@ -22,21 +27,26 @@ python manage.py migrate --fake-initial
 
 python ./debug.py
 
+echo ">> Checking Configuration..."
+python ./debug.py
+
 if [ "$1" == "container" ]
 then 
+    echo ">> CONTAINER Environment Detected!"
+    echo ">> Collecting Static Files..."
     python manage.py collectstatic --noinput
-    echo ">> CONTAINER Environment Detected"
-    echo ">> Binding Server To Non-Loopback Address for Local Configuration..."
-    gunicorn core.wsgi:application --bind=0.0.0.0
+    echo ">> Binding Gunicorn Server To Non-Loopback Address For Container Configuration..."
+    gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3
 elif [ "$1" == "local" ]
 then
+    echo ">> LOCAL Environment Detected!"
+    echo ">> Collecting Static Files..."
     python manage.py collectstatic --noinput
-    echo ">> LOCAL Environment Detected"
-    echo ">> Binding Server To localhost for Local Configuration..."
-    gunicorn core.wsgi:application
+    echo ">> Binding Gunicorn Server To 'localhost' For Local Configuration..."
+    gunicorn core.wsgi:application --workers 3
 elif [ "$1" == "cloud" ]
 then
-    echo ">> CLOUD Environment Detected"
-    echo ">> Deploying Server Onto the Cloud..."
+    echo ">> CLOUD Environment Detected!"
+    echo ">> Deploying Gunicorn Server Onto The Cloud..."
     gunicorn core.wsgi:application 
 fi
