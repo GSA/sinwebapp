@@ -7,6 +7,7 @@ echo "> Migrating Django Database Files..."
 
 python manage.py clearsessions
 
+python manage.py createsuperuser --noinput
 python manage.py migrate --fake authentication zero
 python manage.py migrate --fake-initial
 

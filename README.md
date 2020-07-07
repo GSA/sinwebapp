@@ -20,12 +20,15 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
 
-The final environment variable is VCAP_SERVICES. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, UAA_CLIENT_SECRET and UAA_CLIENT_ID.
+The next environment variable is VCAP_SERVICES. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, UAA_CLIENT_SECRET and UAA_CLIENT_ID.
+
+You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables DJANGO_SUPERUSER and DJANGO_SUPERUSER_PASSWORD set the credentials for this user. 
 
 2. From project's root directory, run 
 >docker-compose up  
     
 This will build the <b><b>sinwebapp</b></b> locally from the <i>Dockerfile</i> and orchestrate it with <b>postgres</b> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
+
 
 ## CloudFoundry Environment
 
@@ -61,7 +64,14 @@ The second line generates a key so that the application instance can leverage th
 
 Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i> just like in step 2, since we are creating a service in an application space. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
 
-6. Restage and start the app
+6. You will need to set up environment variables for the superuser of the Django database service. This will be the user in charge of adding users and managing permissions. Use the commands
+
+>cf set-env sinwebapp DJANGO_SUPERUSER_NAME /put/name/here
+>cf set-env sinwebapp DJANGO_SUPERUSER_PASSWORD /put/password/here
+
+Keep these secret and safe!
+
+7. Restage and start the app
 
 > cf restage
 > cf start

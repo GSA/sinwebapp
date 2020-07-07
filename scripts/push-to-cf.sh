@@ -23,7 +23,6 @@ bash $SCRIPT_DIR/build-frontend.sh
 echo "> Pushing To The Cloud..."
 cd $SCRIPT_DIR/..
 cf push
-cd $SCRIPT_DIR
 
 echo "> Cleaning Up..."
 bash $SCRIPT_DIR/clean-application.sh

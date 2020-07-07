@@ -36,7 +36,6 @@ if APP_ENV == "cloud":
     DEBUG = True
 else: 
     DEBUG = True
-    WEB_CONCURRENCY = 3
 
 ALLOWED_HOSTS = ['*']
 

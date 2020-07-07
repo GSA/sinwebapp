@@ -8,3 +8,6 @@ npm install -g @angular/cli@8.2.0
 
 cd $SCRIPT_DIR/../frontend/
 npm install
+
+cd $SCRIPT_DIR/../sinwebapp/
+pip install -r requirements.txt
