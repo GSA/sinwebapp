@@ -10,19 +10,26 @@
 # cloud.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_NAME='push-to-cf.sh'
+source "$SCRIPT_DIR/helpers/utilities.sh"
 
-echo "> Cleaning Application..."
+formatted_print 'Cleaning Application...' $SCRIPT_NAME
 bash $SCRIPT_DIR/clean-application.sh
 
-echo "> Copying Initialization Script Into App Directory..."
+formatted_print 'Copying Initialization Script Into App Directory...' $SCRIPT_NAME
 cp $SCRIPT_DIR/init-sinwebapp.sh $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 
-echo "> Invoking 'build-frontend.sh' Script..."
+formatted_print 'Initializing Frontend Environment...' $SCRIPT_NAME
+bash $SCRIPT_DIR/setup-frontend-env.sh cloud
+
+formatted_print 'Invoking \e[3mbuild-frontend.sh\e[0m Script...' $SCRIPT_NAME
 bash $SCRIPT_DIR/build-frontend.sh
 
-echo "> Pushing To The Cloud..."
+formatted_print 'Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
 cf push
 
-echo "> Cleaning Up..."
+formatted_print 'Cleaning Up...' $SCRIPT_NAME
 bash $SCRIPT_DIR/clean-application.sh
+bash $SCRIPT_DIR/setup-frontend-env.sh local
+

@@ -20,8 +20,6 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
 
-The next environment variable is <b>VCAP_SERVICES</b>. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, <b>UAA_CLIENT_SECRET</b> and <b>UAA_CLIENT_ID</b>.
-
 You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b>, <b>DJANGO_SUPERUSER_EMAIL</b> and <b>DJANGO_SUPERUSER_PASSWORD</b> set the credentials for this user. 
 
 2. From project's root directory, run 

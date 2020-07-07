@@ -5,21 +5,21 @@
 
 if [ "$1" == "cloud" ]
 then
-    echo ">> Clearing Sessions..."
+    echo -e "> \e[4minit-sinwebapp.sh\e[0m: Clearing Sessions..."
     python manage.py clearsessions
 fi
 
-echo ">> Migrating Django Database Files..."
-python manage.py migrate --fake authentication zero
-python manage.py migrate --fake-initial
+echo -e "> \e[4minit-sinwebapp.sh\e[0m: Migrating Django Database Files..."
+# python manage.py migrate --fake authentication zero
+# python manage.py migrate --fake-initial
 
-echo ">> Setting $DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL As Superuser..."
+echo -e "> \e[4minit-sinwebapp.sh\e[0m: Setting $DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL As Superuser..."
 python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput --email $DJANGO_SUPERUSER_EMAIL
 
 # If first cloud deployment, comment out the above line
 # and uncomment the line below.
 
-# python manage.py migrate 
+python manage.py migrate 
 
 # If the schema already exists in the connected sql service, 
 # then doing a migrate without the --fake-initial flag
@@ -27,26 +27,26 @@ python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput
 
 python ./debug.py
 
-echo ">> Checking Configuration..."
+echo -e '> \e[4minit-sinwebapp.sh\e[0m: Checking Configuration...'
 python ./debug.py
 
 if [ "$1" == "container" ]
 then 
-    echo ">> CONTAINER Environment Detected!"
-    echo ">> Collecting Static Files..."
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: CONTAINER Environment Detected!'
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: Collecting Static Files...'
     python manage.py collectstatic --noinput
-    echo ">> Binding Gunicorn Server To Non-Loopback Address For Container Configuration..."
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: Binding Gunicorn Server To Non-Loopback Address For Container Configuration...'
     gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3
 elif [ "$1" == "local" ]
 then
-    echo ">> LOCAL Environment Detected!"
-    echo ">> Collecting Static Files..."
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: LOCAL Environment Detected!'
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: Collecting Static Files...'
     python manage.py collectstatic --noinput
-    echo ">> Binding Gunicorn Server To 'localhost' For Local Configuration..."
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration...'
     gunicorn core.wsgi:application --workers 3
 elif [ "$1" == "cloud" ]
 then
-    echo ">> CLOUD Environment Detected!"
-    echo ">> Deploying Gunicorn Server Onto The Cloud..."
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: CLOUD Environment Detected!'
+    echo -e '> \e[4minit-sinwebapp.sh\e[0m: Deploying Gunicorn Server Onto The Cloud...'
     gunicorn core.wsgi:application 
 fi
