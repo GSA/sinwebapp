@@ -150,10 +150,6 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 - [ ] bind roles to html on redirect page after successful login 
 - [ ] create pipeline to build frontend and deploy to cloud
 
-## Bugs 
-### Local deployments
-The <i>cg-django-uaa</i> comes with a mock login page for local deployments. By specifing the attributes <b>UAA_TOKEN_URL</b> and <b>UAA_AUTH_URL</b> to equal 'fake:' it will automatically use a mock login. The current application already detects local vs. cloud deployments through the environment variable <b>ENVIRONMENT</b> and sets these attributes accordingly. However, for local deployments, I have had issues getting the mock login to work properly.<br>
-
 ## Useful Links
 - [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
 - [Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
