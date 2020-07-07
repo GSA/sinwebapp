@@ -20,14 +20,15 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
 
-The next environment variable is VCAP_SERVICES. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, UAA_CLIENT_SECRET and UAA_CLIENT_ID.
+The next environment variable is <b>VCAP_SERVICES</b>. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, <b>UAA_CLIENT_SECRET</b> and <b>UAA_CLIENT_ID</b>.
 
-You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables DJANGO_SUPERUSER and DJANGO_SUPERUSER_PASSWORD set the credentials for this user. 
+You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b>, <b>DJANGO_SUPERUSER_EMAIL</b> and <b>DJANGO_SUPERUSER_PASSWORD<b> set the credentials for this user. 
 
 2. From project's root directory, run 
+
 > docker-compose up  
     
-This will build the <b><b>sinwebapp</b></b> locally from the <i>Dockerfile</i> and orchestrate it with <b>postgres</b> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
+This will build the <b><b>sinwebapp</b></b> locally from the <i>Dockerfile</i> and orchestrate it with a <b>postgres</b> image. The database credentials are set up in the <i>docker-compose.yml</i> file for the database image, but are also hard-coded into the <i>Dockerfile</i> through an environment variable <b>VCAP_SERVICES</b> in order to mimic how a CloudFoundry deployment will pass in database credentials.
 
 You can execute
 
@@ -37,6 +38,7 @@ To run the containers as detached, i.e. in the background.
 
 3. Remove the containers with the following command,
 
+> docker-compose stop
 > docker-compose down
 
 ## CloudFoundry Environment
