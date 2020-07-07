@@ -22,7 +22,7 @@ You will also find two other environment variables in the <i>local.env</i> file,
 
 The next environment variable is <b>VCAP_SERVICES</b>. An environment variable with this name delivers the database credentials to the application on the cloud, so the local environment is set up to mock that configuration, for the same reason as the above two variables, <b>UAA_CLIENT_SECRET</b> and <b>UAA_CLIENT_ID</b>.
 
-You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b>, <b>DJANGO_SUPERUSER_EMAIL</b> and <b>DJANGO_SUPERUSER_PASSWORD<b> set the credentials for this user. 
+You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b>, <b>DJANGO_SUPERUSER_EMAIL</b> and <b>DJANGO_SUPERUSER_PASSWORD</b> set the credentials for this user. 
 
 2. From project's root directory, run 
 
@@ -77,7 +77,7 @@ Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>S
 
 6. You will need to set up environment variables for the superuser of the Django database service. This will be the user in charge of adding users and managing permissions. Use the commands
 
->cf set-env sinwebapp DJANGO_SUPERUSER_NAME /put/name/here
+>cf set-env sinwebapp DJANGO_SUPERUSER_NAME /put/name/here<br>
 >cf set-env sinwebapp DJANGO_SUPERUSER_PASSWORD /put/password/here
 
 Keep these secret and safe!
