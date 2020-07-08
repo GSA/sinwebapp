@@ -12,10 +12,9 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, s
 
 ## Prerequisites
 
-Prerequisites: 
-- Docker : Install [here](https://www.docker.com/products/docker-desktop)
-- Git for Windows (If you're on a Windows OS): Install [here](https://git-scm.com/download/win)
-- cf CLI : Install [here](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+- <b>Docker</b> : Install [here](https://www.docker.com/products/docker-desktop)
+- <b>Git for Windows</b> (If you're on a Windows OS): Install [here](https://git-scm.com/download/win)
+- <b>cf CLI :</b> Install [here](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
 ## Local Environment
 
