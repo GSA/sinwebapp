@@ -10,11 +10,14 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, s
 
 2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. Use <i>docker-compose down</i> to remove the containers running the application locally.
 
-## Local Environment
+## Prerequisites
 
 Prerequisites: 
 - Docker : Install [here](https://www.docker.com/products/docker-desktop)
 - Git for Windows (If you're on a Windows OS): Install [here](https://git-scm.com/download/win)
+- cf CLI : Install [here](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+
+## Local Environment
 
 1. The <i>docker-compose.yml</i> sets up the local application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 
@@ -46,9 +49,6 @@ To run the containers as detached, i.e. in the background.
 > docker-compose down
 
 ## CloudFoundry Environment
-
-Prerequisites:
-- cf CLI : Install [here](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
 1. Stage the app without starting it
 
