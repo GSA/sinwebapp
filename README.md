@@ -6,7 +6,7 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, s
 
 ## Quickstart Pointers
 
-1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/push-to-cf.sh<i> to install and build the application proplery before pushing to the cloud. The Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment.  
+1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/push-to-cf.sh</i> to install and build the application proplery before pushing to the cloud. The Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment.  
 
 2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. Use <i>docker-compose down</i> to remove the containers running the application locally.
 
