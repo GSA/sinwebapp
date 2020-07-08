@@ -10,7 +10,7 @@
 
 ### EXAMPLE USAGE 
 ## None! This script is used in the Dockerfile and manifest.yml. 
-## It must execute from inside of the container running the application.
+## It must executed from inside of the container running the application.
 ## This script is used to initialize various properties in the Django
 ## web framework and start the web server.
 
@@ -30,14 +30,12 @@ python manage.py migrate --fake-initial
 # will attempt to recreate the schema and error out. If first cloud deployment, comment out the above line
 # and uncomment the line below. This will perform the migrations on a fresh database
 
-# TODO: pass in flag to automate this 
-
 # python manage.py migrate 
+
+# TODO: pass in flag to automate this 
 
 echo -e "> \e[4minit-sinwebapp.sh\e[0m: Setting $DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL As Superuser..."
 python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput --email $DJANGO_SUPERUSER_EMAIL
-
-python ./debug.py
 
 echo -e '> \e[4minit-sinwebapp.sh\e[0m: Checking Configuration...'
 python ./debug.py

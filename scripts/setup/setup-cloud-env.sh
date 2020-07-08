@@ -18,11 +18,16 @@
     ## 2: $ ./scripts/setup/setup-cloud-env.sh fakeuser fakepassword fsa-calc dev http:s//sinwebapp.app.cloud.gov rebuild
         # This will take down the current environment on the cloud and build a new one.
 
+# Script Constants
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_NAME='setup-cloud-env.sh'
+
+# CloudFoundry OAuth Parameters
 LOGIN_REDIRECT="auth"
 LOGOUT_REDIRECT="logout"
 OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$3/$LOGIN_REDIRECT\",\"$3/$LOGOUT_REDIRECT\"]}"
-SCRIPT_NAME='setup-cloud-env.sh'
+
+# Load in 'formatted_print'
 source "$SCRIPT_DIR/../helpers/utilities.sh"
 
 cd $SCRIPT_DIR/../..
@@ -31,6 +36,7 @@ cf target -o $1 -s $2
 
 if [ "$4" == "rebuild" ]
 then
+    formatted_print 'Clearing Existing Services...' $SCRIPT_NAME
     cf delete-service-key sin-oauth sin-key -f
     cf unbind-service sinwebapp sin-oauth
     cf unbind-service sinwebapp sin-sql

@@ -11,6 +11,10 @@
 ## frontend dependencies, builds frontend and then pushes to the 
 ## cloud. Optional flags provide other functionality.
 
+### NOTE
+# Make sure you are logged into cf cli before executing this 
+# script
+
 ### EXAMPLE USAGE (from project root directory)
     ## 1: $ ./scripts/push-to-cf.sh trail
     ## 2: $ ./scripts/push-to-cf.sh clean dispose trail
