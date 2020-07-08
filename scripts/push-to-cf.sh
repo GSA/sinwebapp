@@ -42,7 +42,7 @@ do
         formatted_print 'Invoking \e[3mclean-application.sh\e[0m Script...' $SCRIPT_NAME
         bash $SCRIPT_DIR/clean-application.sh
     fi
-    if [ "$input" == "build "]
+    if [ "$input" == "build " ]
     then 
         formatted_print 'Invoking \e[3mbuild-frontend.sh\e[0m Script...' $SCRIPT_NAME
         bash $SCRIPT_DIR/build-frontend.sh
