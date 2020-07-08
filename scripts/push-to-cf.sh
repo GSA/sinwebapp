@@ -2,6 +2,8 @@
 ## OPTIONAL
 # clean - wipes application before pushing to cloud,
     # removes artifacts from previous builds.
+# build - builds the application before pushing to
+    # the cloud
 # dispose - wipes application after pushing to cloud,
     # removes artifacts from current build.
 # reset - returns project to development mode after 
@@ -9,7 +11,7 @@
     # are configured for local deployment.
 # trail - trails cloud application logs after pushing
 
-### DESCRIPTOIN
+### DESCRIPTION
 ## Copies over scripts into cloud application folder, installs 
 ## frontend dependencies, builds frontend and then pushes to the 
 ## cloud. Optional flags provide other functionality.
@@ -26,6 +28,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='push-to-cf.sh'
 source "$SCRIPT_DIR/helpers/utilities.sh"
 
+formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
+bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
+
 for input in $@;
 do
     if [ "$input" == "clean" ]
@@ -33,25 +38,25 @@ do
         formatted_print 'Invoking \e[3mclean-application.sh\e[0m Script...' $SCRIPT_NAME
         bash $SCRIPT_DIR/clean-application.sh
     fi
+    if [ "$input" == "build "]
+    then 
+        formatted_print 'Invoking \e[3mbuild-frontend.sh\e[0m Script...' $SCRIPT_NAME
+        bash $SCRIPT_DIR/build-frontend.sh
+    fi
 done
 
 formatted_print 'Copying Initialization Script Into App Directory...' $SCRIPT_NAME
 cp $SCRIPT_DIR/init-sinwebapp.sh $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 
-formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
-bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
-
-formatted_print 'Invoking \e[3mbuild-frontend.sh\e[0m Script...' $SCRIPT_NAME
-bash $SCRIPT_DIR/build-frontend.sh
-
 formatted_print 'Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
 cf push
+
 formatted_print 'Deleting Initialization Script...' $SCRIPT_NAME
 rm $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 
 formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
-bash $SCRIPT_DIR/setup-frontend-env.sh local
+bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
 
 for input in $@;
 do
