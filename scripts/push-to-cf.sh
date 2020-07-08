@@ -14,15 +14,19 @@
 ### DESCRIPTION
 ## Copies over scripts into cloud application folder, installs 
 ## frontend dependencies, builds frontend and then pushes to the 
-## cloud. Optional flags provide other functionality.
+## cloud. Frontend build is configured to output into the 
+## /sinwebapp/static/folder. Optional argument flags provide other
+## functionality.
 
 ### NOTE
-# Make sure you are logged into cf cli before executing this 
-# script
+## Make sure you are logged into cf cli and that you have targetted
+## the organization and space you want to deploy the application to 
+## before executing this script!
 
 ### EXAMPLE USAGE (from project root directory)
     ## 1: $ ./scripts/push-to-cf.sh trail
     ## 2: $ ./scripts/push-to-cf.sh clean trail dispose
+    ## 3: $ ./scripts.push-to-cf.sh clean build dispose reset
     
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='push-to-cf.sh'
@@ -54,9 +58,6 @@ cf push
 
 formatted_print 'Deleting Initialization Script...' $SCRIPT_NAME
 rm $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
-
-formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
-bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
 
 for input in $@;
 do
