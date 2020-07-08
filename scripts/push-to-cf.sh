@@ -4,6 +4,9 @@
     # removes artifacts from previous builds.
 # dispose - wipes application after pushing to cloud,
     # removes artifacts from current build.
+# reset - returns project to development mode after 
+    # pushing, i.e. makes sure all project settings
+    # are configured for local deployment.
 # trail - trails cloud application logs after pushing
 
 ### DESCRIPTOIN
@@ -17,7 +20,7 @@
 
 ### EXAMPLE USAGE (from project root directory)
     ## 1: $ ./scripts/push-to-cf.sh trail
-    ## 2: $ ./scripts/push-to-cf.sh clean dispose trail
+    ## 2: $ ./scripts/push-to-cf.sh clean trail dispose
     
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='push-to-cf.sh'
@@ -44,8 +47,9 @@ bash $SCRIPT_DIR/build-frontend.sh
 formatted_print 'Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
 cf push
+formatted_print 'Deleting Initialization Script...' $SCRIPT_NAME
+rm $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 
-formatted_print 'Resetting Frontend Environment To \e[3mlocalhost\e[0m...'
 formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
 bash $SCRIPT_DIR/setup-frontend-env.sh local
 
@@ -55,11 +59,14 @@ do
     then
         formatted_print 'Invoking \e[3mclean-application.sh\e[0m Script...' $SCRIPT_NAME
         bash $SCRIPT_DIR/clean-application.sh
-    fi
-    if [ "$input" == "trail" ]
+    elif [ "$input" == "trail" ]
     then
         formatted_print 'Trailing CF Logs...' $SCRIPT_NAME
         cf logs sinwebapp
+    elif [ "$input" == "reset" ]
+    then
+        formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
+        bash $SCRIPT_DIR/setup-frontend-env.sh local
     fi
 done
 
