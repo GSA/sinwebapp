@@ -10,6 +10,12 @@
 ## the third argument will cause this script to wipe the existing environment and start 
 ## a fresh environment. 
 
+### NOTE
+## You should only need to use this script when you want to initially set up the 
+## CloudFoundry application on cloud.gov or if you want to tear down the existing 
+## application and create a fresh instance. CAREFUL: If you tear down the existing
+## application, it will delete all the data stored in the database service!
+
 ### EXAMPLE USAGE (from project root directory)
     ## 1: $ ./scripts/setup/setup-cloud-env.sh sinweb.app.cloud.gov 
         # This will build a new cloud environment
