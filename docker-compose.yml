@@ -10,7 +10,7 @@ services:
             - "database"
         env_file:
             - local.env
-        command: ["wait-for-it", "database:5432", "--","bash","./init-sinwebapp.sh","container"]
+        command: ["wait-for-it", "database:5432", "--","bash","./init-app.sh","container"]
     database:
         image: "postgres:latest"
         ports: 

@@ -29,21 +29,23 @@ then
     curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs
 fi
 
+# TODO: Ensure node, python and docker are installed!
+
 if ! command -v ng &> /dev/null
 then
-    formatted_print "Installing Angular CLI..." $SCRIPT_NAME
+    formatted_print "--> Installing Angular CLI" $SCRIPT_NAME
     npm install -g @angular/cli@8.2.0
 fi
 
 cd $SCRIPT_DIR/../../frontend/
-formatted_print "Installing Angular Dependencies..." $SCRIPT_NAME
+formatted_print "--> Installing Angular Dependencies" $SCRIPT_NAME
 npm install
 
 cd $SCRIPT_DIR/../../sinwebapp/
-formatted_print "Installing Python Dependencies..." $SCRIPT_NAME
+formatted_print "--> Installing Python Dependencies" $SCRIPT_NAME
 pip install -r requirements.txt
 
-formatted_print "Changing file mode for scripts..." $SCRIPT_NAME
+formatted_print "--> Changing File Mode For Scripts" $SCRIPT_NAME
 for f in $SCRIPT_DIR/../*
 do
     formatted_print "Making $f executable..." $SCRIPT_NAME

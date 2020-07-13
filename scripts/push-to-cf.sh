@@ -32,24 +32,27 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='push-to-cf.sh'
 source "$SCRIPT_DIR/helpers/utilities.sh"
 
-formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
+formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
 bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
 
 for input in $@;
 do
     if [ "$input" == "clean" ]
     then
-        formatted_print 'Invoking \e[3mclean-app.sh\e[0m Script...' $SCRIPT_NAME
+        formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/clean-app.sh
     fi
     if [ "$input" == "build " ]
     then 
-        formatted_print 'Invoking \e[3mbuild-frontend.sh\e[0m Script...' $SCRIPT_NAME
+        formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/build-frontend.sh
     fi
 done
 
-formatted_print 'Pushing To The Cloud...' $SCRIPT_NAME
+formatted_print '--> Copying Initialization Script Into Application' $SCRIPT_NAME
+cp $SCRIPT_DIR/init-app.sh $SCRIPT_DIR/../sinwebapp/init-app.sh
+
+formatted_print '--> Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
 cf push
 
@@ -57,15 +60,17 @@ for input in $@;
 do
     if [ "$input" == "dispose" ]
     then
-        formatted_print 'Invoking \e[3mclean-app.sh\e[0m Script...' $SCRIPT_NAME
+        formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/clean-app.sh
+        formatted_print '--> Removing Initialization Script From Applcation' $SCRIPT_NAME
+        rm -r $SCRIPT_DIR/../sinwebapp/init-app.sh
     elif [ "$input" == "trail" ]
     then
-        formatted_print 'Trailing CF Logs...' $SCRIPT_NAME
+        formatted_print '--> Trailing CF Logs' $SCRIPT_NAME
         cf logs sinwebapp
     elif [ "$input" == "reset" ]
     then
-        formatted_print 'Invoking \e[3msetup-frontend-env.sh\e[0m Script...' $SCRIPT_NAME
+        formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/setup-frontend-env.sh local
     fi
 done

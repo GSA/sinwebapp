@@ -18,6 +18,33 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, s
 
 ## Local Environment
 
+### Additional Prerequisites For Local Development
+
+- [Python]()
+- [NodeJs]()
+
+You can build the application from source. First create a virtual Python environment in the project's root folder
+
+> python -m venv .venv
+
+Then activate it,
+
+> source ./.venv/Scripts/activate
+
+Navigate to the <i>/sinwebapp/</i> project and install the project requirements,
+
+> pip install -r requirements.txt
+
+Next, you will need to build the frontend. Navigate to the <i>/scripts/</i> directory and execute the BASH script,
+
+> bash build-frontend.sh
+
+This will install all of the frontend dependencies and build the frontend project and output it in the <i>/sinwebapp/static/</i> directory so the project can be statically served. You can then start the app from the <i>/scripts/</i> directory with another script, providing it an argument of "local"
+
+> bash init-app.sh local
+
+## Container Environment
+
 1. The <i>docker-compose.yml</i> sets up the local application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 
 > ENVIRONMENT=container
