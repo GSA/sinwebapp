@@ -11,7 +11,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='setup-frontend-env.sh'
-source "$SCRIPT_DIR/../helpers/utilities.sh"
+source "$SCRIPT_DIR/../util/logging.sh"
 
 formatted_print 'Initializing Frontend Environment...' $SCRIPT_NAME
 

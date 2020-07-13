@@ -7,7 +7,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='build-frontend.sh'
-source "$SCRIPT_DIR/helpers/utilities.sh"
+source "$SCRIPT_DIR/util/logging.sh"
 
 cd $SCRIPT_DIR/../frontend
 

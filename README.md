@@ -108,9 +108,9 @@ Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>S
 6. You will need to set up environment variables for the superuser of the Django database service. This will be the user in charge of adding users and managing permissions. Use the commands
 
 >cf set-env sinwebapp DJANGO_SUPERUSER_NAME /put/name/here<br>
->cf set-env sinwebapp DJANGO_SUPERUSER_PASSWORD /put/password/here
+>cf set-env sinwebapp DJANGO_SUPERUSER_EMAIL /put/email/here
 
-Keep these secret and safe!
+Since the authentication is taken care of by the <i>cg-django-uaa</i> library, you do not need to set a password. The password will be the same password set within the cloud.gov domain.
 
 7. Restage and start the app
 

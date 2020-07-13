@@ -11,26 +11,29 @@
 ## a fresh environment. 
 
 ### EXAMPLE USAGE (from project root directory)
-    ## 1: $ ./scripts/setup/setup-cloud-env.sh fakeuser fakepassword fsa-calc dev https://sinwebapp.app.cloud.gov 
+    ## 1: $ ./scripts/setup/setup-cloud-env.sh sinweb.app.cloud.gov 
         # This will build a new cloud environment
-    ## 2: $ ./scripts/setup/setup-cloud-env.sh fakeuser fakepassword fsa-calc dev http:s//sinwebapp.app.cloud.gov rebuild
+    ## 2: $ ./scripts/setup/setup-cloud-env.sh sinweb.app.cloud.gov rebuild
         # This will take down the current environment on the cloud and build a new one.
 
 # Script Constants
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='setup-cloud-env.sh'
-source "$SCRIPT_DIR/../helpers/utilities.sh"
+source "$SCRIPT_DIR/../util/logging.sh"
 
 # CloudFoundry OAuth Parameters
 LOGIN_REDIRECT="auth"
 LOGOUT_REDIRECT="logout"
-OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"$1/$LOGIN_REDIRECT\",\"$1/$LOGOUT_REDIRECT\"]}"
+OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"https://$1/$LOGIN_REDIRECT/\",\"https://$1/$LOGOUT_REDIRECT\"]}"
 
 cd $SCRIPT_DIR/../..
-formatted print "--> OAUTH_SERVICE_ARG: $OAUTH_SERVICE_ARG" $SCRIPT_NAME
+formatted_print "--> OAUTH_SERVICE_ARG: $OAUTH_SERVICE_ARG" $SCRIPT_NAME
 
 formatted_print '--> Copying Initialization Script Into Application'
 cp $SCRIPT_DIR/../init-app.sh $SCRIPT_DIR/../../sinwebapp/init-app.sh
+mkdir $SCRIPT_DIR/../../sinwebapp/util/ && \
+    cp $SCRIPT_DIR/../util/logging.sh $SCRIPT_DIR/../../sinwebapp/util/logging.sh
+
 
 if [ "$2" == "rebuild" ]
 then
@@ -45,30 +48,34 @@ fi
 formatted_print '--> Creating SQL Service' $SCRIPT_NAME
 cf create-service aws-rds medium-psql sin-sql
 formatted_print '--> Waiting For Service Creation'
-# sleep 5m
-# wait for sql service to be created. Takes a bit. 
-    # Probably a better way to do this. Research 
-    # processes and how to watch them!
 
 formatted_print '--> Creating OAuth Client Service' $SCRIPT_NAME
 cf create-service cloud-gov-identity-provider oauth-client sin-oauth
-#  cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["sinweb.app.cloud.gov/auth","sinweb.app.cloud.gov/logout"]}'
+#  cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["https://sinweb.app.cloud.gov/auth","https://sinweb.app.cloud.gov/logout"]}'
 cf create-service-key sin-oauth sin-key -c "$OAUTH_SERVICE_ARG"
 
-formatted_print '--> Pushing App To Cloud With No-Start Flag' $SCRIPT_NAME
+while [[ "$(cf service sin-sql)" == *"create in progress"* ]]
+do  
+    formatted_print '--> Waiting On SQL Service Creation' $SCRIPT_NAME
+    formatted_print '--> SQL Service Status...' $SCRIPT_NAME
+    cf service sin-sql
+    sleep 15s
+done
+# wait for services to be created. Takes a bit. 
+    # Probably a better way to do this. Research 
+    # processes and how to watch them!
+
+formatted_print '--> Pushing App To Cloud With \e[3m--no-start\e[0m Flag' $SCRIPT_NAME
 cf push --no-start
 
 formatted_print '--> Binding OAuth Client To App' $SCRIPT_NAME
-# cf bind-service sinweb sin-oauth -c '{"redirect_uri": ["sinweb.app.cloud.gov/auth","sinweb.app.cloud.gov/logout"]}'
+# cf bind-service sinweb sin-oauth -c '{"redirect_uri": ["https://sinweb.app.cloud.gov/auth","https://sinweb.app.cloud.gov/logout"]}'
 cf bind-service sinweb sin-oauth -c "$OAUTH_SERVICE_ARG"
 
-SERVICE_KEY ="$(cf service-key sin-oauth sin-key)"
-echo "SERVICE_KEY: $SERVICE_KEY"
-
-CLIENT_ID = echo $SERVICE_KEY | python -c \
-    'import json,sys;print json.load(sys.stdin)["client_id"]'
-CLIENT_SECRET = echo $SERVICE_KEY | python -c \
-    'import json,sys;print json.load(sys.stdin)["client_secret"]'
+SERVICE_KEY="$(cf service-key sin-oauth sin-key)"
+filtered_key="${SERVICE_KEY#*\{}"
+CLIENT_ID=$(echo "{$filtered_key" | python -c 'import json,sys;print(json.load(sys.stdin)["client_id"])')
+CLIENT_SECRET=$(echo "{$filtered_key" | python -c 'import json,sys;print(json.load(sys.stdin)["client_secret"])')
 
 formatted_print "--> CLIENT_ID: $CLIENT_ID" $SCRIPT_NAME
 formatted_print "--> CLIENT_SECRET: $CLIENT_SECRET" $SCRIPT_NAME
@@ -79,6 +86,6 @@ cf set-env sinweb UAA_CLIENT_SECRET $CLIENT_SECRET
 cf set-env sinweb DJANGO_SUPERUSER_USERNAME grantmoore
 cf set-env sinweb DJANGO_SUPERUSER_EMAIL grant.moore@gsa.gov
 
-formatted_print '--> Restaging App' $SCRIPT_NAME
-cf restage sinweb
+formatted_print '--> Starting App' $SCRIPT_NAME
+cf start sinweb
 

@@ -3,7 +3,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='clean-app.sh'
-source "$SCRIPT_DIR/helpers/utilities.sh"
+source "$SCRIPT_DIR/util/logging.sh"
 
 if [ -d "$SCRIPT_DIR/../sinwebapp/static/" ]
 then

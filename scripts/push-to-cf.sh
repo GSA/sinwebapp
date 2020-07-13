@@ -30,7 +30,7 @@
     
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='push-to-cf.sh'
-source "$SCRIPT_DIR/helpers/utilities.sh"
+source "$SCRIPT_DIR/util/logging.sh"
 
 formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
 bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
@@ -42,7 +42,7 @@ do
         formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/clean-app.sh
     fi
-    if [ "$input" == "build " ]
+    if [ "$input" == "build" ]
     then 
         formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/build-frontend.sh
@@ -51,6 +51,8 @@ done
 
 formatted_print '--> Copying Initialization Script Into Application' $SCRIPT_NAME
 cp $SCRIPT_DIR/init-app.sh $SCRIPT_DIR/../sinwebapp/init-app.sh
+mkdir $SCRIPT_DIR/../sinwebapp/util/ && \
+    cp $SCRIPT_DIR/util/logging.sh $SCRIPT_DIR/../sinwebapp/util/logging.sh
 
 formatted_print '--> Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
@@ -67,7 +69,7 @@ do
     elif [ "$input" == "trail" ]
     then
         formatted_print '--> Trailing CF Logs' $SCRIPT_NAME
-        cf logs sinwebapp
+        cf logs sinweb
     elif [ "$input" == "reset" ]
     then
         formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME

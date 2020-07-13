@@ -43,7 +43,8 @@ COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
 
 # START UP SCRIPT
-COPY /scripts/init-app.sh /home/scripts/
+COPY /scripts/init-app.sh /home/scripts/init-app.sh
+COPY /scripts/util/logging.sh /home/scripts/util/logging.sh
 WORKDIR /home/scripts/
 
 EXPOSE 8000

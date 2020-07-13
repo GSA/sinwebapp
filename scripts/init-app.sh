@@ -19,9 +19,12 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='setup-cloud-env.sh'
-source "$SCRIPT_DIR/../helpers/utilities.sh"
+source "$SCRIPT_DIR/util/logging.sh"
 
-cd $SCRIPT_DIR/../sinwebapp/
+if [ "$1" == "local" ]
+then
+    cd $SCRIPT_DIR/../sinwebapp/
+fi
 
 if [ "$1" == "cloud" ]
 then
