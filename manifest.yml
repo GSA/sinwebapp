@@ -7,6 +7,6 @@ disk_quota: 300M
 memory: 100M
 services:
     - sin-sql
-command: bash init-sinwebapp.sh cloud
+command: bash ./init-app.sh cloud
 env:
     ENVIRONMENT: cloud

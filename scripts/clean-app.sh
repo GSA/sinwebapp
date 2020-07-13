@@ -2,7 +2,8 @@
 # Clears the /sinwebapp/static/ and /frontend/node_modules/ directories.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='clean-application.sh'
+SCRIPT_NAME='clean-app
+.sh'
 source "$SCRIPT_DIR/helpers/utilities.sh"
 
 if [ -d "$SCRIPT_DIR/../sinwebapp/static/" ]

@@ -3,14 +3,15 @@
 # 1: local, container or cloud: specifies the type of environment to initialize in.
 
 ### DESCRIPTION
-## Executes from sinwebapp/sinwebapp directory (where manage.py is located).
-## Gets copied over to project folder in the push-to-cf.sh script.
-## Implemented this way for organizational  reasons. 
-## (I like to keep all my scripts in one folder.)
+## Initializes python web application by clearing any outstanding sessions,
+## migrating Django models to the database, setting up a super-user account,
+## collecting static files (for local deployments; the cloud automatically
+## collects static files) and starts a Gunicorn server and binds the WSGI
+## applicaiton to it.
 
 ### EXAMPLE USAGE 
 ## None! This script is used in the Dockerfile and manifest.yml. 
-## It must executed from inside of the container running the application.
+## It executes from inside of the container running the application.
 ## This script is used to initialize various properties in the Django
 ## web framework and start the web server.
 

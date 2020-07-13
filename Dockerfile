@@ -18,7 +18,7 @@ RUN apt-get update -y && apt-get install -y curl wait-for-it
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir /sinwebapp/ && mkdir /frontend/
+RUN mkdir /sinwebapp/ && mkdir /frontend/ && mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
     mkdir ./static/ && mkdir ./dependencies/ && mkdir ./api/
@@ -41,8 +41,11 @@ COPY /sinwebapp/api/ /home/sinwebapp/api/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
-COPY /scripts/init-sinwebapp.sh /home/sinwebapp/
+
+# START UP SCRIPT
+COPY /scripts/init-app.sh /home/scripts/
+WORKDIR /home/scripts/
 
 EXPOSE 8000
 
-CMD ["bash","./init-sinwebapp.sh","container"]
+CMD ["bash","./init-app.sh","container"]

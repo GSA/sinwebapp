@@ -14,7 +14,6 @@ class DebugMiddleware:
         if settings.DEBUG:
             self.logger.info('> Request Path: %s', request.path)
             self.logger.info('> Request Host: %s', request.META["HTTP_HOST"])
-            self.logger.info('> Request Next: %s', request.GET.get('next','nothing'))
 
             for key, value in request.GET.items():
                 self.logger.info('>> Request Parameter %s = %s', key, value)

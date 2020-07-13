@@ -1,11 +1,11 @@
 ### ARGUMENTS
 ## OPTIONAL
 # clean - wipes application before pushing to cloud,
-    # removes artifacts from previous builds.
+    # i.e. removes artifacts from previous builds.
 # build - builds the application before pushing to
     # the cloud
 # dispose - wipes application after pushing to cloud,
-    # removes artifacts from current build.
+    # i.e. removes artifacts from current build.
 # reset - returns project to development mode after 
     # pushing, i.e. makes sure all project settings
     # are configured for local deployment.
@@ -39,8 +39,8 @@ for input in $@;
 do
     if [ "$input" == "clean" ]
     then
-        formatted_print 'Invoking \e[3mclean-application.sh\e[0m Script...' $SCRIPT_NAME
-        bash $SCRIPT_DIR/clean-application.sh
+        formatted_print 'Invoking \e[3mclean-app.sh\e[0m Script...' $SCRIPT_NAME
+        bash $SCRIPT_DIR/clean-app.sh
     fi
     if [ "$input" == "build " ]
     then 
@@ -49,22 +49,16 @@ do
     fi
 done
 
-formatted_print 'Copying Initialization Script Into App Directory...' $SCRIPT_NAME
-cp $SCRIPT_DIR/init-sinwebapp.sh $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
-
 formatted_print 'Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
 cf push
-
-formatted_print 'Deleting Initialization Script...' $SCRIPT_NAME
-rm $SCRIPT_DIR/../sinwebapp/init-sinwebapp.sh
 
 for input in $@;
 do
     if [ "$input" == "dispose" ]
     then
-        formatted_print 'Invoking \e[3mclean-application.sh\e[0m Script...' $SCRIPT_NAME
-        bash $SCRIPT_DIR/clean-application.sh
+        formatted_print 'Invoking \e[3mclean-app.sh\e[0m Script...' $SCRIPT_NAME
+        bash $SCRIPT_DIR/clean-app.sh
     elif [ "$input" == "trail" ]
     then
         formatted_print 'Trailing CF Logs...' $SCRIPT_NAME
