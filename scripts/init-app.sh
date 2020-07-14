@@ -23,6 +23,12 @@ source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "local" ]
 then
+    # set environment variables
+    ENVIRONMENT=local
+    UAA_CLIENT_ID=fakeclientid
+    UAA_CLIENT_SECRET=fake-uaa-provider-client-secret
+    DJANGO_SUPERUSER_USERNAME=grantmoore
+    DJANGO_SUPERUSER_EMAIL=grant.moore@gsa.gov
     cd $SCRIPT_DIR/../sinwebapp/
 fi
 
