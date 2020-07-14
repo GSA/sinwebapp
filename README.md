@@ -78,6 +78,8 @@ To run the containers as detached, i.e. in the background.
 
 ## CloudFoundry Environment
 
+This section gives a brief overview of how to setup the environment for this application on the cloud. The BASH script in </i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the CloudFoundry cli and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
+
 1. Stage the app without starting it
 
 > cf push --no-start
@@ -86,7 +88,7 @@ To run the containers as detached, i.e. in the background.
 
 > cf create-service cloud-gov-identity-provider oauth-client sin-oauth <br>
 > cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
-> cf bind-service sinwebapp sin-oauth <br>
+> cf bind-service sinwebapp sin-oauth -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 
 The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space is which the service in made available.
 
