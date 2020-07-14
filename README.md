@@ -83,7 +83,7 @@ To run the containers as detached, i.e. in the background.
 
 ## CloudFoundry Environment
 
-This section gives a brief overview of how to setup the environment for this application on the cloud. The BASH script in </i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the CloudFoundry cli and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
+This section gives a brief overview on how to setup the environment for this application on cloud.gov implementation of CloudFoundry. The BASH script in <i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the <i>cf cli</i> and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
 
 1. Stage the app without starting it
 
