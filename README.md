@@ -50,7 +50,7 @@ This will install all of the frontend dependencies and build the frontend projec
 
 > bash init-app.sh local
 
-[^1]: TODO: load in database credentials through VCAP_SERVICES env variable to mimic cloud deployments!
+[^1]: TODO: load in database credentials through VCAP_SERVICES env variable in local environment to mimic cloud deployments!
 
 ## Container Environment
 
