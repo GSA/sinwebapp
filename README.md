@@ -160,7 +160,7 @@ The artifacts from the Angular build are outputted into the <i>/sinwebapp/static
 
 ## Database Configuratoin
 
-The file <i>/sinwebapp/authentication/db_config.py</i> creates Groups, Permissions and Users within three separate functions, using Django's built-in class models. These functions are added to the Migration queue within <i>/sinwebapp/authentication/migrations/</i>. The initialization script that starts up both container and cloud instances of the application applies these migrations to the host database. 
+The file <i>/sinwebapp/authentication/db_init.py</i> creates Groups, Permissions and Users within three separate functions, using Django's built-in class models. These functions are added to the Migration queue within <i>/sinwebapp/authentication/migrations/</i>. The initialization script that starts up both container and cloud instances of the application applies these migrations to the host database. 
 
 ## Routes & Endpoints
 
