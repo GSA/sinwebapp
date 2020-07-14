@@ -14,9 +14,9 @@ The application is built from source on the cloud, not the Docker image. The Doc
 
 ## Prerequisites
 
-- <b>Docker</b> : Install [here](https://www.docker.com/products/docker-desktop)
-- <b>Git for Windows</b> (If you're on a Windows OS): Install [here](https://git-scm.com/download/win)
-- <b>cf CLI :</b> Install [here](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Git For Windows](https://git-scm.com/download/win)
+- [cf cli](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
 ## Local Environment
 
