@@ -26,6 +26,9 @@ The application is built from source on the cloud, not the Docker image. The Doc
 
 - [Python](https://www.python.org/downloads/)
 - [NodeJs](https://nodejs.org/en/download/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+
+Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure you database connection[^1]. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
 You can build the application from source. First create a virtual Python environment in the project's root folder
 
@@ -46,6 +49,8 @@ Next, you will need to build the frontend. Navigate to the <i>/scripts/</i> dire
 This will install all of the frontend dependencies and build the frontend project and output it in the <i>/sinwebapp/static/</i> directory so the project can be statically served. You can then start the app from the <i>/scripts/</i> directory with another script, providing it an argument of "local"
 
 > bash init-app.sh local
+
+[^1]: TODO: load in database credentials through VCAP_SERVICES env variable to mimic cloud deployments!
 
 ## Container Environment
 
