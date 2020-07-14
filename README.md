@@ -1,6 +1,6 @@
 # <b>SIN Web App: A Work In Progress</b>
 
-This is a sample application that integrates an Angular frontend with a Django WSGI application deployed onto a <i>gunicorn</i> web server. It uses a <b>cloud.gov</b> OAuth2 client and a pre-configured python library specifically for that client, <i>cg-django-uaa</i>, to authenticate users, in addition to regular authentication Django backend plugins. The application has been containerized through a Dockerfile that creates an image of the application.
+This is a sample application that integrates an Angular frontend with a Django WSGI application deployed onto a <i>gunicorn</i> web server. It uses a <b>cloud.gov</b> OAuth2 client and a pre-configured python library specifically for that client, <i>cg-django-uaa</i>, to authenticate users, in addition to regular authentication Django backend plugins. The application has been containerized through a <i>Dockerfile</i> that creates an image of the application.
 
 Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinweb</b>, so when it is pushed to the cloud, it will live at [https://sinweb.app.cloud.gov](https://sinwebapp.app.cloud.gov). Edit the application name accordingly, if you need another domain route. 
 
