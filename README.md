@@ -20,8 +20,10 @@ Note the <i>manifest.yml</i> for CloudFoundry names this app <b>sinwebapp</b>, s
 
 ### Additional Prerequisites For Local Development
 
-- [Python]()
-- [NodeJs]()
+<b>Note you must be using a Linux distro to develop locally!<b> The python web server <i>gunicorn</i> is Unix based and incompatible with Windows!
+
+- [Python](https://www.python.org/downloads/)
+- [NodeJs](https://nodejs.org/en/download/)
 
 You can build the application from source. First create a virtual Python environment in the project's root folder
 
