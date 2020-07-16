@@ -30,7 +30,7 @@ The application is built from source on the cloud, not the Docker image. The Doc
 
 Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure you database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
-You can build the application from source. First create a virtual Python environment in the project's root folder
+To build the application from source, first create a virtual Python environment in the project's root folder
 
 > python -m venv .venv
 
@@ -56,13 +56,13 @@ This will install all of the frontend dependencies and build the frontend projec
 
 > ENVIRONMENT=container
 
-This will be loaded into the <i>settings.py</i> configuration file and allow certain settings to be parsed for their respective environments, <i>container</i> or <i>cloud</i>. Note in the <i>manifest.yml</i> for CloudFoundry, an environment variable is set,
+This will be loaded into the <i>settings.py</i> configuration file and allow certain settings to be parsed for their respective environments, <i>local</i>, <i>container</i> or <i>cloud</i>. Note in the <i>manifest.yml</i> for CloudFoundry, an environment variable is set,
 
 > env: ENVIRONMENT: cloud
 
 You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
 
-You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b>, <b>DJANGO_SUPERUSER_EMAIL</b> and <b>DJANGO_SUPERUSER_PASSWORD</b> set the credentials for this user. 
+You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
 
 2. From project's root directory, run 
 
@@ -83,7 +83,7 @@ To run the containers as detached, i.e. in the background.
 
 ## CloudFoundry Environment
 
-This section gives a brief overview on how to setup the environment for this application on cloud.gov implementation of CloudFoundry. The BASH script in <i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the <i>cf cli</i> and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
+This section gives a brief overview on how to setup the environment for this application on the cloud.gov implementation of CloudFoundry. The BASH script in <i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the <i>cf cli</i> and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
 
 1. Stage the app without starting it
 
