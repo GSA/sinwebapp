@@ -95,7 +95,7 @@ This section gives a brief overview on how to setup the environment for this app
 > cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 > cf bind-service sinwebapp sin-oauth -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 
-The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space is which the service in made available.
+The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space in which the service is made available.
 
 The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
 
@@ -138,7 +138,15 @@ The <b>production</b> environment variable for the Angular application affects t
 
 ## Building and Pushing
 
-Currently, there is no build pipeline that will automatically compile and deploy the Angular frontend to the cloud. For the time being, when deploying the application to the cloud, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
+### Automatic
+
+A CircleCi pipeline is hooked into the <i>master</i> branch on GitHub. Anytime new code is pushed to the <i>master</i>, the pipeline will trigger. The pipeline will automatically build and deploy the application the cloud.
+
+In the future, the pipeline will include other branches and also test the application before deployment.
+
+### Manual
+
+When deploying the application to the cloud yourself, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
 
 Once the frontend is built, you can push the application to CloudFoundry.
 
@@ -193,7 +201,7 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 - [x] create users with roles in database
 - [x] integrate angular frontend application with django backend framework
 - [ ] bind roles to html on redirect page after successful login 
-- [ ] create pipeline to build frontend and deploy to cloud
+- [x] create pipeline to build frontend and deploy to cloud
 - [ ] load in database credentials for local deployments through VCAP_SERVICES environment variable to mimic cloud deployments
 
 ## Useful Links
