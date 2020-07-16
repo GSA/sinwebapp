@@ -33,6 +33,6 @@ jobs:
 workflows: 
     build: 
         jobs:
-            - build_job
+            - build_job:
                 filters:
-                    only: master
+                   - only: master
