@@ -1,5 +1,5 @@
 version: 2.1
-# Use a package of configuration called an orb
+
 jobs:
     build_job:
         docker:
@@ -25,10 +25,10 @@ jobs:
             - run:
                 name: Install Dependencies and Build Frontend
                 bash ./scripts/build-frontend.sh
-            # TODO: push to cloud
-            # run:
-                # name: Push to CloudFoundry 
-                # command: bash ./scripts/circleci-cf-push.sh
+            # TODO push to cloud
+            # run
+                # name Push to CloudFoundry 
+                # command bash ./scripts/circleci-cf-push.sh
 
 workflows: 
     build: 
