@@ -22,7 +22,7 @@ The application is built from source on the cloud, not the Docker image. The Doc
 
 ### Additional Prerequisites For Local Development
 
-<b>Note you must be using a Linux distro to develop locally!</b> The python web server <i>gunicorn</i> is Unix based and incompatible with Windows!
+<b>Note you must be using a Linux distro to develop locally!</b> The python web server <i>gunicorn</i> is Unix based and incompatible with Windows! If you want to develop and test locally on Windows, please use Docker! See next section.
 
 - [Python](https://www.python.org/downloads/)
 - [NodeJs](https://nodejs.org/en/download/)
