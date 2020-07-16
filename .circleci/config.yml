@@ -8,14 +8,19 @@ jobs:
             - checkout
             - run: 
                 name: Install Build Dependencies
-                command: apt-get update -y && apt-get install -y curl nodejs npm
+                command: apt-get update -y && apt-get install -y curl
             - run: 
                 name: Download CF CLI Binaries
                 command: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github&version=v6" | tar -zx
             - run: 
                 name: Install CF CLI
                 command: mv cf /usr/local/bin
-            # set up frontend for cloud
+            - run: 
+                name: Install Node
+                command:
+                    - curl -sL https://deb.nodesource.com/setup_14.x | bash -
+                    - apt-get install -y nodejs 
+                    # set up frontend for cloud
             - run: bash ./scripts/setup/setup-frontend-env.sh cloud
             # install dependencies and build frontend
             - run: bash ./scripts/build-frontend
