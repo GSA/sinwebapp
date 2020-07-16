@@ -24,7 +24,7 @@ jobs:
                 command: bash ./scripts/setup/setup-frontend-env.sh cloud
             - run:
                 name: Install Dependencies and Build Frontend
-                command: bash ./scripts/build-frontend.sh
+                command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
             # TODO: push to cloud
             # run:
                 # name: Push to CloudFoundry 
