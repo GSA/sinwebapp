@@ -7,12 +7,12 @@ jobs:
         steps:
             - checkout
             # install os libraries
-            - run: apt-get update -y && apt-get install -y curl wget gnupg2
+            - run: apt-get update -y && apt-get install -y curl
             # install cf cli
             - run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github&version=v6" | tar -zx
             - run: mv cf /usr/local/bin
             # install node
-            - run: curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs
+            - run: curl -sL https://deb.nodesource.com/setup_14.x | bash apt-get install -y nodejs
             # set up frontend for cloud
             - run: bash ./scripts/setup/setup-frontend-env.sh cloud
             # install dependencies and build frontend
