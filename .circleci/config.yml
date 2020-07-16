@@ -10,14 +10,14 @@ jobs:
             - run: apt-get update -y && apt-get install -y curl wget
             # install cf cli
             - run: wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-                echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+                echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
             # install node
             - run: curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs
             # set up frontend for cloud
             - run: bash ./scripts/setup/setup-frontend-env.sh cloud
             # install dependencies and build frontend
             - run: bash ./scripts/build-frontend
-            
+
 workflows: 
     # Name the workflow "welcome"
     build: 
