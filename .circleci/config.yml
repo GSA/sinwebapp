@@ -4,6 +4,8 @@ jobs:
     build_job:
         docker:
             - image: python:3.7.7-slim-stretch
+            environment: 
+                CF_LOGIN_URL: 'https://api.fr.cloud.gov'
         steps:
             - checkout
             - run: 
@@ -18,14 +20,20 @@ jobs:
             - run: 
                 name: Install Node
                 command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
-                    # set up frontend for cloud
-            - run: bash ./scripts/setup/setup-frontend-env.sh cloud
-            # install dependencies and build frontend
-            - run: bash ./scripts/build-frontend
+            - run: 
+                name: Setup Frontend For Cloud Deployment
+                command: bash ./scripts/setup/setup-frontend-env.sh cloud
+            - run:
+                name: Install Dependencies and Build Frontend
+                bash ./scripts/build-frontend.sh
+            # TODO: push to cloud
+            # run:
+                # name: Push to CloudFoundry 
+                # command: bash ./scripts/circleci-cf-push.sh
 
 workflows: 
-    # Name the workflow "welcome"
     build: 
-        # Run the welcome/run job in its own container
         jobs:
             - build_job
+                filters:
+                    only: master
