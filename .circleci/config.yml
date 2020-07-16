@@ -9,7 +9,7 @@ jobs:
             # install os libraries
             - run: apt-get update -y && apt-get install -y curl wget
             # install cf cli
-            - run: wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+            - run: wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add -
                 echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
             # install node
             - run: curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs
