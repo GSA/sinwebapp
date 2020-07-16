@@ -8,7 +8,7 @@ jobs:
         steps:
             - checkout
             - run: 
-                name: Install Build Dependencies
+                name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y curl
             - run: 
                 name: Download CF CLI Binaries
