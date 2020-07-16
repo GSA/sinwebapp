@@ -4,8 +4,7 @@ jobs:
     build_job:
         docker:
             - image: python:3.7.7-slim-stretch
-              environment: 
-                CF_LOGIN_URL: 'https://api.fr.cloud.gov'
+
         steps:
             - checkout
             - run: 
