@@ -6,13 +6,15 @@ jobs:
             - image: python:3.7.7-slim-stretch
         steps:
             - checkout
-            # install os libraries
-            - run: apt-get update -y && apt-get install -y curl
-            # install cf cli
-            - run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github&version=v6" | tar -zx
-            - run: mv cf /usr/local/bin
-            # install node
-            - run: curl -sL https://deb.nodesource.com/setup_14.x | bash apt-get install -y nodejs
+            - run: 
+                name: Install Build Dependencies
+                command: apt-get update -y && apt-get install -y curl nodejs npm
+            - run: 
+                name: Download CF CLI Binaries
+                command: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github&version=v6" | tar -zx
+            - run: 
+                name: Install CF CLI
+                command: mv cf /usr/local/bin
             # set up frontend for cloud
             - run: bash ./scripts/setup/setup-frontend-env.sh cloud
             # install dependencies and build frontend
