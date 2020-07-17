@@ -11,12 +11,12 @@ jobs:
             - checkout
             - run: 
                 name: Install OS Dependencies
-                command: apt-get update -y && apt-get install -y curl
+                command: apt-get update -y && apt-get install -y curl wget
             - run: 
                 name: Download And Install CF CLI
                 command: |
                     mkdir cf && cd cf
-                    curl -L "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
+                    wget "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
                     ls
                     dpkg -i cf-cli-installer_6.51_0_x86-64.deb
             - run: 
