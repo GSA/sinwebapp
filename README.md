@@ -28,7 +28,7 @@ The application is built from source on the cloud, not the Docker image. The Doc
 - [NodeJs](https://nodejs.org/en/download/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure you database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
+Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure and customize your database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
 To build the application from source, first create a virtual Python environment in the project's root folder
 
