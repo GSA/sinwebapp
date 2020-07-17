@@ -12,4 +12,8 @@ if [ ! -d "$SCRIPT_DIR/../sinwebapp/util" ]
 then
     mkdir ./sinwebapp/util/
     cp ./scripts/util/logging.sh ./sinwebapp/util/logging.sh
+elif [ ! -f "$SCRIPT_DIR/../sinwebapp/util/logging.sh" ]
+then 
+    cp ./scripts/util/logging.sh ./sinwebapp/util/logging.sh
 fi
+
