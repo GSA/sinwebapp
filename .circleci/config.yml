@@ -7,7 +7,6 @@ executors:
 jobs:
     build:
         executor: application-build
-
         steps:
             - checkout
             - run: 
@@ -31,8 +30,8 @@ jobs:
         
     deploy_dev:    
         executor: application-build
-    
         steps:
+            - checkout
             - run:
                 name: Push to CloudFoundry 
                 command: bash ./scripts/cc-cf-push.sh dev
