@@ -1,9 +1,12 @@
 version: 2.1
 
-jobs:
-    build_job:
+executor:
+    application-build:
         docker:
             - image: python:3.7.7-slim-stretch
+jobs:
+    build:
+        executor: application-build
 
         steps:
             - checkout
@@ -25,15 +28,23 @@ jobs:
             - run:
                 name: Install Dependencies and Build Frontend
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
-            # TODO: push to cloud
-            # run:
-                # name: Push to CloudFoundry 
-                # command: bash ./scripts/circleci-cf-push.sh
+        
+    deploy_dev:    
+        executor: application-build
+    
+        steps:
+            - run:
+                name: Push to CloudFoundry 
+                command: bash ./scripts/cc-cf-push.sh dev
 
 workflows: 
     build: 
         jobs:
-            - build_job:
+            - build:
+                filters:
+                    branches:
+                        only: master
+            - deploy:
                 filters:
                     branches:
                         only: master
