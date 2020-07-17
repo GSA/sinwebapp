@@ -140,7 +140,7 @@ The <b>production</b> environment variable for the Angular application affects t
 
 ### Automatic
 
-A CircleCi pipeline is hooked into the <i>master</i> branch on GitHub. Anytime new code is pushed to the <i>master</i>, the pipeline will trigger. The pipeline will automatically build and deploy the application the cloud.
+A CircleCi pipeline is hooked into the <i>master</i> branch on GitHub. Anytime new code is pushed to the <i>master</i>, the pipeline will trigger. The pipeline will automatically build and deploy the application to the cloud. In order to deploy the application to the cloud, the pipeline needs credentials for the cloud.gov environment.
 
 In the future, the pipeline will include other branches and also test the application before deployment.
 

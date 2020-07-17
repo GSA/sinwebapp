@@ -12,6 +12,8 @@
 # trail - trails cloud application logs after pushing
 
 ### DESCRIPTION
+## Processes that need to be completed after adding to the 
+## code base but before pushing to the cloud.
 ## Copies over scripts into cloud application folder, installs 
 ## frontend dependencies, builds frontend and then pushes to the 
 ## cloud. Frontend build is configured to output into the 
