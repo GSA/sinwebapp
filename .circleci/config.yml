@@ -4,39 +4,52 @@ executors:
     application-build:
         docker:
             - image: python:3.7.7-slim-stretch
+        working_directory: /tmp/
+
 jobs:
     build:
         executor: application-build
         steps:
             - checkout
             - run: 
+                name: debug ls
+                command: ls
+            - run: 
                 name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y curl wget
+            - run: 
+                name: Download And Install Node
+                command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
+            - run:
+                name: Install Dependencies And Build Frontend
+                command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
+            - persist_to_workspace: 
+                root: ./sinwebapp/
+                paths: /static/
+
+
+        
+    deploy_dev:    
+        executor: application-build
+        steps:
+            - checkout
+            - attach_workspace:
+                at: /tmp/sinwebapp/static/
+            - run:
+                name: debug ls
+                command: ls
+            - run: 
+                name: Setup Frontend For Cloud Deployment
+                command: bash ./scripts/setup/setup-frontend-env.sh cloud
+            - run:
+                name: Copy Initialization Scripts Into Application
+                command: bash ./scripts/init-scripts.sh 
             - run: 
                 name: Download And Install CF CLI
                 command: |
                     mkdir cf && cd cf
                     wget "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
                     dpkg -i $(ls)
-                    cf -h
-                    cd ..
-            - run: 
-                name: Download And Install Node
-                command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
-            - run: 
-                name: Setup Frontend For Cloud Deployment
-                command: bash ./scripts/setup/setup-frontend-env.sh cloud
-            - run:
-                name: Install Dependencies And Build Frontend
-                command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
-            - run:
-                name: Copy Initialization Scripts Into Application
-                command: bash ./scripts/init-scripts.sh
-        
-    deploy_dev:    
-        executor: application-build
-        steps:
-            - checkout
             - run:
                 name: Push to CloudFoundry 
                 command: |
