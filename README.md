@@ -38,7 +38,7 @@ Then activate it,
 
 > source ./.venv/Scripts/activate
 
-Navigate to the <i>/sinwebapp/</i> project and install the project requirements,
+Navigate to the <i>/sinwebapp/</i> project directory and install the project requirements,
 
 > pip install -r requirements.txt
 
