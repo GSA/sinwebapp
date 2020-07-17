@@ -16,9 +16,9 @@ jobs:
                 name: Download And Install CF CLI
                 command: |
                     mkdir cf && cd cf
-                    wget -o cf_dpkg.deb "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
-                    ls
-                    dpkg -i cf_dpkg.deb
+                    wget "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
+                    dpkg -i $(ls)
+                    cd ..
             - run: 
                 name: Install Node
                 command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
