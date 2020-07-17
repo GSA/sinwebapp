@@ -4,7 +4,7 @@ executors:
     application-build:
         docker:
             - image: python:3.7.7-slim-stretch
-        working_directory: /tmp/
+        working_directory: /home/
 
 jobs:
     build:
