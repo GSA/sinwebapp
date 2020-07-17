@@ -32,7 +32,7 @@ jobs:
                 at: /home/sinwebapp/
             - run:
                 name: debug ls
-                command: cd /home/sinwebapp/static && ls
+                command: cd /home/sinwebapp/static/frontend && ls
             - run: 
                 name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y wget
