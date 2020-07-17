@@ -187,21 +187,21 @@ The file <i>/sinwebapp/authentication/db_init.py</i> creates Groups, Permissions
 Listed below are the current routes used by each component of the application, the Angular frontend and the Django backend,
 
 Django Static HTML Endpoint
-- /
-- /logout
-- /success
+- <i>/</i>
+- <i>/logout</i>
+- <i>/success</i>
 
 Application API Endpoints
-- /api/user
+- <i>/api/user</i>
 
 Third Party Endpoints
-- /auth/login
-- /auth/callback
-- /fake/oauth/authorize
-- /fake/oauth/token
+- <i>/auth/login</i>
+- <i>/auth/callback</i>
+- <i>/fake/oauth/authorize</i>
+- <i>/fake/oauth/token</i>
 
 Frontend Routes
-- 404: ?
+- <i>404</i>: ?
 
 ## Superuser
 
