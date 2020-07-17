@@ -25,7 +25,7 @@ jobs:
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
             - persist_to_workspace: 
                 root: ./sinwebapp/
-                paths: /static/
+                paths: ./static/
 
 
         
