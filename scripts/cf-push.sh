@@ -51,10 +51,8 @@ do
     fi
 done
 
-formatted_print '--> Copying Initialization Script Into Application' $SCRIPT_NAME
-cp $SCRIPT_DIR/init-app.sh $SCRIPT_DIR/../sinwebapp/init-app.sh
-mkdir $SCRIPT_DIR/../sinwebapp/util/ && \
-    cp $SCRIPT_DIR/util/logging.sh $SCRIPT_DIR/../sinwebapp/util/logging.sh
+formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
+bash $SCRIPT_DIR/init-scripts.sh
 
 formatted_print '--> Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..

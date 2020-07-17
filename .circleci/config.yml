@@ -30,10 +30,7 @@ jobs:
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
             - run:
                 name: Copy Initialization Scripts Into Application
-                command: |
-                    cp ./scripts/init-app.sh ./sinwebapp/init-app.sh
-                    mkdir ./sinwebapp/util/
-                    cp ./scripts/util/logging.sh ./sinwebapp/util/logging.sh
+                command: bash ./scripts/init-scripts.sh
         
     deploy_dev:    
         executor: application-build
@@ -46,7 +43,7 @@ jobs:
                     bash ./scripts/cc-cf-push.sh dev
 
 workflows: 
-    build: 
+    build_and_deploy: 
         jobs:
             - build:
                 filters:
