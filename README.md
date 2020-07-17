@@ -138,13 +138,25 @@ The <b>production</b> environment variable for the Angular application affects t
 
 ## Building and Pushing
 
-### Automatic
+### Automatic : CircleCi Pipeline
 
-A CircleCi pipeline is hooked into the <i>master</i> branch on GitHub. Anytime new code is pushed to the <i>master</i>, the pipeline will trigger. The pipeline will automatically build and deploy the application to the cloud. In order to deploy the application to the cloud, the pipeline needs credentials for the cloud.gov environment.
+A CircleCi pipeline is hooked into the <i>master</i> branch on GitHub. Anytime new code is pushed to the <i>master</i>, the pipeline will trigger. The pipeline will automatically build and deploy the application to the cloud. In order to deploy the application to the cloud, the pipeline needs credentials for the cloud.gov environment. You can create a cloud-environment-specific service account for CircleCi with the <i>cf cli</i> with the following command,
+
+> cf create-service cloud-gov-service-account sin-/CLOUD_SPACE_GOES_HERE/-deployer circleci-account
+
+You can then create a service-key for this service,
+
+> cf create-service-key circleci-account circleci-key
+
+And then retrieve the credentials for this account with the newly created key,
+
+> cf service-key circleci-account circle-key
+
+You will then need to store these credentials on the CircleCi pipeline environment in variables named <b>CF_/CLOUD_SPACE_GOES_HERE/_USERNAME</b> and <b>CF_/CLOUD_SPACE_GOES_HERE/_PASSWORD</b> respectively. 
 
 In the future, the pipeline will include other branches and also test the application before deployment.
 
-### Manual
+### Manual : <i>cf cli</i>
 
 When deploying the application to the cloud yourself, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
 
@@ -214,6 +226,7 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 - [Gunicorn Documentation](https://docs.gunicorn.org/en/stable/run.html)
 ### Authentication
 - [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
+- [Cloud.gov Service Account](https://cloud.gov/docs/services/cloud-gov-service-account/)
 - [Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
 - [Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
