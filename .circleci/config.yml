@@ -16,7 +16,7 @@ jobs:
                 name: Download And Install CF CLI
                 command: |
                     mkdir cf && cd cf
-                    wget "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
+                    wget -o cf_dpkg.deb "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
                     ls
                     dpkg -i cf-cli-installer_6.51_0_x86-64.deb
             - run: 
