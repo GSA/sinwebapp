@@ -15,6 +15,9 @@ jobs:
                 name: debug ls
                 command: ls
             - run: 
+                name: Install OS Dependencies
+                command: apt-get update -y && apt-get install -y wget
+            - run: 
                 name: Download And Install Node
                 command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
             - run:
