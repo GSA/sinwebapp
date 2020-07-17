@@ -13,7 +13,7 @@ jobs:
                 name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y curl
             - run: 
-                name: Download And Install CF CLI Binaries
+                name: Download And Install CF CLI
                 command: |
                     mkdir cf && cd cf
                     curl -L "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
