@@ -14,15 +14,15 @@ source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "dev" ]
 then
-    cf auth $CF_DEV_USERNAME $CF_DEV_PASSWORD
+    cf auth -a api.fr.cloud.gov $CF_DEV_USERNAME $CF_DEV_PASSWORD
     cf target -o $CF_ORGANIZATION -s $CF_DEV_SPACE
 elif [ "$1" == "prod" ]
 then
-    cf auth $CF_DEV_USERNAME $CF_DEV_PASSWORD
+    cf auth -a api.fr.cloud.gov $CF_DEV_USERNAME $CF_DEV_PASSWORD
     cf target -o $CF_ORGANIZATION -s $CF_PROD_SPACE
 elif [ "$1" == "staging" ]
 then
-    cf auth $CF_DEV_USERNAME $CF_DEV_PASSWORD
+    cf auth -a api.fr.cloud.gov $CF_DEV_USERNAME $CF_DEV_PASSWORD
     cf target -o $CF_ORGANIZATION -s $CF_STAGING_SPACE
 fi
 
