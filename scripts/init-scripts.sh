@@ -1,4 +1,3 @@
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='init-scripts.sh'
 source "$SCRIPT_DIR/util/logging.sh"
@@ -17,4 +16,3 @@ elif [ ! -f "$SCRIPT_DIR/../sinwebapp/util/logging.sh" ]
 then 
     cp $SCRIPT_DIR/util/logging.sh $SCRIPT_DIR/../sinwebapp/util/logging.sh
 fi
-

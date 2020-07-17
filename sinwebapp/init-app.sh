@@ -18,11 +18,17 @@
 ### TODO: pass in argument to determine how migrations should proceed.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='setup-cloud-env.sh'
+SCRIPT_NAME='init-app.sh'
 source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "local" ]
 then
+    # set environment variables
+    ENVIRONMENT=local
+    UAA_CLIENT_ID=fakeclientid
+    UAA_CLIENT_SECRET=fake-uaa-provider-client-secret
+    DJANGO_SUPERUSER_USERNAME=grantmoore
+    DJANGO_SUPERUSER_EMAIL=grant.moore@gsa.gov
     cd $SCRIPT_DIR/../sinwebapp/
 fi
 

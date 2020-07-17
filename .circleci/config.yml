@@ -20,7 +20,7 @@ jobs:
                     dpkg -i $(ls)
                     cd ..
             - run: 
-                name: Install Node
+                name: Download And Install Node
                 command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
             - run: 
                 name: Setup Frontend For Cloud Deployment
