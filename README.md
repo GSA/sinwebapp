@@ -50,6 +50,8 @@ This will install all of the frontend dependencies and build the frontend projec
 
 > bash init-app.sh local
 
+Note inside of the <i>init-app.sh</i>, it defines environment variables before launching the application. This is where the enivornment variables live for local deployments. If you need to edit a local environment variable, do so in this file.
+
 ## Container Environment
 
 1. The <i>docker-compose.yml</i> sets up the application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
