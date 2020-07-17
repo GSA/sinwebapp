@@ -26,7 +26,7 @@ jobs:
                 name: Setup Frontend For Cloud Deployment
                 command: bash ./scripts/setup/setup-frontend-env.sh cloud
             - run:
-                name: Install Dependencies and Build Frontend
+                name: Install Dependencies And Build Frontend
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
             - run:
                 name: Copy Initialization Scripts Into Application
