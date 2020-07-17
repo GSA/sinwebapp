@@ -31,7 +31,7 @@
     ## 3: $ ./scripts.push-to-cf.sh clean build dispose reset
     
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='push-to-cf.sh'
+SCRIPT_NAME='cf-push.sh'
 source "$SCRIPT_DIR/util/logging.sh"
 
 formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME

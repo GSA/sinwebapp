@@ -8,6 +8,9 @@
 ### CloudFounry.
 
 # TODO: verify number of arguments, else exit
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_NAME='cc-cf-push.sh'
+source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "dev" ]
 then
