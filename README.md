@@ -52,7 +52,7 @@ This will install all of the frontend dependencies and build the frontend projec
 
 ## Container Environment
 
-1. The <i>docker-compose.yml</i> sets up the local application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
+1. The <i>docker-compose.yml</i> sets up the application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 
 > ENVIRONMENT=container
 
