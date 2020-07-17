@@ -18,6 +18,7 @@ jobs:
                     mkdir cf && cd cf
                     wget "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
                     dpkg -i $(ls)
+                    cf -h
                     cd ..
             - run: 
                 name: Download And Install Node
