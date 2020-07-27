@@ -18,7 +18,7 @@
 ### TODO: pass in argument to determine how migrations should proceed.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='setup-cloud-env.sh'
+SCRIPT_NAME='init-app.sh'
 source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "local" ]

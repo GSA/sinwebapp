@@ -28,9 +28,9 @@ The application is built from source on the cloud, not the Docker image. The Doc
 - [NodeJs](https://nodejs.org/en/download/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure you database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
+Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure and customize your database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
-You can build the application from source. First create a virtual Python environment in the project's root folder
+To build the application from source, first create a virtual Python environment in the project's root folder
 
 > python -m venv .venv
 
@@ -38,7 +38,7 @@ Then activate it,
 
 > source ./.venv/Scripts/activate
 
-Navigate to the <i>/sinwebapp/</i> project and install the project requirements,
+Navigate to the <i>/sinwebapp/</i> project directory and install the project requirements,
 
 > pip install -r requirements.txt
 
@@ -50,19 +50,21 @@ This will install all of the frontend dependencies and build the frontend projec
 
 > bash init-app.sh local
 
+Note inside of the <i>init-app.sh</i>, it defines environment variables before launching the application. This is where the enivornment variables live for local deployments. If you need to edit a local environment variable, do so in this file.
+
 ## Container Environment
 
-1. The <i>docker-compose.yml</i> sets up the local application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
+1. The <i>docker-compose.yml</i> sets up the application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 
 > ENVIRONMENT=container
 
-This will be loaded into the <i>settings.py</i> configuration file and allow certain settings to be parsed for their respective environments, <i>container</i> or <i>cloud</i>. Note in the <i>manifest.yml</i> for CloudFoundry, an environment variable is set,
+This will be loaded into the <i>settings.py</i> configuration file and allow certain settings to be parsed for their respective environments, <i>local</i>, <i>container</i> or <i>cloud</i>. Note in the <i>manifest.yml</i> for CloudFoundry, an environment variable is set,
 
 > env: ENVIRONMENT: cloud
 
 You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
 
-You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b>, <b>DJANGO_SUPERUSER_EMAIL</b> and <b>DJANGO_SUPERUSER_PASSWORD</b> set the credentials for this user. 
+You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
 
 2. From project's root directory, run 
 
@@ -83,7 +85,7 @@ To run the containers as detached, i.e. in the background.
 
 ## CloudFoundry Environment
 
-This section gives a brief overview on how to setup the environment for this application on cloud.gov implementation of CloudFoundry. The BASH script in <i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the <i>cf cli</i> and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
+This section gives a brief overview on how to setup the environment for this application on the cloud.gov implementation of CloudFoundry. The BASH script in <i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the <i>cf cli</i> and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
 
 1. Stage the app without starting it
 
@@ -95,7 +97,7 @@ This section gives a brief overview on how to setup the environment for this app
 > cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 > cf bind-service sinwebapp sin-oauth -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 
-The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space is which the service in made available.
+The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space in which the service is made available.
 
 The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
 
@@ -138,7 +140,27 @@ The <b>production</b> environment variable for the Angular application affects t
 
 ## Building and Pushing
 
-Currently, there is no build pipeline that will automatically compile and deploy the Angular frontend to the cloud. For the time being, when deploying the application to the cloud, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
+### Automatic : CircleCi Pipeline
+
+A CircleCi pipeline is hooked into the <i>master</i> branch on GitHub. Anytime new code is pushed to the <i>master</i>, the pipeline will trigger. The pipeline will automatically build and deploy the application to the cloud. In order to deploy the application to the cloud, the pipeline needs credentials for the cloud.gov environment. You can create a cloud-environment-specific service account for CircleCi with the <i>cf cli</i> with the following command,
+
+> cf create-service cloud-gov-service-account sin-/CLOUD_SPACE_GOES_HERE/-deployer circleci-account
+
+You can then create a service-key for this service,
+
+> cf create-service-key circleci-account circleci-key
+
+And then retrieve the credentials for this account with the newly created key,
+
+> cf service-key circleci-account circle-key
+
+You will then need to store these credentials on the CircleCi pipeline environment in variables named <b>CF_/CLOUD_SPACE_GOES_HERE/_USERNAME</b> and <b>CF_/CLOUD_SPACE_GOES_HERE/_PASSWORD</b> respectively. 
+
+In the future, the pipeline will include other branches and also test the application before deployment.
+
+### Manual : <i>cf cli</i>
+
+When deploying the application to the cloud yourself, you will need to manually build the frontend with the <i>build-frontend.sh</i> BASH script contained in the <i>/scripts/</i> folder before pushing. The Angular build is configured to output its artifacts into the <i>/sinwebapp/static/frontend/</i> directory, which is statically served through the Django framework. 
 
 Once the frontend is built, you can push the application to CloudFoundry.
 
@@ -167,21 +189,21 @@ The file <i>/sinwebapp/authentication/db_init.py</i> creates Groups, Permissions
 Listed below are the current routes used by each component of the application, the Angular frontend and the Django backend,
 
 Django Static HTML Endpoint
-- /
-- /logout
-- /success
+- <i>/</i>
+- <i>/logout</i>
+- <i>/success</i>
 
 Application API Endpoints
-- /api/user
+- <i>/api/user</i>
 
 Third Party Endpoints
-- /auth/login
-- /auth/callback
-- /fake/oauth/authorize
-- /fake/oauth/token
+- <i>/auth/login</i>
+- <i>/auth/callback</i>
+- <i>/fake/oauth/authorize</i>
+- <i>/fake/oauth/token</i>
 
 Frontend Routes
-- 404: ?
+- <i>404</i>: ?
 
 ## Superuser
 
@@ -193,22 +215,23 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 - [x] create users with roles in database
 - [x] integrate angular frontend application with django backend framework
 - [ ] bind roles to html on redirect page after successful login 
-- [ ] create pipeline to build frontend and deploy to cloud
+- [x] create pipeline to build frontend and deploy to cloud
 - [ ] load in database credentials for local deployments through VCAP_SERVICES environment variable to mimic cloud deployments
 
 ## Useful Links
 ### Core Application
 - [Django: Data Migrations](https://docs.djangoproject.com/en/3.0/topics/migrations/#data-migrations)
 - [Django: Authentication Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/)<br>
-- [Django: Groups Class documentation](https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group)<br>
-- [Django: Permissions Class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization)<br>
-- [Django: User Class documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
-- [Gunicorn Documentation](https://docs.gunicorn.org/en/stable/run.html)
+- [Django: Groups Class Documentation](https://docs.djangoproject.com/en/3.0/ref/contrib/auth/#django.contrib.auth.models.Group)<br>
+- [Django: Permissions Class Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#permissions-and-authorization)<br>
+- [Django: User Class Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/#user-objects)<br>
+- [Gunicorn: Documentation](https://docs.gunicorn.org/en/stable/run.html)
 ### Authentication
-- [Cloud.gov Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
-- [Leveraging Cloud.gov Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
+- [Cloud.gov: Identity Provider](https://cloud.gov/docs/services/cloud-gov-identity-provider/) <br/>
+- [Cloud.gov: Service Account](https://cloud.gov/docs/services/cloud-gov-service-account/)
+- [Cloud.gov: Leveraging Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
-- [Python Library cg-django-uaa Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
+- [Python Library, cg-django-uaa: Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
 ### Relevant Stack Discussions
 - [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Django: Creating JSON HttpResponse](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)

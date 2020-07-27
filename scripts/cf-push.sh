@@ -12,6 +12,8 @@
 # trail - trails cloud application logs after pushing
 
 ### DESCRIPTION
+## Processes that need to be completed after adding to the 
+## code base but before pushing to the cloud.
 ## Copies over scripts into cloud application folder, installs 
 ## frontend dependencies, builds frontend and then pushes to the 
 ## cloud. Frontend build is configured to output into the 
@@ -29,7 +31,7 @@
     ## 3: $ ./scripts.push-to-cf.sh clean build dispose reset
     
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='push-to-cf.sh'
+SCRIPT_NAME='cf-push.sh'
 source "$SCRIPT_DIR/util/logging.sh"
 
 formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
@@ -49,10 +51,8 @@ do
     fi
 done
 
-formatted_print '--> Copying Initialization Script Into Application' $SCRIPT_NAME
-cp $SCRIPT_DIR/init-app.sh $SCRIPT_DIR/../sinwebapp/init-app.sh
-mkdir $SCRIPT_DIR/../sinwebapp/util/ && \
-    cp $SCRIPT_DIR/util/logging.sh $SCRIPT_DIR/../sinwebapp/util/logging.sh
+formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
+bash $SCRIPT_DIR/init-scripts.sh
 
 formatted_print '--> Pushing To The Cloud...' $SCRIPT_NAME
 cd $SCRIPT_DIR/..

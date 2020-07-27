@@ -1,39 +1,66 @@
 version: 2.1
 
-jobs:
-    build_job:
+executors:
+    application-build:
         docker:
             - image: python:3.7.7-slim-stretch
+        working_directory: /home/
 
+jobs:
+    build:
+        executor: application-build
         steps:
             - checkout
             - run: 
                 name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y curl
             - run: 
-                name: Download CF CLI Binaries
-                command: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github&version=v6" | tar -zx
-            - run: 
-                name: Install CF CLI
-                command: mv cf /usr/local/bin
-            - run: 
-                name: Install Node
+                name: Download And Install Node
                 command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
+            - run:
+                name: Install Dependencies And Build Frontend
+                command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
+            - persist_to_workspace: 
+                root: ./sinwebapp/
+                paths: ./static/
+
+    deploy_dev:    
+        executor: application-build
+        steps:
+            - checkout
+            - attach_workspace:
+                at: /home/sinwebapp/
+            - run: 
+                name: Install OS Dependencies
+                command: apt-get update -y && apt-get install -y wget
             - run: 
                 name: Setup Frontend For Cloud Deployment
                 command: bash ./scripts/setup/setup-frontend-env.sh cloud
             - run:
-                name: Install Dependencies and Build Frontend
-                command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
-            # TODO: push to cloud
-            # run:
-                # name: Push to CloudFoundry 
-                # command: bash ./scripts/circleci-cf-push.sh
+                name: Copy Initialization Scripts Into Application
+                command: bash ./scripts/init-scripts.sh 
+            - run: 
+                name: Download And Install CF CLI
+                command: |
+                    mkdir cf && cd cf
+                    wget "https://packages.cloudfoundry.org/stable?release=debian64&source=github&version=v6"
+                    dpkg -i $(ls)
+            - run:
+                name: Push to CloudFoundry 
+                command: |
+                    echo $PATH
+                    bash ./scripts/cc-cf-push.sh dev
 
 workflows: 
-    build: 
+    build_and_deploy: 
         jobs:
-            - build_job:
+            - build:
+                filters:
+                    branches:
+                        only: master
+            - deploy_dev:
+                requires: 
+                    - build
                 filters:
                     branches:
                         only: master
