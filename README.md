@@ -97,7 +97,7 @@ This section gives a brief overview on how to setup the environment for this app
 > cf create-service-key sin-oauth sin-key -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 > cf bind-service sinwebapp sin-oauth -c '{"redirect_uri": ["BASE_URL/auth","BASE_URL/logout"]}'<br>
 
-The first line is of the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space in which the service is made available.
+The first line is of the form <i>cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b></i>, where <b>SERVICE_PLAN</b> is the type of service being implemented, <b>SERVICE_INSTANCE</b> is the name of the particular service created and the <b>APP_INSTANCE</b> is the application space in which the service is made available.
 
 The second line generates a key so that the application instance can leverage this service. The third line binds the application instance to the service instance.
 
@@ -105,7 +105,7 @@ The second line generates a key so that the application instance can leverage th
 
 > cf service-key sin-oauth sin-key
 
-4. Django reads the client ID and client secret from Environment Variables. In the local setup, these are contained in the <i>local.env</i>. To set them on CloudFoundry, execute these commands,
+4. Django reads the client ID and client secret from Environment Variables. In the container setup, these are contained in the <i>local.env</i>. In the local setup, these are contained in the <i>init-app.sh</i> script. To set them on CloudFoundry, execute these commands,
 
 > cf set-env sinwebapp UAA_CLIENT_ID "client id goes here"<br>
 > cf set-env sinwebapp UAA_CLIENT_SECRET "client secret goes here"
@@ -114,7 +114,7 @@ The second line generates a key so that the application instance can leverage th
 
 > cf create-service aws-rds medium-psql sin-sql 
 
-Again, this command uses the form <i>'cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b>'</i> just like in step 2, since we are creating a service in an application space. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
+Again, this command uses the form <i>cf create-service <b>SERVICE_PLAN</b> <b>SERVICE_INSTANCE</b> <b>APP_INSTANCE</b></i> just like in step 2, since we are creating a service in an application space. No need to bind the <i>sin-sql</i> service to app, since it is included in the manifest. Note: the cloud-gov-identity-provider cannot be specified in the manifest since the application must first be configured with the client ID and client secret that is provided in the service key. 
 
 6. You will need to set up environment variables for the superuser of the Django database service. This will be the user in charge of adding users and managing permissions. Use the commands
 
@@ -132,7 +132,7 @@ Since the authentication is taken care of by the <i>cg-django-uaa</i> library, y
 
 ### Environment
 
-In the <i>/frontend/environments/</i> directory, there is a TypeScript file that controls the Angular Service HTTP routing. When the variable <b>production</b> is set to true, Angular services will direct their HTTP calls to the backend on the cloud. When <b>production</b> is set to false, Angulars services will direct their HTTP calls to the localhost backend. Be sure to set this variable to the proper value during development and when pushing to production!
+In the <i>/frontend/environments/</i> directory, there is a TypeScript file that controls the Angular Service HTTP routing. When the variable <b>production</b> is set to true, Angular services will direct their HTTP calls to the backend on the cloud. When <b>production</b> is set to false, Angulars services will direct their HTTP calls to the localhost backend. Be sure to set this variable to the proper value during development and when pushing to production! The <i>init-app.sh</i> script and the <i>cf-push</i> script both invoke another script <i>setup-frontend-env</i> that automatically switches this file to appropriate format for the given environment. In other works, using the two former scripts will take care of setting this file for you.
 
 ### Context
 
@@ -172,9 +172,12 @@ Before pushing to the cloud,
 
 > cf push
 
-These commands are so frequent they have been further condensed into another BASH script. The BASH script, <i>/scripts/push-to-cf.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>.
+These commands are so frequent they have been further condensed into another BASH script. The BASH script, <i>/scripts/cf-push.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>.
 
-> bash ./scripts/push-to-cf.sh
+> bash ./scripts/cf-push.sh
+
+The <i>cf-push.sh</i> script has other capabilities, such as trailing CloudFoundry logs and cleaning the application. See comments within the script for more documentation.
+
 
 ## Work Flows
 
@@ -207,7 +210,7 @@ Frontend Routes
 
 ## Superuser
 
-The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>local.env</i> file, while the cloud environment variables need to be set with the <i>cf cli</i>
+The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The container environment variables are set in the <i>local.env</i> file, the local environment variables are set in the <i>init-app.sh</i> script and the cloud environment variables need to be set with the <i>cf cli</i>
 
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
@@ -231,7 +234,7 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 - [Cloud.gov: Service Account](https://cloud.gov/docs/services/cloud-gov-service-account/)
 - [Cloud.gov: Leveraging Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
-- [Python Library, cg-django-uaa: Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
+- [cg-django-uaa: Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
 ### Relevant Stack Discussions
 - [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Django: Creating JSON HttpResponse](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)

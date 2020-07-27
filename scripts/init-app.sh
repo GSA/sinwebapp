@@ -44,6 +44,7 @@ then
 
 elif [ "$1" == "container" ]
 then
+    formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
     cd $SCRIPT_DIR/../sinwebapp/
 elif [ "$1" == "cloud" ]
 then
