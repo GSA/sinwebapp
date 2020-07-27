@@ -23,9 +23,15 @@ jobs:
             - run:
                 name: Install Dependencies And Build Frontend
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
+            - run:
+                name: Copy Initialization Scripts Into Application
+                command: bash ./scripts/init-scripts.sh 
             - persist_to_workspace: 
                 root: ./sinwebapp/
-                paths: ./static/
+                paths: 
+                    - ./static/
+                    - ./util/
+                    - ./init-app.sh
 
     deploy_dev:    
         executor: application-build
@@ -36,9 +42,6 @@ jobs:
             - run: 
                 name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y wget
-            - run:
-                name: Copy Initialization Scripts Into Application
-                command: bash ./scripts/init-scripts.sh 
             - run: 
                 name: Download And Install CF CLI
                 command: |
