@@ -236,3 +236,4 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 - [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Django: Creating JSON HttpResponse](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)
 - [Django: Add User to Group Via Django Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)
+- [Django: How Do I Register A Model That is Already Registered?](https://stackoverflow.com/questions/25964028/how-do-i-register-a-model-that-is-already-registered-in-admin)

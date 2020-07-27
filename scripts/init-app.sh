@@ -29,24 +29,27 @@ then
     UAA_CLIENT_SECRET=fake-uaa-provider-client-secret
     DJANGO_SUPERUSER_USERNAME=grantmoore
     DJANGO_SUPERUSER_EMAIL=grant.moore@gsa.gov
+    bash $SCRIPT_DIR/init-scripts.sh
+    bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
     cd $SCRIPT_DIR/../sinwebapp/
-fi
-
-if [ "$1" == "cloud" ]
+elif [ "$1" == "container" ]
+then
+    cd $SCRIPT_DIR/../sinwebapp/
+elif [ "$1" == "cloud" ]
 then
     formatted_print "--> Clearing Sessions" $SCRIPT_NAME
     python manage.py clearsessions
 fi
 
 formatted_print '-->Migrating Django Database Files' $SCRIPT_NAME
-python manage.py migrate --fake authentication zero
-python manage.py migrate --fake-initial
+# python manage.py migrate --fake authentication zero
+# python manage.py migrate --fake-initial
 
 # If the schema already exists in the connected sql service, then doing a migrate without the --fake-initial flag
 # will attempt to recreate the schema and error out. If first cloud deployment, comment out the above line
 # and uncomment the line below. This will perform the migrations on a fresh database
 
-# python manage.py migrate 
+python manage.py migrate 
 
 # TODO: pass in flag to automate this 
 
@@ -54,12 +57,12 @@ formatted_print "--> Setting <$DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAI
 python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput --email $DJANGO_SUPERUSER_EMAIL
 
 formatted_print '--> Printing Configuration' $SCRIPT_NAME
-python ./debug.py
+python debug.py
 
 if [ "$1" == "container" ]
 then 
     formatted_print '--> CONTAINER Environment Detected' $SCRIPT_NAME
-    formatteD_print '--> Collecting Static Files' $SCRIPT_NAME
+    formatted_print '--> Collecting Static Files' $SCRIPT_NAME
     python manage.py collectstatic --noinput
     formatted_print 'Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
     gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3

@@ -48,7 +48,6 @@ jobs:
             - run:
                 name: Push to CloudFoundry 
                 command: |
-                    echo $PATH
                     bash ./scripts/cc-cf-push.sh dev
 
 workflows: 

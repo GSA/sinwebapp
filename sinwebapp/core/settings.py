@@ -15,13 +15,12 @@ import os, json
 import logging
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 APP_ENV = os.getenv('ENVIRONMENT')
+SECRET_KEY = 'thisismyriflethisismygun'
 
 if APP_ENV == 'cloud' or APP_ENV == 'container':
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 else:
-    # app is being run locally 
     db_creds={
         'host': 'localhost',
         'db_name': 'sinwebapp',
@@ -30,21 +29,13 @@ else:
         'port': '5432'
     }
 
-SECRET_KEY = 'thisismyriflethisismygun'
 
 if APP_ENV == "cloud":
     DEBUG = True
 else: 
     DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
 INSTALLED_APPS = [
-    'authentication.apps.AuthenticationConfig',
-    'api.apps.ApiConfig',
-
-    'uaa_client',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,7 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+
+    'uaa_client',
+
+    'authentication.apps.AuthenticationConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -97,10 +93,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-ALLOWED_HOSTS = ['*']
-
 # Database Configuration
-
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
@@ -114,18 +107,14 @@ DATABASES = {
 
 # Localization Configuration
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-# Header properties
+# Header Properties
+ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
-
 REFERRER_POLICY = 'origin'
 
 # cloud.gov OAuth2 properties

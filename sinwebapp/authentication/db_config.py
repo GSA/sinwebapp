@@ -3,28 +3,21 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.models import Group
-from django.utils.translation import ugettext_lazy as _
 
 User = get_user_model()
 
-
-# Create ModelForm based on the Group model.
 class GroupAdminForm(forms.ModelForm):
     class Meta:
         model = Group
         exclude = []
 
-    # Add the users field.
     users = forms.ModelMultipleChoiceField(
          queryset=User.objects.all(),
          required=False,
-         # Use the pretty 'filter_horizontal widget'.
-         widget=FilteredSelectMultiple('users', False),
-         label=_('Users'),
+         widget=FilteredSelectMultiple('users', False)
     )
 
     def __init__(self, *args, **kwargs):
-        # Do the normal form initialisation.
         super(GroupAdminForm, self).__init__(*args, **kwargs)
         # If it is an existing group (saved objects have a pk).
         if self.instance.pk:
@@ -41,8 +34,10 @@ class GroupAdminForm(forms.ModelForm):
             self.instance.user_set.set(self.cleaned_data['users'])
 
     def save(self, *args, **kwargs):
-        # Default save
         instance = super(GroupAdminForm, self).save()
-        # Save many-to-many data
         self.save_m2m()
         return instance
+
+class GroupAdmin(admin.ModelAdmin):
+    form = GroupAdminForm
+    filter_horizontal = ['permissions']
