@@ -28,3 +28,9 @@ then
     formatted_print '--> Cleaning \e[4m/sinwebapp/init-app.sh\e[0m File' $SCRIPT_NAME
     rm $SCRIPT_DIR/../sinwebapp/init-app.sh
 fi
+
+if [ -f "$SCRIPT_DIR/../sinwebapp/util/logging.sh" ]
+then 
+    formatted_print '--> Cleaning \e[4m/sinwebapp/util/logging.sh\e[0m File' $SCRIPT_NAME
+    rm $SCRIPT_DIR/../sinwebapp/util/logging.sh
+fi

@@ -17,12 +17,12 @@ def user_info(request):
             group_list = list(user_groups) 
             response = JsonResponse({
                 'email': request.user.email,
-                groups: group_list
+               'groups': group_list
             }) 
         else:
             response = JsonResponse({
-                email: request.user.email,
-                groups: ['None']
+                'email': request.user.email,
+                'groups': ['None']
             })
     else:
         response = JsonResponse({

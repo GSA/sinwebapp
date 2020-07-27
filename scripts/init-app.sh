@@ -21,7 +21,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='init-app.sh'
 source "$SCRIPT_DIR/util/logging.sh"
 
-formatted_print "--> \e[3$1\e[0m Environment Detected" $SCRIPT_NAME
+formatted_print "--> $1 Environment Detected" $SCRIPT_NAME
 
 if [ "$1" == "local" ]
 then
