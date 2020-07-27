@@ -8,6 +8,6 @@ The application is built from source on the cloud, not the Docker image. The Doc
 
 ## Table of Contents
 
-- 1. (Setup)[docs/SETUP.md]
-- 2. (Development)[docs/DEVELOPMENT.md]
-- 3. (Appendix)[docs/APPENDIX.md]
+- 1. [Setup](docs/SETUP.md)
+- 2. [Development](docs/DEVELOPMENT.md)
+- 3. [Appendix](docs/APPENDIX.md)

@@ -1,4 +1,4 @@
-(Setup <<)[SETUP.md] | (>> Appendix)[APPENDIX.md]
+[Setup <<](SETUP.md) | [>> Appendix](APPENDIX.md)
 
 ## Frontend
 

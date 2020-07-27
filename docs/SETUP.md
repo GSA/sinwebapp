@@ -1,4 +1,4 @@
-(>> Development)[DEVELOPMENT.md]
+[>> Development](DEVELOPMENT.md)
 
 ## Quickstart Pointers
 

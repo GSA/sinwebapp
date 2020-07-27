@@ -1,4 +1,4 @@
-(Development <<)[DEVELOPMENT.md] 
+[Development <<](DEVELOPMENT.md) 
 
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
