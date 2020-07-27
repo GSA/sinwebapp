@@ -12,9 +12,18 @@ def user_info(request):
     logger.info('Request User Groups: %s', request.user.groups)
 
     if hasattr(request.user, 'email'):
-        response = JsonResponse({
-            'email': request.user.email,
-        }) 
+        if hasattr(request.user, 'groups'):
+            user_groups = request.user.groups.values_list('name',flat = True)
+            group_list = list(user_groups) 
+            response = JsonResponse({
+                'email': request.user.email,
+                groups: group_list
+            }) 
+        else:
+            response = JsonResponse({
+                email: request.user.email,
+                groups: ['None']
+            })
     else:
         response = JsonResponse({
             'error': "NO USER SIGNED IN"
