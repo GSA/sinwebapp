@@ -1,5 +1,7 @@
 [>> Development](DEVELOPMENT.md)
 
+# Setup
+
 ## Quickstart Pointers
 
 1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/push-to-cf.sh</i> to install and build the application properly before pushing to the cloud. The Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment.  

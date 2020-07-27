@@ -1,5 +1,7 @@
 [Development <<](DEVELOPMENT.md) 
 
+# Appendix
+
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
 - [x] determine how to protect certain endpoints from unauthenticated individuals
