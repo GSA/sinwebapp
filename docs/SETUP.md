@@ -1,7 +1,7 @@
 
 ### Documentation Navigation
 
- [^^ ReadMe ^^](../README.md) | [Development >>](DEVELOPMENT.md)
+ [^ ReadMe ^](../README.md) | [Development >>](DEVELOPMENT.md)
 
 # Setup
 
