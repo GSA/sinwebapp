@@ -7,9 +7,9 @@
 
 ## Quickstart Pointers
 
-1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/push-to-cf.sh</i> to install and build the application properly before pushing to the cloud. The Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment.  
+1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/push-to-cf.sh</i> to install dependencies and build the application properly before pushing to the cloud. This is done because the Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment. This script contains the commands to build the Angular frontend and push to the cloud.
 
-2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. Use <i>docker-compose down</i> to remove the containers running the application locally.
+2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. It will link to a <b>postgres</b> database over a Docker network on port 5432. Use <i>docker-compose down</i> to remove the containers running the application through Docker Compose.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@
 - [NodeJs](https://nodejs.org/en/download/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-Before you build the application, you will need to ensure <i>postgres</i> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure and customize your database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
+Before you build the application, you will need to ensure <b>postgres</b> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure and customize your database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
 To build the application from source, first create a virtual Python environment in the project's root folder
 
@@ -53,7 +53,7 @@ Note inside of the <i>init-app.sh</i>, it defines environment variables before l
 
 ## Container Environment
 
-1. The <i>docker-compose.yml</i> sets up the application automatically. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
+1. The <i>docker-compose.yml</i> builds the web application and connects it to a <i>postgres</i> database. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
 
 > ENVIRONMENT=container
 
@@ -61,9 +61,11 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 > env: ENVIRONMENT: cloud
 
-You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local docker deployments; they are only there to maintain minimal differences in the codebase for cloud and local docker deployments. In other words, they make life easier. 
+Likewise, the <i>init-app.sh</i> sets these variables for local deployments.
 
-You will also need to set the superuser for the program; this user will be able to add and delete users from the database. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
+You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local or docker deployments; they are only there to maintain minimal differences in the codebase for cloud and docker deployments. In other words, they make life easier. 
+
+You will also need to set the superuser for the program; this user will be able to add and delete users from the database, assign users to groups, etc, through the Django admin screen. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
 
 2. From project's root directory, run 
 
