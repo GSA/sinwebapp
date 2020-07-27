@@ -1,5 +1,5 @@
 ### Documentation Navigation
-[<< Setup](SETUP.md) | [^^ ReadMe ^^](README.md) | [Appendix >>](APPENDIX.md)
+[<< Setup](SETUP.md) | [^^ ReadMe ^^](../README.md) | [Appendix >>](APPENDIX.md)
 
 # Development
 
