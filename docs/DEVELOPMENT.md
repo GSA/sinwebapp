@@ -47,9 +47,18 @@ Before pushing to the cloud,
 
 > cf push
 
-These commands are so frequent they have been further condensed into another BASH script. The BASH script, <i>/scripts/push-to-cf.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>.
+These commands are so frequent they have been further condensed into another BASH script. The BASH script, <i>/scripts/cf-push.sh</i>, takes care of installing and building the frontend for you, as long as you already logged into the <i>cf cli</i>, if you provide it the proper argument
 
-> bash ./scripts/push-to-cf.sh
+> bash ./scripts/cf-push.sh build
+
+This script has other functionality, such as cleaning the artifacts from the build after pushing them to the cloud or trailing the cloud logs. For example, the command,
+
+> bash ./scripts/cf-push.sh build dispose trail
+
+will build the frontnend application, push it to the cloud, remove the generated artifacts from the project and trail the logs outputted by CloudFoundry. The order of arguments does not matter, i.e. the following command will accomplish the same task,
+
+> bash ./scripts/cf-push.sh dispose trail build
+
 
 ## Work Flows
 
