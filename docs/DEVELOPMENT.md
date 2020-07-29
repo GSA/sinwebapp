@@ -85,7 +85,7 @@ Application API Endpoints
 - <i>/api/user</i> - retrieves information about the currently signed in user. 
     > GET RESPONSE FORMAT<br><br>
     > { <br>
-    >   'email': 'user@domain.com (Char Array)',<br>
+    >   'email': 'user(at)domain.com (Char Array)',<br>
     >   'groups': 'user_groups_list (JSON List)' <br>
     >}<br>
 - <i>/api/sin</i>
