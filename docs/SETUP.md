@@ -67,9 +67,9 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 > env: ENVIRONMENT: cloud
 
-Likewise, the <i>init-app.sh</i> sets these variables for local deployments.
+Likewise, the <i>init-app.sh</i> sets this variable for local deployments.
 
-You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local or docker deployments; they are only there to maintain minimal differences in the codebase for cloud and docker deployments. In other words, they make life easier. 
+You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local or docker deployments; they are only there to maintain minimal differences in the codebase for cloud and docker deployments. In other words, they make life easier. If you are curious about their function, see the [cg-django-uaa documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html).
 
 You will also need to set the superuser for the program; this user will be able to add and delete users from the database, assign users to groups, etc, through the Django admin screen. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
 
