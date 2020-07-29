@@ -23,16 +23,14 @@ def get_user_info(request):
 
         user_groups = request.user.groups.values_list('name',flat = True)
         group_list = list(user_groups) 
-        response = JsonResponse({
+        response = {
                 'email': request.user.email,
                'groups': group_list
-        }) 
+        } 
     else:
-        response = JsonResponse({
-            'message': "No User Signed In"
-        })
+        response = { 'message': "No User Signed In" }
 
-    return response
+    return JsonResponse(response, safe=False)
 
 # /api/sin?number=123456
 # retrieves information for a specific SIN number
@@ -44,21 +42,17 @@ def get_sin_info(request):
     logger.info('SIN Number: %s', sin)    
 
     if not sin:
-        retrieved_sin ={
-            'message': 'Input Error'
-        }
+        retrieved_sin ={ 'message': 'Input Error' }
         logger.info('Parameter Not Provided')
     else:
         try:
             retrieved_sin = Sin.objects.get(sin_number=sin)
             logger.info('SIN Found!')
         except Sin.DoesNotExist:
-            retrieved_sin = {
-                'message': 'SIN Does Not Exist'
-            }
+            retrieved_sin = { 'message': 'SIN Does Not Exist' }
             logger.info('SIN Not Found!')
 
-    response = JsonResponse(retrieved_sin, safe=False)
+    return JsonResponse(retrieved_sin, safe=False)
 
 # /api/sins
 # retrieves information on all SIN numbers
@@ -70,15 +64,12 @@ def get_all_sins_info(request):
         retrieved_sins = list(Sin.objects.values())
         logger.info('SINs Found!')
     except Sin.DoesNotExist:
-        retrieved_sins = {
-            'message': 'SINs Do Not Exist'
-        }
+        retrieved_sins = { 'message': 'SINs Do Not Exist' }
         logger.info('SINs Not Found!')
     if len(retrieved_sins) == 0:
-            retrieved_sins = {
-                'message': '0 SINs found'
-            }
+            retrieved_sins = { 'message': '0 SINs found' }
             logger.info('No SINs Found!')
+            
     return JsonResponse(retrieved_sins, safe=False)
 
 # /api/status?id=1
@@ -91,14 +82,11 @@ def get_status_info(request):
     logger.info('Status Id: %s', status_id)
 
     if not status_id:
-        retrieved_status = {
-            'message': 'Input Error'
-        }
+        retrieved_status = { 'message': 'Input Error' }
 
     try:
         retrieved_status = Status.objects.get(id=status_id)
     except Status.DoesNotExist:
-        retrieved_status = {
-            'message': 'Status Does Not Exist'
-        }
+        retrieved_status = { 'message': 'Status Does Not Exist' }
+
     return JsonResponse(retrieved_status, safe=False)
