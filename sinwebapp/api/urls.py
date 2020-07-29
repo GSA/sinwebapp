@@ -4,8 +4,8 @@ from . import views
 app_name = 'api'
 
 urlpatterns= [
-    path('user/', views.get_user_info),
-    path('sin/', views.get_sin_info),
-    path('sins/', views.get_all_sins_info),
-    path('status/', views.get_status_info)
+    path('user/', views.user_info),
+    path('sin/', views.sin_info),
+    path('sins/', views.sin_info_all),
+    path('status/', views.status_info)
 ]
