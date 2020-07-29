@@ -1,7 +1,12 @@
+import json 
+
 from django.http import JsonResponse
-from debug import DebugLogger
 from django.contrib.auth.models import Group, User
+from django.views.decorators.csrf import csrf_exempt
+
 from api.models import Sin, Status
+
+from debug import DebugLogger
 
 # GET: /api/user
 # 
@@ -40,6 +45,10 @@ def user_info(request):
 # { 
 #   'sin_number': 123456
 # }
+### DO NOT USE CSRF_EXEMPT IN PRODUCTION!!!!
+# THIS IS SO I CAN TEST IN POSTMAN AND NOTHING ELSE!
+###### REMOVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@csrf_exempt 
 def sin_info(request):
     
     logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
@@ -47,20 +56,26 @@ def sin_info(request):
     if request.method == "POST":
         logger.info('Posting New SIN...')
 
-        user_id = User.objects.get(email=request.user.email).id
-        logger.info('User Posting: %s', request.user.email)
+        if hasattr(request.user, 'email'):
+            user_id = User.objects.get(email=request.user.email).id
+            email = request.user.email
+        else:
+            user_id = 0
+            email = 'No User'
+        logger.info('User Posting: #%s: %s', user_id, email)
 
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         content = body['content']
         sin_number = content.sin_number
-        logger.info('SIN Posted: %s', sin_number)
+        logger.info('SIN Posting: %s', sin_number)
 
         # submitted
         status_id=1 
-        logger.info('Status Posted: %s', status_id)
+        logger.info('Status Posting: %s', status_id)
 
         # verify sin is not already active
+        logger.info('Attempting To Post...')
         try: 
             sin = Sin.objects.get(sin_number=sin_number)
             logger.info('SIN Exists!')
