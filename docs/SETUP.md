@@ -9,11 +9,13 @@
 
 1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/cf-push.sh</i> with the argument <i>build</i>, i.e.,
 
-> bash ./scripts/cf-push.sh build
+> bash PROECT_ROOT/scripts/cf-push.sh build
 
 This will install dependencies and build the application properly before pushing to the cloud. This is done because the Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment. This script contains the commands to build the Angular frontend properly for production deployment.
 
-2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. It will link to a <b>postgres</b> database over a Docker network on port 5432. Use <i>docker-compose down</i> to remove the containers running the application through Docker Compose.
+2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. It will link to a <b>postgres</b> database over a Docker network on port 5432. Use <i>docker-compose down</i> to remove the containers running the application through Docker Compose. A useful script is the <i>/scripts/build-container.sh</i>, as it will automatically remove any running containers and purge any dangling containers leftover from previous builds. To accomplish this, use the script without any arguments,
+
+> bash PROJECT_ROOT/scripts/build-container.sh
 
 ## Prerequisites
 
@@ -39,7 +41,7 @@ To build the application from source, first create a virtual Python environment 
 
 Then activate it,
 
-> source ./.venv/Scripts/activate
+> source PROJECT_ROOT/.venv/Scripts/activate
 
 Navigate to the <i>/sinwebapp/</i> project directory and install the project requirements,
 
