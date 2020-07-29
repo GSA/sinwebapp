@@ -31,6 +31,8 @@ And then retrieve the credentials for this account with the newly created key,
 
 You will then need to store these credentials on the CircleCi pipeline environment in variables named <b>CF_/CLOUD_SPACE_GOES_HERE/_USERNAME</b> and <b>CF_/CLOUD_SPACE_GOES_HERE/_PASSWORD</b> respectively. 
 
+<b>Note: the current application has already been configured for CircleCi</b>
+
 In the future, the pipeline will include other branches and also test the application before deployment.
 
 ### Manual : <i>cf cli</i>
