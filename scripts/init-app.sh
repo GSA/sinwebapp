@@ -38,7 +38,10 @@ then
     
     formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAM
     bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
-    
+
+    formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script'
+    bash $SCRIPT_DIR/build-frontend.sh
+
     formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
     cd $SCRIPT_DIR/../sinwebapp/
 
