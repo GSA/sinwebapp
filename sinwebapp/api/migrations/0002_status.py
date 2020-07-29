@@ -6,7 +6,7 @@ from ..db_init import init_status
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0001_initial'),
+        ('api', '0001_initial')
     ]
 
     operations = [
