@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Status(models.Model):
-    status = models.IntegerField(null=False)
+    status = models.CharField(max_length=20)
     description = models.CharField(max_length=200)
 
 class Sin(models.Model):
