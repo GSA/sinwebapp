@@ -7,7 +7,11 @@
 
 ## Quickstart Pointers
 
-1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/push-to-cf.sh</i> to install dependencies and build the application properly before pushing to the cloud. This is done because the Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment. This script contains the commands to build the Angular frontend and push to the cloud.
+1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/cf-push.sh</i> with the argument <i>build</i>, i.e.,
+
+> bash ./scripts/cf-push.sh build
+
+This will install dependencies and build the application properly before pushing to the cloud. This is done because the Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment. This script contains the commands to build the Angular frontend properly for production deployment.
 
 2. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. It will link to a <b>postgres</b> database over a Docker network on port 5432. Use <i>docker-compose down</i> to remove the containers running the application through Docker Compose.
 
