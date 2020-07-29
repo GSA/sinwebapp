@@ -55,14 +55,20 @@ def get_sin_info(request):
 # /api/sins
 def get_all_sins_info(request):
     try:
-        retrieved_sin = list(Sin.objects.values())
+        retrieved_sins = list(Sin.objects.values())
     except Sin.DoesNotExist:
-        retrieved_sin = {
+        retrieved_sins = {
             'sin_number': 'No SIN Found',
             'user': 'No User Found',
             'status': 'No Status Found'
         }
-    return JsonResponse(retrieved_sin, safe=False)
+    if len(retrieved_sins) == 0:
+            retrieved_sins = {
+                'sin_number': '0 SINs Found',
+                'user': '0 Users Found',
+                'status': '0 Statuses Found'
+            }
+    return JsonResponse(retrieved_sins, safe=False)
 
 # /api/status?id=1
 def get_status_info(request):
