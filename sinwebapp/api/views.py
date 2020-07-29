@@ -32,13 +32,13 @@ def get_user_info(request):
 
     return JsonResponse(response, safe=False)
 
-# /api/sin?number=123456
+# /api/sin?id=123456
 # retrieves information for a specific SIN number
 def get_sin_info(request):
     logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
     logger.info('Retrieving SIN Info...')
 
-    sin=request.GET.get('number','')
+    sin=request.GET.get('id','')
     logger.info('SIN Number: %s', sin)    
 
     if not sin:
@@ -62,14 +62,15 @@ def get_all_sins_info(request):
 
     try:
         retrieved_sins = list(Sin.objects.values())
-        logger.info('SINs Found!')
     except Sin.DoesNotExist:
         retrieved_sins = { 'message': 'SINs Do Not Exist' }
         logger.info('SINs Not Found!')
     if len(retrieved_sins) == 0:
-            retrieved_sins = { 'message': '0 SINs found' }
-            logger.info('No SINs Found!')
-            
+        retrieved_sins = { 'message': '0 SINs found' }
+        logger.info('No SINs Found!')
+    else:
+        logger.info('SINs Found!')
+
     return JsonResponse(retrieved_sins, safe=False)
 
 # /api/status?id=1
