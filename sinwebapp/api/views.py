@@ -34,18 +34,52 @@ def user_info(request):
 
 # GET: /api/sin?id=123456 { body: empty }
 # POST: /api/sin { body: new SIN }
-#
+# 
 # Description: retrieves information for a specific SIN number or posts a new SIN
+# Post should be of form:
+# { 
+#   'sin_number': 123456
+# }
 def sin_info(request):
     
+    logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
+
     if request.method == "POST":
+        logger.info('Posting New SIN...')
+
+        user_id = User.objects.get(email=request.user.email).id
+        logger.info('User Posting: %s', request.user.email)
+
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         content = body['content']
-        user_id = User.objects.get(email=request.user.email).id
-    
+        sin_number = content.sin_number
+        logger.info('SIN Posted: %s', sin_number)
+
+        # submitted
+        status_id=1 
+        logger.info('Status Posted: %s', status_id)
+
+        # verify sin is not already active
+        try: 
+            sin = Sin.objects.get(sin_number=sin_number)
+            logger.info('SIN Exists!')
+            if sin.status in [1,2,3]:
+                # 1 = submitted, 2 = reviewed, 3 = change, 4 = approved, 5 = denied, 6 = expired
+                logger.warn('Existing SIN Cannot Be Modified')
+                return JsonResponse({ 'message': 'SIN already in process' })
+            else:
+                sin.update(user=user_id, status=status_id)
+                logger.info('Existed SIN Updated')
+                return JsonResponse({ 'message': 'Existed SIN Updated' })
+                
+        except Sin.DoesNotExist:
+            sin = Sin.objects.create(sin_number=sin_number, user=user_id, status=status_id)
+            sin.save()
+            logger.info('New SIN Posted')
+            return JsonResponse({ 'message': 'New SIN Posted'})
+            
     if request.method == "GET":
-        logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
         logger.info('Retrieving SIN Info...')
 
         sin=request.GET.get('id','')
@@ -83,7 +117,7 @@ def sin_info_all(request):
         logger.info('SINs Not Found!')
     if len(retrieved_sins) == 0:
         retrieved_sins = { 'message': '0 SINs found' }
-        logger.info('No SINs Found!')
+        logger.info('0 SINs Found!')
     else:
         logger.info('SINs Found!')
 
