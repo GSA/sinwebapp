@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 class Status(models.Model):
     status = models.CharField(max_length=20)
@@ -13,8 +14,8 @@ class Sin(models.Model):
 class Audit_Log(models.Model):
     sin = models.ForeignKey(Sin, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_date = models.DateTimeField('Creation Date')
-    updated_date = models.DateTimeField('Update Date')
+    created_date = models.DateTimeField('Creation Date', auto_now=True)
+    updated_date = models.DateTimeField('Update Date', auto_now=True)
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
