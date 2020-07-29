@@ -126,9 +126,9 @@ LOGIN_URL = 'uaa_client:login'
 
 LOGIN_REDIRECT_URL = '/success'
 
-UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID')
+UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID', 'fakeclientid')
 
-UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET')
+UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET', 'fakeclientsecret')
 
 if APP_ENV == 'cloud':
     UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'
