@@ -10,6 +10,7 @@
 - [ ] bind roles to html on redirect page after successful login 
 - [x] create pipeline to build frontend and deploy to cloud
 - [ ] load in database credentials for local deployments through VCAP_SERVICES environment variable to mimic cloud deployments
+- [ ] REMOVE <i>crsf_exempt</i> decorate from POST api endpoints that were put in place to test during development!!!
 
 ## Useful Links
 ### Core Application
@@ -25,8 +26,11 @@
 - [Cloud.gov: Leveraging Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
 - [cg-django-uaa: Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
+### Security
+- [Django: Cross Site Request Forgery Tokens](https://docs.djangoproject.com/en/3.0/ref/csrf/)
 ### Relevant Stack Discussions
 - [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Django: Creating JSON HttpResponse](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)<br>
 - [Django: Add User to Group Via Group Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)
 - [Django: Output QuerySet as Json](https://stackoverflow.com/questions/15874233/output-django-queryset-as-json)
+- [Django: CSRF Cookie Not Set](https://stackoverflow.com/questions/17716624/django-csrf-cookie-not-set)
