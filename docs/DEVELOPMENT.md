@@ -68,7 +68,9 @@ The artifacts from the Angular build are outputted into the <i>/sinwebapp/static
 
 ## Database Configuratoin
 
-The file <i>/sinwebapp/authentication/db_init.py</i> creates Groups, Permissions and Users within three separate functions, using Django's built-in class models. These functions are added to the Migration queue within <i>/sinwebapp/authentication/migrations/</i>. The initialization script that starts up both container and cloud instances of the application applies these migrations to the host database. 
+The file <i>/sinwebapp/authentication/db_init.py</i> creates Groups, Permissions and Users within three separate functions, using Django's built-in <i>Auth</i> class models. These functions are added to the Migration queue within <i>/sinwebapp/authentication/migrations/</i>. 
+
+The files <i>/sinwebapp/api/models.py</i> and <i>/sinwebapp/api/db_init.py<i> create the SIN, Status, Audit and Comment tables and then initialize the tables with constant data. These migrations and initializations are added to the Migration queue within <i>/sinwebapp/api/migrations/</i>
 
 ## Routes & Endpoints
 
@@ -80,7 +82,38 @@ Django Static HTML Endpoint
 - <i>/success</i>
 
 Application API Endpoints
-- <i>/api/user</i>
+- <i>/api/user</i> - retrieves information about the currently signed in user. 
+    > GET RESPONSE FORMAT<br><br>
+    > { <br>
+    >   'email': 'user@domain.com (Char Array)',<br>
+    >   'groups': 'user_groups_list (JSON List)' <br>
+    >}<br>
+- <i>/api/sin</i>
+    > GET RESPONSE FORMAT<br><br>
+    > { <br>
+    >   'sin_number': 'SIN # (Int)',<br>
+    >   'user': 'user_groups_list (JSON List)', <br>
+    >   'status' 'user status (Int)'
+    >}<br><br>
+    > POST REQUEST FORMAT<br><br>
+    > { <br>
+    >   'sin_number': 'SIN # (Int)',<br>
+    >}<br>
+- <i>/api/sins</i>
+    > GET RESPONSE FORMAT<br><br>
+    > { <br>
+    >   [ <br>
+    >       'sin_number': 'SIN # (Int)',<br>
+    >       'user': 'user_groups_list (JSON List)', <br>
+    >       'status' 'user status (Int)'<br>
+    >   ]<br>
+    >}<br><br>
+- <i>/api/status</i>
+    > GET RESPONSE FORMAT<br><br>
+    > { <br>
+    >   'status': 'Status name (Char Array)',<br>
+    >   'description': 'Status description (Char Array)'<br>
+    >}<br><br>
 
 Third Party Endpoints
 - <i>/auth/login</i>
