@@ -28,7 +28,7 @@ def get_user_info(request):
         }) 
     else:
         response = JsonResponse({
-            'error': "NO USER SIGNED IN"
+            'message': "No User Signed In"
         })
 
     return response
@@ -37,14 +37,17 @@ def get_user_info(request):
 def get_sin_info(request):
     sin=request.GET.get('number','')
 
-    try:
-        retrieved_sin = Sin.objects.get(sin_number=sin)
-    except Sin.DoesNotExist:
-        retrieved_sin = {
-            'sin_number': 'No SIN Found',
-            'user': 'No User Found',
-            'status': 'No Status Found'
+    if not sin:
+        retrieved_sin ={
+            'message': 'Input Error'
         }
+    else:
+        try:
+            retrieved_sin = Sin.objects.get(sin_number=sin)
+        except Sin.DoesNotExist:
+            retrieved_sin = {
+                'message': 'SIN Does Not Exist'
+            }
 
     response = JsonResponse({
         'sin_number': retrieved_sin.sin_number,
@@ -58,15 +61,11 @@ def get_all_sins_info(request):
         retrieved_sins = list(Sin.objects.values())
     except Sin.DoesNotExist:
         retrieved_sins = {
-            'sin_number': 'No SIN Found',
-            'user': 'No User Found',
-            'status': 'No Status Found'
+            'message': 'SINs Do Not Exist'
         }
     if len(retrieved_sins) == 0:
             retrieved_sins = {
-                'sin_number': '0 SINs Found',
-                'user': '0 Users Found',
-                'status': '0 Statuses Found'
+                'message': '0 SINs found'
             }
     return JsonResponse(retrieved_sins, safe=False)
 
@@ -74,11 +73,15 @@ def get_all_sins_info(request):
 def get_status_info(request):
     status_id=request.GET.get('id','')
 
+    if not status:
+        retrieved_status = {
+            'message': 'Input Error'
+        }
+
     try:
         retrieved_status = Status.objects.get(id=status_id)
     except Status.DoesNotExist:
         retrieved_status = {
-            'status': 'No Status Found',
-            'description': 'No Description Found'
+            'message': 'Status Does Not Exist'
         }
     return JsonResponse(retrieved_status, safe=False)
