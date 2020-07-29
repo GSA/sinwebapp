@@ -39,5 +39,5 @@ def init_group_permissions(apps, schema_editor):
 
     admin_group = Group.objects.get(name='admin_group')
     admin_group.permissions.add(submitter_permissions)
-    admin_group.permissions.add(reviewer_group)
-    admin_group.permissions.add(approver_group)
+    admin_group.permissions.add(reviewer_permissions)
+    admin_group.permissions.add(approver_permissions)
