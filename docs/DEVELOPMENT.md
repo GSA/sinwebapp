@@ -70,7 +70,7 @@ The artifacts from the Angular build are outputted into the <i>/sinwebapp/static
 
 The file <i>/sinwebapp/authentication/db_init.py</i> creates Groups, Permissions and Users within three separate functions, using Django's built-in <i>Auth</i> class models. These functions are added to the Migration queue within <i>/sinwebapp/authentication/migrations/</i>. 
 
-The files <i>/sinwebapp/api/models.py</i> and <i>/sinwebapp/api/db_init.py<i> create the SIN, Status, Audit and Comment tables and then initialize the tables with constant data. These migrations and initializations are added to the Migration queue within <i>/sinwebapp/api/migrations/</i>
+The files <i>/sinwebapp/api/models.py</i> and <i>/sinwebapp/api/db_init.py</i> create the SIN, Status, Audit and Comment tables and then initialize the tables with constant data. These migrations and initializations are added to the Migration queue within <i>/sinwebapp/api/migrations/</i>
 
 ## Routes & Endpoints
 
