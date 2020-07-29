@@ -62,7 +62,7 @@ def get_all_sins_info(request):
             'user': 'No User Found',
             'status': 'No Status Found'
         }
-    return JsonResponse(retrieved_sin)
+    return JsonResponse(retrieved_sin, safe=False)
 
 # /api/status?id=1
 def get_status_info(request):
@@ -75,4 +75,4 @@ def get_status_info(request):
             'status': 'No Status Found',
             'description': 'No Description Found'
         }
-    return JsonResponse(retrieved_status)
+    return JsonResponse(retrieved_status, safe=False)
