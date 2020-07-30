@@ -86,8 +86,8 @@ Application API Endpoints
 - <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
->   <span style="text-indent:50px;">'email': 'user(at)domain.com (Char Array)'</span> <br>
->   <span style="text-indent:50px;">'groups': 'user_groups_list (JSON List)' </span><br>
+>   <span style="margin-left:50px;">'email': 'user(at)domain.com (Char Array)'</span> <br>
+>   <span style="margin-left:50px;">'groups': 'user_groups_list (JSON List)' </span><br>
 >}<br>
 - <i>/api/sin</i> - exposes a <b>GET</b> and <b>POST</b> endpoint. 
 
