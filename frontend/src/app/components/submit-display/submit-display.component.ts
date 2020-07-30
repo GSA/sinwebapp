@@ -14,6 +14,8 @@ export class SubmitDisplayComponent implements OnInit {
     status: null
   };
 
+  public submitted : boolean = false;
+
   constructor(private sin: SinService) { }
 
   ngOnInit() { this.submit_SIN; }
@@ -21,7 +23,11 @@ export class SubmitDisplayComponent implements OnInit {
   public submitSIN(): void{
     this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
       console.log('submit-display.component.submitSIN: SIN Posted!')
-      console.log(`Response: ${response}`)
+      this.submit_SIN = {
+        sin_number: null,
+        status: null
+      }
+      this.submitted = true;
     })
   }
 }
