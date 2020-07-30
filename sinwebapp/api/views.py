@@ -53,46 +53,49 @@ def sin_info(request):
     
     logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
 
+    # Posting new SIN to database or modifying inactive existing SIN
     if request.method == "POST":
         logger.info('Posting New SIN...')
 
         if hasattr(request.user, 'email'):
-            user_id = User.objects.get(email=request.user.email).id
             email = request.user.email
         else:
-            user_id = 0
-            email = 'No User'
-        logger.info('User Posting: #%s: %s', user_id, email)
-
+            email = "No User"
+        logger.info('User Posting: %s', email)
+ 
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         sin_number =body['sin_number']
-        logger.info('SIN Posting: %s', sin_number)
+        logger.info('SIN # Posting: %s', sin_number)
 
-        # submitted
-        status_id=1 
-        logger.info('Status Posting: %s', status_id)
+        # create submitted status
+        new_status = Status.objects.get(id=1)
+        logger.info('Status Posting: %s', new_status.status)
 
         # verify sin is not already active
         logger.info('Attempting To Post...')
         try: 
             sin = Sin.objects.get(sin_number=sin_number)
-            logger.info('SIN Exists!')
+            logger.info('SIN # Exists!')
             if sin.status in [1,2,3]:
-                # 1 = submitted, 2 = reviewed, 3 = change, 4 = approved, 5 = denied, 6 = expired
+                # STATUS STATES:  
+                # 1 = submitted, 2 = reviewed, 3 = change
+                # 4 = approved, 5 = denied, 6 = expired
                 logger.warn('Existing SIN Cannot Be Modified')
-                return JsonResponse({ 'message': 'SIN already in process' })
+                return JsonResponse({ 'error': 'Existing SIN # Still In Process' })
+                
             else:
-                sin.update(user=user_id, status=status_id)
-                logger.info('Existed SIN Updated')
-                return JsonResponse({ 'message': 'Existed SIN Updated' })
+                sin.update(user=request.user, status=new_status)
+                logger.info('Existing SIN # Updated')
+                return JsonResponse(sin, safe=False)
                 
         except Sin.DoesNotExist:
-            sin = Sin.objects.create(sin_number=sin_number, user=user_id, status=status_id)
+            sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status)
             sin.save()
-            logger.info('New SIN Posted')
-            return JsonResponse({ 'message': 'New SIN Posted'})
+            logger.info('New SIN # Posted')
+            return JsonResponse(sin, safe=False)
             
+    # retrieving information on a specific SIN
     if request.method == "GET":
         logger.info('Retrieving SIN Info...')
 

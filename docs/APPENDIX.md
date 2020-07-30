@@ -26,6 +26,7 @@
 - [Cloud.gov: Leveraging Authentication](https://cloud.gov/docs/management/leveraging-authentication/) <br/>
 - [CloudFoundry: Service Keys](https://docs.cloudfoundry.org/devguide/services/service-keys.html) <br/>
 - [cg-django-uaa: Documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html)<br/>
+- [Angular: HTTP Interceptor to handle withCredentials Header](https://weblog.west-wind.com/posts/2019/Apr/07/Creating-a-custom-HttpInterceptor-to-handle-withCredentials)<br>
 ### Security
 - [Django: Cross Site Request Forgery Tokens](https://docs.djangoproject.com/en/3.0/ref/csrf/)
 ### Relevant Stack Discussions

@@ -11,13 +11,16 @@ export class ContextService {
 
   constructor() { }
 
-  getUserUrl() : String {
-    if (environment.production){
-      return `${Context.CLOUD_URL}/${Context.USER_ENDPOINT}`
-    }
-    else{
-      return `${Context.LOCAL_URL}/${Context.USER_ENDPOINT}`
-    }
-    
+  private getBackEndUrlBase() : String {
+    if (environment.production){ return `${Context.CLOUD_URL}` }
+    else{ return `${Context.LOCAL_URL}`}
   }
+  public getUserUrl() : String {
+    return `${this.getBackEndUrlBase()}/${Context.USER_ENDPOINT}`
+  }
+
+  public getSINUrl() : String {
+    return `${this.getBackEndUrlBase()}/${Context.SIN_ENDPOINT}`
+  }
+
 }
