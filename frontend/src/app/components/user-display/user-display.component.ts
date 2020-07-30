@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service'
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-user-display',
@@ -13,7 +14,8 @@ export class UserDisplayComponent implements OnInit {
     groups: null
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+                private logger: LogService) { }
 
   ngOnInit() {
     this.getUser()

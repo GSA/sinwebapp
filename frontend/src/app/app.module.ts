@@ -8,12 +8,14 @@ import { UserDisplayComponent } from './components/user-display/user-display.com
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SubmitDisplayComponent } from './components/submit-display/submit-display.component';
+import { ReviewDisplayComponent } from './components/review-display/review-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserDisplayComponent,
-    SubmitDisplayComponent
+    SubmitDisplayComponent,
+    ReviewDisplayComponent
   ],
   imports: [
     BrowserModule,

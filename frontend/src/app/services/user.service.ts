@@ -4,18 +4,22 @@ import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { ContextService } from './context.service';
 import { catchError, map, tap } from 'rxjs/operators';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private class_name: String = "UserService";
+
   constructor(private http: HttpClient,
-              private context: ContextService) { }
+              private context: ContextService,
+              private logger: LogService) { }
 
   public getUser() : Observable<User> {
-    console.log("UserService.getUser: Retrieving User...")
     return this.http.get<User>(this.context.getUserUrl().toString()).pipe(
+            tap(()=>{ this.logger.log('Retrieving User', `${this.class_name}.getUser`); }),
             catchError(this.handleError<User>("getUser"))
           );
   }

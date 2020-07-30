@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SinService } from 'src/app/services/sin.service';
 import { SIN } from 'src/app/models/sin';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-submit-display',
@@ -8,7 +9,7 @@ import { SIN } from 'src/app/models/sin';
 })
 export class SubmitDisplayComponent implements OnInit {
 
-  // bind this to HTML with two way model
+  private class_name = "SubmitDisplayComponent"
   public submit_SIN : SIN = {
     sin_number: null,
     status: null
@@ -16,17 +17,15 @@ export class SubmitDisplayComponent implements OnInit {
 
   public submitted : boolean = false;
 
-  constructor(private sin: SinService) { }
+  constructor(private sin: SinService,
+              private logger: LogService) { }
 
   ngOnInit() { this.submit_SIN; }
 
   public submitSIN(): void{
     this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
-      console.log('submit-display.component.submitSIN: SIN Posted!')
-      this.submit_SIN = {
-        sin_number: null,
-        status: null
-      }
+      this.logger.log('SIN Posted', `${this.class_name}.submitSIN`)
+      this.submit_SIN = { sin_number: null, status: null }
       this.submitted = true;
     })
   }

@@ -15,6 +15,7 @@ export class ContextService {
     if (environment.production){ return `${Context.CLOUD_URL}` }
     else{ return `${Context.LOCAL_URL}`}
   }
+
   public getUserUrl() : String {
     return `${this.getBackEndUrlBase()}/${Context.USER_ENDPOINT}`
   }
@@ -25,6 +26,10 @@ export class ContextService {
 
   public getSINUrl(): String{
     return `${this.getBackEndUrlBase()}/${Context.SIN_ENDPOINT}`
+  }
+
+  public getSINsUrl(): String {
+    return `${this.getBackEndUrlBase()}/${Context.SINS_ENDPOINT}`
   }
 
 }
