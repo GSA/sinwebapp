@@ -4,8 +4,7 @@ import { SIN } from 'src/app/models/sin';
 
 @Component({
   selector: 'app-submit-display',
-  templateUrl: './submit-display.component.html',
-  styleUrls: ['./submit-display.component.css']
+  templateUrl: './submit-display.component.html'
 })
 export class SubmitDisplayComponent implements OnInit {
 

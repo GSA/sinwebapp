@@ -12,19 +12,12 @@ from debug import DebugLogger
 # 
 # Description: retrieves user associated with request
 def user_info(request):
-
     logger = DebugLogger("sinwebapp.api.views.get_user_info").get_logger()
     logger.info('Retrieving User Info...')
     logger.info('Request Email: %s', request.user.email)
     logger.info('Request User Groups: %s', request.user.groups)
 
-    if hasattr(request.user, 'email'):
-        
-        if not hasattr(request.user, 'groups'):
-            logger.info('User Has No Group, Assigning Default Group...')
-            approver_group = Group.objects.get(name='submitter_group')
-            user_object = User.objects.get(email=request.user.email)
-            approver_group.user_set.add(user_object)
+    if hasattr(request.user, 'email') and hasattr(request.user, 'groups'):
 
         user_groups = request.user.groups.values_list('name',flat = True)
         group_list = list(user_groups) 
@@ -59,9 +52,10 @@ def sin_info(request):
 
         if hasattr(request.user, 'email'):
             email = request.user.email
+            logger.info('User Posting: %s', email)
         else:
-            email = "No User"
-        logger.info('User Posting: %s', email)
+            logger.info('No User Associated With Incoming Request')
+            return JsonResponse({ 'error': 'No User Signed In.' })
  
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
@@ -82,7 +76,7 @@ def sin_info(request):
                 # 1 = submitted, 2 = reviewed, 3 = change
                 # 4 = approved, 5 = denied, 6 = expired
                 logger.warn('Existing SIN Cannot Be Modified')
-                return JsonResponse({ 'error': 'Existing SIN # Still In Process' })
+                return JsonResponse({ 'error': 'Existing SIN # Still In Process.' })
                 
             else:
                 sin.update(user=request.user, status=new_status)
