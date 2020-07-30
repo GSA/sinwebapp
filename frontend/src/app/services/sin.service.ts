@@ -24,7 +24,7 @@ export class SinService {
 
   public postSIN(sin : SIN): Observable<SIN>{
     console.log("SinService.postSIN: Posting SIN...")
-    return this.http.post<SIN>(this.context.getSINUrl().toString(), sin, httpOptions)
+    return this.http.post<SIN>(this.context.postSINUrl().toString(), sin, httpOptions)
                       .pipe( catchError(this.handleError('postSIN', sin)));
   }
 

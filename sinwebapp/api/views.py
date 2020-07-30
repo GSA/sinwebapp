@@ -59,6 +59,7 @@ def sin_info(request):
  
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
+        print(body)
         sin_number =body['sin_number']
         logger.info('SIN # Posting: %s', sin_number)
 
@@ -85,9 +86,14 @@ def sin_info(request):
                 
         except Sin.DoesNotExist:
             sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status)
+            raw_sin = {
+                'sin_number': sin_number,
+                'user': request.user.id,
+                'status': new_status.id
+            }
             sin.save()
             logger.info('New SIN # Posted')
-            return JsonResponse(sin, safe=False)
+            return JsonResponse(raw_sin, safe=False)
             
     # retrieving information on a specific SIN
     if request.method == "GET":
@@ -155,19 +161,20 @@ def status_info(request):
     status_id=request.GET.get('id','')
     logger.info('Status Id: %s', status_id)
 
-    if not status_id:
+    if 'id' in request.GET:
+
+        try:
+            raw_status = Status.objects.get(id=status_id)
+            retrieved_status = {
+                'status' : raw_status.status,
+                'description': raw_status.description,
+            }
+            logger.info('Status Found!')
+        except Status.DoesNotExist:
+            retrieved_status = { 'message': 'Status Does Not Exist' }
+            logger.info('Status Not Found!')
+    else:
         retrieved_status = { 'message': 'Input Error' }
         logger.info('Parameter Not Provided')
-
-    try:
-        raw_status = Status.objects.get(id=status_id)
-        retrieved_status = {
-            'status' : raw_status.status,
-            'description': raw_status.description,
-        }
-        logger.info('Status Found!')
-    except Status.DoesNotExist:
-        retrieved_status = { 'message': 'Status Does Not Exist' }
-        logger.info('Status Not Found!')
 
     return JsonResponse(retrieved_status, safe=False)

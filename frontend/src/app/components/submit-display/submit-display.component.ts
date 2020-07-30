@@ -9,11 +9,19 @@ import { SIN } from 'src/app/models/sin';
 export class SubmitDisplayComponent implements OnInit {
 
   // bind this to HTML with two way model
-  public submit_SIN : SIN;
+  public submit_SIN : SIN = {
+    sin_number: null,
+    status: null
+  };
 
   constructor(private sin: SinService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { this.submit_SIN; }
 
+  public submitSIN(): void{
+    this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
+      console.log('submit-display.component.submitSIN: SIN Posted!')
+      console.log(`Response: ${response}`)
+    })
+  }
 }

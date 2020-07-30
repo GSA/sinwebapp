@@ -1,1 +1,11 @@
-<p>submit-display works!</p>
+<div class = "panel panel-default">
+
+    <div class = "panel-heading">SIN Submission</div>
+    <div class = "panel-body">
+        <label> SIN: <input [(ngModel)] = "submit_SIN.sin_number" type = "text" 
+            placeholder = "Type SIN # Here"> </label>
+
+        <button *ngIf="submit_SIN.sin_number" type = "Submit" (click)="submitSIN()">Submit</button>
+        <button *ngIf="!submit_SIN.sin_number" type = "Submit" disabled>Submit</button>
+    </div>
+</div>

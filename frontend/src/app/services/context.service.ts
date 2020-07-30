@@ -19,7 +19,11 @@ export class ContextService {
     return `${this.getBackEndUrlBase()}/${Context.USER_ENDPOINT}`
   }
 
-  public getSINUrl() : String {
+  public postSINUrl() : String {
+    return `${this.getBackEndUrlBase()}/${Context.SIN_ENDPOINT}/`
+  }
+
+  public getSINUrl(): String{
     return `${this.getBackEndUrlBase()}/${Context.SIN_ENDPOINT}`
   }
 
