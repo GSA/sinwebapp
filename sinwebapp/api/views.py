@@ -93,13 +93,10 @@ def sin_info(request):
     if request.method == "GET":
         logger.info('Retrieving SIN Info...')
 
-        sin=request.GET.get('id','')
-        logger.info('SIN Number: %s', sin)    
-
-        if not sin:
-            retrieved_sin ={ 'message': 'Input Error' }
-            logger.info('Parameter Not Provided')
-        else:
+        if 'id' in request.GET:
+            sin=request.GET.get('id')
+            logger.info('SIN Number: %s', sin)
+           
             try:
                 raw_sin = Sin.objects.get(sin_number=sin)
                 retrieved_sin = {
@@ -111,6 +108,20 @@ def sin_info(request):
             except Sin.DoesNotExist:
                 retrieved_sin = { 'message': 'SIN Does Not Exist' }
                 logger.info('SIN Not Found!')
+
+        elif 'user_email' in request.GET:
+            user_email = request.GET.get('user_email')
+            search_user = User.objects.get(email=user_email)
+            retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+
+        elif 'status' in request.GET:
+            user_status = request.GET.get('status')   
+            search_status = Status.objects.get(id=user_status)
+            retrieved_sin = list(Sin.objects.filter(status=search_status).values()) 
+
+        else:
+            retrieved_sin ={ 'message': 'Input Error' }
+            logger.info('No Query Parameters Provided')
 
         return JsonResponse(retrieved_sin, safe=False)
 
