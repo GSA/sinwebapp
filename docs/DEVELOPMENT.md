@@ -86,8 +86,8 @@ Application API Endpoints
 - <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com (Char Array)'<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list (JSON List)'<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;(Char Array)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;(JSON List)<br>
 >}<br>
 - <i>/api/sin</i> - exposes a <b>GET</b> and <b>POST</b> endpoint. 
 
@@ -101,38 +101,44 @@ will return a JSON formatted response containing information about SIN Number 12
 
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
->   <span style="text-indent:50px;">'sin_number': 'SIN # (<i>Int</i>)'</span>,<br>
->   <span style="text-indent:50px;">'user': 'user_groups_list (<i>JSON</i>)'</span>, <br>
->   <span style="text-indent:50px;">'status' 'user status (<i>Int</i>)'</span>
->}<br><br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;(<i>Int</i>) <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;(<i>Int</i>)<br>
+>}<br>
 
 2. The POST endpoint requires a SIN number within the body of the POST. The method will attempt to either create a new entry in the database for the SIN number, or if that SIN number already exists in the database, it will attempt to update that entry if its status is contained in the set (Approved, Denied, Expired). If its status is contained in the set (Submitted, Reviewed, Change), then the method will return an error.
 
     > <b>POST REQUEST FORMAT</b><br><br>
     > { <br>
-    >   <span style="text-indent:50px;">'sin_number': 'SIN # (<i>Int,</i>)',</span><br>
+    >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #' &nbsp;&nbsp;(<i>Int</i>)<br>
     >}<br>
-- <i>/api/sins</i>
+
+- <i>/api/sins</i> - retrieves a JSON array of all SINs
     > <b>GET RESPONSE FORMAT</b><br><br>
     > { <br>
     >   [ <br>
-    >       <span style="text-indent:50px;">'sin_number': 'SIN # (<i>Int</i>)',</span><br>
-    >       <span style="text-indent:50px;">'user': 'user_groups_list (<i>JSON List</i>)', </span><br>
-    >       <span style="text-indent:50px;">'status' 'user status (<i>Int</i>)'</span><br>
+    >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;(<i>Int</i>)<br>
+    >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;(<i>Int</i>)'<br>
+    >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;(<i>Int</i>)<br>
     >   ]<br>
     >}<br><br>
-- <i>/api/status</i>
+- <i>/api/status</i> - given a query parameter of ID, this method retrieves a Status Name and Description for an ID. For example,
+
+> localhost:8000/api/status?id=3
+
+will return a JSON containing the ID's status name and description in the following format,
+
     > <b>GET RESPONSE FORMAT</b><br><br>
     > { <br>
-    >   <span style="text-indent:50px;">'status': 'Status name (<i>Char Array</i>)'</span>,<br>
-    >   <span style="text-indent:50px;">'description': 'Status description (<i>Char Array</i>)</span>'<br>
+    >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp; (<i>Char Array</i>)<br>
+    >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;(<i>Char Array</i>)<br>
     >}<br><br>
 
 Third Party Endpoints
-- <i>/auth/login</i>
-- <i>/auth/callback</i>
-- <i>/fake/oauth/authorize</i>
-- <i>/fake/oauth/token</i>
+- <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>
+- <i>/auth/callback</i> - callback endpoint for cloud.gov OAuth2 authorization and authentication<br>
+- <i>/fake/oauth/authorize</i> - mock authorize endpoint for fake cloud.gov backend<br>
+- <i>/fake/oauth/token</i> - mock token generation endpoint for fake cloud.backend<br>
 
 Frontend Routes
 - <i>404</i>: ?
