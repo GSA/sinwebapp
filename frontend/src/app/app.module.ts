@@ -4,14 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { UserDisplayComponent } from './user-display/user-display.component';
+import { UserDisplayComponent } from './components/user-display/user-display.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SubmitDisplayComponent } from './components/submit-display/submit-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserDisplayComponent
+    UserDisplayComponent,
+    SubmitDisplayComponent
   ],
   imports: [
     BrowserModule,
