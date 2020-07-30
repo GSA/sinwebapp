@@ -8,6 +8,9 @@ source "$SCRIPT_DIR/util/logging.sh"
 formatted_print '--> Removing Running Containers' $SCRIPT_NAME
 docker-compose down
 
+formatted_print '--> Clearing Docker Cache' $SCRIPT_NAME
+docker system prune -f
+
 formatted_print '--> Configuring Application Environment' $SCRIPT_NAME
 bash $SCRIPT_DIR/setup/setup-frontend-env.sh container
 
