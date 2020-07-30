@@ -35,3 +35,4 @@
 - [Django: Add User to Group Via Group Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)
 - [Django: Output QuerySet as Json](https://stackoverflow.com/questions/15874233/output-django-queryset-as-json)
 - [Django: CSRF Cookie Not Set](https://stackoverflow.com/questions/17716624/django-csrf-cookie-not-set)
+- [Angular: withCredentials Header, What Is It?](https://stackoverflow.com/questions/27406994/http-requests-withcredentials-what-is-this-and-why-using-it)
