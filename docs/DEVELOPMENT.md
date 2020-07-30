@@ -128,11 +128,11 @@ will return a JSON formatted response containing information about SIN Number 12
 
 will return a JSON containing the ID's status name and description in the following format,
 
-    > <b>GET RESPONSE FORMAT</b><br><br>
-    > { <br>
-    >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp; (<i>Char Array</i>)<br>
-    >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;(<i>Char Array</i>)<br>
-    >}<br><br>
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp; (<i>Char Array</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;(<i>Char Array</i>)<br>
+>}<br><br>
 
 Third Party Endpoints
 - <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>
