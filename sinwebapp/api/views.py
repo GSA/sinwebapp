@@ -66,8 +66,7 @@ def sin_info(request):
 
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        content = body['content']
-        sin_number = content.sin_number
+        sin_number =body['sin_number']
         logger.info('SIN Posting: %s', sin_number)
 
         # submitted
