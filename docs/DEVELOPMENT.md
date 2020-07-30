@@ -82,37 +82,50 @@ Django Static HTML Endpoint
 - <i>/success</i>
 
 Application API Endpoints
-- <i>/api/user</i> - retrieves information about the currently signed in user. 
-    > GET RESPONSE FORMAT<br><br>
+
+- <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+>   <span style="text-indent:50px;">'email': 'user(at)domain.com (Char Array)'</span> <br>
+>   <span style="text-indent:50px;">'groups': 'user_groups_list (JSON List)' </span><br>
+>}<br>
+- <i>/api/sin</i> - exposes a <b>GET</b> and <b>POST</b> endpoint. 
+
+1. The <b>GET</b> endpoint requires a query parameter of ID for a given SIN number and returns its corresponding information. 
+
+For example, the following HTTP request<br>
+
+>localhost:8000/api/sin?id=123456<br>
+
+will return a JSON formatted response containing information about SIN Number 123456 in the following format,
+
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+>   <span style="text-indent:50px;">'sin_number': 'SIN # (<i>Int</i>)'</span>,<br>
+>   <span style="text-indent:50px;">'user': 'user_groups_list (<i>JSON</i>)'</span>, <br>
+>   <span style="text-indent:50px;">'status' 'user status (<i>Int</i>)'</span>
+>}<br><br>
+
+2. The POST endpoint requires a SIN number within the body of the POST. The method will attempt to either create a new entry in the database for the SIN number, or if that SIN number already exists in the database, it will attempt to update that entry if its status is contained in the set (Approved, Denied, Expired). If its status is contained in the set (Submitted, Reviewed, Change), then the method will return an error.
+
+    > <b>POST REQUEST FORMAT</b><br><br>
     > { <br>
-    >   'email': 'user(at)domain.com (Char Array)',<br>
-    >   'groups': 'user_groups_list (JSON List)' <br>
-    >}<br>
-- <i>/api/sin</i>
-    > GET RESPONSE FORMAT<br><br>
-    > { <br>
-    >   'sin_number': 'SIN # (Int)',<br>
-    >   'user': 'user_groups_list (JSON List)', <br>
-    >   'status' 'user status (Int)'
-    >}<br><br>
-    > POST REQUEST FORMAT<br><br>
-    > { <br>
-    >   'sin_number': 'SIN # (Int)',<br>
+    >   <span style="text-indent:50px;">'sin_number': 'SIN # (<i>Int,</i>)',</span><br>
     >}<br>
 - <i>/api/sins</i>
-    > GET RESPONSE FORMAT<br><br>
+    > <b>GET RESPONSE FORMAT</b><br><br>
     > { <br>
     >   [ <br>
-    >       'sin_number': 'SIN # (Int)',<br>
-    >       'user': 'user_groups_list (JSON List)', <br>
-    >       'status' 'user status (Int)'<br>
+    >       <span style="text-indent:50px;">'sin_number': 'SIN # (<i>Int</i>)',</span><br>
+    >       <span style="text-indent:50px;">'user': 'user_groups_list (<i>JSON List</i>)', </span><br>
+    >       <span style="text-indent:50px;">'status' 'user status (<i>Int</i>)'</span><br>
     >   ]<br>
     >}<br><br>
 - <i>/api/status</i>
-    > GET RESPONSE FORMAT<br><br>
+    > <b>GET RESPONSE FORMAT</b><br><br>
     > { <br>
-    >   'status': 'Status name (Char Array)',<br>
-    >   'description': 'Status description (Char Array)'<br>
+    >   <span style="text-indent:50px;">'status': 'Status name (<i>Char Array</i>)'</span>,<br>
+    >   <span style="text-indent:50px;">'description': 'Status description (<i>Char Array</i>)</span>'<br>
     >}<br><br>
 
 Third Party Endpoints
