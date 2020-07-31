@@ -27,7 +27,7 @@ class DebugMiddleware:
    
             if request.path == '/api/sin/':
                 for key, value in request.headers.items():
-                    self.logger('>>>> Request Header: %s', key)
+                    self.logger.info('>>>> Request Header: %s', key)
 
                 self.logger.info('>>>> Cookie Header: %s', request.headers['Cookie'])
                 if 'X-CSRFToken' in request.headers:
