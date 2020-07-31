@@ -11,9 +11,10 @@ export class LogService {
   constructor() { }
 
   public log(msg: String, location: String){
-    this.logue.push(`${location}: ${msg}`)
+    let now = new Date().getUTCHours()
+    this.logue.push(`${now}: ${location}: ${msg}`)
     console.log(`${location}: ${msg}`)
   }
 
-  public getLog(): String[] { return this.logue; }
+  public getLogs(): String[] { return this.logue; }
 }

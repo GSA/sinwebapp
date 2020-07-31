@@ -22,22 +22,25 @@
       <div class="panel panel-default" >
         <div class="panel-heading">User Details</div>
         <div class="panel-body">
-          Email: {{user.email}}<br>
-          Groups: {{user.groups}}
+          Email: <span *ngIf = 'user.email'>{{user.email}}</span><br>
+          Groups: <span *ngIf = 'user.groups'>{{user.groups}}</span>
         </div>
       </div>
     </div>
 
     <div class = "col-md-5">
-      <div *ngIf = "user.groups.includes('submitter_group')">
-        <app-submit-display></app-submit-display>
-      </div>
+      <div *ngIf = 'user.groups'>
 
-      <div *ngIf = "user.groups.includes('approver_group')">
-      </div>
+        <div *ngIf = "user.groups.includes('submitter_group')">
+          <app-submit-display></app-submit-display>
+        </div>
+        <div *ngIf = "user.groups.includes('approver_group')">
+          <app-review-display approver="true"></app-review-display>
+        </div>
+        <div *ngIf = "user.groups.includes('reviewer_group')">
+          <app-review-display approver="false"></app-review-display>
+        </div>
 
-      <div *ngIf = "user.groups.includes('reviewer_group')">
-        <app-review-display></app-review-display>
       </div>
     </div>
 
@@ -47,4 +50,10 @@
 
   </div>
 
+  <div class = "row">
+
+    <div class = "col-md-9">
+      <app-logger></app-logger>
+    </div>
+  </div>
 </div>

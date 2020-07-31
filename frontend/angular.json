@@ -30,7 +30,7 @@
           },
           "configurations": {
             "production": {
-              "optimization": true,
+              "optimization": false, // change to true for prod
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
@@ -38,7 +38,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false, // change to true for prod
               "budgets": [
                 {
                   "type": "initial",

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SinService } from 'src/app/services/sin.service';
 import { LogService } from 'src/app/services/log.service';
 import { SIN } from 'src/app/models/sin';
@@ -11,6 +11,10 @@ export class ReviewDisplayComponent implements OnInit {
 
   public sin_list : SIN[];
 
+  // review and approve functionality are similar, so 
+  // reuse component with flag to differentiate behavior
+  @Input() approver: boolean;
+
   constructor(private sin: SinService,
               private logger: LogService) { }
 
@@ -19,8 +23,8 @@ export class ReviewDisplayComponent implements OnInit {
   }
 
   private loadSINs(): void{
-    this.sin.getSINs().subscribe( sins => {
-      this.sin_list=sins
+    this.sin.getSINs().subscribe(sins => {
+      this.sin_list=sins;
     })
   }
 

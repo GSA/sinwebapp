@@ -19,8 +19,7 @@ def user_info(request):
 
     if hasattr(request.user, 'email') and hasattr(request.user, 'groups'):
 
-        user_groups = request.user.groups.values_list('name',flat = True)
-        group_list = list(user_groups) 
+        group_list = list(request.user.groups.values_list('name',flat = True)) 
         response = {
                 'email': request.user.email,
                'groups': group_list
@@ -38,10 +37,6 @@ def user_info(request):
 # { 
 #   'sin_number': 123456
 # }
-### DO NOT USE CSRF_EXEMPT IN PRODUCTION!!!!
-# THIS IS SO I CAN TEST IN POSTMAN AND NOTHING ELSE!
-###### REMOVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-@csrf_exempt 
 def sin_info(request):
     
     logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
@@ -59,7 +54,6 @@ def sin_info(request):
  
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        print(body)
         sin_number =body['sin_number']
         logger.info('SIN # Posting: %s', sin_number)
 
@@ -81,12 +75,13 @@ def sin_info(request):
                 
             else:
                 sin.update(user=request.user, status=new_status)
-                logger.info('Existing SIN # Updated')
+                logger.info('Existing SIN # Updated.')
                 return JsonResponse(sin, safe=False)
                 
         except Sin.DoesNotExist:
             sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status)
             raw_sin = {
+                'id': sin.id,
                 'sin_number': sin_number,
                 'user': request.user.id,
                 'status': new_status.id
@@ -106,6 +101,7 @@ def sin_info(request):
             try:
                 raw_sin = Sin.objects.get(sin_number=sin)
                 retrieved_sin = {
+                    'id': raw_sin.id,
                     'sin_number': raw_sin.sin_number,
                     'user': raw_sin.user,
                     'status': raw_sin.status
@@ -118,6 +114,11 @@ def sin_info(request):
         elif 'user_email' in request.GET:
             user_email = request.GET.get('user_email')
             search_user = User.objects.get(email=user_email)
+            retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+
+        elif 'user_id' in request.GET:
+            user_id = request.GET.get('user_id')
+            search_user = User.objects.get(id=user_id)
             retrieved_sin = list(Sin.objects.filter(user=search_user).values())
 
         elif 'status' in request.GET:

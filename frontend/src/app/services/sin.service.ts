@@ -6,13 +6,7 @@ import { ContextService } from './context.service';
 import { catchError, map, tap } from 'rxjs/operators';
 import { SIN } from '../models/sin';
 import { LogService } from './log.service';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-};
+import { CookieService } from 'ngx-cookie-service'; 
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +17,18 @@ export class SinService {
 
   constructor(private http: HttpClient,
                 private context: ContextService,
+                private cookie: CookieService,
                 private logger: LogService) { }
 
 
   public postSIN(sin : SIN): Observable<SIN>{
+    //let crsf_token=this.cookie.get('csrftoken')
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        //'Cookie': `csrftoken=${crsf_token}`
+      })
+    };
     return this.http.post<SIN>(this.context.postSINUrl().toString(), sin, httpOptions).pipe( 
                       tap( () => { this.logger.log( "Posting SIN", `${this.class_name}.postSIN`);}),
                       catchError(this.handleError('postSIN', sin))
