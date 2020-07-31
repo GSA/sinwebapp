@@ -27,11 +27,7 @@ if [ "$1" == "local" ]
 then
     # set environment variables
     formatted_print '--> Setting Environment Variables' $SCRIPT_NAME
-    ENVIRONMENT='local'
-    UAA_CLIENT_ID='fakeclientid'
-    UAA_CLIENT_SECRET='fake-uaa-provider-client-secret'
-    DJANGO_SUPERUSER_USERNAME='grantmoore'
-    DJANGO_SUPERUSER_EMAIL='grant.moore@gsa.gov'
+    sh -ac "$SCRIPT_DIR/../env/local.env"
 
     formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/init-scripts.sh

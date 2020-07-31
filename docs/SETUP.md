@@ -51,11 +51,11 @@ Next, you will need to build the frontend and deploy it onto the server. You cou
 
 > bash init-app.sh local
 
-Note inside of the <i>init-app.sh</i>, it defines environment variables before launching the application. This is where the enivornment variables live for local deployments. If you need to edit a local environment variable, do so in this file.
+The environment file in <i>/env/local.env</i> defines the local environment configuration. It is loaded during the <i>init-app.sh</i> script if an argument of "local" is provided.
 
 ## Container Environment
 
-1. The <i>docker-compose.yml</i> builds the web application and connects it to a <i>postgres</i> database. It reads in the <i>local.env</i> file and sets the environment for the application. Open the <i>local.env</i> file in project's root directory and verify the following variable is set,
+1. The <i>docker-compose.yml</i> builds the web application and connects it to a <i>postgres</i> database. It reads in the <i>container.env</i> file and sets the environment for the application. Open the <i>/env/container.env</i> file in project's root directory and verify the following variable is set,
 
 > ENVIRONMENT=container
 
@@ -63,9 +63,9 @@ This will be loaded into the <i>settings.py</i> configuration file and allow cer
 
 > env: ENVIRONMENT: cloud
 
-Likewise, the <i>init-app.sh</i> sets this variable for local deployments.
+Likewise, the <i>local.env</i> sets this variable for local deployments.
 
-You will also find two other environment variables in the <i>local.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local or docker deployments; they are only there to maintain minimal differences in the codebase for cloud and docker deployments. In other words, they make life easier. If you are curious about their function, see the [cg-django-uaa documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html).
+You will also find two other environment variables in the <i>container.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local or docker deployments; they are only there to maintain minimal differences in the codebase for cloud and docker deployments. In other words, they make life easier. If you are curious about their function, see the [cg-django-uaa documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html).
 
 You will also need to set the superuser for the program; this user will be able to add and delete users from the database, assign users to groups, etc, through the Django admin screen. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
 
