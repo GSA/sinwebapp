@@ -1,11 +1,11 @@
 <div *ngIf = "sin_list">
     <div class = "panel panel-default">
-        <div class = "panel-heading">SIN Form Submissions For Review</div>
+        <div class = "panel-heading">Submissions For Review</div>
         <div class = "panel-body">
             <ul>
                 <li *ngFor = "let sin of sin_list">
                     SIN #: {{sin.sin_number}}<br>
-                    Status: {{sin.sin_status}}
+                    Status: {{sin.status}}
                 </li>
             </ul>
         </div>

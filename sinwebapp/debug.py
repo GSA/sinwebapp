@@ -23,7 +23,7 @@ class DebugLogger():
         self.logger.info("-------------------------------------------------")
         self.logger.info('SETTINGS.PY Configuration')
         self.logger.info("-------------------------------------------------")
-        self.logger.info("# Directory Location %s", config.BASE_DIR)
+        self.logger.info("# Directory Location : %s", config.BASE_DIR)
         self.logger.info('> Debug : %s', config.DEBUG)
         self.logger.info('> Enviroment: %s', config.APP_ENV)
         self.logger.info("-------------------------------------------------")
