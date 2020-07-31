@@ -2,6 +2,7 @@ import json
 
 from django.http import JsonResponse
 from django.contrib.auth.models import Group, User
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from api.models import Sin, Status
@@ -37,6 +38,7 @@ def user_info(request):
 # { 
 #   'sin_number': 123456
 # }
+@login_required
 def sin_info(request):
     
     logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()

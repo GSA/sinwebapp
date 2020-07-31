@@ -1,6 +1,8 @@
 from django.contrib.auth.models import Group, User, Permission
 from django.contrib.contenttypes.models import ContentType
+from core import settings
 from debug import DebugLogger
+import os
 
 
 def init_groups(apps, schema_editor):
@@ -41,3 +43,17 @@ def init_group_permissions(apps, schema_editor):
     admin_group.permissions.add(submitter_permissions)
     admin_group.permissions.add(reviewer_permissions)
     admin_group.permissions.add(approver_permissions)
+
+def init_default_users(app, schema_editor):
+    if settings.APP_ENV == 'local' or settings.APP_ENV == 'container':
+        submitter = User.objects.create_user(username="submitter", email="submitter@gsa.gov")
+        approver = User.objects.create_user(username="approver", email="approver@gsa.gov")
+        reviewer = User.objects.create_user(username="approver",email="reviewer@gsa.gov")
+        submitter.save()
+        approver.save()
+        reviewer.save()
+
+        super_name = os.getenv('DJANGO_SUPERUSER_USERNAME')
+        super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
+        super_user = User.objects.get(username=super_name, email=super_email)
+        super_user.save()
