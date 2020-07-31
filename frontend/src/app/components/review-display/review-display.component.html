@@ -1,10 +1,13 @@
-<p>review-display works!</p>
-
 <div *ngIf = "sin_list">
-    <ul>
-        <li *ngFor = "let sin of sin_list">
-            SIN #: {{sin.sin_number}}<br>
-            Status: {{sin.sin_status}}
-        </li>
-    </ul>
+    <div class = "panel panel-default">
+        <div class = "panel-heading"></div>
+        <div class = "panel-body">
+            <ul>
+                <li *ngFor = "let sin of sin_list">
+                    SIN #: {{sin.sin_number}}<br>
+                    Status: {{sin.sin_status}}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

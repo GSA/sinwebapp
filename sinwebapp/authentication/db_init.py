@@ -47,13 +47,16 @@ def init_group_permissions(apps, schema_editor):
 def init_default_users(app, schema_editor):
     if settings.APP_ENV == 'local' or settings.APP_ENV == 'container':
         submitter = User.objects.create_user(username="submitter", email="submitter@gsa.gov")
-        approver = User.objects.create_user(username="approver", email="approver@gsa.gov")
-        reviewer = User.objects.create_user(username="approver",email="reviewer@gsa.gov")
+        submitter_group = Group.objects.get(name="submitter_group")
+        submitter_group.user_set.add(submitter)
         submitter.save()
-        approver.save()
-        reviewer.save()
 
-        super_name = os.getenv('DJANGO_SUPERUSER_USERNAME')
-        super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
-        super_user = User.objects.get(username=super_name, email=super_email)
-        super_user.save()
+        approver = User.objects.create_user(username="approver", email="approver@gsa.gov")
+        approver_group = Group.objects.get(name='approver_group')
+        approver_group.user_set.add(approver)
+        approver.save()
+        
+        reviewer = User.objects.create_user(username="reviewer",email="reviewer@gsa.gov")
+        reviewer_group = Group.objects.get(name="reviewer_group")
+        reviewer_group.user_set.add(reviewer)
+        reviewer.save()
