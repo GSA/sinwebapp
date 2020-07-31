@@ -137,6 +137,7 @@ def sin_info(request):
 # GET: /api/sins
 #
 # Description: retrieves information on all SIN numbers
+@login_required
 def sin_info_all(request):
     logger = DebugLogger("sinwebapp.api.views.get_all_sins_info").get_logger()
     logger.info('Retrieving All SIN Info...')
@@ -157,6 +158,7 @@ def sin_info_all(request):
 # GETl /api/status?id=1
 # 
 # Description: retrieves information for a specific Status
+@login_required
 def status_info(request):
     logger = DebugLogger("sinwebapp.api.views.get_status_info").get_logger()
     logger.info('Retrieving Status Info...')
