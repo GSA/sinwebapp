@@ -93,7 +93,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# Database Configuration
+# Database Configuration Settings
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
@@ -105,14 +105,19 @@ DATABASES = {
     }
 }
 
-# Localization Configuration
+# Localization Configuration Settings
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Header Properties
+# CSRF Settings
+CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_PATH = '/'
+
+# Miscellanous Header Properties
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 REFERRER_POLICY = 'origin'
@@ -123,11 +128,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = 'uaa_client:login'
-
 LOGIN_REDIRECT_URL = '/success'
-
+UAA_APPROVED_DOMAINS = ['gsa.gov']
 UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID', 'fakeclientid')
-
 UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET', 'fakeclientsecret')
 
 if APP_ENV == 'cloud':
@@ -138,13 +141,9 @@ else:
     UAA_AUTH_URL = 'fake:'
     UAA_TOKEN_URL = 'fake:'
 
-UAA_APPROVED_DOMAINS = ['gsa.gov']
-
 # Static Configuration
 STATIC_URL = '/static/'
-
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, "static")
 ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

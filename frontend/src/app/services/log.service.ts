@@ -11,7 +11,7 @@ export class LogService {
   constructor() { }
 
   public log(msg: String, location: String){
-    let now = new Date().getUTCHours()
+    let now = new Date().toLocaleTimeString()
     this.logue.push(`${now}: ${location}: ${msg}`)
     console.log(`${location}: ${msg}`)
   }

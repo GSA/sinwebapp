@@ -11,15 +11,19 @@ def login_page(request):
 @login_required
 def login_success_page(request):
     logger = DebugLogger("sinwebapp.authentication.views.login_success_page").get_logger()
-    logger.info('Accessing Login Page...')
+
+    logger.info('%s Accessing Login Page.', request.user.email)
+
+    logger.info('Determing User Group for User.')
     if (not hasattr(request.user, 'groups')) or (not request.user.groups.filter(name__in=['reviewer_group', 
                                                                                             'submitter_group',
                                                                                             'approver_group',
                                                                                             'admin_group']).exists()):
-        logger.warn('User Has No Group, Assigning Default Group submitter_group')
-        approver_group = Group.objects.get(name='submitter_group')
+        logger.warn('User Has No Group, Assigning Default Group \'submitter_group\'.')
+        submitter_group = Group.objects.get(name='submitter_group')
         user_object = User.objects.get(email=request.user.email)
-        approver_group.user_set.add(user_object)
+        submitter_group.user_set.add(user_object)
+
     return render(request, 'login_success.html')
     
 def logout_page(request):

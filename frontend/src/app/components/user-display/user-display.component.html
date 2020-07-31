@@ -1,35 +1,29 @@
+<div *ngIf = "user.groups && user.email">
 
-<nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header"> Menu</div>
+      <ul class="nav navbar-nav">
+        <li *ngIf = "user.groups.includes('admin_group')" 
+            class="active"><a href="/admin">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <div class="container-fluid">
+  <div class = "container-fluid">
+    <div class = "row">
 
-    <div class="navbar-header"> Menu</div>
-
-    <ul class="nav navbar-nav">
-      <li *ngIf = "user.groups.includes('admin_group')" 
-          class="active"><a href="/admin">Admin</a></li>
-    </ul>
-
-  </div>
-
-</nav>
-
-<div class = "container-fluid">
-
-  <div class = "row">
-
-    <div class = "col-md-2">
-      <div class="panel panel-default" >
-        <div class="panel-heading">User Details</div>
-        <div class="panel-body">
-          Email: <span *ngIf = 'user.email'>{{user.email}}</span><br>
-          Groups: <span *ngIf = 'user.groups'>{{user.groups}}</span>
+      <div class = "col-md-2">
+        <div class="panel panel-default" >
+          <div class="panel-heading">User Details</div>
+          <div class="panel-body">
+            Email: {{user.email}}<br>
+            Groups: {{user.groups}}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class = "col-md-5">
-      <div *ngIf = 'user.groups'>
+      <div class = "col-md-5">
 
         <div *ngIf = "user.groups.includes('submitter_group')">
           <app-submit-display></app-submit-display>
@@ -40,20 +34,24 @@
         <div *ngIf = "user.groups.includes('reviewer_group')">
           <app-review-display approver="false"></app-review-display>
         </div>
-
       </div>
+
+      <div class = "col-md-2">
+        Placeholder for second menu
+      </div>
+
     </div>
 
-    <div class = "col-md-2">
-      Placeholder for second menu
+    <div class = "row">
+
+      <div class = "col-md-9">
+        <app-logger></app-logger>
+      </div>
+      
     </div>
 
   </div>
 
-  <div class = "row">
 
-    <div class = "col-md-9">
-      <app-logger></app-logger>
-    </div>
-  </div>
+
 </div>

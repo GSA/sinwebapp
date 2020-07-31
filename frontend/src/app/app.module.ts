@@ -26,6 +26,7 @@ import { LoggerComponent } from './components/logger/logger.component';
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken'
     }),
     AppRoutingModule
   ],

@@ -17,19 +17,19 @@ export class ContextService {
   }
 
   public getUserUrl() : String {
-    return `${this.getBackEndUrlBase()}/${Context.USER_ENDPOINT}`
+    return `${Context.USER_ENDPOINT}`
   }
 
   public postSINUrl() : String {
-    return `${this.getBackEndUrlBase()}/${Context.SIN_ENDPOINT}/`
+    return `${Context.SIN_ENDPOINT}/`
   }
 
   public getSINUrl(): String{
-    return `${this.getBackEndUrlBase()}/${Context.SIN_ENDPOINT}`
+    return `${Context.SIN_ENDPOINT}`
   }
 
   public getSINsUrl(): String {
-    return `${this.getBackEndUrlBase()}/${Context.SINS_ENDPOINT}`
+    return `${Context.SINS_ENDPOINT}`
   }
 
 }

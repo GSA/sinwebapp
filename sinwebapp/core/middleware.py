@@ -25,6 +25,14 @@ class DebugMiddleware:
             if hasattr(request, 'user'):
                 self.logger.info('>>>> Session User: %s', request.user)
    
+            if request.path == '/api/sin/':
+                for key, value in request.headers.items():
+                    self.logger('>>>> Request Header: %s', key)
+
+                self.logger.info('>>>> Cookie Header: %s', request.headers['Cookie'])
+                if 'X-CSRFToken' in request.headers:
+                    self.logger.info('>>>> X-CSRFTOKEN Header: %s', request.headers['X-CSRFTOKEN']) 
+
         response = self.get_response(request)
 
         return response

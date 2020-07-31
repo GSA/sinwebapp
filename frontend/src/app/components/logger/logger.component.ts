@@ -4,8 +4,7 @@ import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-logger',
-  templateUrl: './logger.component.html',
-  styleUrls: ['./logger.component.css']
+  templateUrl: './logger.component.html'
 })
 export class LoggerComponent implements OnInit {
 

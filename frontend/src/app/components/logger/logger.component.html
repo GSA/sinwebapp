@@ -1,8 +1,10 @@
 <div *ngIf = 'debug' class = "panel panel-default">
     <div class ="panel-heading">Application Logger 
-        <input type="checkbox" [(ngModel)] = "display"> Display
+        <span style="float: right;">
+            <input type="checkbox" [(ngModel)] = "display"> Display
+        </span>
     </div>
     <div *ngIf = 'display' class = "panel-body">
-        <span *ngFor = "let msg of log">{{msg}}</span>
+        <span *ngFor = "let msg of log">{{msg}}<br></span>
     </div>
 </div>
