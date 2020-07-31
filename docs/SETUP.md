@@ -47,7 +47,7 @@ Navigate to the <i>/sinwebapp/</i> project directory and install the project req
 
 > pip install -r requirements.txt
 
-Next, you will need to build the frontend and deploy it onto the server. You could do this manually, but all the necessary commands have been packaged in a script. Navigate to the <i>/scripts/</i> directory and locate the <i>init-app.sh</i> BASH script. This script install all of the frontend dependencies and build the frontend project and output it in the <i>/sinwebapp/static/</i> directory so the project can be statically served. It will then start the app's server. This script is also used when orchestrating the application through containers or on the cloud, so provide it an argument of "local", or in other words, execute the following command,
+Next, you will need to build the frontend and deploy it onto the server. You could do this manually, but all the necessary commands have been packaged in a script. Navigate to the <i>/scripts/</i> directory and locate the <i>init-app.sh</i> BASH script. This script will install all of the frontend dependencies and build the frontend project and output it in the <i>/sinwebapp/static/</i> directory so the project can be statically served. It will then start the app's server. This script is also used when orchestrating the application through containers or on the cloud, so provide it an argument of "local", or in other words, execute the following command,
 
 > bash init-app.sh local
 

@@ -145,4 +145,4 @@ Frontend Routes
 
 ## Superuser
 
-The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>local.env</i> file, while the cloud environment variables need to be set with the <i>cf cli</i>
+The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>init-app.sh</i> BASH script, the docker environment variables are set in the <i>local.env</i> file, while the cloud environment variables need to be set manually with the <i>cf cli</i>
