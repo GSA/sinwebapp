@@ -83,7 +83,7 @@ elif [ "$1" == "local" ]
 then
     formatted_print '--> Collecting Static Files' $SCRIPT_NAME
     python manage.py collectstatic --noinput
-    formatted_print '--> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration...' $SCRIPT_NAME
+    formatted_print '--> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration' $SCRIPT_NAME
     gunicorn core.wsgi:application --workers 3
 elif [ "$1" == "cloud" ]
 then
