@@ -5,8 +5,12 @@
         <label> SIN: <input [(ngModel)] = "submit_SIN.sin_number" type = "text" 
             placeholder = "Type SIN # Here"> </label>
 
-        <button *ngIf="submit_SIN.sin_number" type = "Submit" (click)="submitSIN()">Submit</button>
-        <button *ngIf="!submit_SIN.sin_number" type = "Submit" disabled>Submit</button><br><br>
+        <button *ngIf="submit_SIN.sin_number" type = "Submit" 
+                (click)="submitSIN()" (focus)="clear()">
+                Submit</button>
+        <button *ngIf="!submit_SIN.sin_number" type = "Submit" 
+                disabled>
+                Submit</button><br><br>
 
         <span *ngIf="submitted">Thank you for your submission!</span>
     </div>

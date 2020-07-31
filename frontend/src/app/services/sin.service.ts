@@ -22,11 +22,9 @@ export class SinService {
 
 
   public postSIN(sin : SIN): Observable<SIN>{
-    //let crsf_token=this.cookie.get('csrftoken')
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        //'Cookie': `csrftoken=${crsf_token}`
+        'Content-Type':  'application/json'
       })
     };
     return this.http.post<SIN>(this.context.postSINUrl().toString(), sin, httpOptions).pipe( 

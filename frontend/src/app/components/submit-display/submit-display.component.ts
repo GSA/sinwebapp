@@ -26,8 +26,12 @@ export class SubmitDisplayComponent implements OnInit {
   public submitSIN(): void{
     this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
       this.logger.log('SIN Posted', `${this.class_name}.submitSIN`)
-      this.submit_SIN = { sin_number: null, status: null }
+      this.submit_SIN = { sin_number: null, status_id: null, user_id: null }
       this.submitted = true;
     })
+  }
+  
+  public clear(){
+    this.submitted = false;
   }
 }
