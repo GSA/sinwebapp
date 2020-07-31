@@ -1,4 +1,5 @@
 export interface SIN{
     sin_number: number,
-    status: number,
+    status_id: number,
+    user_id: number
 }

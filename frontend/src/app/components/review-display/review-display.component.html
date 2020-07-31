@@ -4,8 +4,9 @@
         <div class = "panel-body">
             <ul>
                 <li *ngFor = "let sin of sin_list">
-                    SIN #: {{sin.sin_number}}<br>
-                    Status: {{sin.status}}
+                    SIN #: {{ sin.sin_number }}<br>
+                    Status: {{ sin.status_id }}
+                    User: {{ sin.user_ud }}
                 </li>
             </ul>
         </div>

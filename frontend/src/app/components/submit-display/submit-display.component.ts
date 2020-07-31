@@ -12,7 +12,8 @@ export class SubmitDisplayComponent implements OnInit {
   private class_name = "SubmitDisplayComponent"
   public submit_SIN : SIN = {
     sin_number: null,
-    status: null
+    status_id: null,
+    user_id: null
   };
 
   public submitted : boolean = false;
