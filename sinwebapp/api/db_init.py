@@ -14,3 +14,5 @@ def init_status(apps, schema_editor):
                                             description="SIN form has been approved.")
     denied = Status.objects.get_or_create(status='denied', 
                                              description="SIN form has been denied.")
+    expired = Status.objects.get_or_create(status='expired',
+                                             description="SIN form has expired.")

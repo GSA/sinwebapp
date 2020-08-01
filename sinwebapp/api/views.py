@@ -85,8 +85,8 @@ def sin_info(request):
             raw_sin = {
                 'id': sin.id,
                 'sin_number': sin_number,
-                'user': request.user.id,
-                'status': new_status.id
+                'user_id': request.user.id,
+                'status_id': new_status.id
             }
             sin.save()
             logger.info('New SIN # Posted')
@@ -105,8 +105,8 @@ def sin_info(request):
                 retrieved_sin = {
                     'id': raw_sin.id,
                     'sin_number': raw_sin.sin_number,
-                    'user': raw_sin.user,
-                    'status': raw_sin.status
+                    'user_id': raw_sin.user.id,
+                    'status_id': raw_sin.status.id
                 }
                 logger.info('SIN Found!')
             except Sin.DoesNotExist:

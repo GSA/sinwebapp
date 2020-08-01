@@ -30,14 +30,14 @@ source "$SCRIPT_DIR/../util/logging.sh"
 # CloudFoundry OAuth Parameters
 LOGIN_REDIRECT="auth"
 LOGOUT_REDIRECT="logout"
-OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"https://$1/$LOGIN_REDIRECT/\",\"https://$1/$LOGOUT_REDIRECT\"]}"
+OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"https://$1/$LOGIN_REDIRECT\",\"https://$1/$LOGOUT_REDIRECT\"]}"
 
 cd $SCRIPT_DIR/../..
 formatted_print "--> OAUTH_SERVICE_ARG: $OAUTH_SERVICE_ARG" $SCRIPT_NAME
 
 formatted_print '--> Copying Initialization Script Into Application'
 cp $SCRIPT_DIR/../init-app.sh $SCRIPT_DIR/../../sinwebapp/init-app.sh
-mkdir $SCRIPT_DIR/../../sinwebapp/util/ && \
+mkdir -p $SCRIPT_DIR/../../sinwebapp/util/ && \
     cp $SCRIPT_DIR/../util/logging.sh $SCRIPT_DIR/../../sinwebapp/util/logging.sh
 
 
@@ -53,7 +53,6 @@ fi
 
 formatted_print '--> Creating SQL Service' $SCRIPT_NAME
 cf create-service aws-rds medium-psql sin-sql
-formatted_print '--> Waiting For Service Creation'
 
 formatted_print '--> Creating OAuth Client Service' $SCRIPT_NAME
 cf create-service cloud-gov-identity-provider oauth-client sin-oauth
@@ -63,7 +62,7 @@ cf create-service-key sin-oauth sin-key -c "$OAUTH_SERVICE_ARG"
 while [[ "$(cf service sin-sql)" == *"create in progress"* ]]
 do  
     formatted_print '--> Waiting On SQL Service Creation' $SCRIPT_NAME
-    formatted_print '--> SQL Service Status...' $SCRIPT_NAME
+    formatted_print '--> SQL Service Status:' $SCRIPT_NAME
     cf service sin-sql
     sleep 15s
 done
@@ -89,9 +88,11 @@ formatted_print "--> CLIENT_SECRET: $CLIENT_SECRET" $SCRIPT_NAME
 cf set-env sinweb UAA_CLIENT_ID $CLIENT_ID
 cf set-env sinweb UAA_CLIENT_SECRET $CLIENT_SECRET
 # Change these fields to change the superuser!
-cf set-env sinweb DJANGO_SUPERUSER_USERNAME grantmoore
-cf set-env sinweb DJANGO_SUPERUSER_EMAIL grant.moore@gsa.gov
 
-formatted_print '--> Starting App' $SCRIPT_NAME
-cf start sinweb
+source $SCRIPT_DIR/../../env/cloud.sh
+cf set-env sinweb DJANGO_SUPERUSER_USERNAME $DJANGO_SUPERUSER_USERNAME
+cf set-env sinweb DJANGO_SUPERUSER_EMAIL $DJANGO_SUPERUSER_EMAIL
+cf set-env sinweb DJANGO_SUPERUSER_PASSWORD $DJANGO_SUPERUSER_PASSWORD
+
+formatted_print '--> Environment built on the Cloud. Use \e[3mcf-push.sh\e[0m to push application onto the Cloud.'
 

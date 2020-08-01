@@ -1,14 +1,33 @@
 <div *ngIf = "sin_list">
     <div class = "panel panel-default">
         <div class = "panel-heading">Submissions For Review</div>
+
         <div class = "panel-body">
-            <ul>
-                <li *ngFor = "let sin of sin_list">
-                    SIN #: {{ sin.sin_number }}<br>
-                    Status: {{ sin.status_id }}
-                    User: {{ sin.user_ud }}
-                </li>
-            </ul>
+            <p>The following submissions are awaiting review:</p>
         </div>
-    </div>
+        
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>SIN</th>
+                <th>Status</th>
+                <th>User</th>
+                <th>Reviewed</th>
+                <th>Submit Changes</th>
+            </tr>
+            <tr *ngFor = "let sin of sin_list; let i = index;">
+                <td>{{i + 1}}</td>
+                <td>{{sin.sin_number}}</td>
+                <td>{{sin.status_id}} </td>
+                <td>{{sin.user_id}} </td>
+                <td> <input type="checkbox" [(ngModel)] = "reviewed_lookup[i]" (ngModelChange)="change(i)"> </td>
+                <td> 
+                    <button *ngIf = 'changed_lookup[i]' type = "submit" 
+                            (click) = "submitChanges(i)">Submit</button>
+                    <button *ngIf = '!changed_lookup[i]' type = "submit" 
+                            (click) = "submitChanges(i)" disabled>Submit</button>
+                </td>
+            </tr>
+        </table>
+        
 </div>

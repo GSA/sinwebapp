@@ -27,7 +27,7 @@ if [ "$1" == "local" ]
 then
     # set environment variables
     formatted_print '--> Setting Environment Variables' $SCRIPT_NAME
-    sh -ac "$SCRIPT_DIR/../env/local.env"
+    source $SCRIPT_DIR/../env/local.sh
 
     formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/init-scripts.sh

@@ -21,7 +21,10 @@ export class SubmitDisplayComponent implements OnInit {
   constructor(private sin: SinService,
               private logger: LogService) { }
 
-  ngOnInit() { this.submit_SIN; }
+  ngOnInit() { 
+    this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
+    this.submit_SIN; 
+  }
 
   public submitSIN(): void{
     this.sin.postSIN(this.submit_SIN).subscribe((response)=>{

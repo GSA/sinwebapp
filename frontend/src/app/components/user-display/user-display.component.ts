@@ -9,7 +9,9 @@ import { LogService } from 'src/app/services/log.service';
 })
 export class UserDisplayComponent implements OnInit {
 
-  user : User = {
+  private class_name = "UserDisplayComponent";
+
+  public user : User = {
     email: null,
     groups: null
   };
@@ -18,11 +20,13 @@ export class UserDisplayComponent implements OnInit {
                 private logger: LogService) { }
 
   ngOnInit() {
+    this.logger.log('Intializing', `${this.class_name}.ngOnInit`)
     this.getUser()
   }
 
   getUser(): void {
     this.userService.getUser().subscribe((user : User) =>{
+      this.logger.log('User Retrieved', `${this.class_name}.getUser`)
       this.user = user;
     })
   }
