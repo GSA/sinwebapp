@@ -49,7 +49,7 @@ export class ReviewDisplayComponent implements OnInit {
     this.changed_lookup[i] = !this.changed_lookup[i];
   }
 
-  public submitChanges(): void{
+  public submitChanges(i: number): void{
     // todo: post changes to database
   }
 

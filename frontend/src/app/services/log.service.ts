@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LogService {
 
-  public now: Date = new Date();
+  public now: Date;
   public logue : String[] = [];
 
   constructor() { }
