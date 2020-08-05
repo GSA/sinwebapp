@@ -83,6 +83,7 @@ then
     gunicorn core.wsgi:application --workers 3
 elif [ "$1" == "cloud" ]
 then
+    python email_test.py
     formatted_print '--> Deploying Gunicorn Server Onto The Cloud' $SCRIPT_NAME
     gunicorn core.wsgi:application 
 fi
