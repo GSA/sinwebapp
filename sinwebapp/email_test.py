@@ -4,12 +4,12 @@ from debug import DebugLogger
 logger = DebugLogger("email_test").getlogger()
 
 
-gmail_user = "sinweb@cloud.gov" 
+send_user = "sinweb@cloud.gov" 
 #gmail_password = 
-receiver = ['grant.moore@gsa.gov']
+receive_user = ['grant.moore@gsa.gov']
 message = "testing testing 123"
 
-logger.info("Testing email from %s to %s", gmail_user, receiver)
+logger.info("Testing email from %s to %s", send_user, receive_user)
 try:
     logger.info("Opening SMTP connection to smtp.gsa.gov")
     server = smtplib.SMTP("smtp.gsa.gov")
@@ -17,7 +17,7 @@ try:
         #server.ehlo()
         #server.login(gmail_user, gmail_password)
     logger.info("Sending mail")
-    server.sendmail(gmail_user, receiver, message)
+    server.sendmail(send_user, receive_user, message)
     logger.info("Closing SMTP connection to smtp.gsa.gov")
     server.close()
 
