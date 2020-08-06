@@ -66,6 +66,7 @@ export class SubmitDisplayComponent implements OnInit {
   public selectSIN(sin: SIN){
     this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
     this.selected_SIN = sin;
+    this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`)
     this.selection_event.emit(sin);
   }
   
