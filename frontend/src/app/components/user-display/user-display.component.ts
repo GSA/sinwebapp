@@ -46,7 +46,7 @@ export class UserDisplayComponent implements OnInit {
     this.selected_SIN = sin;
     this.logger.log('Retrieving User From SIN #', `${this.class_name}.selectSIN`)
     this.userService.getSINUser(sin.user_id).subscribe( (user)=>{
-      this.logger.log(`User Retrieved from SIN #: ${user.email}`, `${this.class_name}.selectSIN`)
+      this.logger.log(`User Retrieved For User: ${user.email}`, `${this.class_name}.selectSIN`)
       this.selected_User = user;
     })
 
