@@ -13,7 +13,7 @@ from debug import DebugLogger
 # 
 # Description: retrieves user associated with request
 def user_info(request):
-    logger = DebugLogger("sinwebapp.api.views.get_user_info").get_logger()
+    logger = DebugLogger("sinwebapp.api.views.user_info").get_logger()
     logger.info('Retrieving User Info...')
     logger.info('Request Email: %s', request.user.email)
     logger.info('Request User Groups: %s', request.user.groups)
@@ -29,6 +29,34 @@ def user_info(request):
         response = { 'message': "No User Signed In" }
 
     return JsonResponse(response, safe=False)
+
+# GET: /api/sinUser?user_id=123
+#
+# Description: Retrieved information about a given user based on
+# the provided id.
+@login_required
+def sin_user_info(request):
+    logger = DebugLogger("sinwebapp.api.views.sin_user_info").get_logger()
+
+    if 'user_id' in request.GET:
+        user_id = request.GET.get('user_id')
+        logger.info('Using User ID Query Parameter: %s', user_id)
+        try:
+            raw_user = User.objects.get(id=user_id)
+            logger.info('User Found!')
+            retrieved_user = {
+                'id': user_id,
+                'email': raw_user.email,
+                'groups': raw_user.groups
+            }
+        except User.DoesNotExist:
+            retrieved_user = { 'message': 'User Does Not Exist' }
+            logger.warning('User Not Found!')
+    else:
+        retrieved_user ={ 'message': 'Input Error' }
+        logger.info('No Query Parameters Provided')
+
+    return JsonResponse(retrieved_user, safe=False)
 
 # GET: /api/sin?id=123456 { body: empty }
 # POST: /api/sin { body: new SIN }
@@ -51,7 +79,7 @@ def sin_info(request):
             email = request.user.email
             logger.info('User Posting: %s', email)
         else:
-            logger.info('No User Associated With Incoming Request')
+            logger.warning('No User Associated With Incoming Request')
             return JsonResponse({ 'error': 'No User Signed In.' })
  
         body_unicode = request.body.decode('utf-8')
@@ -72,7 +100,7 @@ def sin_info(request):
                 # STATUS STATES:  
                 # 1 = submitted, 2 = reviewed, 3 = change
                 # 4 = approved, 5 = denied, 6 = expired
-                logger.warn('Existing SIN Cannot Be Modified')
+                logger.warning('Existing SIN Cannot Be Modified')
                 return JsonResponse({ 'error': 'Existing SIN # Still In Process.' })
                 
             else:
@@ -94,12 +122,12 @@ def sin_info(request):
             
     # retrieving information on a specific SIN
     if request.method == "GET":
-        logger.info('Retrieving SIN Info...')
+        logger.info('Retrieving SIN Info')
 
         if 'id' in request.GET:
             sin=request.GET.get('id')
-            logger.info('SIN Number: %s', sin)
-           
+            logger.info('Using ID Query Parameter: %s', sin)
+
             try:
                 raw_sin = Sin.objects.get(sin_number=sin)
                 retrieved_sin = {
@@ -111,23 +139,40 @@ def sin_info(request):
                 logger.info('SIN Found!')
             except Sin.DoesNotExist:
                 retrieved_sin = { 'message': 'SIN Does Not Exist' }
-                logger.info('SIN Not Found!')
+                logger.warning('SIN Not Found!')
 
         elif 'user_email' in request.GET:
             user_email = request.GET.get('user_email')
-            search_user = User.objects.get(email=user_email)
-            retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+            logger.info('Using User Email Query Parameter: %s', user_email)
+            try:
+                search_user = User.objects.get(email=user_email)
+                logger.info('User Found!')
+                retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+            except User.DoesNotExist:
+                retrieved_sin = { 'message': 'User Does Not Exist'}
+                logger.warning('User Not Found!')
 
         elif 'user_id' in request.GET:
             user_id = request.GET.get('user_id')
-            search_user = User.objects.get(id=user_id)
-            retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+            logger.info('Using User Id Query Parameter: %s', user_id)
+            try:
+                search_user = User.objects.get(id=user_id)
+                logger.info('User Found!')
+                retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+            except User.DoesNotExist:
+                retrieved_sin = {'message': 'User Does Not Exist'}
+                logger.warning('User Not Found!')
 
         elif 'status' in request.GET:
-            user_status = request.GET.get('status')   
-            search_status = Status.objects.get(id=user_status)
-            retrieved_sin = list(Sin.objects.filter(status=search_status).values()) 
-
+            user_status = request.GET.get('status') 
+            logger.info('Using Status Query Parameter: %s', user_status)
+            try:  
+                search_status = Status.objects.get(id=user_status)
+                logger.info('Status Found!')
+                retrieved_sin = list(Sin.objects.filter(status=search_status).values()) 
+            except User.DoesNotExist:
+                retrieved_sin = { 'message': 'Status Does Not Exist' }
+                logger.warning('Status Not Found!')
         else:
             retrieved_sin ={ 'message': 'Input Error' }
             logger.info('No Query Parameters Provided')

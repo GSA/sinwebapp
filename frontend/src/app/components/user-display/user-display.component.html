@@ -45,8 +45,15 @@
       </div>
 
       <div class = "col-md-2">
-        Placeholder for second menu<br>
-        <span *ngIf= "selected_SIN"> {{selected_SIN.sin_number}} </span>
+        <div class = "panel panel-default">
+          <div class="panel-heading">Selected SIN Details</div>
+          <div *ngIf = "selected_SIN" class="panel-body">
+            SIN #: {{selected_SIN.sin_number}}<br>
+            Status: {{selected_SIN.status}}<br>
+            Submitted By: {{selected_User.user_email}}<br>
+            Submitted To: !TODO!<br>
+          </div>
+        </div>
       </div>
 
     </div>

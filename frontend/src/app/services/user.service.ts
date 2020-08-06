@@ -24,6 +24,12 @@ export class UserService {
           );
   }
 
+  public getSINUser(id: Number): Observable<User>{
+    return this.http.get<User>(this.context.getSINUserUrl(id).toString()).pipe(
+            tap(()=>{ this.logger.log('Retrieving User', `${this.class_name}.getSINUser`); }),
+            catchError(this.handleError<User>("getUser"))
+    )
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

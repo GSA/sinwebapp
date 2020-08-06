@@ -20,6 +20,10 @@ export class ContextService {
     return `${Context.USER_ENDPOINT}`
   }
 
+  public getSINUserUrl(id: Number): String{
+    return `${Context.SIN_USER_ENDPOINT}?${Context.SIN_USER_PARAM_ID}=${id}`
+  }
+
   public postSINUrl() : String {
     return `${Context.SIN_ENDPOINT}/`
   }
