@@ -3,8 +3,7 @@
 ## $2: The name of the script from which the message originated
 
 ### DESCRIPTION
-## Prints the inputted message with the current time and with
-## text formatting. 
+## Prints the inputted message with the current time and text formatting. 
 formatted_print(){
     echo -e "\e[92m$(date +"%r")\e[0m: \e[4;32m$2\e[0m : $1"
 }

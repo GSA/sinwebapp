@@ -1,3 +1,6 @@
+# Script to tear down existing SQL service on your CloudFoundry (Organization, Space)
+# and create a new one.
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='reset-sql-service.sh'
 source "$SCRIPT_DIR/util/logging.sh"
@@ -17,3 +20,5 @@ do
     cf service sin-sql
     sleep 15s
 done
+
+formatted_print '--> SQL Service Created' $SCRIPT_NAME

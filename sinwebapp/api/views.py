@@ -245,4 +245,4 @@ def status_info_all(request):
         retrieved_statues = { 'message' : '0 Statuses Found' }
         logger.info('Statuses No Found!')
         
-    return JsonResponse(retrieved_statuses, safe=false)
+    return JsonResponse(retrieved_statuses, safe=False)
