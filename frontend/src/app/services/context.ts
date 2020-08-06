@@ -9,6 +9,8 @@ export enum Context{
         SIN_PARAM_STATUS = "status",
         SIN_PARAM_EMAIL = "user_email",
     SINS_ENDPOINT = "api/sins",
-    STATUS_ENDPOINT = "api/status"
+    STATUS_ENDPOINT = "api/status",
+        STATUS_PARAM_ID = "status_id",
+    STATUSES_ENDPOINT = "api/statuses"
 
 }

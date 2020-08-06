@@ -5,6 +5,8 @@ import { LogService } from 'src/app/services/log.service';
 import { null_SIN, SIN } from 'src/app/models/sin';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { SinService } from 'src/app/services/sin.service';
+import { StatusService } from 'src/app/services/status.service';
+import { Status } from 'src/app/models/status';
 
 @Component({
   selector: 'app-user-display',
@@ -17,13 +19,18 @@ export class UserDisplayComponent implements OnInit {
   public user : User = null_User;
   public selected_User: User = null_User;
   public selected_SIN: SIN = null_SIN;
+  public status_lookup: Status[] = [];
 
   constructor(private userService: UserService,
+                private statusService: StatusService,
                 private logger: LogService) { }
 
   ngOnInit() {
     this.logger.log('Intializing', `${this.class_name}.ngOnInit`)
     this.getUser()
+    this.statusService.getStatuses().subscribe( (statuses)=>{
+      this.status_lookup = statuses;
+    })
   }
 
   public getUser(): void {

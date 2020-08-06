@@ -206,14 +206,14 @@ def sin_info_all(request):
 # Description: retrieves information for a specific Status
 @login_required
 def status_info(request):
-    logger = DebugLogger("sinwebapp.api.views.get_status_info").get_logger()
-    logger.info('Retrieving Status Info...')
+    logger = DebugLogger("sinwebapp.api.views.status_info").get_logger()
+    logger.info('Retrieving Status Info')
 
-    status_id=request.GET.get('id','')
-    logger.info('Status Id: %s', status_id)
+
 
     if 'id' in request.GET:
-
+        status_id=request.GET.get('status_id')
+        logger.info('Using Status Id Query Parameter: %s', status_id)
         try:
             raw_status = Status.objects.get(id=status_id)
             retrieved_status = {
@@ -229,3 +229,20 @@ def status_info(request):
         logger.info('Parameter Not Provided')
 
     return JsonResponse(retrieved_status, safe=False)
+
+@login_required
+def status_info_all(request):
+    logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
+    logger.info('Retrieving All Statuses')
+
+    try:
+        retrieved_statuses = list(Status.objects.values())
+        logger.info('Statuses Found!')
+    except Status.DoesNotExist:
+        retrieved_statuses = {'message': 'Statuses Do Not Exist'}
+        logger.info('Statuses Not Found!')
+    if len(retrieved_statuses)==0:
+        retrieved_statues = { 'message' : '0 Statuses Found' }
+        logger.info('Statuses No Found!')
+        
+    return JsonResponse(retrieved_statuses, safe=false)

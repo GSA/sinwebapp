@@ -1,4 +1,4 @@
-<div class = "panel panel-default">
+<div *ngIf = "status_lookup.length > 0" class = "panel panel-default">
 
     <div class = "panel-heading">SIN Submissions</div>
     <!--Status Mode Panel-->
@@ -15,7 +15,7 @@
                 (click) = "selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
-                <td>{{sin.status_id}} </td>
+                <td>{{this.status_lookup[this.sin.status_id]}} </td>
                 <td>todo: EDIT</td>
             </tr>
         </table>

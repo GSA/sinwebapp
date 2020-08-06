@@ -3,6 +3,8 @@ import { SinService } from 'src/app/services/sin.service';
 import { SIN, null_SIN } from 'src/app/models/sin';
 import { LogService } from 'src/app/services/log.service';
 import { User } from 'src/app/models/user';
+import { Status } from 'src/app/models/status';
+import { StatusService } from 'src/app/services/status.service';
 
 
 
@@ -19,23 +21,28 @@ export class SubmitDisplayComponent implements OnInit {
   public submit_SIN : SIN = null_SIN;
   public selected_SIN: SIN = null_SIN;
   public user_SINs: SIN[] =[];
+  public status_lookup: Status[] = [];
   @Input() 
   public user: User;
   @Output() 
   public selection_event = new EventEmitter<SIN>();
 
 
-  constructor(private sin: SinService,
+  constructor(private sinService: SinService,
+              private statusService: StatusService,
               private logger: LogService) { }
 
   ngOnInit() { 
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
     this.loadUserSINs();
+    this.statusService.getStatuses().subscribe( (statuses) => {
+      this.status_lookup = statuses;
+    })
   }
 
   public submitSIN(): void{
     this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`)
-    this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
+    this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
       this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
       this.submit_SIN = null_SIN;
       this.switchModes();
@@ -44,7 +51,7 @@ export class SubmitDisplayComponent implements OnInit {
 
   public loadUserSINs(): void{
     this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`)
-    this.sin.getUserSINs(this.user).subscribe( (sins)=>{
+    this.sinService.getUserSINs(this.user).subscribe( (sins)=>{
       this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`)
       this.user_SINs = sins;
     })

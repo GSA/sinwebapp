@@ -44,4 +44,11 @@ export class ContextService {
     return `${Context.SINS_ENDPOINT}`
   }
 
+  public getStatusUrl(id: Number): String{
+    return `${Context.STATUS_ENDPOINT}?${Context.STATUS_PARAM_ID}=${id}`
+  }
+
+  public getStatusesUrl(): String{
+    return `${Context.STATUSES_ENDPOINT}`
+  }
 }

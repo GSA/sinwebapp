@@ -50,7 +50,7 @@ export class SinService {
                       );
   }
 
-  public getStatusSINs(id: number){
+  public getStatusSINs(id: number): Observable<SIN[]>{
     return this.http.get<SIN[]>(this.context.getSINByStatusUrl(id).toString()).pipe(
                       tap( () => { this.logger.log(`Fetching All SINs With Status ID: #${id}`, 
                                                     `${this.class_name}.getStatusSINs`)}),

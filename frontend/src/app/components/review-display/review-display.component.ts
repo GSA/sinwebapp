@@ -2,8 +2,9 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SinService } from 'src/app/services/sin.service';
 import { LogService } from 'src/app/services/log.service';
 import { SIN, null_SIN } from 'src/app/models/sin';
-import { STATUS_STATE } from '../../models/status'
+import { STATUS_STATE, Status } from '../../models/status'
 import { User } from 'src/app/models/user';
+import { StatusService } from 'src/app/services/status.service';
 
 @Component({
   selector: 'app-review-display',
@@ -16,23 +17,27 @@ export class ReviewDisplayComponent implements OnInit {
   public reviewed_lookup: boolean[] = [];
   public changed_lookup: boolean[] = [];
   public selected_SIN: SIN = null_SIN;
+  public status_lookup: Status[] = [];
   @Output() selection_event = new EventEmitter<SIN>();
-
   // review and approve functionality are similar, so 
   // reuse component with flag to differentiate behavior
   @Input() approver: boolean;
   @Input() user: User;
 
-  constructor(private sin: SinService,
+  constructor(private sinService: SinService,
+              private statusService: StatusService,
               private logger: LogService) { }
 
   ngOnInit() {
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
     this.loadSINs();
+    this.statusService.getStatuses().subscribe( (statuses) => {
+      this.status_lookup = statuses;
+    })
   }
 
   private loadSINs(): void{
-    this.sin.getSINs().subscribe(sins => {
+    this.sinService.getSINs().subscribe(sins => {
       this.logger.log('SINs Retrieved', `${this.class_name}.loadSINs`)
       this.sin_list=sins;
       this.logger.log('Initializing Component Controls', `${this.class_name}.loadSINs`)
