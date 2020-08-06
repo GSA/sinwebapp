@@ -55,7 +55,7 @@
               below conditional on status existing until the bug can be resolved-->
           <div *ngIf = "selected_SIN.status_id && status_lookup.length > 0" class="panel-body">
             SIN #:<br> <span class = "right">{{this.selected_SIN.sin_number}}</span><br>
-            Status:<br> <span class = "right">{{this.status_lookup[this.selected_SIN.status_id].name}}</span><br>
+            Status:<br> <span class = "right">{{this.status_lookup[this.selected_SIN.status_id-1].name}}</span><br>
             Submitted By:<br> <span class = "right">{{this.selected_User.email}}</span><br>
             Submitted To:<br> <span class = "right">!TODO!</span><br>
           </div>
