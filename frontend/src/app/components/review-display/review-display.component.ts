@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SinService } from 'src/app/services/sin.service';
 import { LogService } from 'src/app/services/log.service';
-import { SIN } from 'src/app/models/sin';
+import { SIN, null_SIN } from 'src/app/models/sin';
 import { STATUS_STATE } from '../../models/status'
 import { User } from 'src/app/models/user';
 
@@ -15,6 +15,8 @@ export class ReviewDisplayComponent implements OnInit {
   public sin_list : SIN[];
   public reviewed_lookup: boolean[] = [];
   public changed_lookup: boolean[] = [];
+  public selected_SIN: SIN = null_SIN;
+  @Output() selection_event = new EventEmitter<SIN>();
 
   // review and approve functionality are similar, so 
   // reuse component with flag to differentiate behavior
@@ -49,6 +51,13 @@ export class ReviewDisplayComponent implements OnInit {
                       `${this.class_name}.loadSINs`)
     this.reviewed_lookup[i] = !this.reviewed_lookup[i];
     this.changed_lookup[i] = !this.changed_lookup[i];
+  }
+
+  public selectSIN(sin: SIN){
+    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
+    this.selected_SIN = sin;
+    this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`)
+    this.selection_event.emit(sin);
   }
 
   public submitChanges(i: number): void{

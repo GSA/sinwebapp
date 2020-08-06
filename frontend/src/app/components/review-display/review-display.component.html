@@ -15,7 +15,9 @@
                 <th>Reviewed</th>
                 <th>Submit Changes</th>
             </tr>
-            <tr *ngFor = "let sin of sin_list; let i = index;">
+            <tr *ngFor = "let sin of sin_list; let i = index;"
+                [class.selected] = "sin === selected_SIN"
+                (click) ="selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
                 <td>{{sin.status_id}} </td>

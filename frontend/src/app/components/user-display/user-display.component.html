@@ -37,10 +37,12 @@
                               (selection_event)="selectSIN($event)"></app-submit-display>
         </div>
         <div *ngIf = "user.groups.includes('approver_group')">
-          <app-review-display approver="true" [user] = "user"></app-review-display>
+          <app-review-display approver="true" [user] = "user"
+                              (selection_event)="selectSIN($event)"></app-review-display>
         </div>
         <div *ngIf = "user.groups.includes('reviewer_group')">
-          <app-review-display approver="false" [user] = "user"></app-review-display>
+          <app-review-display approver="false" [user] = "user"
+                              (selection_event)="selectSIN($event)"></app-review-display>
         </div>
       </div>
 
