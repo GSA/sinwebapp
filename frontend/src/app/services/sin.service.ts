@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { User } from '../models/user';
-import { ContextService } from './context.service';
 import { catchError, map, tap } from 'rxjs/operators';
-import { SIN } from '../models/sin';
-import { LogService } from './log.service';
 import { CookieService } from 'ngx-cookie-service'; 
+
+import { LogService } from './log.service';
+import { ContextService } from './context.service';
+import { User } from '../models/user';
+import { Status } from '../models/status';
+import { SIN } from '../models/sin';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,22 @@ export class SinService {
                     tap(()=>{ this.logger.log( "Retrieving All SINs", `${this.class_name}.getSINs`);}),
                     catchError(this.handleError('getSINs', []))
                     );
+  }
+
+  public getUserSINs(user : User): Observable<SIN[]>{
+    let user_url = this.context.getSINByEmailUrl(user.email).toString()
+    return this.http.get<SIN[]>(this.context.getSINByEmailUrl(user.email).toString()).pipe(
+                      tap( () => { this.logger.log(`Fetching All SINs From ${user.email}`, `${this.class_name}.getUserSINs`)}),
+                      catchError(this.handleError('getUserSINS',[]))
+                      );
+  }
+
+  public getStatusSINs(id: number){
+    return this.http.get<SIN[]>(this.context.getSINByStatusUrl(id).toString()).pipe(
+                      tap( () => { this.logger.log(`Fetching All SINs With Status ID #${id}`, 
+                                                    `${this.class_name}.getStatusSINs`)}),
+                      catchError(this.handleError('getStatusSINS',[]))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

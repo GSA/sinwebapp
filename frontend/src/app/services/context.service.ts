@@ -25,7 +25,16 @@ export class ContextService {
   }
 
   public getSINUrl(): String{
-    return `${Context.SIN_ENDPOINT}`
+    return `${Context.SIN_ENDPOINT}`;
+  }
+
+  public getSINByEmailUrl(email: String): String {
+    return `${Context.SIN_ENDPOINT}?${Context.SIN_PARAM_EMAIL}=${email}`
+  }
+
+  public getSINByStatusUrl(status: Number){
+    return `${Context.SIN_ENDPOINT}?${Context.SIN_PARAM_STATUS}=${status}`
+
   }
 
   public getSINsUrl(): String {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
+import { User, null_User } from '../../models/user';
 import { UserService } from '../../services/user.service'
 import { LogService } from 'src/app/services/log.service';
 
@@ -11,10 +11,7 @@ export class UserDisplayComponent implements OnInit {
 
   private class_name = "UserDisplayComponent";
 
-  public user : User = {
-    email: null,
-    groups: null
-  };
+  public user : User = null_User
 
   constructor(private userService: UserService,
                 private logger: LogService) { }

@@ -1,6 +1,13 @@
 export interface Status{
+    id: number,
     name: string,
     description: string,
+}
+
+export const null_Status: Status = {
+    id: null,
+    name: null,
+    description: null
 }
 
 export const STATUS_STATE = {

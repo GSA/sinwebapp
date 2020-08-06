@@ -14,7 +14,7 @@ try:
     logger.info("Opening SMTP connection to smtp.gsa.gov")
     server = smtplib.SMTP(host='smtp.gsa.gov', port=25, timeout=30)
     server.ehlo()
-        #server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        #server = smtplib.SMTP_SSL('smtp.gsa.gov', 465)
         #server.login(send_user, send_user_password)
     logger.info("Sending mail")
     server.sendmail(send_user, receive_user, message)
