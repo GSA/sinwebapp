@@ -90,7 +90,7 @@ def sin_info(request):
 
         # create submitted status
         new_status = Status.objects.get(id=1)
-        logger.info('Status Posting: %s', new_status.status)
+        logger.info('Status Posting: %s', new_status.name)
 
         # verify sin is not already active
         logger.info('Attempting To Post...')
