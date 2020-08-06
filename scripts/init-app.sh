@@ -78,7 +78,7 @@ then
 elif [ "$1" == "cloud" ]
 then
     formatted_print '--> Testing Email Service' $SCRIPT_NAME
-    python email_test.py
+    # python email_test.py
     formatted_print '--> Deploying Gunicorn Server Onto The Cloud' $SCRIPT_NAME
     gunicorn core.wsgi:application 
 fi
