@@ -7,4 +7,14 @@
   overflow-y: auto;
   height: 300px;
 }
+.right{
+  float:right;
+}
+.lefT{
+  float:left;
+}
+.selected{
+  background-color: #98afb9;
+  color: white;
+}
 

@@ -45,14 +45,14 @@ export class SinService {
   public getUserSINs(user : User): Observable<SIN[]>{
     let user_url = this.context.getSINByEmailUrl(user.email).toString()
     return this.http.get<SIN[]>(this.context.getSINByEmailUrl(user.email).toString()).pipe(
-                      tap( () => { this.logger.log(`Fetching All SINs From ${user.email}`, `${this.class_name}.getUserSINs`)}),
+                      tap( () => { this.logger.log(`Fetching All SINs For User: ${user.email}`, `${this.class_name}.getUserSINs`)}),
                       catchError(this.handleError('getUserSINS',[]))
                       );
   }
 
   public getStatusSINs(id: number){
     return this.http.get<SIN[]>(this.context.getSINByStatusUrl(id).toString()).pipe(
-                      tap( () => { this.logger.log(`Fetching All SINs With Status ID #${id}`, 
+                      tap( () => { this.logger.log(`Fetching All SINs With Status ID: #${id}`, 
                                                     `${this.class_name}.getStatusSINs`)}),
                       catchError(this.handleError('getStatusSINS',[]))
     );

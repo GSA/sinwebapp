@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     Observable<HttpEvent<any>> {
     
       this.logger.log(`Intercepting Request: ${req.url}`, `${this.class_name}.intercept`)
-      this.logger.log(`Appending Django Credentials...`, `${this.class_name}.intercept`)
+      this.logger.log(`Appending Django Credentials`, `${this.class_name}.intercept`)
       req = req.clone({
         withCredentials: true
       });

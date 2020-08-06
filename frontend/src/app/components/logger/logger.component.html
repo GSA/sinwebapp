@@ -4,7 +4,7 @@
             <input type="checkbox" [(ngModel)] = "display"> Display
         </span>
     </div>
-    <div *ngIf = 'display' class = "panel-body">
-        <span *ngFor = "let msg of log" class ="vertical-scroll-sm">{{msg}}<br></span>
+    <div *ngIf = 'display' class = "panel-body vertical-scroll-sm">
+        <span *ngFor = "let msg of log">{{msg}}<br></span>
     </div>
 </div>

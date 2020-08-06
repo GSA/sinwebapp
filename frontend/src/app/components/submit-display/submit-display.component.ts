@@ -17,6 +17,7 @@ export class SubmitDisplayComponent implements OnInit {
   // true = submit mode, false = status mode
   public whichMode : boolean = false;
   public submit_SIN : SIN = null_SIN;
+  public selected_SIN: SIN = null_SIN;
   public user_SINs: SIN[] =[];
   @Input() user: User;
 
@@ -38,6 +39,14 @@ export class SubmitDisplayComponent implements OnInit {
     })
   }
 
+  public loadUserSINs(): void{
+    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`)
+    this.sin.getUserSINs(this.user).subscribe( (sins)=>{
+      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`)
+      this.user_SINs = sins;
+    })
+  }
+  
   public switchModes(): void{
     this.logger.log('Switching Modes', `${this.class_name}.switchModes`)
     this.whichMode = !this.whichMode;
@@ -46,16 +55,14 @@ export class SubmitDisplayComponent implements OnInit {
       this.loadUserSINs();
     }
     else{ 
+      this.submit_SIN = null_SIN;
       this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
     }
   }
 
-  public loadUserSINs(): void{
-    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`)
-    this.sin.getUserSINs(this.user).subscribe( (sins)=>{
-      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`)
-      this.user_SINs = sins;
-    })
+  public selectSIN(sin: SIN){
+    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
+    this.selected_SIN = sin;
   }
   
 }

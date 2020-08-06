@@ -10,25 +10,27 @@
                 <th>Status</th>
                 <th>Edit</th>
             </tr>
-            <tr *ngFor = "let sin of user_SINs; let i = index;">
+            <tr *ngFor = "let sin of user_SINs; let i = index;" 
+                [class.selected] = "sin === selected_SIN"
+                (click) = "selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
                 <td>{{sin.status_id}} </td>
                 <td>todo: EDIT</td>
             </tr>
         </table>
-        <button type="submit" style = "float:right;" class = "btn btn-default btn-sm" 
+        <button type="submit" class = "btn btn-default btn-sm right" 
                 (click) = "switchModes()">Create New Submission</button>
     </div>
 
     <!-- Submit Mode Panel-->
     <div *ngIf = "whichMode" class = "panel-body">
         <label> SIN: <input [(ngModel)] = "submit_SIN.sin_number" type = "text"    
-                                placeholder = "Type SIN # Here"> </label>
+                                placeholder = "Type SIN # Here"> </label><br>
 
-        <button *ngIf="submit_SIN.sin_number" class = "btn btn-default btn-sm"
+        <button *ngIf="submit_SIN.sin_number" class = "btn btn-default btn-sm right"
                 type = "Submit" (click)="submitSIN()">Submit</button>
-        <button *ngIf="!submit_SIN.sin_number" class = "btn btn-default btn-sm"
+        <button *ngIf="!submit_SIN.sin_number" class = "btn btn-default btn-sm right"
                 type = "Submit" disabled>Submit</button><br><br>
     </div>
 
