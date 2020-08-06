@@ -16,9 +16,8 @@ export class SubmitDisplayComponent implements OnInit {
 
   // true = submit mode, false = status mode
   public whichMode : boolean = false;
-  public submitted : boolean = false;
   public submit_SIN : SIN = null_SIN;
-  public user_SINS: SIN[] =[];
+  public user_SINs: SIN[] =[];
   @Input() user: User;
 
 
@@ -31,23 +30,31 @@ export class SubmitDisplayComponent implements OnInit {
   }
 
   public submitSIN(): void{
+    this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`)
     this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
-      this.logger.log('SIN Posted', `${this.class_name}.submitSIN`)
+      this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
       this.submit_SIN = null_SIN;
-      this.submitted = true;
       this.whichMode = false;
     })
   }
 
-  public changeModes(): void{
+  public switchModes(): void{
+    this.logger.log('Switching Modes', `${this.class_name}.switchModes`)
     this.whichMode = !this.whichMode;
-    if(!this.whichMode){ this.loadUserSINs();}
+    if(!this.whichMode){ 
+      this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`)
+      this.loadUserSINs();
+    }
+    else{ 
+      this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
+    }
   }
 
   public loadUserSINs(): void{
+    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`)
     this.sin.getUserSINs(this.user).subscribe( (sins)=>{
-      this.logger.log('User SINS Retrieved', `${this.class_name}.loadUserSINs`)
-      this.user_SINS = sins;
+      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`)
+      this.user_SINs = sins;
     })
   }
   
