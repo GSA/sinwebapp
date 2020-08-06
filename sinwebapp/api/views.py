@@ -43,11 +43,12 @@ def sin_user_info(request):
         logger.info('Using User ID Query Parameter: %s', user_id)
         try:
             raw_user = User.objects.get(id=user_id)
+            group_list = list(raw_user.groups.values_list('name', flat=True))
             logger.info('User Found!')
             retrieved_user = {
                 'id': user_id,
                 'email': raw_user.email,
-                'groups': raw_user.groups
+                'groups': group_list
             }
         except User.DoesNotExist:
             retrieved_user = { 'message': 'User Does Not Exist' }

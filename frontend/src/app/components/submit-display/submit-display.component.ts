@@ -60,6 +60,7 @@ export class SubmitDisplayComponent implements OnInit {
     else{ 
       this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
       this.submit_SIN = null_SIN;
+      this.selected_SIN = null_SIN;
     }
   }
 
