@@ -1,4 +1,6 @@
 *.venv
 *.pyc
 sinwebapp/static/*
+sinwebapp/util/*
+sinwebapp/init-app.sh
 frontend/node_modules/*
