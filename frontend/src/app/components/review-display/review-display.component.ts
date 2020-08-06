@@ -3,6 +3,7 @@ import { SinService } from 'src/app/services/sin.service';
 import { LogService } from 'src/app/services/log.service';
 import { SIN } from 'src/app/models/sin';
 import { STATUS_STATE } from '../../models/status'
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-review-display',
@@ -18,6 +19,7 @@ export class ReviewDisplayComponent implements OnInit {
   // review and approve functionality are similar, so 
   // reuse component with flag to differentiate behavior
   @Input() approver: boolean;
+  @Input() user: User;
 
   constructor(private sin: SinService,
               private logger: LogService) { }

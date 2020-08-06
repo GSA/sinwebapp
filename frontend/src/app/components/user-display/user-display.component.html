@@ -26,13 +26,13 @@
       <div class = "col-md-5">
 
         <div *ngIf = "user.groups.includes('submitter_group')">
-          <app-submit-display></app-submit-display>
+          <app-submit-display [user] = "user" ></app-submit-display>
         </div>
         <div *ngIf = "user.groups.includes('approver_group')">
-          <app-review-display approver="true"></app-review-display>
+          <app-review-display approver="true" [user] = "user"></app-review-display>
         </div>
         <div *ngIf = "user.groups.includes('reviewer_group')">
-          <app-review-display approver="false"></app-review-display>
+          <app-review-display approver="false" [user] = "user"></app-review-display>
         </div>
       </div>
 

@@ -1,9 +1,14 @@
 <div class = "panel panel-default">
 
     <div class = "panel-heading">SIN Submission Form</div>
-    <div class = "panel-body">
-        <label> SIN: <input [(ngModel)] = "submit_SIN.sin_number" type = "text" 
-                                (focus)="clear()"   
+    <!--Status Mode Panel-->
+    <div *ngIf ="!whichMode" class = "panel-body">
+
+    </div>
+
+    <!-- Submit Mode Panel-->
+    <div *ngIf = "whichMode" class = "panel-body">
+        <label> SIN: <input [(ngModel)] = "submit_SIN.sin_number" type = "text"    
                                 placeholder = "Type SIN # Here"> </label>
 
         <button *ngIf="submit_SIN.sin_number" type = "Submit" 

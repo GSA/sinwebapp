@@ -34,7 +34,6 @@ export class ContextService {
 
   public getSINByStatusUrl(status: Number){
     return `${Context.SIN_ENDPOINT}?${Context.SIN_PARAM_STATUS}=${status}`
-
   }
 
   public getSINsUrl(): String {
