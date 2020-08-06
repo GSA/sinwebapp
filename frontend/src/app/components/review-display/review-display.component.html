@@ -1,6 +1,6 @@
 <div *ngIf = "sin_list && status_lookup.length > 0">
     <div class = "panel panel-default">
-        <div class = "panel-heading">Submissions For Review</div>
+        <div class = "panel-heading">Submission Review</div>
 
         <div class = "panel-body">
             <p>The following submissions are awaiting review:</p>
@@ -20,7 +20,7 @@
                 (click) ="selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
-                <td>{{this.status_lookup[this.sin.status_id]}} </td>
+                <td>{{this.status_lookup[this.sin.status_id].name}} </td>
                 <td>{{sin.user_id}} </td>
                 <td> <input type="checkbox" [(ngModel)] = "reviewed_lookup[i]" (ngModelChange)="change(i)"> </td>
                 <td> 

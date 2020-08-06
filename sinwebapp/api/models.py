@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import datetime
 
 class Status(models.Model):
-    status = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
     description = models.CharField(max_length=200)
 
 class Sin(models.Model):

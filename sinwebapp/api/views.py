@@ -217,7 +217,8 @@ def status_info(request):
         try:
             raw_status = Status.objects.get(id=status_id)
             retrieved_status = {
-                'status' : raw_status.status,
+                'id': raw_status.id,
+                'name' : raw_status.name,
                 'description': raw_status.description,
             }
             logger.info('Status Found!')
