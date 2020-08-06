@@ -49,7 +49,11 @@
       <div class = "col-md-2">
         <div class = "panel panel-default">
           <div class="panel-heading">Selected SIN Details</div>
-          <div *ngIf = "selected_SIN" class="panel-body">
+          <!--for some reason, the selection event is being trigger by the data binding
+              in app-submit-display for the input html component. since the status on a 
+              sin doesn't exist until it's posted in the database, display the component
+              below conditional on status existing-->
+          <div *ngIf = "selected_SIN.status_id" class="panel-body">
             SIN #:<br> <span class = "right">{{selected_SIN.sin_number}}</span><br>
             Status:<br> <span class = "right">{{selected_SIN.status_id}}</span><br>
             Submitted By:<br> <span class = "right">{{selected_User.email}}</span><br>

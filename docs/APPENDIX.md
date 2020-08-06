@@ -7,10 +7,9 @@
 - [x] determine how to protect certain endpoints from unauthenticated individuals
 - [x] create users with roles in database
 - [x] integrate angular frontend application with django backend framework
-- [ ] bind roles to html on redirect page after successful login 
+- [x] bind roles to html on redirect page after successful login 
 - [x] create pipeline to build frontend and deploy to cloud
 - [ ] load in database credentials for local deployments through VCAP_SERVICES environment variable to mimic cloud deployments
-- [ ] REMOVE <i>crsf_exempt</i> decorate from POST api endpoints that were put in place to test during development!!!
 
 ## Useful Links
 ### Core Application
@@ -37,6 +36,7 @@
 - [Django: Add User to Group Via Group Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)<br>
 - [Django: Output QuerySet as Json](https://stackoverflow.com/questions/15874233/output-django-queryset-as-json)<br>
 - [Django: CSRF Cookie Not Set](https://stackoverflow.com/questions/17716624/django-csrf-cookie-not-set)<br>
+- [Django: Serializing Objects with Many-to-Many relations](https://stackoverflow.com/questions/34474893/django-serializer-manyrelatedmanager-object-at-xx-is-not-json-serializable)
 - [Angular: withCredentials Header, What Is It?](https://stackoverflow.com/questions/27406994/http-requests-withcredentials-what-is-this-and-why-using-it)<br>
 - [Angular: Service Not Sending XSRF Token Header With HTTP Request](https://stackoverflow.com/questions/50510998/angular-6-does-not-add-x-xsrf-token-header-to-http-request)<br>
 - [Docker: Apt Repository is Not Signed](https://stackoverflow.com/questions/59139453/repository-is-not-signed-in-docker-build)<br>
