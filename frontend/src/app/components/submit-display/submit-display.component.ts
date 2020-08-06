@@ -34,7 +34,7 @@ export class SubmitDisplayComponent implements OnInit {
     this.sin.postSIN(this.submit_SIN).subscribe((response)=>{
       this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
       this.submit_SIN = null_SIN;
-      this.whichMode = false;
+      this.switchModes();
     })
   }
 
