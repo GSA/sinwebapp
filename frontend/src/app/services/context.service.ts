@@ -22,7 +22,6 @@ export class ContextService {
     let url_builder = `${Context.USERS_ENDPOINT}?`;
     let index = 1;
     for(let id of ids){
-      console.log(`getUserUrl: id= ${id}`)
       url_builder = url_builder.concat(`${Context.USERS_PARAM_ID}=${id}`)
       if (index < ids.length){
         url_builder = url_builder.concat('&')

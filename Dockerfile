@@ -29,7 +29,7 @@ WORKDIR /home/
 RUN mkdir /frontend/ && mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
-    mkdir ./static/ && && mkdir ./api/
+    mkdir ./static/ && mkdir ./api/
 
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
