@@ -31,8 +31,11 @@ export class UserService {
     )
   }
 
-  public getUsers(id: Number[]){
-    
+  public getUsers(ids: Number[]): Observable<User[]>{
+    return this.http.get<User[]>(this.context.getUsersUrl(ids).toString()).pipe(
+                      tap(()=>{ this.logger.log('Retrieving Users', `${this.class_name}.getUsers`); }),
+                      catchError(this.handleError<User[]>("getUsers"))
+    )
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -30,12 +30,14 @@ def user_info(request):
 
     return JsonResponse(response, safe=False)
 
-# GET: /api/users?id=1&id=2&id=3
+# GET: /api/users?ids=1&ids=2&ids=3
+#
+# Description: Retrieves an array of users with the ids provided in the array parameter.
 @login_required
 def user_info_filtered(request):
     logger = DebugLogger("sinwebapp.api.views.user_info_filtered").get_logger()
     if 'id' in request.GET:
-        ids = request.GET.getlist('id')
+        ids = request.GET.getlist('ids')
         try:
             retrieved_users = list(User.objects.filter(id__in=ids).values())
             logger.info('Users Found!')
@@ -219,7 +221,7 @@ def sin_info_all(request):
 
     return JsonResponse(retrieved_sins, safe=False)
 
-# GETl /api/status?id=1
+# GET: /api/status?id=1
 # 
 # Description: retrieves information for a specific Status
 @login_required
@@ -249,6 +251,9 @@ def status_info(request):
 
     return JsonResponse(retrieved_status, safe=False)
 
+# GET: /api/statuses
+#
+# Description: Retrieves a list of all Statuses.
 @login_required
 def status_info_all(request):
     logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()

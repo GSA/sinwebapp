@@ -2,6 +2,8 @@ export enum Context{
     CLOUD_URL = "https://sinweb.app.cloud.gov",
     LOCAL_URL ="http://localhost:8000",
     USER_ENDPOINT = "api/user",
+    USERS_ENDPOINT = "api/users",
+        USERS_PARAM_ID = "ids",
     SIN_USER_ENDPOINT = "api/sinUser",
         SIN_USER_PARAM_ID = "user_id",
     SIN_ENDPOINT = "api/sin",

@@ -5,6 +5,7 @@ import { SIN, null_SIN } from 'src/app/models/sin';
 import { STATUS_STATE, Status } from '../../models/status'
 import { User } from 'src/app/models/user';
 import { StatusService } from 'src/app/services/status.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-review-display',
@@ -24,6 +25,7 @@ export class ReviewDisplayComponent implements OnInit {
   
   constructor(private sinService: SinService,
               private statusService: StatusService,
+              private userService: UserService,
               private logger: LogService) { }
 
   ngOnInit() {
@@ -35,6 +37,12 @@ export class ReviewDisplayComponent implements OnInit {
     this.sinService.getSINs().subscribe(sins => {
       this.logger.log('SINs Retrieved', `${this.class_name}.loadComponentData`)
       this.sin_list=sins;
+      let id_list : Number[] = [];
+      for(let sin of sins){ id_list.push(sin.user_id);}
+      this.userService.getUsers(id_list).subscribe( (users) => {
+        this.logger.log('Users Retrieved', `${this.class_name}.loadComponentData`)
+        this.user_lookup = users;
+      })
     })
     this.statusService.getStatuses().subscribe( (statuses) => {
       this.logger.log('Statuses Retrieved', `${this.class_name}.loadComponentData`)

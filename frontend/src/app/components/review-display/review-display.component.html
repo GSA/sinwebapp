@@ -10,18 +10,16 @@
             <tr>
                 <th>#</th>
                 <th>SIN</th>
-                <th>Status</th>
                 <th>User</th>
-                <th>Reviewed</th>
-                <th>Submit Changes</th>
+                <th>Status</th>
             </tr>
             <tr *ngFor = "let sin of sin_list; let i = index;"
                 [class.selected] = "sin === selected_SIN"
                 (click) ="selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
+                <td>{{this.user_lookup[this.sin.user_id-1}].email} </td>
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
-                <td>{{sin.user_id}} </td>
             </tr>
         </table>
         

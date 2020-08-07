@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Context } from './context';
 import { environment } from '../../environments/environment'
-const LOCAL: number = 0
-const CLOUD: number = 1
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +16,19 @@ export class ContextService {
 
   public getUserUrl() : String {
     return `${Context.USER_ENDPOINT}`
+  }
+
+  public getUsersUrl(ids: Number[]): String{
+    let url_builder = `${Context.USERS_ENDPOINT}?`;
+    let index = 1;
+    for(let id in ids){
+      url_builder = url_builder.concat(`${Context.USERS_PARAM_ID}=${id}`)
+      if (index < ids.length){
+        url_builder = url_builder.concat('&')
+        index++;
+      }
+    }
+    return url_builder;
   }
 
   public getSINUserUrl(id: Number): String{
