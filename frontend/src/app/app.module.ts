@@ -11,6 +11,7 @@ import { SubmitDisplayComponent } from './components/submit-display/submit-displ
 import { ReviewDisplayComponent } from './components/review-display/review-display.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoggerComponent } from './components/logger/logger.component';
+import { EditDisplayComponent } from './components/edit-display/edit-display.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoggerComponent } from './components/logger/logger.component';
     UserDisplayComponent,
     SubmitDisplayComponent,
     ReviewDisplayComponent,
-    LoggerComponent
+    LoggerComponent,
+    EditDisplayComponent
   ],
   imports: [
     BrowserModule,

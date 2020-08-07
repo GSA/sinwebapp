@@ -40,8 +40,10 @@ export class ReviewDisplayComponent implements OnInit {
       this.sin_list=sins;
       let id_list : number[] = [];
       for(let sin of sins){ 
-        this.logger.log(`Storing User ID: ${sin.user_id} from SIN # ${sin.sin_number}`, `${this.class_name}.loadComponentData`)
-        if(!id_list.includes(sin.user_id)){ id_list.push(sin.user_id); }
+        if(!id_list.includes(sin.user_id)){ 
+          this.logger.log(`Storing User ID: ${sin.user_id} from SIN # ${sin.sin_number}`, `${this.class_name}.loadComponentData`)
+          id_list.push(sin.user_id); 
+        }
       }
 
       for(let id of id_list){ this.logger.log(`Stored User ID: ${id}`, `${this.class_name}.loadComponentData`) }

@@ -3,8 +3,6 @@ import { User, null_User } from '../../models/user';
 import { UserService } from '../../services/user.service'
 import { LogService } from 'src/app/services/log.service';
 import { null_SIN, SIN } from 'src/app/models/sin';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { SinService } from 'src/app/services/sin.service';
 import { StatusService } from 'src/app/services/status.service';
 import { Status } from 'src/app/models/status';
 
@@ -44,13 +42,24 @@ export class UserDisplayComponent implements OnInit {
   }
 
   public selectSIN(sin: SIN): void{
-    this.logger.log(`Selecting SIN: #${sin.sin_number}`, `${this.class_name}.selectSIN`)
-    this.selected_SIN = sin;
-    this.logger.log('Retrieving User From SIN #', `${this.class_name}.selectSIN`)
-    this.userService.getSINUser(sin.user_id).subscribe( (user)=>{
-      this.logger.log(`User Retrieved For User: ${user.email}`, `${this.class_name}.selectSIN`)
-      this.selected_User = user;
-    })
-
+    if(!this.edit_mode){
+      this.logger.log(`Selecting SIN: #${sin.sin_number}`, `${this.class_name}.selectSIN`)
+      this.selected_SIN = sin;
+      this.logger.log('Retrieving User From SIN #', `${this.class_name}.selectSIN`)
+      this.userService.getSINUser(sin.user_id).subscribe( (user)=>{
+        this.logger.log(`User Retrieved For User: ${user.email}`, `${this.class_name}.selectSIN`)
+        this.selected_User = user;
+      })
+    }
   }
+
+  public switchModes(): void{
+    this.edit_mode = !this.edit_mode
+  }
+
+  public saveSIN(sin: SIN): void{
+    //post to database with SIN service
+  }
+
+  public cancel(msg: String): void{ this.switchModes(); }
 }
