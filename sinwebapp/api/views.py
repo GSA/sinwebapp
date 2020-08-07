@@ -22,6 +22,7 @@ def user_info(request):
 
         group_list = list(request.user.groups.values_list('name',flat = True)) 
         response = {
+                'id': request.user.id,
                 'email': request.user.email,
                'groups': group_list
         } 
@@ -42,7 +43,7 @@ def user_info_filtered(request):
         ids = request.GET.getlist('ids')
         logger.info('Using Query Parameter IDs array: %s', ids)
         try:
-            raw_users = list(User.objects.filter(id__in=ids).values())
+            raw_users = User.objects.filter(id__in=ids).values()
             retrieved_user = []
             for user in raw_users:
                 group_list = list(user.groups.values_list('name', flat=True))
