@@ -13,6 +13,7 @@
 - [x] integrate angular frontend application with django backend framework
 - [x] bind roles to html on redirect page after successful login 
 - [x] create pipeline to build frontend and deploy to cloud
+- [ ] endpoint to update status of existing sin within database
 - [ ] load in database credentials for local deployments through VCAP_SERVICES environment variable to mimic cloud deployments
 
 ## Useful Links
