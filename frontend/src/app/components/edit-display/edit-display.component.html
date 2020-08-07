@@ -5,42 +5,34 @@
             class="right">{{this.edit_SIN.sin_number}}</span><br>
     
     <label for ="new-sin-number">New SIN #: </label>
-    <span id="new-sin-number" 
-            class="right">{{this.buffer_SIN.sin_number}}</span><br>
+    <span *ngIf = "buffer_SIN.sin_number" id="new-sin-number" class="right label label-info">
+            {{this.buffer_SIN.sin_number}}</span><br>
     
     <div class ="input-group">
-        <span class ="input-group-addon">Enter New SIN #:</label>
+        <span class ="input-group-addon">Enter New SIN #</span>
         <input type="text" id ="input-sin-number" class="form-control"
-                placeholder="Enter New SIN # Here"
-                [(ngModel)]="buffer_SIN.sin_number">
+                placeholder="Enter New SIN # Here" [(ngModel)]="buffer_SIN.sin_number">
     </div>
 
     <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group')">
         Status<br> 
         <label for="current-status">Current Status:</label>
-        <span name="current-status" class="right">{{this.status_lookup[this.edit_SIN.status_id-1].name}}</span><br>
+        <span id="current-status" class="right">{{this.status_lookup[this.edit_SIN.status_id-1].name}}</span><br>
 
         <label for="new-status">New Status:</label>
-        <span *ngIf ="buffer_SIN.status_id"
-                name="new-status" 
-                class="right">{{this.status_lookup[this.buffer_SIN.status_id-1].name}}</span><br>
+        <span *ngIf ="buffer_SIN.status_id" id="new-status" class="right label label-info">
+                {{this.status_lookup[this.buffer_SIN.status_id-1].name}}</span><br>
 
         <div class="input-group">
-            <span class="input-group-addon">Select New Status:</span>
-            <select [(ngModel)] = "buffer_SIN.status_id" 
-                    id ="input-status" 
-                    class="form-control">
+            <span class="input-group-addon">Select New Status</span>
+            <select [(ngModel)] = "buffer_SIN.status_id" id ="input-status" class="form-control">
                 <option *ngFor="let status of status_lookup" 
                         [value]="status.id">{{status.name}}</option>
-            </select><br>
+            </select>
         </div>
 
     </div>
 
-    <button type="submit" 
-            class="right"
-            (click)="cancel()">Cancel</button>
-    <button type="submit" 
-            class="right"
-            (click)="save()">Save</button>
+    <button type="submit" class="right btn btn-default btn-sm" (click)="cancel()">Cancel</button>
+    <button type="submit" class="right btn btn-default btn-sm" (click)="save()">Save</button>
 </div>

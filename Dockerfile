@@ -19,14 +19,17 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 RUN npm install -g @angular/cli@8.2.0
 WORKDIR /home/
-RUN mkdir /sinwebapp/
+RUN mkdir /sinwebapp/ && mkdir /frontend/
+COPY /frontend/package.json /home/frontend/package.json
+WORKDIR /home/frontend/
+RUN npm install
 WORKDIR /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir /frontend/ && mkdir /scripts/
+RUN mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
     mkdir ./static/ && mkdir ./api/
@@ -34,7 +37,6 @@ RUN mkdir ./authentication/ && mkdir ./core/ && \
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
 COPY /frontend/  /home/frontend/
-RUN npm install
 RUN ng build --prod --output-hashing none
 
 ## BUILD BACKEND
