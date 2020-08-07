@@ -30,6 +30,24 @@ def user_info(request):
 
     return JsonResponse(response, safe=False)
 
+# GET: /api/users?id=1&id=2&id=3
+@login_required
+def user_info_filtered(request):
+    logger = DebugLogger("sinwebapp.api.views.user_info_filtered").get_logger()
+    if 'id' in request.GET:
+        ids = request.GET.getlist('id')
+        try:
+            retrieved_users = list(User.objects.filter(id__in=ids).values())
+            logger.info('Users Found!')
+        except User.DoesNotExist:
+            retrieved_users = { 'message' : 'Users Do No Exist'}
+            logger.info('Users Not Found!')
+    else:
+        retrieved_users ={ 'message': 'Input Error' }
+        logger.info('No Query Parameters Provided')
+
+    return JsonResponse(retrieved_users, safe=False)
+
 # GET: /api/sinUser?user_id=123
 #
 # Description: Retrieved information about a given user based on

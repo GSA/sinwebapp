@@ -13,54 +13,33 @@ import { StatusService } from 'src/app/services/status.service';
 export class ReviewDisplayComponent implements OnInit {
 
   private class_name = "ReviewDisplayComponent"
-  public sin_list : SIN[];
-  public user_lookup: boolean[] = [];
-  public loaded_lookup: boolean[] = [];
-
-  public selected_SIN: SIN = null_SIN;
-  public status_lookup: Status[] = [];
+  
   @Output() selection_event = new EventEmitter<SIN>();
-  // review and approve functionality are similar, so 
-  // reuse component with flag to differentiate behavior
   @Input() approver: boolean;
   @Input() user: User;
-
+  public sin_list : SIN[];
+  public user_lookup: User[];
+  public status_lookup: Status[];
+  public selected_SIN: SIN = null_SIN;
+  
   constructor(private sinService: SinService,
               private statusService: StatusService,
               private logger: LogService) { }
 
   ngOnInit() {
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
-    this.loadSINs();
+    this.loadComponentData();
+  }
+
+  private loadComponentData(): void{
+    this.sinService.getSINs().subscribe(sins => {
+      this.logger.log('SINs Retrieved', `${this.class_name}.loadComponentData`)
+      this.sin_list=sins;
+    })
     this.statusService.getStatuses().subscribe( (statuses) => {
+      this.logger.log('Statuses Retrieved', `${this.class_name}.loadComponentData`)
       this.status_lookup = statuses;
     })
-  }
-
-  private loadSINs(): void{
-    this.sinService.getSINs().subscribe(sins => {
-      this.logger.log('SINs Retrieved', `${this.class_name}.loadSINs`)
-      this.sin_list=sins;
-      this.logger.log('Initializing Component Controls', `${this.class_name}.loadSINs`)
-      for(let sin of sins){ 
-        if(sin.status_id == STATUS_STATE.submitted){ 
-          this.user_lookup.push(false); 
-          this.loaded_lookup.push(false);
-        }
-        else{ 
-          this.user_lookup.push(true); 
-          this.loaded_lookup.push(true);
-        }
-        this.logger.log(`Component Controls For # ${sin.sin_number} Initialized`, 
-                          `${this.class_name}.loadSINs`)
-      }
-    })
-  }
-
-  public change(i: number): void{
-    this.logger.log(`Component Control For # ${this.sin_list[i].sin_number} Changed`, 
-                      `${this.class_name}.loadSINs`)
-    this.user_lookup[i] = !this.user_lookup[i];
   }
 
   public selectSIN(sin: SIN){
@@ -68,11 +47,6 @@ export class ReviewDisplayComponent implements OnInit {
     this.selected_SIN = sin;
     this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`)
     this.selection_event.emit(sin);
-  }
-
-  public submitChanges(i: number): void{
-    // todo: post changes to database
-    // then set loaded_lookup = user_lookup
   }
 
 }

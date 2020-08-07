@@ -30,6 +30,11 @@ export class UserService {
             catchError(this.handleError<User>("getUser"))
     )
   }
+
+  public getUsers(id: Number[]){
+    
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
