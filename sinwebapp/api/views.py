@@ -41,23 +41,28 @@ def user_info_filtered(request):
 
     if 'ids' in request.GET:
         ids = request.GET.getlist('ids')
-        logger.info('Using Query Parameter IDs array: %s', ids)
+        num_ids = []
+        for my_id in ids:
+            num_ids.push(int(my_id))
+        logger.info('Using Query Parameter IDs array: %s', num_ids)
         try:
-            raw_users = User.objects.filter(id__in=ids)
-            retrieved_user = []
-            for user in raw_users:
+            raw_users = User.objects.filter(id__in=num_ids)
+            retrieved_users = []
+            for user in raw_users.all():
                 group_list = list(user.groups.values_list('name', flat=True))
-                retrieved_user.append({
+                logger.info("Retrieved User's (id, email, groups): (%s, %s, %s,)", user.id, user.email, group_list)
+                retrieved_users.append({
                     'id': user.id,
                     'email': user.email,
                     'groups': group_list
                 })
+            logger.info('Retrieved Users: %s', retrieved_users)
             logger.info('Users Found!')
         except User.DoesNotExist:
             retrieved_users = { 'message' : 'Users Do No Exist'}
             logger.info('Users Not Found!')
     else:
-        retrieved_users ={ 'message': 'Input Error' }
+        retrieved_users = { 'message': 'Input Error' }
         logger.info('No Query Parameters Provided')
 
     return JsonResponse(retrieved_users, safe=False)
@@ -87,7 +92,7 @@ def sin_user_info(request):
             retrieved_user = { 'message': 'User Does Not Exist' }
             logger.warning('User Not Found!')
     else:
-        retrieved_user ={ 'message': 'Input Error' }
+        retrieved_user = { 'message': 'Input Error' }
         logger.info('No Query Parameters Provided')
 
     return JsonResponse(retrieved_user, safe=False)

@@ -35,24 +35,33 @@ export class ReviewDisplayComponent implements OnInit {
 
   private loadComponentData(): void{
     this.sinService.getSINs().subscribe(sins => {
+
       this.logger.log('SINs Retrieved', `${this.class_name}.loadComponentData`)
       this.sin_list=sins;
-      let id_list : Number[] = [];
+      let id_list : number[] = [];
       for(let sin of sins){ 
         this.logger.log(`Storing User ID: ${sin.user_id} from SIN # ${sin.sin_number}`, `${this.class_name}.loadComponentData`)
-        id_list.push(sin.user_id);
+        if(!id_list.includes(sin.user_id)){ id_list.push(sin.user_id); }
       }
+
+      for(let id of id_list){ this.logger.log(`Stored User ID: ${id}`, `${this.class_name}.loadComponentData`) }
       this.userService.getUsers(id_list).subscribe( (users) => {
         this.logger.log('Users Retrieved', `${this.class_name}.loadComponentData`)
         this.user_lookup = users;
       })
     })
+
     this.statusService.getStatuses().subscribe( (statuses) => {
       this.logger.log('Statuses Retrieved', `${this.class_name}.loadComponentData`)
       this.status_lookup = statuses;
     })
   }
 
+  public lookupUserEmail(sin_id: Number){
+    for(let user of this.user_lookup){
+      if(user.id == sin_id){ return user.email; }
+    }
+  }
   public selectSIN(sin: SIN){
     this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
     this.selected_SIN = sin;

@@ -30,6 +30,7 @@ export class UserDisplayComponent implements OnInit {
     this.logger.log('Intializing', `${this.class_name}.ngOnInit`)
     this.getUser()
     this.statusService.getStatuses().subscribe( (statuses)=>{
+      this.logger.log('Statuses Retrieved', `${this.class_name}.ngOnInit`)
       this.status_lookup = statuses;
     })
   }

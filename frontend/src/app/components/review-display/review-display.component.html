@@ -1,4 +1,4 @@
-<div *ngIf = "sin_list && status_lookup.length > 0 && user_lookup > 0">
+<div *ngIf = "sin_list && status_lookup.length > 0 && user_lookup.length > 0">
     <div class = "panel panel-default">
         <div class = "panel-heading">Submission Review</div>
 
@@ -18,7 +18,7 @@
                 (click) ="selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
-                <td>{{this.user_lookup[this.sin.user_id-1].email}} </td>
+                <td>{{this.lookupUserEmail(this.sin.user_id)}} </td>
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
             </tr>
         </table>

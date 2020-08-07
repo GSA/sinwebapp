@@ -18,10 +18,11 @@ export class ContextService {
     return `${Context.USER_ENDPOINT}`
   }
 
-  public getUsersUrl(ids: Number[]): String{
+  public getUsersUrl(ids: number[]): String{
     let url_builder = `${Context.USERS_ENDPOINT}?`;
     let index = 1;
-    for(let id in ids){
+    for(let id of ids){
+      console.log(`getUserUrl: id= ${id}`)
       url_builder = url_builder.concat(`${Context.USERS_PARAM_ID}=${id}`)
       if (index < ids.length){
         url_builder = url_builder.concat('&')

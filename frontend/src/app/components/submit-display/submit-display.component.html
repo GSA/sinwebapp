@@ -8,7 +8,6 @@
                 <th>#</th>
                 <th>SIN</th>
                 <th>Status</th>
-                <th>Edit</th>
             </tr>
             <tr *ngFor = "let sin of user_SINs; let i = index;" 
                 [class.selected] = "sin === selected_SIN"
@@ -16,7 +15,6 @@
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
-                <td>todo: EDIT</td>
             </tr>
         </table>
         <button type="submit" class = "btn btn-default btn-sm right" 

@@ -15,27 +15,30 @@ ENV VCAP_SERVICES='{ "aws-rds": [{ \
 
 ## DEPENDENCIES
 RUN apt-get update -y && apt-get install -y curl wait-for-it
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get install -y nodejs
+RUN npm install -g @angular/cli@8.2.0
+WORKDIR /home/
+RUN mkdir /sinwebapp/
+WORKDIR /home/sinwebapp/
+COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
+RUN pip install -r ./requirements.txt
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir /sinwebapp/ && mkdir /frontend/ && mkdir /scripts/
+RUN mkdir /frontend/ && mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
-    mkdir ./static/ && mkdir ./dependencies/ && mkdir ./api/
+    mkdir ./static/ && && mkdir ./api/
 
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
 COPY /frontend/  /home/frontend/
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs
-RUN npm install -g @angular/cli@8.2.0
 RUN npm install
 RUN ng build --prod --output-hashing none
 
 ## BUILD BACKEND
 WORKDIR /home/sinwebapp/
-COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
-RUN pip install -r ./requirements.txt
 COPY /sinwebapp/authentication/ /home/sinwebapp/authentication/
 COPY /sinwebapp/api/ /home/sinwebapp/api/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
