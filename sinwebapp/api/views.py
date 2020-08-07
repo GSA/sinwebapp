@@ -41,12 +41,9 @@ def user_info_filtered(request):
 
     if 'ids' in request.GET:
         ids = request.GET.getlist('ids')
-        num_ids = []
-        for my_id in ids:
-            num_ids.push(int(my_id))
-        logger.info('Using Query Parameter IDs array: %s', num_ids)
+        logger.info('Using Query Parameter IDs array: %s', ids)
         try:
-            raw_users = User.objects.filter(id__in=num_ids)
+            raw_users = User.objects.filter(id__in=ids)
             retrieved_users = []
             for user in raw_users.all():
                 group_list = list(user.groups.values_list('name', flat=True))
