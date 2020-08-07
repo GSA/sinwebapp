@@ -54,7 +54,7 @@ done
 formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
 bash $SCRIPT_DIR/init-scripts.sh
 
-formatted_print '--> Pushing To The Cloud...' $SCRIPT_NAME
+formatted_print '--> Pushing To The Cloud' $SCRIPT_NAME
 cd $SCRIPT_DIR/..
 cf push
 

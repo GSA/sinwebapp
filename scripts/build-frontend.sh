@@ -11,8 +11,8 @@ source "$SCRIPT_DIR/util/logging.sh"
 
 cd $SCRIPT_DIR/../frontend
 
-formatted_print '--> Installing Angular Dependencies...' $SCRIPT_NAME
+formatted_print '--> Installing Angular Dependencies' $SCRIPT_NAME
 npm install
 
-formatted_print '--> Building Angular Frontend...' $SCRIPT_NAME
+formatted_print '--> Building Angular Frontend' $SCRIPT_NAME
 ng build --prod --output-hashing none
