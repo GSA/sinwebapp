@@ -36,7 +36,8 @@
 - [Django: Add User to Group Via Group Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)<br>
 - [Django: Output QuerySet as Json](https://stackoverflow.com/questions/15874233/output-django-queryset-as-json)<br>
 - [Django: CSRF Cookie Not Set](https://stackoverflow.com/questions/17716624/django-csrf-cookie-not-set)<br>
-- [Django: Serializing Objects with Many-to-Many relations](https://stackoverflow.com/questions/34474893/django-serializer-manyrelatedmanager-object-at-xx-is-not-json-serializable)
+- [Django: Serializing Objects with Many-to-Many relations](https://stackoverflow.com/questions/34474893/django-serializer-manyrelatedmanager-object-at-xx-is-not-json-serializable)<br>
+- [Django: values_list() vs. values()](https://stackoverflow.com/questions/37205793/django-values-list-vs-values)
 - [Angular: withCredentials Header, What Is It?](https://stackoverflow.com/questions/27406994/http-requests-withcredentials-what-is-this-and-why-using-it)<br>
 - [Angular: Service Not Sending XSRF Token Header With HTTP Request](https://stackoverflow.com/questions/50510998/angular-6-does-not-add-x-xsrf-token-header-to-http-request)<br>
 - [Docker: Apt Repository is Not Signed](https://stackoverflow.com/questions/59139453/repository-is-not-signed-in-docker-build)<br>

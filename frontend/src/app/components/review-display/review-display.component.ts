@@ -38,7 +38,10 @@ export class ReviewDisplayComponent implements OnInit {
       this.logger.log('SINs Retrieved', `${this.class_name}.loadComponentData`)
       this.sin_list=sins;
       let id_list : Number[] = [];
-      for(let sin of sins){ id_list.push(sin.user_id);}
+      for(let sin of sins){ 
+        this.logger.log(`Storing User ID: ${sin.user_id} from SIN # ${sin.sin_number}`, `${this.class_name}.loadComponentData`)
+        id_list.push(sin.user_id);
+      }
       this.userService.getUsers(id_list).subscribe( (users) => {
         this.logger.log('Users Retrieved', `${this.class_name}.loadComponentData`)
         this.user_lookup = users;
