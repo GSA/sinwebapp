@@ -36,7 +36,7 @@ def user_info(request):
 @login_required
 def user_info_filtered(request):
     logger = DebugLogger("sinwebapp.api.views.user_info_filtered").get_logger()
-    if 'id' in request.GET:
+    if 'ids' in request.GET:
         ids = request.GET.getlist('ids')
         try:
             retrieved_users = list(User.objects.filter(id__in=ids).values())
