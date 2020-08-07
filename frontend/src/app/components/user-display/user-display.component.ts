@@ -19,6 +19,7 @@ export class UserDisplayComponent implements OnInit {
   public user : User = null_User;
   public selected_User: User = null_User;
   public selected_SIN: SIN = null_SIN;
+  public edit_mode : Boolean = false;
   public status_lookup: Status[] = [];
 
   constructor(private userService: UserService,
