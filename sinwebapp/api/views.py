@@ -36,10 +36,21 @@ def user_info(request):
 @login_required
 def user_info_filtered(request):
     logger = DebugLogger("sinwebapp.api.views.user_info_filtered").get_logger()
+    logger.info('Retrieving Users')
+
     if 'ids' in request.GET:
         ids = request.GET.getlist('ids')
+        logger.info('Using Query Parameter IDs array: %s', ids)
         try:
-            retrieved_users = list(User.objects.filter(id__in=ids).values())
+            raw_users = list(User.objects.filter(id__in=ids).values())
+            retrieved_user = []
+            for user in raw_users:
+                group_list = list(user.groups.values_list('name', flat=True))
+                retrieved_user.append({
+                    'id': user.id,
+                    'email': user.email,
+                    'groups': group_list
+                })
             logger.info('Users Found!')
         except User.DoesNotExist:
             retrieved_users = { 'message' : 'Users Do No Exist'}
@@ -57,6 +68,7 @@ def user_info_filtered(request):
 @login_required
 def sin_user_info(request):
     logger = DebugLogger("sinwebapp.api.views.sin_user_info").get_logger()
+    logger.info('Retrieving User Info From SIN User ID')
 
     if 'user_id' in request.GET:
         user_id = request.GET.get('user_id')
