@@ -15,6 +15,8 @@ export class EditDisplayComponent implements OnInit {
   @Output() public cancel_event = new EventEmitter<String>();
   @Output() public save_event = new EventEmitter<SIN>();
   @Input() public edit_SIN : SIN;
+  @Input() public user_group: string[];
+
   public buffer_SIN: SIN = null_SIN;
 
   public status_lookup: Status[];

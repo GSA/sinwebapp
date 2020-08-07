@@ -68,8 +68,8 @@
 
           <!-- SIN Editor -->
           <div *ngIf="edit_mode">
-            <app-edit_display [edit_SIN] ="selected_SIN"
-                              (cancel_event)="cancel($event)" (save_event)="saveSIN($event)"></app-edit_display>
+            <app-edit-display [edit_SIN] ="selected_SIN" [user_group]="user.groups"
+                              (cancel_event)="cancel($event)" (save_event)="saveSIN($event)"></app-edit-display>
           </div>
 
         </div>
