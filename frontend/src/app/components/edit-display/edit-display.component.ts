@@ -17,6 +17,7 @@ export class EditDisplayComponent implements OnInit {
   @Input() public edit_SIN : SIN;
   @Input() public user_group: string[];
 
+  public undo_SIN: SIN;
   public buffer_SIN: SIN = null_SIN;
 
   public status_lookup: Status[];
@@ -30,6 +31,7 @@ export class EditDisplayComponent implements OnInit {
   }
 
   private loadComponentData(){
+    this.undo_SIN = this.edit_SIN;
     this.statusService.getStatuses().subscribe((statuses)=>{
       this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)
       this.status_lookup = statuses;
@@ -41,7 +43,24 @@ export class EditDisplayComponent implements OnInit {
     this.cancel_event.emit("cancel")
   }
 
-  public save(): void {
+  public applySIN(): void{
+    this.edit_SIN.sin_number = this.buffer_SIN.sin_number;
+    this.buffer_SIN.sin_number = null;
+  }
+
+  public applyStatus(): void{
+    this.edit_SIN.status_id = this.buffer_SIN.status_id;
+    this.buffer_SIN.status_id = null;
+  }
+
+  public undoSIN(): void{
+    this.edit_SIN.sin_number = this.undo_SIN.sin_number;
+  }
+
+  public undoStatus(): void{
+    this.edit_SIN.status_id = this.undo_SIN.status_id;
+  }
+  public saveAll(): void {
     this.logger.log(`Emitting Save Event for SIN # ${this.edit_SIN.sin_number}`, `${this.class_name}.save`)
     this.save_event.emit(this.edit_SIN)
   }

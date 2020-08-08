@@ -41,6 +41,7 @@ export class SinService {
                       catchError(this.handleError('updateSIN', sin))
     );
   }
+  
   public getSINs(): Observable<SIN[]>{
     return this.http.get<SIN[]>(this.context.getSINsUrl().toString()).pipe( 
                     tap(()=>{ this.logger.log( "Retrieving All SINs", `${this.class_name}.getSINs`);}),

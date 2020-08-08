@@ -1,4 +1,6 @@
  <div *ngIf="status_lookup.length > 0" class="panel-body">
+
+    <!--SIN editor-->    
     SIN #<br> 
     <label for="current-sin-number">Current SIN #: </label>
     <span id="current-sin-number" 
@@ -9,11 +11,17 @@
             {{this.buffer_SIN.sin_number}}</span><br>
     
     <div class ="input-group">
-        <span class ="input-group-addon">Enter New SIN #</span>
+        <span class ="input-group-addon" id="enter-new-sin-number">Enter New SIN #</span>
         <input type="text" id ="input-sin-number" class="form-control"
-                placeholder="Enter New SIN # Here" [(ngModel)]="buffer_SIN.sin_number">
+                placeholder="Enter New SIN # Here" aria-describedby="enter-new-sin-number"
+                [(ngModel)]="buffer_SIN.sin_number">
     </div>
 
+    <div class ="btn-group" role="group">
+
+    </div>
+
+    <!--Status Editor-->
     <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group')">
         Status<br> 
         <label for="current-status">Current Status:</label>
@@ -24,8 +32,9 @@
                 {{this.status_lookup[this.buffer_SIN.status_id-1].name}}</span><br>
 
         <div class="input-group">
-            <span class="input-group-addon">Select New Status</span>
-            <select [(ngModel)] = "buffer_SIN.status_id" id ="input-status" class="form-control">
+            <span class="input-group-addon" id="select-new-status"> Select New Status</span>
+            <select [(ngModel)] = "buffer_SIN.status_id" id ="input-status" class="form-control"
+                        aria-describedby="select-new-status">
                 <option *ngFor="let status of status_lookup" 
                         [value]="status.id">{{status.name}}</option>
             </select>
