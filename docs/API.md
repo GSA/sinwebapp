@@ -52,8 +52,7 @@ will return a JSON formatted response containing information about SIN Number 12
 > <b>POST REQUEST FORMAT</b><br><br>
 > { <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->}<br>
-<br>
+>}<br><br>
 > <b>POST RESPONSE FORMAT</b><br><br>
 > { <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
