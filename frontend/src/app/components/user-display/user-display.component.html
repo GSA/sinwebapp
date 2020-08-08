@@ -69,7 +69,7 @@
         <!-- SIN Editor-->
         <div *ngIf = "edit_mode" class = "panel panel-default">
           <div class="panel-heading">SIN Editor</div>
-          <app-edit-display  [edit_SIN] ="selected_SIN" [user_group]="user.groups"
+          <app-edit-display  [input_SIN] ="selected_SIN" [user_group]="user.groups"
                             (cancel_event)="cancel($event)" (save_event)="saveSIN($event)"></app-edit-display>
         </div>
       </div>

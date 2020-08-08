@@ -21,3 +21,6 @@
   cursor:pointer;
 }
 
+.hoverable tr:hover{
+  background-color: #a2f3ef
+}

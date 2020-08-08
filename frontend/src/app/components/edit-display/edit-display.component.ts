@@ -14,11 +14,12 @@ export class EditDisplayComponent implements OnInit {
 
   @Output() public cancel_event = new EventEmitter<String>();
   @Output() public save_event = new EventEmitter<SIN>();
-  @Input() public edit_SIN : SIN;
+  @Input() public input_SIN : SIN;
   @Input() public user_group: string[];
 
-  public undo_SIN: SIN;
-  public buffer_SIN: SIN ;
+  public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
   public status_lookup: Status[];
@@ -33,6 +34,7 @@ export class EditDisplayComponent implements OnInit {
   }
 
   private loadComponentData(){
+    this.edit_SIN = Object.assign(this.edit_SIN, this.input_SIN);
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
     this.buffer_SIN = Object.assign(this.buffer_SIN, null_SIN)
     this.printValues();
