@@ -50,7 +50,8 @@ will return a JSON formatted response containing information about SIN Number 12
 > <b>POST REQUEST FORMAT</b><br><br>
 > { <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->}<br>
+>}
+<br><br><br>
 
 
 
@@ -63,21 +64,22 @@ will return a JSON formatted response containing information about SIN Number 12
 >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >   ]<br>
->}<br><br>
+>}
+<br><br><br>
 
 
 
 
 - <i>/api/updateSIN/</i> - POST endpoint to update an existing SIN within the database.
-
+<br><br><br>
 
 
 - <i>/api/sinUser/</i> - GET endpoint that exchanges a User ID for a response containing the entire User object.
-
+<br><br><br>
 
 
 - <i>/api/statuses</i> - returns an array of JSONs for all statuses.
-
+<br><br><br>
 
 
 
@@ -91,7 +93,8 @@ will return a JSON containing the ID's status name and description in the follow
 > { <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
->}<br><br>
+>}
+<br><br><br>
 
 # Third Party Endpoints
 - <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>
