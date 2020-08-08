@@ -81,6 +81,13 @@ will return a JSON formatted response containing information about SIN Number 12
 
 
 - <i>/api/updateSIN/</i> - POST endpoint to update an existing SIN within the database.
+> <b>POST REQUEST/RESPONSE FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>) <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>}<br>
 <br><br><br>
 
 
@@ -89,8 +96,15 @@ will return a JSON formatted response containing information about SIN Number 12
 
 
 - <i>/api/statuses</i> - returns an array of JSONs for all statuses.
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+> [<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+> ]<br>
+> }
 <br><br><br>
-
 
 
 - <i>/api/status</i> - given a query parameter of ID, this GET method retrieves a Status Name and Description for an ID. For example,
