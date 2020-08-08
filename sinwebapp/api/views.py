@@ -134,7 +134,7 @@ def sin_info_update(request):
         response = { 'message': 'SIN Does Not Exist'}
         logger.info('SIN Not Found')
 
-    return JsonResponse(new_sin, safe=False)
+    return JsonResponse(response, safe=False)
 
 # GET: /api/sin?id=123456 { body: empty }
 # POST: /api/sin { body: new SIN }

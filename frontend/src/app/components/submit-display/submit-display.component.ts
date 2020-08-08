@@ -43,7 +43,7 @@ export class SubmitDisplayComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    this.loadUserSINs();
+    if(changes.selectable !== undefined){ this.loadUserSINs(); }
   }
 
   public submitSIN(): void{

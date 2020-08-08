@@ -18,9 +18,9 @@ export class ReviewDisplayComponent implements OnInit {
   @Output() selection_event = new EventEmitter<SIN>();
   @Input() user: User;
   @Input() selectable: boolean;
-  public sin_list : SIN[];
-  public user_lookup: User[];
-  public status_lookup: Status[];
+  public sin_list : SIN[] = [];
+  public user_lookup: User[] = [];
+  public status_lookup: Status[] = [];
   public selected_SIN: SIN = null_SIN;
   
   constructor(private sinService: SinService,
@@ -34,9 +34,7 @@ export class ReviewDisplayComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    if(changes.user.previousValue != changes.user.currentValue){
-      this.loadComponentData();
-    }
+    if(changes.selectable !== undefined){ this.loadComponentData(); }
   }
   private loadComponentData(): void{
     this.sinService.getSINs().subscribe(sins => {
