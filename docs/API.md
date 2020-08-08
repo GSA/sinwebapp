@@ -1,16 +1,16 @@
 ### Documentation Navigation
 [<< Development](DEVELOPMENT.md) | [^ ReadMe ^](../README.md) | [Appendix >>](APPENDIX.md)
 
-## Routes & Endpoints
+# Routes & Endpoints
 
 Listed below are the current routes used by each component of the application, the Angular frontend and the Django backend,
 
-# Django Static HTML Endpoints
+## Django Static HTML Endpoints
 - <i>/</i> - Login Splash Page
 - <i>/logout</i> - Logout Splash Page
 - <i>/success</i> - Authenticated Login Splash Page. This is where the Angular application enters. 
 
-# Application API Endpoints
+## Application API Endpoints
 - <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
@@ -96,11 +96,11 @@ will return a JSON containing the ID's status name and description in the follow
 >}
 <br><br><br>
 
-# Third Party Endpoints
+## Third Party Endpoints
 - <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>
 - <i>/auth/callback</i> - callback endpoint for cloud.gov OAuth2 authorization and authentication<br>
 - <i>/fake/oauth/authorize</i> - mock authorize endpoint for fake cloud.gov backend<br>
 - <i>/fake/oauth/token</i> - mock token generation endpoint for fake cloud.backend<br>
 
-# Frontend Routes
+## Frontend Routes
 - <i>404</i>: Not yet created. TODO.
