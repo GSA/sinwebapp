@@ -45,6 +45,7 @@ def user_info_filtered(request):
         try:
             raw_users = User.objects.filter(id__in=ids)
             retrieved_users = []
+            # TODO: CHECK IF LENGTH IS ZERO
             for user in raw_users.all():
                 group_list = list(user.groups.values_list('name', flat=True))
                 retrieved_users.append({
@@ -306,9 +307,10 @@ def status_info(request):
 
 # GET: /api/statuses
 #
-# Description: Retrieves a list of all Statuses.
+# Description: Retrieves a list of all Statuses accessible by the user
+# signed into the request's session
 @login_required
-def status_info_all(request):
+def status_info_filtered(request):
     logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
     logger.info('Retrieving All Statuses')
 
@@ -321,6 +323,24 @@ def status_info_all(request):
         else:
             retrieved_statuses = list(Status.objects.values())
 
+        logger.info('Statuses Found!')
+    except Status.DoesNotExist:
+        retrieved_statuses = {'message': 'Statuses Do Not Exist'}
+        logger.info('Statuses Not Found!')
+    if len(retrieved_statuses)==0:
+        retrieved_statues = { 'message' : '0 Statuses Found' }
+        logger.info('0 Statuses Found!')
+        
+    return JsonResponse(retrieved_statuses, safe=False)
+
+@login_required
+def status_info_all(request):
+    logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
+    logger.info('Retrieving All Statuses')
+
+    try:
+        group_list = request.user.groups.values_list('name', flat=True)
+        retrieved_statuses = list(Status.objects.values())
         logger.info('Statuses Found!')
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}

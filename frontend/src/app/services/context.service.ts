@@ -66,4 +66,6 @@ export class ContextService {
   public getStatusesUrl(): String{
     return `${Context.STATUSES_ENDPOINT}`
   }
+
+  //TODO: public getUserStatusesUrl(): for user permissibile Status fields
 }

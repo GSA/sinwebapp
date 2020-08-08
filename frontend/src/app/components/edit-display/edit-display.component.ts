@@ -23,6 +23,8 @@ export class EditDisplayComponent implements OnInit {
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
   public status_lookup: Status[] = [];
+  // TODO: user_status_lookup: for user accessible fields
+
   
   constructor(private logger: LogService,
               private statusService: StatusService) { }

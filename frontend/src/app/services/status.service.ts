@@ -31,6 +31,8 @@ export class StatusService {
     )
   }
   
+  //TODO: getUserStatuses(): for user permissible status fields
+  
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
