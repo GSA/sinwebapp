@@ -126,7 +126,7 @@ def sin_info_update(request):
         response = { 'message': 'User Does Not Exist'}
         logger.info('User Not Found')
 
-    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)4
+    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)
     new_sin.save()
     return JsonResponse(new_sin, safe=False)
 

@@ -7,19 +7,29 @@
             class="right">{{this.edit_SIN.sin_number}}</span><br>
     
     <label for ="new-sin-number">New SIN #: </label>
-    <span *ngIf = "buffer_SIN.sin_number" id="new-sin-number" class="right label label-info">
-            {{this.buffer_SIN.sin_number}}</span><br>
+    <span *ngIf = "buffer_SIN.sin_number" id="new-sin-number" class="right">
+            <mark>{{this.buffer_SIN.sin_number}}</mark></span><br>
     
     <div class ="input-group">
         <span class ="input-group-addon" id="enter-new-sin-number">Enter New SIN #</span>
-        <input type="text" id ="input-sin-number" class="form-control"
+        <input type="text" id ="input-sin-number-enabled" class="form-control"
                 placeholder="Enter New SIN # Here" aria-describedby="enter-new-sin-number"
-                [(ngModel)]="buffer_SIN.sin_number">
+                *ngIf = "!applied_SIN" [(ngModel)]="buffer_SIN.sin_number">
+        <input type = "text" id ="input-sin-number-disabled" class="form-control"
+                [placeholder]="edit_SIN.sin_number" aria-describedby="enter-new-sin-number"
+                *ngIf = "applied_SIN" disabled>
     </div>
 
-    <div class ="btn-group" role="group">
-
-    </div>
+    <div class ="btn-group right" role="group">
+        <button *ngIf="applied_SIN" type="button" (click)="undoSIN()"
+                class="btn btn-danger btn-sm" id="undo-sin-enabled">Undo</button>
+        <button *ngIf="!applied_SIN" type="button" disabled
+                class="btn btn-danger btn-sm" id="undo-sin-disabled">Undo</button>
+        <button *ngIf="!applied_SIN" type="button" (click)="applySIN()"
+                class="btn btn-success btn-sm" id="apply-sin-enabled">Apply</button>
+        <button *ngIf="applied_SIN" type="button" disabled
+                class="btn btn-success btn-sm" id="apply-sin-disabled">Apply</button>
+    </div><br><br>
 
     <!--Status Editor-->
     <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group')">
@@ -28,20 +38,36 @@
         <span id="current-status" class="right">{{this.status_lookup[this.edit_SIN.status_id-1].name}}</span><br>
 
         <label for="new-status">New Status:</label>
-        <span *ngIf ="buffer_SIN.status_id" id="new-status" class="right label label-info">
-                {{this.status_lookup[this.buffer_SIN.status_id-1].name}}</span><br>
+        <span *ngIf ="buffer_SIN.status_id" id="new-status" class="right">
+                <mark>{{this.status_lookup[this.buffer_SIN.status_id-1].name}}</mark></span><br>
 
         <div class="input-group">
             <span class="input-group-addon" id="select-new-status"> Select New Status</span>
-            <select [(ngModel)] = "buffer_SIN.status_id" id ="input-status" class="form-control"
-                        aria-describedby="select-new-status">
+            <select [(ngModel)] = "buffer_SIN.status_id" id ="input-status-enabled" class="form-control"
+                        *ngIf = "!applied_Status" aria-describedby="select-new-status">
+                <option *ngFor="let status of status_lookup" 
+                        [value]="status.id">{{status.name}}</option>
+            </select>
+            <select id ="input-status-disabled" class="form-control"
+                        *ngIf="applied_Status" aria-describedby="select-new-status">
                 <option *ngFor="let status of status_lookup" 
                         [value]="status.id">{{status.name}}</option>
             </select>
         </div>
 
+        <div class ="btn-group right" role="group">
+                <button *ngIf="applied_Status" type="button" (click)="undoStatus()"
+                        class="btn btn-danger btn-sm" id="undo-status-enabled">Undo</button>
+                <button *ngIf="!applied_Status" type="button" disabled
+                        class="btn btn-danger btn-sm" id="undo-status-disabled">Undo</button>    
+                <button *ngIf="applied_Status" type="button" (click)="applyStatus()"
+                        class="btn btn-success btn-sm" id="apply-status-enabled">Apply</button>    
+                <button *ngIf="!applied_Status" type="button" disabled
+                        class="btn btn-success btn-sm" id="apply-status-disabled">Apply</button>
+        </div><br><br>
+
     </div>
 
     <button type="submit" class="right btn btn-default btn-sm" (click)="cancel()">Cancel</button>
-    <button type="submit" class="right btn btn-default btn-sm" (click)="save()">Save</button>
+    <button type="submit" class="right btn btn-default btn-sm" (click)="saveAll()">Save</button>
 </div>
