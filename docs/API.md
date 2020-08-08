@@ -14,6 +14,7 @@ Listed below are the current routes used by each component of the application, t
 - <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
 >}<br>
@@ -40,9 +41,10 @@ will return a JSON formatted response containing information about SIN Number 12
 
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>) <br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>) <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >}<br>
 
 2. The POST endpoint requires a SIN number within the body of the POST. The method will attempt to either create a new entry in the database for the SIN number, or if that SIN number already exists in the database, it will attempt to update that entry if its status is contained in the set (Approved, Denied, Expired). If its status is contained in the set (Submitted, Reviewed, Change), then the method will return an error.
@@ -60,9 +62,10 @@ will return a JSON formatted response containing information about SIN Number 12
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
 >   [ <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >   ]<br>
 >}
 <br><br><br>
@@ -91,6 +94,7 @@ will return a JSON containing the ID's status name and description in the follow
 
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >}
