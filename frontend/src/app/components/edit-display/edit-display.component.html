@@ -25,9 +25,9 @@
                 class="btn btn-danger btn-sm" id="undo-sin-enabled">Undo</button>
         <button *ngIf="!applied_SIN" type="button" disabled
                 class="btn btn-danger btn-sm" id="undo-sin-disabled">Undo</button>
-        <button *ngIf="!applied_SIN" type="button" (click)="applySIN()"
+        <button *ngIf="!applied_SIN && buffer_SIN.sin_number" type="button" (click)="applySIN()"
                 class="btn btn-success btn-sm" id="apply-sin-enabled">Apply</button>
-        <button *ngIf="applied_SIN" type="button" disabled
+        <button *ngIf="applied_SIN || !buffer_SIN.sin_number" type="button" disabled
                 class="btn btn-success btn-sm" id="apply-sin-disabled">Apply</button>
     </div><br><br>
 
@@ -60,9 +60,9 @@
                         class="btn btn-danger btn-sm" id="undo-status-enabled">Undo</button>
                 <button *ngIf="!applied_Status" type="button" disabled
                         class="btn btn-danger btn-sm" id="undo-status-disabled">Undo</button>    
-                <button *ngIf="!applied_Status" type="button" (click)="applyStatus()"
+                <button *ngIf="!applied_Status && buffer_SIN.status_id" type="button" (click)="applyStatus()"
                         class="btn btn-success btn-sm" id="apply-status-enabled">Apply</button>    
-                <button *ngIf="applied_Status" type="button" disabled
+                <button *ngIf="applied_Status || !buffer_SIN.status_id" type="button" disabled
                         class="btn btn-success btn-sm" id="apply-status-disabled">Apply</button>
         </div><br><br>
 

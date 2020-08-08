@@ -44,7 +44,7 @@ export class ContextService {
   }
 
   public updateSINUrl(): String{
-    return `${Context.SIN_UPDATE_ENDPOINT}`
+    return `${Context.SIN_UPDATE_ENDPOINT}/`
   }
 
   public getSINByEmailUrl(email: String): String {

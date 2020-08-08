@@ -1,5 +1,6 @@
 <div *ngIf = "user.groups && user.email">
 
+  <!--NAV Bar-->
   <nav class="navbar navbar-default" id="sin-navbar">
     <div class="container-fluid">
 
@@ -12,6 +13,7 @@
     </div>
   </nav>
 
+  <!--Application Container-->
   <div class = "container-fluid" id="sin-application">
     <div class = "row">
 
@@ -34,15 +36,13 @@
       <div class = "col-md-5" id="group-specific-panel">
 
         <div *ngIf = "user.groups.includes('submitter_group')">
-          <app-submit-display [user] = "user" 
+          <app-submit-display id="submit-app-component"
+                              [user] = "user" [selectable] = "!edit_mode"
                               (selection_event)="selectSIN($event)"></app-submit-display>
         </div>
-        <div *ngIf = "user.groups.includes('approver_group')">
-          <app-review-display approver="true" [user] = "user"
-                              (selection_event)="selectSIN($event)"></app-review-display>
-        </div>
-        <div *ngIf = "user.groups.includes('reviewer_group')">
-          <app-review-display approver="false" [user] = "user"
+        <div *ngIf = "user.groups.includes('approver_group') || user.groups.includes('reviewer_group')">
+          <app-review-display id="review-app-component"
+                              [user] = "user" [selectable] = "!edit_mode"
                               (selection_event)="selectSIN($event)"></app-review-display>
         </div>
       </div>
@@ -50,7 +50,7 @@
       <!--User Selected SIN Panel-->
       <div class = "col-md-3" id="sin-selection-panel">
         <!-- SIN Viewer -->   
-        <div *ngIf="!edit_mode" class = "panel panel-default">
+        <div *ngIf="!edit_mode" id="sin-selection-viewer" class = "panel panel-default">
         
               <div class="panel-heading">SIN Details</div>
 
@@ -67,15 +67,17 @@
         </div>
 
         <!-- SIN Editor-->
-        <div *ngIf = "edit_mode" class = "panel panel-default">
+        <div *ngIf = "edit_mode" id="sin-selection-editor" class = "panel panel-default">
           <div class="panel-heading">SIN Editor</div>
-          <app-edit-display  [input_SIN] ="selected_SIN" [user_group]="user.groups"
+          <app-edit-display id="edit-app-component" 
+                            [input_SIN] ="selected_SIN" [user_group]="user.groups"
                             (cancel_event)="cancel($event)" (save_event)="saveSIN($event)"></app-edit-display>
         </div>
       </div>
 
     </div>
 
+    <!--Application Logger Panel-->
     <div class = "row">
 
       <div class = "col-md-9" id="application-logger-panel">

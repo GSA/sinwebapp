@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { SinService } from 'src/app/services/sin.service';
 import { SIN, null_SIN } from 'src/app/models/sin';
 import { LogService } from 'src/app/services/log.service';
@@ -24,6 +24,8 @@ export class SubmitDisplayComponent implements OnInit {
   public status_lookup: Status[] = [];
   @Input() 
   public user: User;
+  @Input()
+  public selectable: boolean; 
   @Output() 
   public selection_event = new EventEmitter<SIN>();
 
@@ -38,6 +40,10 @@ export class SubmitDisplayComponent implements OnInit {
     this.statusService.getStatuses().subscribe( (statuses) => {
       this.status_lookup = statuses;
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    this.loadUserSINs();
   }
 
   public submitSIN(): void{

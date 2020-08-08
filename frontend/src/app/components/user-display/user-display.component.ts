@@ -6,6 +6,7 @@ import { null_SIN, SIN } from 'src/app/models/sin';
 import { StatusService } from 'src/app/services/status.service';
 import { Status } from 'src/app/models/status';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { SinService } from 'src/app/services/sin.service';
 
 @Component({
   selector: 'app-user-display',
@@ -18,11 +19,12 @@ export class UserDisplayComponent implements OnInit {
   public user : User = null_User;
   public selected_User: User = null_User;
   public selected_SIN: SIN = null_SIN;
-  public edit_mode : Boolean = false;
+  public edit_mode : boolean = false;
   public status_lookup: Status[] = [];
 
   constructor(private userService: UserService,
                 private statusService: StatusService,
+                private sinService: SinService,
                 private logger: LogService) { }
 
   ngOnInit() {
@@ -56,17 +58,25 @@ export class UserDisplayComponent implements OnInit {
 
   public switchModes(): void{
     this.edit_mode = !this.edit_mode
-    if(this.edit_mode){ this.logger.log('Edit Mode Activated', `${this.class_name}.switchModes`); }
-    else{ this.logger.log('View Mode Activated', `${this.class_name}.switchModes`)}
+    if(this.edit_mode){ 
+      this.logger.log('Edit Mode Activated', `${this.class_name}.switchModes`); 
+    }
+    else{ 
+      this.logger.log('View Mode Activated', `${this.class_name}.switchModes`)}
   }
 
   public saveSIN(sin: SIN): void{
     this.logger.log(`Saving User Edited SIN # ${sin.sin_number}`, `${this.class_name}.saveSIN`)
-    //post to database with SIN service
+    this.sinService.updateSIN(sin).subscribe((updateSIN)=>{
+      this.logger.log(`Sin #${updateSIN.sin_number} Updated`, `${this.class_name}.saveSIN`)
+    })
+    this.selected_SIN = null_SIN;
+    this.switchModes();
   }
 
   public cancel(msg: String): void{ 
-    this.logger.log('Cancelling Edit Mode', `${this.class_name}.cancel`)
+    this.logger.log('Cancelling Edit Mode', `${this.class_name}.cancel`);
+    this.selected_SIN = null_SIN;
     this.switchModes(); 
   }
 }

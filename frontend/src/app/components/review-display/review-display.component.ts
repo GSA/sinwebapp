@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { SinService } from 'src/app/services/sin.service';
 import { LogService } from 'src/app/services/log.service';
 import { SIN, null_SIN } from 'src/app/models/sin';
@@ -16,8 +16,8 @@ export class ReviewDisplayComponent implements OnInit {
   private class_name = "ReviewDisplayComponent"
   
   @Output() selection_event = new EventEmitter<SIN>();
-  @Input() approver: boolean;
   @Input() user: User;
+  @Input() selectable: boolean;
   public sin_list : SIN[];
   public user_lookup: User[];
   public status_lookup: Status[];
@@ -33,6 +33,11 @@ export class ReviewDisplayComponent implements OnInit {
     this.loadComponentData();
   }
 
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.user.previousValue != changes.user.currentValue){
+      this.loadComponentData();
+    }
+  }
   private loadComponentData(): void{
     this.sinService.getSINs().subscribe(sins => {
 

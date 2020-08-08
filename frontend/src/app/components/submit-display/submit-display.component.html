@@ -11,7 +11,7 @@
             </tr>
             <tr *ngFor = "let sin of user_SINs; let i = index;" 
                 class = "clickable hoverable"
-                [class.selected] = "sin === selected_SIN"
+                [class.selected] = "sin === selected_SIN && selectable"
                 (click) = "selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
