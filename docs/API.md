@@ -52,7 +52,15 @@ will return a JSON formatted response containing information about SIN Number 12
 > <b>POST REQUEST FORMAT</b><br><br>
 > { <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->}
+>}<br>
+<br>
+> <b>POST RESPONSE FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>) <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>}<br>
 <br><br><br>
 
 
