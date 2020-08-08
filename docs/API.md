@@ -56,14 +56,14 @@ will return a JSON formatted response containing information about SIN Number 12
 
 
 - <i>/api/sins</i> - retrieves a JSON array of all SINs
-    > <b>GET RESPONSE FORMAT</b><br><br>
-    > { <br>
-    >   [ <br>
-    >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
-    >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
-    >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
-    >   ]<br>
-    >}<br><br>
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+>   [ <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sin_number': 'SIN #', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   ]<br>
+>}<br><br>
 
 
 
