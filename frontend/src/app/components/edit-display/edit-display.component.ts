@@ -17,8 +17,8 @@ export class EditDisplayComponent implements OnInit {
   @Input() public edit_SIN : SIN;
   @Input() public user_group: string[];
 
-  public undo_SIN: SIN = null_SIN;
-  public buffer_SIN: SIN = null_SIN;
+  public undo_SIN: SIN;
+  public buffer_SIN: SIN ;
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
   public status_lookup: Status[];
@@ -34,6 +34,7 @@ export class EditDisplayComponent implements OnInit {
 
   private loadComponentData(){
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
+    this.buffer_SIN = Object.assign(this.buffer_SIN, null_SIN)
     this.printValues();
     this.statusService.getStatuses().subscribe((statuses)=>{
       this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)

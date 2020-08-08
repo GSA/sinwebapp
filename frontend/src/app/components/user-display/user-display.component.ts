@@ -56,7 +56,7 @@ export class UserDisplayComponent implements OnInit {
 
   public switchModes(): void{
     this.edit_mode = !this.edit_mode
-    if(this.edit_mode){ this.logger.log('Edit Mode Actived', `${this.class_name}.switchModes`); }
+    if(this.edit_mode){ this.logger.log('Edit Mode Activated', `${this.class_name}.switchModes`); }
     else{ this.logger.log('View Mode Activated', `${this.class_name}.switchModes`)}
   }
 
