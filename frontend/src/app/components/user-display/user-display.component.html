@@ -37,12 +37,12 @@
 
         <div *ngIf = "user.groups.includes('submitter_group')">
           <app-submit-display id="submit-app-component"
-                              [user] = "user" [selectable] = "!edit_mode"
+                              [user] = "user" [selectable] = "!edit_mode" [save_message] = "saved"
                               (selection_event)="selectSIN($event)"></app-submit-display>
         </div>
         <div *ngIf = "user.groups.includes('approver_group') || user.groups.includes('reviewer_group')">
           <app-review-display id="review-app-component"
-                              [user] = "user" [selectable] = "!edit_mode"
+                              [user] = "user" [selectable] = "!edit_mode" [save_message] = "saved"
                               (selection_event)="selectSIN($event)"></app-review-display>
         </div>
       </div>

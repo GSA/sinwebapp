@@ -67,7 +67,7 @@ if [ "$1" == "container" ]
 then 
     formatted_print '--> Collecting Static Files' $SCRIPT_NAME
     python manage.py collectstatic --noinput
-    formatted_print 'Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
+    formatted_print '--> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
     gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3
 elif [ "$1" == "local" ]
 then

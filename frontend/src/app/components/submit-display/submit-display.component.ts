@@ -18,6 +18,7 @@ export class SubmitDisplayComponent implements OnInit {
 
   // true = submit mode, false = status mode
   public whichMode : boolean = false;
+  public submitted: boolean = false;
   public submit_SIN : SIN = null_SIN;
   public selected_SIN: SIN = null_SIN;
   public user_SINs: SIN[] =[];
@@ -26,6 +27,8 @@ export class SubmitDisplayComponent implements OnInit {
   public user: User;
   @Input()
   public selectable: boolean; 
+  @Input()
+  public save_message: boolean;
   @Output() 
   public selection_event = new EventEmitter<SIN>();
 
@@ -51,8 +54,13 @@ export class SubmitDisplayComponent implements OnInit {
     this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
       this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
       this.submit_SIN = null_SIN;
+      this.submitted = true;
       this.switchModes();
     })
+  }
+
+  public clearMessage(): void {
+    this.submitted = false;
   }
 
   public loadUserSINs(): void{
@@ -72,6 +80,7 @@ export class SubmitDisplayComponent implements OnInit {
     }
     else{ 
       this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
+      this.submitted = false;
       this.submit_SIN = null_SIN;
       this.selected_SIN = null_SIN;
     }
@@ -79,6 +88,7 @@ export class SubmitDisplayComponent implements OnInit {
 
   public selectSIN(sin: SIN){
     this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
+    this.submitted = false;
     this.selected_SIN = sin;
     this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`)
     this.selection_event.emit(sin);

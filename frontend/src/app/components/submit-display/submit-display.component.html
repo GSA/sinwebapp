@@ -1,8 +1,13 @@
 <div *ngIf = "status_lookup.length > 0" class = "panel panel-default">
 
     <div class = "panel-heading">SIN Submissions</div>
+    
     <!--Status Mode Panel-->
     <div *ngIf ="!whichMode && user_SINs" class = "panel-body">
+        <div *ngIf = "submitted" id="submission-message"
+                class="alert alert-success" role="alert">Thank you for your submission!</div>
+        <div *ngIf = "save_message" id="save-message" 
+                class="alert alert-success" role="alert">SIN Entry Has Been Saved!</div>        
         <table class="table">
             <tr>
                 <th>#</th>

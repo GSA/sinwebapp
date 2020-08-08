@@ -20,6 +20,7 @@ export class UserDisplayComponent implements OnInit {
   public selected_User: User = null_User;
   public selected_SIN: SIN = null_SIN;
   public edit_mode : boolean = false;
+  public saved : boolean = false;
   public status_lookup: Status[] = [];
 
   constructor(private userService: UserService,
@@ -46,6 +47,7 @@ export class UserDisplayComponent implements OnInit {
 
   public selectSIN(sin: SIN): void{
     if(!this.edit_mode){
+      this.saved = false;
       this.logger.log(`Selecting SIN: #${sin.sin_number}`, `${this.class_name}.selectSIN`)
       this.selected_SIN = sin;
       this.logger.log('Retrieving User From SIN #', `${this.class_name}.selectSIN`)
@@ -60,6 +62,7 @@ export class UserDisplayComponent implements OnInit {
     this.edit_mode = !this.edit_mode
     if(this.edit_mode){ 
       this.logger.log('Edit Mode Activated', `${this.class_name}.switchModes`); 
+      this.saved = false;
     }
     else{ 
       this.logger.log('View Mode Activated', `${this.class_name}.switchModes`)}
@@ -71,6 +74,7 @@ export class UserDisplayComponent implements OnInit {
       this.logger.log(`Sin #${updateSIN.sin_number} Updated`, `${this.class_name}.saveSIN`)
     })
     this.selected_SIN = null_SIN;
+    this.saved = true;
     this.switchModes();
   }
 

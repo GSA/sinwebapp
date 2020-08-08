@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges } from '@
 import { SinService } from 'src/app/services/sin.service';
 import { LogService } from 'src/app/services/log.service';
 import { SIN, null_SIN } from 'src/app/models/sin';
-import { STATUS_STATE, Status } from '../../models/status'
+import { Status } from '../../models/status'
 import { User } from 'src/app/models/user';
 import { StatusService } from 'src/app/services/status.service';
 import { UserService } from 'src/app/services/user.service';
@@ -18,6 +18,7 @@ export class ReviewDisplayComponent implements OnInit {
   @Output() selection_event = new EventEmitter<SIN>();
   @Input() user: User;
   @Input() selectable: boolean;
+  @Input() save_message: boolean;
   public sin_list : SIN[] = [];
   public user_lookup: User[] = [];
   public status_lookup: Status[] = [];

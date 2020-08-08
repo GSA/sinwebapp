@@ -47,13 +47,11 @@ def user_info_filtered(request):
             retrieved_users = []
             for user in raw_users.all():
                 group_list = list(user.groups.values_list('name', flat=True))
-                logger.info("Retrieved User's (id, email, groups): (%s, %s, %s,)", user.id, user.email, group_list)
                 retrieved_users.append({
                     'id': user.id,
                     'email': user.email,
                     'groups': group_list
                 })
-            logger.info('Retrieved Users: %s', retrieved_users)
             logger.info('Users Found!')
         except User.DoesNotExist:
             retrieved_users = { 'message' : 'Users Do No Exist'}
@@ -315,7 +313,14 @@ def status_info_all(request):
     logger.info('Retrieving All Statuses')
 
     try:
-        retrieved_statuses = list(Status.objects.values())
+        group_list = request.user.groups.values_list('name', flat=True)
+        if 'submitter_group' in group_list:
+            retrieved_statuses = list(Status.objects.filter(id__in=[1]).values())
+        elif 'reviewer_group' in group_list:
+            retrieved_statuses = list(Status.objects.filter(id__in=[1,2,3]).values())
+        else:
+            retrieved_statuses = list(Status.objects.values())
+
         logger.info('Statuses Found!')
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}
