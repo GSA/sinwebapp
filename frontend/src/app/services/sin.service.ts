@@ -16,6 +16,11 @@ import { SIN } from '../models/sin';
 export class SinService {
 
   private class_name : String = "SinService";
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
   constructor(private http: HttpClient,
                 private context: ContextService,
@@ -24,17 +29,18 @@ export class SinService {
 
 
   public postSIN(sin : SIN): Observable<SIN>{
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    return this.http.post<SIN>(this.context.postSINUrl().toString(), sin, httpOptions).pipe( 
+    return this.http.post<SIN>(this.context.postSINUrl().toString(), sin, this.httpOptions).pipe( 
                       tap( () => { this.logger.log( "Posting SIN", `${this.class_name}.postSIN`);}),
                       catchError(this.handleError('postSIN', sin))
                       );
   }
 
+  public updateSIN(sin: SIN): Observable<SIN>{
+    return this.http.post<SIN>(this.context.updateSINUrl().toString(), sin, this.httpOptions).pipe(
+                      tap( () => { this.logger.log( "Updating SIN", `${this.class_name}.postSIN`);}),
+                      catchError(this.handleError('updateSIN', sin))
+    );
+  }
   public getSINs(): Observable<SIN[]>{
     return this.http.get<SIN[]>(this.context.getSINsUrl().toString()).pipe( 
                     tap(()=>{ this.logger.log( "Retrieving All SINs", `${this.class_name}.getSINs`);}),

@@ -9,6 +9,7 @@ urlpatterns= [
     path('sinUser/', views.sin_user_info),
     path('sin/', views.sin_info),
     path('sins/', views.sin_info_all),
+    path('updateSin/', views.sin_info_update),
     path('status/', views.status_info),
     path('statuses/', views.status_info_all)
 ]

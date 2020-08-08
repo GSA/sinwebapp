@@ -10,4 +10,5 @@ The application is built from source on the cloud, not the Docker image. The Doc
 
 - [Setup](docs/SETUP.md)
 - [Development](docs/DEVELOPMENT.md)
+- [API](docs/API.md)
 - [Appendix](docs/APPENDIX.md)

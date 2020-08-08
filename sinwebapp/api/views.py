@@ -94,6 +94,42 @@ def sin_user_info(request):
 
     return JsonResponse(retrieved_user, safe=False)
 
+@login_required
+def sin_info_update(request):
+    logger = DebugLogger("sinwebapp.api.views.sin_info_update").get_logger()
+    logger.info('Updating Existing SIN')
+
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    sin_number = body['sin_number']
+    try:
+        sin_id = Sin.objects.get(sin_number=sin_number).id
+        logger.info('SIN Found')
+    except Sin.DoesNotExist:
+        response = { 'message': 'SIN Does Not Exist'}
+        logger.info('SIN Not Found')
+
+    status_id = body['status_id']
+    try:
+        new_status = Status.objects.get(id=status_id)
+        logger.info('Status Found')
+    except Status.DoesNotExist:
+        response = { 'message' : 'Status Does Not Exist'}
+        logger.info('Status Not Found')
+
+    user_id = body['user_id']
+    try:
+        new_user = User.objects.get(id=user_id)
+        logger.info('User Found')
+    except User.DoesNotExist:
+        response = { 'message': 'User Does Not Exist'}
+        logger.info('User Not Found')
+
+    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)4
+    new_sin.save()
+    return JsonResponse(new_sin, safe=False)
+
 # GET: /api/sin?id=123456 { body: empty }
 # POST: /api/sin { body: new SIN }
 # 
@@ -105,11 +141,11 @@ def sin_user_info(request):
 @login_required
 def sin_info(request):
     
-    logger = DebugLogger("sinwebapp.api.views.get_sin_info").get_logger()
+    logger = DebugLogger("sinwebapp.api.views.sin_info").get_logger()
 
     # Posting new SIN to database or modifying inactive existing SIN
     if request.method == "POST":
-        logger.info('Posting New SIN...')
+        logger.info('Posting New SIN')
 
         if hasattr(request.user, 'email'):
             email = request.user.email
@@ -244,8 +280,6 @@ def status_info(request):
     logger = DebugLogger("sinwebapp.api.views.status_info").get_logger()
     logger.info('Retrieving Status Info')
 
-
-
     if 'id' in request.GET:
         status_id=request.GET.get('status_id')
         logger.info('Using Status Id Query Parameter: %s', status_id)
@@ -282,6 +316,6 @@ def status_info_all(request):
         logger.info('Statuses Not Found!')
     if len(retrieved_statuses)==0:
         retrieved_statues = { 'message' : '0 Statuses Found' }
-        logger.info('Statuses No Found!')
+        logger.info('0 Statuses Found!')
         
     return JsonResponse(retrieved_statuses, safe=False)

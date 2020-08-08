@@ -11,26 +11,36 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='cc-cf-push.sh'
+nl=$'\n'
+SCRIPT_DES="This script should only be invoked within the CircleCI pipeline environment. \
+This script is invoked after${nl}   the application has been built on the pipeline and is \
+ready for deployment. This script will push the${nl}   pipeline build on the cloud using \
+dummy account credentials provided by a service account within cloud.gov."
 source "$SCRIPT_DIR/util/logging.sh"
 
-cf api api.fr.cloud.gov
-if [ "$1" == "dev" ]
+if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]
 then
-    cf auth $CF_DEV_USERNAME $CF_DEV_PASSWORD
-    formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_DEV_SPACE)" $SCRIPT_NAME
-    cf target -o $CF_ORGANIZATION -s $CF_DEV_SPACE
-elif [ "$1" == "prod" ]
-then
-    cf auth $CF_PROD_USERNAME $CF_PROD_PASSWORD
-    formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_PROD_SPACE)" $SCRIPT_NAME
-    cf target -o $CF_ORGANIZATION -s $CF_PROD_SPACE
-elif [ "$1" == "staging" ]
-then
-    cf auth $CF_STAGING_USERNAME $CF_STAGING_PASSWORD
-    formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_STAGING_SPACE)" $SCRIPT_NAME
-    cf target -o $CF_ORGANIZATION -s $CF_STAGING_SPACE
-fi
+    help_print "$SCRIPT_DES" $SCRIPT_NAME
+else
+    cf api api.fr.cloud.gov
+    if [ "$1" == "dev" ]
+    then
+        cf auth $CF_DEV_USERNAME $CF_DEV_PASSWORD
+        formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_DEV_SPACE)" $SCRIPT_NAME
+        cf target -o $CF_ORGANIZATION -s $CF_DEV_SPACE
+    elif [ "$1" == "prod" ]
+    then
+        cf auth $CF_PROD_USERNAME $CF_PROD_PASSWORD
+        formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_PROD_SPACE)" $SCRIPT_NAME
+        cf target -o $CF_ORGANIZATION -s $CF_PROD_SPACE
+    elif [ "$1" == "staging" ]
+    then
+        cf auth $CF_STAGING_USERNAME $CF_STAGING_PASSWORD
+        formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_STAGING_SPACE)" $SCRIPT_NAME
+        cf target -o $CF_ORGANIZATION -s $CF_STAGING_SPACE
+    fi
 
-formatted_print '--> Pushing To CloudFoundry' $SCRIPT_NAME
-cf push
+    formatted_print '--> Pushing To CloudFoundry' $SCRIPT_NAME
+    cf push
+fi
 
