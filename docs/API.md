@@ -11,6 +11,8 @@ Listed below are the current routes used by each component of the application, t
 - <i>/success</i> - Authenticated Login Splash Page. This is where the Angular application enters. 
 
 ## Application API Endpoints
+You must be logged in and authenticated through <i>cloud.gov</i> in order to access any of the endpoints given below. The backend tracks the user's login session through a cookie called <b>session_id</b>. This cookie is sent in the <i>Set-Cookie</i> response header after the user logs onto the site.
+
 - <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
@@ -36,7 +38,6 @@ will return an array of JSONs containing information on the Users with ID = 3, 7
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
 > ]<br>
 > }<br>
-<br><br><br>
 
 
 
@@ -71,7 +72,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>) <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >}<br>
-<br><br><br>
 
 
 
@@ -86,7 +86,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >   ]<br>
 >}
-<br><br><br>
 
 
 
@@ -99,7 +98,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id': 'user ID', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>) <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >}<br>
-<br><br><br>
 
 
 - <i>/api/sinUser/</i> - GET endpoint that exchanges a User ID for a response containing the entire User object.
@@ -109,7 +107,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
 >}<br>
-<br><br><br>
 
 
 - <i>/api/statuses</i> - returns an array of JSONs for all statuses.
@@ -121,7 +118,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 > ]<br>
 > }
-<br><br><br>
 
 
 - <i>/api/status</i> - given a query parameter of ID, this GET method retrieves a Status Name and Description for an ID. For example,
@@ -136,7 +132,6 @@ will return a JSON containing the ID's status name and description in the follow
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >}
-<br><br><br>
 
 ## Third Party Endpoints
 - <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>
