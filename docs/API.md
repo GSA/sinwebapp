@@ -18,6 +18,7 @@ Listed below are the current routes used by each component of the application, t
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
 >}<br>
+<br><br><br>
 
 
 
@@ -26,6 +27,16 @@ Listed below are the current routes used by each component of the application, t
 > localhost:8000/api/users?ids=3&ids=7&ids=10
 
 will return an array of JSONs containing information on the Users with ID = 3, 7 and 10. 
+
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+> [ <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
+> ]<br>
+> }<br>
+<br><br><br>
 
 
 
@@ -92,6 +103,12 @@ will return a JSON formatted response containing information about SIN Number 12
 
 
 - <i>/api/sinUser/</i> - GET endpoint that exchanges a User ID for a response containing the entire User object.
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
+>}<br>
 <br><br><br>
 
 
