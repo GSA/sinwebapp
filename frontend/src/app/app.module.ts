@@ -10,7 +10,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SubmitDisplayComponent } from './components/submit-display/submit-display.component';
 import { ReviewDisplayComponent } from './components/review-display/review-display.component';
 import { CookieService } from 'ngx-cookie-service';
-import { LoggerComponent } from './components/logger/logger.component';
+import { LoggerComponent } from './components/logger-display/logger.component';
 import { EditDisplayComponent } from './components/edit-display/edit-display.component';
 
 @NgModule({

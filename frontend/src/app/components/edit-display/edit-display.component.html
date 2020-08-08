@@ -18,7 +18,7 @@
         <input type = "text" id ="input-sin-number-disabled" class="form-control"
                 [placeholder]="edit_SIN.sin_number" aria-describedby="enter-new-sin-number"
                 *ngIf = "applied_SIN" disabled>
-    </div>
+    </div><br>
 
     <div class ="btn-group right" role="group">
         <button *ngIf="applied_SIN" type="button" (click)="undoSIN()"
@@ -48,21 +48,21 @@
                 <option *ngFor="let status of status_lookup" 
                         [value]="status.id">{{status.name}}</option>
             </select>
-            <select id ="input-status-disabled" class="form-control"
+            <select id ="input-status-disabled" class="form-control" disabled
                         *ngIf="applied_Status" aria-describedby="select-new-status">
                 <option *ngFor="let status of status_lookup" 
                         [value]="status.id">{{status.name}}</option>
             </select>
-        </div>
+        </div><br>
 
         <div class ="btn-group right" role="group">
                 <button *ngIf="applied_Status" type="button" (click)="undoStatus()"
                         class="btn btn-danger btn-sm" id="undo-status-enabled">Undo</button>
                 <button *ngIf="!applied_Status" type="button" disabled
                         class="btn btn-danger btn-sm" id="undo-status-disabled">Undo</button>    
-                <button *ngIf="applied_Status" type="button" (click)="applyStatus()"
+                <button *ngIf="!applied_Status" type="button" (click)="applyStatus()"
                         class="btn btn-success btn-sm" id="apply-status-enabled">Apply</button>    
-                <button *ngIf="!applied_Status" type="button" disabled
+                <button *ngIf="applied_Status" type="button" disabled
                         class="btn btn-success btn-sm" id="apply-status-disabled">Apply</button>
         </div><br><br>
 

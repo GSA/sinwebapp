@@ -17,4 +17,7 @@
   background-color: #98afb9;
   color: white;
 }
+.clickable{
+  cursor:pointer;
+}
 

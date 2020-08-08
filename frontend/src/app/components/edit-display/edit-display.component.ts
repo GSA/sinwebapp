@@ -28,59 +28,70 @@ export class EditDisplayComponent implements OnInit {
 
   ngOnInit() {
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
+    this.printValues();
     this.loadComponentData();
   }
 
   private loadComponentData(){
-    // Load undo_SIN field by field since Typescript objects are 
-    // assigned by reference and undo_SIN needs to be a distinct 
-    // copy of edit_SIN in order for component to function properly.
-    this.undo_SIN.id = this.edit_SIN.id;
-    this.undo_SIN.sin_number = this.edit_SIN.sin_number;
-    this.undo_SIN.status_id = this.edit_SIN.status_id;
-    this.undo_SIN.user_id = this.edit_SIN.user_id;
+    this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
+    this.printValues();
     this.statusService.getStatuses().subscribe((statuses)=>{
       this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)
       this.status_lookup = statuses;
     })
   }
 
+  private printValues():void{
+    this.logger.log(`SIN Object Values`,`${this.class_name}.printValues`)
+    this.logger.log(`edit_SIN.sin_number = ${this.edit_SIN.sin_number}`,`${this.class_name}.printValues`)
+    this.logger.log(`undo_SIN.sin_number = ${this.undo_SIN.sin_number}`,`${this.class_name}.printValues`)
+    this.logger.log(`buffer_SIN.sin_number = ${this.buffer_SIN.sin_number}`,`${this.class_name}.printValues`)
+  }
   public cancel(): void {
     this.logger.log('Emitting Cancel Event', `${this.class_name}.cancel`)
     this.cancel_event.emit("cancel")
   }
 
   public applySIN(): void{
+    this.printValues();
     this.logger.log(`Converting edit_SIN.sin_number = ${this.edit_SIN.sin_number} to ${this.buffer_SIN.sin_number}`,
                       `${this.class_name}.applySIN`)
     this.edit_SIN.sin_number = this.buffer_SIN.sin_number;
     this.buffer_SIN.sin_number = null;
     this.applied_SIN = true;
+    this.printValues();
   }
 
   public applyStatus(): void{
+    this.printValues();
     this.logger.log(`Converting edit_SIN.status_id = ${this.edit_SIN.status_id} to ${this.buffer_SIN.status_id}`,
                       `${this.class_name}.applyStatus`)
     this.edit_SIN.status_id = this.buffer_SIN.status_id;
     this.buffer_SIN.status_id = null;
     this.applied_Status = true;
+    this.printValues();
   }
 
   public undoSIN(): void{
+    this.printValues();
     this.logger.log(`Resetting edit_SIN.sin_number = ${this.edit_SIN.sin_number} to ${this.undo_SIN.sin_number}`,
-                      `${this.class_name}.applySIN`)
+                      `${this.class_name}.undoSIN`)
     this.edit_SIN.sin_number = this.undo_SIN.sin_number;
     this.applied_SIN=false;
+    this.printValues();
   }
 
   public undoStatus(): void{
+    this.printValues();
     this.logger.log(`Resetting edit_SIN.status_id = ${this.edit_SIN.status_id} to ${this.undo_SIN.status_id}`,
                       `${this.class_name}.undoStatus`)
     this.edit_SIN.status_id = this.undo_SIN.status_id;
     this.applied_Status = false;
+    this.printValues();
   }
+
   public saveAll(): void {
-    this.logger.log(`Emitting Save Event for SIN # ${this.edit_SIN.sin_number}`, `${this.class_name}.save`)
+    this.logger.log(`Emitting Save Event for SIN # ${this.edit_SIN.sin_number}`, `${this.class_name}.saveAll`)
     this.save_event.emit(this.edit_SIN)
   }
 }
