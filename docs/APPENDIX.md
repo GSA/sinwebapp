@@ -2,10 +2,6 @@
 
 # Appendix
 
-## BUGS
-
-1. In <b>user-display.component</b>, the selection_event is being triggered by a data binding in <b>submit-display.component</b>, causing the displayed SIN # in the <i>Selected SIN Details</i> menu to bind to the SIN being typed in by the user, before it should be displayed. This element should bind to the SIN <i>after it has been posted</i>, i.e. after the user clicks submit. The selection_event is supposed to only fire when the user clicks a SIN on screen, but somehow this event is being triggered in another way, or else the data binding in the above described element is incorrectly configured. Regardless, since the status on a SIN doesn't exist until it's posted in the database, the <b>user-display.component</b> uses status_id attribute of the user's SIN selection to verify and validate the <i>Selected SIN Details</i> menu.
-
 ## TODO
 - [x] reset service-key redirect uri on cloud.gov
 - [x] determine how to protect certain endpoints from unauthenticated individuals
@@ -13,7 +9,7 @@
 - [x] integrate angular frontend application with django backend framework
 - [x] bind roles to html on redirect page after successful login 
 - [x] create pipeline to build frontend and deploy to cloud
-- [ ] endpoint to update status of existing sin within database
+- [x] endpoint to update status of existing sin within database
 - [ ] load in database credentials for local deployments through VCAP_SERVICES environment variable to mimic cloud deployments
 
 ## Useful Links
