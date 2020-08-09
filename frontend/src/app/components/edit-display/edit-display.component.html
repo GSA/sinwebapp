@@ -45,12 +45,12 @@
             <span class="input-group-addon" id="select-new-status"> Select New Status</span>
             <select [(ngModel)] = "buffer_SIN.status_id" id ="input-status-enabled" class="form-control"
                         *ngIf = "!applied_Status" aria-describedby="select-new-status">
-                <option *ngFor="let status of status_lookup" 
+                <option *ngFor="let status of permission_status_lookup" 
                         [value]="status.id">{{status.name}}</option>
             </select>
             <select id ="input-status-disabled" class="form-control" disabled
                         *ngIf="applied_Status" aria-describedby="select-new-status">
-                <option *ngFor="let status of status_lookup" 
+                <option *ngFor="let status of permission_status_lookup" 
                         [value]="status.id">{{status.name}}</option>
             </select>
         </div><br>

@@ -23,7 +23,6 @@ export class SubmitDisplayComponent implements OnInit {
   public selected_SIN: SIN = null_SIN;
   public user_SINs: SIN[] =[];
   public status_lookup: Status[] = [];
-  // TODO: user_status_lookup: for user accessible fields
 
   @Input() 
   public user: User;

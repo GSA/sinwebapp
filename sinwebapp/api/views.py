@@ -5,7 +5,8 @@ from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from api.models import Sin, Status
+from api.models import Sin, Status, STATUS_STATES
+from authentication.db_init import GROUPS
 
 from debug import DebugLogger
 
@@ -310,20 +311,27 @@ def status_info(request):
 # Description: Retrieves a list of all Statuses accessible by the user
 # signed into the request's session
 @login_required
-def status_info_filtered(request):
-    logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
+def user_status_info(request):
+    logger = DebugLogger('sinwebapp.api.views.status_info_filtered').get_logger()
     logger.info('Retrieving All Statuses')
 
     try:
         group_list = request.user.groups.values_list('name', flat=True)
-        if 'submitter_group' in group_list:
-            retrieved_statuses = list(Status.objects.filter(id__in=[1]).values())
-        elif 'reviewer_group' in group_list:
-            retrieved_statuses = list(Status.objects.filter(id__in=[1,2,3]).values())
-        else:
+        if GROUPS.submitter in group_list:
+            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES.submitted]).values())
+            logger.info('Status Found!')
+        elif GROUPS.reviewer in group_list:
+            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES.submitted,
+                                                                    STATUS_STATES.reviewed,
+                                                                    STATUS_STATES.change]).values())
+            logger.info('Statuses Found!')
+        elif GROUPS.approver in group_list or GROUPS.admin in group_list:
             retrieved_statuses = list(Status.objects.values())
+            logger.info('Statuses Found!')
+        else:
+            retreived_statuses = { 'message' : 'User Does Not Have Any Permissions'}
+            logger.info('User Has No Permissions!')
 
-        logger.info('Statuses Found!')
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}
         logger.info('Statuses Not Found!')

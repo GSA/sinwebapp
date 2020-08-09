@@ -11,6 +11,6 @@ urlpatterns= [
     path('sins/', views.sin_info_all),
     path('updateSin/', views.sin_info_update),
     path('status/', views.status_info),
-    path('userStatus/', views.status_info_filtered),
+    path('userStatuses/', views.user_status_info),
     path('statuses/', views.status_info_all)
 ]

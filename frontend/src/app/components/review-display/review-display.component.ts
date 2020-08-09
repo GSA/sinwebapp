@@ -22,7 +22,6 @@ export class ReviewDisplayComponent implements OnInit {
   public sin_list : SIN[] = [];
   public user_lookup: User[] = [];
   public status_lookup: Status[] = [];
-  // TODO: user_status_lookup: for user accessible fields
   public selected_SIN: SIN = null_SIN;
   
   constructor(private sinService: SinService,

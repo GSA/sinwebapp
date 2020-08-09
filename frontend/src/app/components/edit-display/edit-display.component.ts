@@ -23,7 +23,7 @@ export class EditDisplayComponent implements OnInit {
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
   public status_lookup: Status[] = [];
-  // TODO: user_status_lookup: for user accessible fields
+  public permission_status_lookup: Status[] = [];
 
   
   constructor(private logger: LogService,
@@ -41,6 +41,10 @@ export class EditDisplayComponent implements OnInit {
     this.statusService.getStatuses().subscribe((statuses)=>{
       this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)
       this.status_lookup = statuses;
+    });
+    this.statusService.getUserStatuses().subscribe((user_statuses)=>{
+      this.logger.log('Retrieved User Statuses', `${this.class_name}.loadComponentData`)
+      this.permission_status_lookup = user_statuses;
     })
   }
 
