@@ -35,11 +35,11 @@ In addition, if the data model is changed, the migrations stored within each app
 
 ### B. Superuser
 
-The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>/env/local.env</i> file, the docker environment variables are set in the <i>/env/container.env</i> file, while the cloud environment variables need to be set manually with the <i>cf cli</i>.
+The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>/env/local.sh</i> script, the docker environment variables are set in the <i>/env/container.env</i> file, while the cloud environment variables can set manually with the <i>cf cli</i> or loaded in through the <i>/env/cloud.sh</i> script when invoking the <i>/scripts/setup-cloud-env.sh</i> script.
 
 ### C. App Structure
 
-The <b>django</b> backend application is broken into several component apps: <i>api</i>, <i>authentication</i> and <i>core</i>. The <i>core</i> app sets up the basic framework necessary for a django app to function. While the application utilizes the external library <i>cg-django-uaa</i> for more of its authentication and authorization, the <i>authentication</i> app is responsible for some application specific customization. The <i>api</i> app provides endpoints that exposeS the database to user queries.  
+The <b>django</b> backend application is broken into several component apps: <i>api</i>, <i>authentication</i> and <i>core</i>. The <i>core</i> app sets up the basic framework necessary for a django app to function. While the application utilizes the external library <i>cg-django-uaa</i> for most of its authentication and authorization, the <i>authentication</i> app is responsible for some application specific customization. The <i>api</i> app provides endpoints that exposeS the database to user queries.  
 
 ## 3.  Building and Pushing
 
