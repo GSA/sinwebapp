@@ -123,7 +123,7 @@ will return a response containing information about the User with ID = 123.
 > ]<br>
 > }
 
-- <i>/api/userStatuses</i> - returns an array of JSONs for all statuses available to given role. For example, the user requesting the statuses is a <i>submitter</i>, the response will only contain the <b>submitted</b> status. If the user requesting the status is a <i>reviewer</i>, then the response will contain the <b>submitted</b>, <b>reviewed</b> and <b>change</b> statuses. If the user is an <i>approver</i> or <i>admin></i>, the response will contain all statuses. 
+- <i>/api/userStatuses</i> - returns an array of JSONs for all statuses available to given role. For example, the user requesting the statuses is a <i>submitter</i>, the response will only contain the <b>submitted</b> status. If the user requesting the status is a <i>reviewer</i>, then the response will contain the <b>submitted</b>, <b>reviewed</b> and <b>change</b> statuses. If the user is an <i>approver</i> or <i>admin</i>, the response will contain all statuses. 
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
 > [<br>
