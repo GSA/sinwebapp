@@ -4,12 +4,6 @@ export interface Status{
     description: string,
 }
 
-export const null_Status: Status = {
-    id: null,
-    name: null,
-    description: null
-}
-
 export const STATUS_STATE = {
     submitted: 1,
     reviewed: 2,

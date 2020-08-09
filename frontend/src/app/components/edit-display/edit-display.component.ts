@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { SIN, null_SIN } from 'src/app/models/sin';
-import { LogService } from 'src/app/services/log.service';
+import { SIN } from 'src/app/models/sin';
+import { GROUPS } from 'src/app/models/user';
 import { Status } from 'src/app/models/status';
+import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 
 @Component({
@@ -12,11 +13,6 @@ export class EditDisplayComponent implements OnInit {
   
   private class_name = "EditDisplayComponent";
 
-  @Output() public cancel_event = new EventEmitter<String>();
-  @Output() public save_event = new EventEmitter<SIN>();
-  @Input() public input_SIN : SIN;
-  @Input() public user_group: string[];
-
   public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
   public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
   public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
@@ -25,6 +21,10 @@ export class EditDisplayComponent implements OnInit {
   public status_lookup: Status[] = [];
   public permission_status_lookup: Status[] = [];
 
+  @Input() public input_SIN : SIN;
+  @Input() public user_group: string[];
+  @Output() public cancel_event = new EventEmitter<String>();
+  @Output() public save_event = new EventEmitter<SIN>();
   
   constructor(private logger: LogService,
               private statusService: StatusService) { }
@@ -38,14 +38,17 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN = Object.assign(this.edit_SIN, this.input_SIN);
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
     this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-    this.statusService.getStatuses().subscribe((statuses)=>{
-      this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)
-      this.status_lookup = statuses;
-    });
-    this.statusService.getUserStatuses().subscribe((user_statuses)=>{
-      this.logger.log('Retrieved User Statuses', `${this.class_name}.loadComponentData`)
-      this.permission_status_lookup = user_statuses;
-    })
+    if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer)){
+      this.logger.log(`Retrieving Statues For Role ${this.user_group[0]}`, `${this.class_name}.loadComponentData`)
+      this.statusService.getStatuses().subscribe((statuses)=>{
+        this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)
+        this.status_lookup = statuses;
+      });
+      this.statusService.getUserStatuses().subscribe((user_statuses)=>{
+        this.logger.log('Retrieved User Statuses', `${this.class_name}.loadComponentData`)
+        this.permission_status_lookup = user_statuses;
+      })
+    }
   }
 
   public cancel(): void {

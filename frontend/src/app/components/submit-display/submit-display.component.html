@@ -3,38 +3,43 @@
     <div class = "panel-heading">SIN Submissions</div>
     
     <!--Status Mode Panel-->
-    <div *ngIf ="!whichMode && user_SINs" class = "panel-body">
+    <div *ngIf ="!submit_mode && user_SINs" class = "panel-body" id="sin-status-panel">
         <div *ngIf = "submitted" id="submission-message"
                 class="alert alert-success" role="alert">Thank you for your submission!</div>
         <div *ngIf = "save_message" id="save-message" 
                 class="alert alert-success" role="alert">SIN Entry Has Been Saved!</div>        
-        <table class="table">
+        <table class="table" id="sin-status-table">
             <tr>
                 <th>#</th>
                 <th>SIN</th>
                 <th>Status</th>
             </tr>
             <tr *ngFor = "let sin of user_SINs; let i = index;" 
-                class = "clickable hoverable"
-                [class.selected] = "sin === selected_SIN && selectable"
+                id="sin-status-table-entry" [class.clickable] = "selectable" 
+                [class.hoverable] = "selectable" [class.selected] = "sin === selected_SIN && selectable"
                 (click) = "selectSIN(sin)">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
             </tr>
         </table>
-        <button type="submit" class = "btn btn-default btn-sm right" 
+        <button type="submit" id ="new-sin-btn"
+                class = "btn btn-default btn-sm right" 
                 (click) = "switchModes()">Create New Submission</button>
     </div>
 
     <!-- Submit Mode Panel-->
-    <div *ngIf = "whichMode" class = "panel-body">
-        <label> SIN: <input [(ngModel)] = "submit_SIN.sin_number" type = "text"    
-                                placeholder = "Type SIN # Here"> </label><br>
+    <div *ngIf = "submit_mode" class = "panel-body" id="sin-submit-panel">
+        <label for="sin-submit-input"> SIN:</label>
+        <input [(ngModel)]="submit_SIN.sin_number" 
+                type="text" id="sin-submit-input"    
+                placeholder="Type SIN # Here"><br>
 
-        <button *ngIf="submit_SIN.sin_number" class = "btn btn-default btn-sm right"
-                type = "Submit" (click)="submitSIN()">Submit</button>
-        <button *ngIf="!submit_SIN.sin_number" class = "btn btn-default btn-sm right"
+        <button *ngIf="submit_SIN.sin_number" id="sin-submit-btn-enabled"
+                class="btn btn-default btn-sm right"
+                type="Submit" (click)="submitSIN()">Submit</button>
+        <button *ngIf="!submit_SIN.sin_number" id="sin-submit-btn-disabled" 
+                class="btn btn-default btn-sm right"
                 type = "Submit" disabled>Submit</button><br><br>
     </div>
 

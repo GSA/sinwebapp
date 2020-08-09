@@ -13,10 +13,10 @@ def init_groups(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_groups").get_logger()
     logger.info("> Initializing Groups...")
 
-    admin_group = Group.objects.get_or_create(name=GROUPS.admin)
-    submitter_group = Group.objects.get_or_create(name=GROUPS.submitter)
-    reviewer_group = Group.objects.get_or_create(name=GROUPS.reviewer)
-    approver_group = Group.objects.get_or_create(name=GROUPS.approver)
+    admin_group = Group.objects.get_or_create(name=GROUPS['admin'])
+    submitter_group = Group.objects.get_or_create(name=GROUPS['submitter'])
+    reviewer_group = Group.objects.get_or_create(name=GROUPS['reviewer'])
+    approver_group = Group.objects.get_or_create(name=GROUPS['approver'])
 
 def init_permissions(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_permissions").get_logger()
@@ -31,19 +31,19 @@ def init_group_permissions(apps, schema_editor):
     logger = DebugLogger("authentication.db_config.init_group_permissions").get_logger()
     logger.info("> Initializing Group Permissions...")
     
-    submitter_group = Group.objects.get(name=GROUPS.submitter)
+    submitter_group = Group.objects.get(name=GROUPS['submitter'])
     submitter_permissions = Permission.objects.get(codename='submit_sin')
     submitter_group.permissions.add(submitter_permissions)
 
-    reviewer_group = Group.objects.get(name=GROUPS.reviewer)
+    reviewer_group = Group.objects.get(name=GROUPS['reviewer'])
     reviewer_permissions = Permission.objects.get(codename='review_sin')
     reviewer_group.permissions.add(reviewer_permissions)
 
-    approver_group = Group.objects.get(name=GROUPS.approver)
+    approver_group = Group.objects.get(name=GROUPS['approver'])
     approver_permissions = Permission.objects.get(codename='approve_sin')
     approver_group.permissions.add(approver_permissions)
 
-    admin_group = Group.objects.get(name=GROUPS.admin)
+    admin_group = Group.objects.get(name=GROUPS['admin'])
     admin_group.permissions.add(submitter_permissions)
     admin_group.permissions.add(reviewer_permissions)
     admin_group.permissions.add(approver_permissions)
@@ -51,17 +51,17 @@ def init_group_permissions(apps, schema_editor):
 def init_default_users(app, schema_editor):
     if settings.APP_ENV == 'local' or settings.APP_ENV == 'container':
         submitter = User.objects.create_user(username="submitter", email="submitter@gsa.gov")
-        submitter_group = Group.objects.get(name=GROUPS.submitter)
+        submitter_group = Group.objects.get(name=GROUPS['submitter'])
         submitter_group.user_set.add(submitter)
         submitter.save()
 
         approver = User.objects.create_user(username="approver", email="approver@gsa.gov")
-        approver_group = Group.objects.get(name=GROUPS.approver)
+        approver_group = Group.objects.get(name=GROUPS['approver'])
         approver_group.user_set.add(approver)
         approver.save()
         
         reviewer = User.objects.create_user(username="reviewer",email="reviewer@gsa.gov")
-        reviewer_group = Group.objects.get(name=GROUPS.reviewer)
+        reviewer_group = Group.objects.get(name=GROUPS['reviewer'])
         reviewer_group.user_set.add(reviewer)
         reviewer.save()
 
@@ -69,6 +69,6 @@ def init_default_users(app, schema_editor):
         super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
         super_pass = os.getenv('DJANGO_SUPERUSER_PASSWORD')
         super_user = User.objects.create_superuser(username=super_name, email=super_email, password=super_pass)
-        admin_group = Group.objects.get(name=GROUPS.admin)
+        admin_group = Group.objects.get(name=GROUPS['admin'])
         admin_group.user_set.add(super_user)
         super_user.save()

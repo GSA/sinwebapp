@@ -10,9 +10,3 @@ export const GROUPS = {
     approver: 'approver_group',
     admin: 'admin_group'
 }
-
-export const null_User : User ={
-    id: null,
-    email: null,
-    groups: null
-}

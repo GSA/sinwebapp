@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { User, null_User } from '../../models/user';
+import { User } from '../../models/user';
+import { SIN } from 'src/app/models/sin';
+import { Status } from 'src/app/models/status';
+import { SinService } from 'src/app/services/sin.service';
 import { UserService } from '../../services/user.service'
 import { LogService } from 'src/app/services/log.service';
-import { null_SIN, SIN } from 'src/app/models/sin';
 import { StatusService } from 'src/app/services/status.service';
-import { Status } from 'src/app/models/status';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { SinService } from 'src/app/services/sin.service';
 
 @Component({
   selector: 'app-user-display',
@@ -16,9 +15,9 @@ export class UserDisplayComponent implements OnInit {
 
   private class_name = "UserDisplayComponent";
 
-  public user : User = null_User;
-  public selected_User: User = null_User;
-  public selected_SIN: SIN = null_SIN;
+  public user : User = { id: null, email: null, groups: null}
+  public selected_User: User = { id: null, email: null, groups: null}
+  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
   public edit_mode : boolean = false;
   public saved : boolean = false;
   public status_lookup: Status[] = [];
@@ -65,7 +64,8 @@ export class UserDisplayComponent implements OnInit {
       this.saved = false;
     }
     else{ 
-      this.logger.log('View Mode Activated', `${this.class_name}.switchModes`)}
+      this.logger.log('View Mode Activated', `${this.class_name}.switchModes`) 
+    }
   }
 
   public saveSIN(sin: SIN): void{
@@ -73,14 +73,14 @@ export class UserDisplayComponent implements OnInit {
     this.sinService.updateSIN(sin).subscribe((updateSIN)=>{
       this.logger.log(`Sin #${updateSIN.sin_number} Updated`, `${this.class_name}.saveSIN`)
     })
-    this.selected_SIN = null_SIN;
+    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
     this.saved = true;
     this.switchModes();
   }
 
   public cancel(msg: String): void{ 
     this.logger.log('Cancelling Edit Mode', `${this.class_name}.cancel`);
-    this.selected_SIN = null_SIN;
+    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
     this.switchModes(); 
   }
 }

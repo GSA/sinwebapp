@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
-import { SinService } from 'src/app/services/sin.service';
-import { LogService } from 'src/app/services/log.service';
-import { SIN, null_SIN } from 'src/app/models/sin';
+import { SIN } from 'src/app/models/sin';
 import { Status } from '../../models/status'
 import { User } from 'src/app/models/user';
 import { StatusService } from 'src/app/services/status.service';
 import { UserService } from 'src/app/services/user.service';
+import { SinService } from 'src/app/services/sin.service';
+import { LogService } from 'src/app/services/log.service';
 
 @Component({
   selector: 'app-review-display',
@@ -15,14 +15,15 @@ export class ReviewDisplayComponent implements OnInit {
 
   private class_name = "ReviewDisplayComponent"
   
-  @Output() selection_event = new EventEmitter<SIN>();
-  @Input() user: User;
-  @Input() selectable: boolean;
-  @Input() save_message: boolean;
   public sin_list : SIN[] = [];
   public user_lookup: User[] = [];
   public status_lookup: Status[] = [];
-  public selected_SIN: SIN = null_SIN;
+  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+
+  @Output() public selection_event = new EventEmitter<SIN>();
+  @Input() public user: User;
+  @Input() public selectable: boolean;
+  @Input() public save_message: boolean;
   
   constructor(private sinService: SinService,
               private statusService: StatusService,

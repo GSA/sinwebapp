@@ -267,14 +267,14 @@ def sin_info_all(request):
 
     try:
         retrieved_sins = list(Sin.objects.values())
+        if len(retrieved_sins) == 0:
+            retrieved_sins = { 'message': '0 SINs found' }
+            logger.info('0 SINs Found!')
+        else:
+            logger.info('SINs Found!')
     except Sin.DoesNotExist:
         retrieved_sins = { 'message': 'SINs Do Not Exist' }
         logger.info('SINs Not Found!')
-    if len(retrieved_sins) == 0:
-        retrieved_sins = { 'message': '0 SINs found' }
-        logger.info('0 SINs Found!')
-    else:
-        logger.info('SINs Found!')
 
     return JsonResponse(retrieved_sins, safe=False)
 
@@ -312,20 +312,20 @@ def status_info(request):
 # signed into the request's session
 @login_required
 def user_status_info(request):
-    logger = DebugLogger('sinwebapp.api.views.status_info_filtered').get_logger()
+    logger = DebugLogger('sinwebapp.api.views.user_status_info').get_logger()
     logger.info('Retrieving All Statuses')
 
     try:
         group_list = request.user.groups.values_list('name', flat=True)
-        if GROUPS.submitter in group_list:
-            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES.submitted]).values())
+        if GROUPS['submitter'] in group_list:
+            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted']]).values())
             logger.info('Status Found!')
-        elif GROUPS.reviewer in group_list:
-            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES.submitted,
-                                                                    STATUS_STATES.reviewed,
-                                                                    STATUS_STATES.change]).values())
+        elif GROUPS['reviewer'] in group_list:
+            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted'],
+                                                                    STATUS_STATES['reviewed'],
+                                                                    STATUS_STATES['change']]).values())
             logger.info('Statuses Found!')
-        elif GROUPS.approver in group_list or GROUPS.admin in group_list:
+        elif GROUPS['approver'] in group_list or GROUPS['admin'] in group_list:
             retrieved_statuses = list(Status.objects.values())
             logger.info('Statuses Found!')
         else:
@@ -335,9 +335,6 @@ def user_status_info(request):
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}
         logger.info('Statuses Not Found!')
-    if len(retrieved_statuses)==0:
-        retrieved_statues = { 'message' : '0 Statuses Found' }
-        logger.info('0 Statuses Found!')
         
     return JsonResponse(retrieved_statuses, safe=False)
 
@@ -349,12 +346,13 @@ def status_info_all(request):
     try:
         group_list = request.user.groups.values_list('name', flat=True)
         retrieved_statuses = list(Status.objects.values())
-        logger.info('Statuses Found!')
+        if len(retrieved_statuses)==0:
+            retrieved_statues = { 'message' : '0 Statuses Found' }
+            logger.info('0 Statuses Found!')
+        else:
+            logger.info('Statuses Found!')
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}
         logger.info('Statuses Not Found!')
-    if len(retrieved_statuses)==0:
-        retrieved_statues = { 'message' : '0 Statuses Found' }
-        logger.info('0 Statuses Found!')
         
     return JsonResponse(retrieved_statuses, safe=False)

@@ -113,11 +113,20 @@ will return a JSON formatted response containing information about SIN Number 12
 > { <br>
 > [<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 > ]<br>
 > }
 
+- <i>/api/userStatuses</i> - returns an array of JSONs for all statuses available to given role. For example, the user requesting the statuses is a <i>submitter</i>, the response will only contain the <b>submitted<b> status. If a user reqeuesting the statues is an <i>reviewer</i>, then the resonse will contain the <b>submitted</b>, <b>reviewed</b> and <b>change</b> statuses. If the user is an <i>approver</i> or <i>admin></i>, the response will contain all statuses. 
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+> [<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+> ]<br>
+> }
 
 - <i>/api/status</i> - given a query parameter of ID, this GET method retrieves a Status Name and Description for an ID. For example,
 
@@ -128,7 +137,7 @@ will return a JSON containing the ID's status name and description in the follow
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >}
 
