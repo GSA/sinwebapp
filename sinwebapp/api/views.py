@@ -103,18 +103,18 @@ def sin_info_update(request):
     body = json.loads(body_unicode)
 
     sin_number = body['sin_number']
+    sin_id = body['id']
+    status_id = body['status_id']
     try:
-        sin_id = Sin.objects.get(sin_number=sin_number).id
-        logger.info('SIN Found')
-        status_id = body['status_id']
+        new_status = Status.objects.get(id=status_id)
+        logger.info('Status Found')
+        user_id = body['user_id']
         try:
-            new_status = Status.objects.get(id=status_id)
-            logger.info('Status Found')
-            user_id = body['user_id']
+            new_user = User.objects.get(id=user_id)
+            logger.info('User Found')
             try:
-                new_user = User.objects.get(id=user_id)
-                logger.info('User Found')
                 new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)
+                logger.info('SIN Found')   
                 new_sin.save()
                 response={
                     'id': sin_id,
@@ -122,17 +122,17 @@ def sin_info_update(request):
                     'status_id': new_status.id,
                     'user_id': new_user.id
                 }
-            except User.DoesNotExist:
-                response = { 'message': 'User Does Not Exist'}
-                logger.info('User Not Found')
+            except Sin.DoesNotExist:
+                response = { 'message': 'SIN Does Not Exist'}
+                logger.info('SIN Not Found')    
+        except User.DoesNotExist:
+            response = { 'message': 'User Does Not Exist'}
+            logger.info('User Not Found')
 
-        except Status.DoesNotExist:
-            response = { 'message' : 'Status Does Not Exist'}
-            logger.info('Status Not Found')
+    except Status.DoesNotExist:
+        response = { 'message' : 'Status Does Not Exist'}
+        logger.info('Status Not Found')
         
-    except Sin.DoesNotExist:
-        response = { 'message': 'SIN Does Not Exist'}
-        logger.info('SIN Not Found')
 
     return JsonResponse(response, safe=False)
 
