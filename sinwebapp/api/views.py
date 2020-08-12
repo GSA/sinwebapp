@@ -5,7 +5,8 @@ from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from api.models import Sin, Status, STATUS_STATES
+from api.models import Sin, Status
+from api.models import STATUS_STATES, STATUS_FIELDS, SIN_FIELDS
 from authentication.db_init import GROUPS
 
 from debug import DebugLogger
@@ -78,6 +79,7 @@ def sin_user_info(request):
         logger.info('Using User ID Query Parameter: %s', user_id)
         try:
             raw_user = User.objects.get(id=user_id)
+            # TODO: Check if length is zero
             group_list = list(raw_user.groups.values_list('name', flat=True))
             logger.info('User Found!')
             retrieved_user = {
@@ -101,38 +103,57 @@ def sin_info_update(request):
 
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
+    body_keys = list(body.keys())
+    parameter_check = True
 
-    sin_number = body['sin_number']
-    sin_id = body['id']
-    status_id = body['status_id']
-    try:
-        new_status = Status.objects.get(id=status_id)
-        logger.info('Status Found')
+    for parameter in SIN_FIELDS:
+        if parameter not in body_keys:
+            parameter_check = False
+
+    if parameter_check:
+
+        parsed_request = {}
+        for parameter in SIN_FIELDS:
+            parsed_request[parameter] = body[parameter]
+
+        for key,value in parsed_request.items():
+            logger.info('key: %s, value: %s', key, value)
+
+        sin_number = body['sin_number']
+        sin_id = body['id']
+        status_id = body['status_id']
         user_id = body['user_id']
-        try:
-            new_user = User.objects.get(id=user_id)
-            logger.info('User Found')
-            try:
-                new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)
-                logger.info('SIN Found')   
-                new_sin.save()
-                response={
-                    'id': sin_id,
-                    'sin_number': sin_number,
-                    'status_id': new_status.id,
-                    'user_id': new_user.id
-                }
-            except Sin.DoesNotExist:
-                response = { 'message': 'SIN Does Not Exist'}
-                logger.info('SIN Not Found')    
-        except User.DoesNotExist:
-            response = { 'message': 'User Does Not Exist'}
-            logger.info('User Not Found')
 
-    except Status.DoesNotExist:
-        response = { 'message' : 'Status Does Not Exist'}
-        logger.info('Status Not Found')
-        
+        try:
+            new_status = Status.objects.get(id=status_id)
+            logger.info('Status Found')
+            try:
+                new_user = User.objects.get(id=user_id)
+                logger.info('User Found')
+                try:
+                    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)
+                    logger.info('SIN Found')   
+                    new_sin.save()
+                    response={
+                        'id': sin_id,
+                        'sin_number': sin_number,
+                        'status_id': new_status.id,
+                        'user_id': new_user.id
+                    }
+                except Sin.DoesNotExist:
+                    response = { 'message': 'SIN Does Not Exist'}
+                    logger.info('SIN Not Found')    
+            except User.DoesNotExist:
+                response = { 'message': 'User Does Not Exist'}
+                logger.info('User Not Found')
+        except Status.DoesNotExist:
+            response = { 'message' : 'Status Does Not Exist'}
+            logger.info('Status Not Found')
+    
+    else:
+
+        response = { 'message' : 'Body Parameter Parsing Error'}
+        logger.info('Error Parsing Parameters in Request Body')
 
     return JsonResponse(response, safe=False)
 

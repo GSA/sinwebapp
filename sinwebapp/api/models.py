@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
-STATUS_STATES = {
-    'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 'denied': 5, 'expired': 6
-}
+STATUS_FIELDS = ['id', 'name', 'description']
+SIN_FIELDS=['id','user_id','sin_number','status_id']
+STATUS_STATES = { 'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 'denied': 5, 'expired': 6 }
+
 
 class Status(models.Model):
     name = models.CharField(max_length=20)
