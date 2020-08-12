@@ -10,7 +10,7 @@ GROUPS = {
 }
 
 def init_groups(apps, schema_editor):
-    logger = DebugLogger("authentication.db_config.init_groups").get_logger()
+    logger = DebugLogger("authentication.db_init.init_groups").get_logger()
     logger.info("Initializing Groups")
 
     admin_group = Group.objects.get_or_create(name=GROUPS['admin'])
@@ -19,7 +19,7 @@ def init_groups(apps, schema_editor):
     approver_group = Group.objects.get_or_create(name=GROUPS['approver'])
 
 def init_permissions(apps, schema_editor):
-    logger = DebugLogger("authentication.db_config.init_permissions").get_logger()
+    logger = DebugLogger("authentication.db_init.init_permissions").get_logger()
     logger.info("Initializing Permissions")
 
     ct = ContentType.objects.get_for_model(User)
@@ -28,7 +28,7 @@ def init_permissions(apps, schema_editor):
     approve_sin = Permission.objects.get_or_create(name='Approve SIN', content_type=ct, codename='approve_sin')
 
 def init_group_permissions(apps, schema_editor):
-    logger = DebugLogger("authentication.db_config.init_group_permissions").get_logger()
+    logger = DebugLogger("authentication.db_init.init_group_permissions").get_logger()
     logger.info("Initializing Group Permissions")
     
     submitter_group = Group.objects.get(name=GROUPS['submitter'])
@@ -49,7 +49,7 @@ def init_group_permissions(apps, schema_editor):
     admin_group.permissions.add(approver_permissions)
 
 def init_default_users(app, schema_editor):
-    logger = DebugLogger("authentication.db_config.init_default_users").get_logger()
+    logger = DebugLogger("authentication.db_init.init_default_users").get_logger()
     logger.info("Initializing Default Users")
 
     if settings.APP_ENV == 'local' or settings.APP_ENV == 'container':

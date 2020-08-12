@@ -106,23 +106,16 @@ def sin_info_update(request):
     body_keys = list(body.keys())
     parameter_check = True
 
-    for parameter in SIN_FIELDS:
+    for key, parameter in SIN_FIELDS.items():
         if parameter not in body_keys:
             parameter_check = False
 
     if parameter_check:
 
-        parsed_request = {}
-        for parameter in SIN_FIELDS:
-            parsed_request[parameter] = body[parameter]
-
-        for key,value in parsed_request.items():
-            logger.info('key: %s, value: %s', key, value)
-
-        sin_number = body['sin_number']
-        sin_id = body['id']
-        status_id = body['status_id']
-        user_id = body['user_id']
+        sin_id = body[SIN_FIELDS[1]]
+        sin_number = body[SIN_FIELDS[2]]
+        user_id = body[SIN_FIELDS[3]]
+        status_id = body[SIN_FIELDS[4]]
 
         try:
             new_status = Status.objects.get(id=status_id)
@@ -135,10 +128,10 @@ def sin_info_update(request):
                     logger.info('SIN Found')   
                     new_sin.save()
                     response={
-                        'id': sin_id,
-                        'sin_number': sin_number,
-                        'status_id': new_status.id,
-                        'user_id': new_user.id
+                        SIN_FIELDS[1]: sin_id,
+                        SIN_FIELDS[2]: sin_number,
+                        SIN_FIELDS[3]: new_status.id,
+                        SIN_FIELDS[4]: new_user.id
                     }
                 except Sin.DoesNotExist:
                     response = { 'message': 'SIN Does Not Exist'}
@@ -283,7 +276,7 @@ def sin_info(request):
 # Description: retrieves information on all SIN numbers
 @login_required
 def sin_info_all(request):
-    logger = DebugLogger("sinwebapp.api.views.get_all_sins_info").get_logger()
+    logger = DebugLogger("sinwebapp.api.views.sins_info_all").get_logger()
     logger.info('Retrieving All SIN Info...')
 
     try:

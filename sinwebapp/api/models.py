@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import datetime
 
 STATUS_FIELDS = ['id', 'name', 'description']
-SIN_FIELDS=['id','user_id','sin_number','status_id']
+SIN_FIELDS={ 1: 'id', 2: 'sin_number', 3: 'user_id', 4: 'status_id' }
 STATUS_STATES = { 'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 'denied': 5, 'expired': 6 }
 
 

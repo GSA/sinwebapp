@@ -2,11 +2,12 @@ from debug import DebugLogger
 from api.models import Status, STATUS_STATES
 
 def init_status(apps, schema_editor):
-    logger = DebugLogger("authentication.db_config.init_status").get_logger()
+    logger = DebugLogger("api.db_init.init_status").get_logger()
     logger.info('Initializing Status Types')
     
     key_list = list(STATUS_STATES.keys()) 
     val_list = list(STATUS_STATES.values()) 
+    
     submitted = Status.objects.get_or_create(name=key_list[val_list.index(1)], 
                                              description="SIN form has been submitted for review and approval.")
     reviewed = Status.objects.get_or_create(name=key_list[val_list.index(2)], 
