@@ -81,10 +81,18 @@ You can execute
 
 To run the containers as detached, i.e. in the background.
 
+Doing this too often can create dangling images in your Docker cache that need to be cleaned up every time you make a change to the code in addition to other garbage that can accumulate in the cache. The script <i>/scripts/build-container.sh</i> will clean up any artifacts leftover during docker builds and keep your system nice and tidy. Instead of using <i>docker-compose up</i>, invoke from the project root directory,
+
+> ./scripts/build-container.sh
+
+At the base, this script uses <i>docker-compose up</i> but will also perform some basic house cleaning so your system doesn't overload. If you ever receive an error that one of your 'docker repositories is unsigned', this is probably because your cache is overloaded. You will need to prune some the cache and remove some of the dangling docker images before the application will build properly. See the Stack Overflow link in the Appendix for more information on this error.
+
 3. Remove the containers with the following command,
 
 > docker-compose stop<br>
 > docker-compose down
+
+Note: the <i>build-container.sh</i> script will automatically prune running containers before building and orchestrating new images. 
 
 ## CloudFoundry Environment
 
