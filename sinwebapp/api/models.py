@@ -14,7 +14,17 @@ class Status(models.Model):
 class Sin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    sin_number = models.IntegerField(null=False)
+    sin_identity = models.CharField(max_length=1000)
+    schedule_number = models.CharField(max_length=1000)
+    special_item_number = models.CharField(max_length=1000)
+    sin_group_title = models.CharField(max_length=1000)
+    sin_description1 = models.CharField(max_length=1000)
+    sin_description2 = models.CharField(max_length=1000)
+    sin_order = models.CharField(max_length=1000)
+    co_fname = models.CharField(max_length=1000)
+    co_lname = models.CharField(max_length=1000)
+    co_phone = models.CharField(max_length=1000)
+    co_email = models.CharField(max_length=1000)
 
 class Audit_Log(models.Model):
     sin = models.ForeignKey(Sin, on_delete=models.CASCADE)
