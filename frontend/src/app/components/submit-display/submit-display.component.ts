@@ -15,11 +15,13 @@ export class SubmitDisplayComponent implements OnInit {
   private class_name = "SubmitDisplayComponent"
 
   public submit_mode : boolean = false;
-  public edit_mode: boolean = false;
+  public exists : boolean;
   public submitted: boolean = false;
   public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                sin_description1: null, sin_group_title: null };
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                                sin_description1: null, sin_group_title: null };
+  public existing_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                 sin_description1: null, sin_group_title: null };
   public user_SINs: SIN[] =[];
   public all_SINs: SIN[] =[]
@@ -68,7 +70,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description1: null, sin_group_title: null };
       this.submitted = true;
-      this.switchModes();
+      this.switchModes(false);
     })
   }
 
@@ -76,7 +78,9 @@ export class SubmitDisplayComponent implements OnInit {
     this.submitted = false;
   }
   
-  public switchModes(): void{
+  public switchModes(exists: boolean): void{
+    this.exists = exists;
+    if(this.exists){ this.loadAllSINs(); }
     this.logger.log('Switching Modes', `${this.class_name}.switchModes`);
     this.submit_mode = !this.submit_mode;
     if(!this.submit_mode){ 
@@ -84,7 +88,8 @@ export class SubmitDisplayComponent implements OnInit {
       this.loadUserSINs();
     }
     else{ 
-      this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`);
+      if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
+      else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
       this.submitted = false;
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description1: null, sin_group_title: null };
@@ -99,6 +104,11 @@ export class SubmitDisplayComponent implements OnInit {
     this.selected_SIN = sin;
     this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`);
     this.selection_event.emit(sin);
+  }
+
+  public selectExistingSIN(sin: SIN){
+    this.logger.log(`Selecting Pre-existing SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
+    this.existing_SIN = sin;
   }
   
 }
