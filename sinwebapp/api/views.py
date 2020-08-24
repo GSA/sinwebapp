@@ -117,7 +117,7 @@ def sin_info_update(request):
         user_id = body[SIN_FIELDS[3]]
         status_id = body[SIN_FIELDS[4]]
         sin_description = body[SIN_FIELDS[5]]
-        sin_title = body[SIN_FIELDS[7]]
+        sin_title = body[SIN_FIELDS[6]]
 
         try:
             new_status = Status.objects.get(id=status_id)
@@ -136,7 +136,7 @@ def sin_info_update(request):
                         SIN_FIELDS[3]: new_status.id,
                         SIN_FIELDS[4]: new_user.id,
                         SIN_FIELDS[5]: sin_description,
-                        SIN_FIELDS[7]: sin_title
+                        SIN_FIELDS[6]: sin_title
                     }
                 except Sin.DoesNotExist:
                     response = { 'message': 'SIN Does Not Exist'}
@@ -149,7 +149,6 @@ def sin_info_update(request):
             logger.info('Status Not Found')
     
     else:
-
         response = { 'message' : 'Body Parameter Parsing Error'}
         logger.info('Error Parsing Parameters in Request Body')
 

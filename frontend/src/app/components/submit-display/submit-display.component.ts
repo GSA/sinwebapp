@@ -76,13 +76,16 @@ export class SubmitDisplayComponent implements OnInit {
     }
     else{
       this.logger.log('Submitting Existing SIN', `${this.class_name}.submitSIN`);
+      if(!this.submit_SIN.status_id) { this.submit_SIN.status_id = this.existing_SIN.status_id; };
+      if(!this.submit_SIN.user_id) { this.submit_SIN.user_id = this.existing_SIN.user_id; };
+      if(!this.submit_SIN.id) { this.submit_SIN.id = this.existing_SIN.id; };
       this.sinService.updateSIN(this.submit_SIN).subscribe((response)=>{
         this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
           sin_description1: null, sin_group_title: null };
           this.submitted = true;
           this.switchModes(false);
-      })
-    }
+      });
+    };
   }
 
   public clearMessage(): void {
@@ -102,6 +105,7 @@ export class SubmitDisplayComponent implements OnInit {
       if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
       else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
       this.submitted = false;
+      // check if submit_SIN fields are null, set equal to selected_SIN if so
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description1: null, sin_group_title: null };
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
