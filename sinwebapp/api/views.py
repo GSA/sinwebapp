@@ -176,7 +176,13 @@ def sin_info(request):
  
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        sin_number =body['sin_number']
+        # TODO 1: use SIN_FIELDS array to verify body contains all parameters
+        # TODO 2: use SIN_FIELDS array to pull all fields from body automatically
+        # instead of doing it manually
+        sin_number = body['sin_number']
+        sin_title = body['sin_group_title']
+        sin_description = body['sin_description1']
+
         logger.info('SIN # Posting: %s', sin_number)
 
         # create submitted status
@@ -199,17 +205,22 @@ def sin_info(request):
                 sin.update(user=request.user, status=new_status)
                 logger.info('Existing SIN # Updated.')
                 return JsonResponse(sin, safe=False)
-                
+        
+        # post new sin
         except Sin.DoesNotExist:
-            sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status)
-            raw_sin = {
-                'id': sin.id,
-                'sin_number': sin_number,
-                'user_id': request.user.id,
-                'status_id': new_status.id
-            }
+            sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status,
+                                        sin_group_title=sin_title, sin_description1=sin_description)
             sin.save()
             logger.info('New SIN # Posted')
+            # TODO: determine how to serialize django model instead of doing this manually
+            raw_sin = {
+                'id': sin.id,
+                'sin_number': sin.sin_number,
+                'user_id': request.user.id,
+                'status_id': new_status.id,
+                'sin_group_title': sin.sin_group_title,
+                'sin_description1': sin.sin_description1
+            }
             return JsonResponse(raw_sin, safe=False)
             
     # retrieving information on a specific SIN

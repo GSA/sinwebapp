@@ -18,9 +18,9 @@ export class SubmitDisplayComponent implements OnInit {
   public edit_mode: boolean = false;
   public submitted: boolean = false;
   public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                               sin_description1: null, sin_description2: null, sin_group_title: null };
+                               sin_description1: null, sin_group_title: null };
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                                sin_description1: null, sin_description2: null, sin_group_title: null };
+                                sin_description1: null, sin_group_title: null };
   public user_SINs: SIN[] =[];
   public status_lookup: Status[] = [];
 
@@ -50,7 +50,7 @@ export class SubmitDisplayComponent implements OnInit {
     this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
       this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_description2: null, sin_group_title: null };
+                            sin_description1: null, sin_group_title: null };
       this.submitted = true;
       this.switchModes();
     })
@@ -79,9 +79,9 @@ export class SubmitDisplayComponent implements OnInit {
       this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
       this.submitted = false;
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_description2: null, sin_group_title: null };
+                            sin_description1: null, sin_group_title: null };
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_description2: null, sin_group_title: null };
+                            sin_description1: null, sin_group_title: null };
     }
   }
 
