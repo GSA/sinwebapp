@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
+# For formatting purposes.
 STATUS_FIELDS = ['id', 'name', 'description']
-SIN_FIELDS={ 1: 'id', 2: 'sin_number', 3: 'user_id', 4: 'status_id' }
+SIN_FIELDS={ 1: 'id', 2: 'sin_number', 3: 'user_id', 4: 'status_id', 5: "sin_description1", 6: "sin_description2", 7:"sin_group_title" }
 STATUS_STATES = { 'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 'denied': 5, 'expired': 6 }
 
 
@@ -15,11 +16,11 @@ class Sin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     sin_number = models.CharField(max_length=1000)
-    schedule_number = models.CharField(max_length=1000, null=True)
-    special_item_number = models.CharField(max_length=1000, null=True)
     sin_group_title = models.CharField(max_length=1000, null=True)
     sin_description1 = models.CharField(max_length=1000, null=True)
     sin_description2 = models.CharField(max_length=1000, null=True)
+    schedule_number = models.CharField(max_length=1000, null=True)
+    special_item_number = models.CharField(max_length=1000, null=True)
     sin_order = models.CharField(max_length=1000, null=True)
     co_fname = models.CharField(max_length=1000, null=True)
     co_lname = models.CharField(max_length=1000, null=True)

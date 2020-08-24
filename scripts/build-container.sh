@@ -1,5 +1,5 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='build-app.sh'
+SCRIPT_NAME='build-container.sh'
 nl=$'\n'
 SCRIPT_DES="This script will stop and remove any Docker containers currently \
 running on your machine,${nl}   clear the Docker cache, configure the frontend \
