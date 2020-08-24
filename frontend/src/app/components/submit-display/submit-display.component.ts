@@ -64,14 +64,25 @@ export class SubmitDisplayComponent implements OnInit {
     })
   }
   public submitSIN(): void{
-    this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`);
-    this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
-      this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`);
-      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
-      this.submitted = true;
-      this.switchModes(false);
-    })
+    if(!this.exists){
+      this.logger.log('Submitting New SIN', `${this.class_name}.submitSIN`);
+      this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
+        this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`);
+        this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                              sin_description1: null, sin_group_title: null };
+        this.submitted = true;
+        this.switchModes(false);
+      })
+    }
+    else{
+      this.logger.log('Submitting Existing SIN', `${this.class_name}.submitSIN`);
+      this.sinService.updateSIN(this.submit_SIN).subscribe((response)=>{
+        this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+          sin_description1: null, sin_group_title: null };
+          this.submitted = true;
+          this.switchModes(false);
+      })
+    }
   }
 
   public clearMessage(): void {
