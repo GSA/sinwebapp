@@ -116,6 +116,8 @@ def sin_info_update(request):
         sin_number = body[SIN_FIELDS[2]]
         user_id = body[SIN_FIELDS[3]]
         status_id = body[SIN_FIELDS[4]]
+        sin_description = body[SIN_FIELDS[5]]
+        sin_title = body[SIN_FIELDS[7]]
 
         try:
             new_status = Status.objects.get(id=status_id)
@@ -131,7 +133,9 @@ def sin_info_update(request):
                         SIN_FIELDS[1]: sin_id,
                         SIN_FIELDS[2]: sin_number,
                         SIN_FIELDS[3]: new_status.id,
-                        SIN_FIELDS[4]: new_user.id
+                        SIN_FIELDS[4]: new_user.id,
+                        SIN_FIELDS[5]: sin_description,
+                        SIN_FIELDS[7]: sin_title
                     }
                 except Sin.DoesNotExist:
                     response = { 'message': 'SIN Does Not Exist'}
