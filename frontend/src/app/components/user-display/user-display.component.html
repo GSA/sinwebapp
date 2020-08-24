@@ -50,12 +50,12 @@
       <!--User Selected SIN Panel-->
       <div class = "col-md-6" id="sin-selection-panel">
 
-        <div *ngIf="!selected_SIN.sin_number"> Select a SIN</div>
-
         <!-- SIN Viewer -->   
         <div *ngIf="!edit_mode" id="sin-selection-viewer" class = "panel panel-default">
         
               <div class="panel-heading">SIN Details</div>
+
+              <div *ngIf="!selected_SIN.sin_number" class="panel-body"> Select a SIN</div>
 
               <div *ngIf = "selected_SIN.status_id && selected_User.id && status_lookup.length > 0" 
                     class="panel-body">
