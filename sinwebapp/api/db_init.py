@@ -50,16 +50,16 @@ def init_sindata(app, schema_editor):
         for row in reader:
             next(reader, None) 
             created = SinData.objects.get_or_create(
-                  co_email=row[0],
-                  co_fname=row[1],
-                  co_lname=row[2],
-                  co_phone=row[3],
-                  schedule_number=row[4],
-                  sin_description1=row[5],
-                  sin_description2=row[6],
-                  sin_group_title=row[7],
-                  sin_order=row[8],
-                  special_item_number=row[9],
-                  sin_number=row[10]
+                  sin_number=row[0],
+                  schedule_number=row[1],
+                  special_item_number=row[2],
+                  sin_group_title=row[3],
+                  sin_description1=row[4],
+                  sin_description2=row[5],
+                  sin_order=row[6],
+                  co_fname=row[7],
+                  co_lname=row[8],
+                  co_phone=row[9],
+                  co_email=row[10]
                 )
             logger.info("Sin Created")
