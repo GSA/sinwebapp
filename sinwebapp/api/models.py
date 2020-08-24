@@ -17,7 +17,9 @@ class Status(models.Model):
 
 class SinData(models.Model):
     sin_number = models.CharField(max_length=1000)
+    schedule_number = models.CharField(max_length=1000, null=True)
     sin_group_title = models.CharField(max_length=1000, null=True)
+    special_item_number = models.CharField(max_length=1000, null=True)
     sin_description1 = models.TextField(null=True)
     sin_description2 = models.TextField(null=True)
     sin_order = models.CharField(max_length=1000, null=True)
