@@ -89,7 +89,7 @@
                         type="text" id="sin-submit-exist-input">
                         <option *ngFor="let sin of all_SINs"
                                 [value]="sin.sin_number"
-                                (click)="selectExistingSIN()"> {{sin.sin_number}} </option>
+                                (click)="selectExistingSIN(sin)"> {{sin.sin_number}} </option>
                 </select><br>
         </div><br>
 
@@ -122,7 +122,7 @@
         <!-- Submission Options-->
         <button *ngIf="submit_SIN.sin_number" id="sin-submit-exists-btn-enabled"
                 class="btn btn-default btn-sm right"
-                type="Submit" (click)="submitSIN(false)">Submit</button>
+                type="Submit" (click)="submitSIN()">Submit</button>
         <button *ngIf="!submit_SIN.sin_number" id="sin-submit-exists-btn-disabled" 
                 class="btn btn-default btn-sm right"
                 type = "Submit" disabled>Submit</button><br><br>
