@@ -13,9 +13,12 @@ export class EditDisplayComponent implements OnInit {
   
   private class_name = "EditDisplayComponent";
 
-  public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-  public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-  public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
+  public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
+  public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
   public status_lookup: Status[] = [];
@@ -37,7 +40,8 @@ export class EditDisplayComponent implements OnInit {
   private loadComponentData(){
     this.edit_SIN = Object.assign(this.edit_SIN, this.input_SIN);
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
-    this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+    this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                           sin_description1: null, sin_description2: null, sin_group_title: null };
     if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer)){
       this.logger.log(`Retrieving Statues For Role ${this.user_group[0]}`, `${this.class_name}.loadComponentData`)
       this.statusService.getStatuses().subscribe((statuses)=>{

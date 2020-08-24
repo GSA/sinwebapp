@@ -46,7 +46,8 @@ export class SubmitDisplayComponent implements OnInit {
     this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`)
     this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
       this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
-      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
       this.submitted = true;
       this.switchModes();
     })
@@ -74,8 +75,10 @@ export class SubmitDisplayComponent implements OnInit {
     else{ 
       this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
       this.submitted = false;
-      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-      this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
+      this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
     }
   }
 

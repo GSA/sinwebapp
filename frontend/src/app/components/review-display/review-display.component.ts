@@ -18,7 +18,8 @@ export class ReviewDisplayComponent implements OnInit {
   public sin_list : SIN[] = [];
   public user_lookup: User[] = [];
   public status_lookup: Status[] = [];
-  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                                sin_description1: null, sin_description2: null, sin_group_title: null };
 
   @Output() public selection_event = new EventEmitter<SIN>();
   @Input() public user: User;

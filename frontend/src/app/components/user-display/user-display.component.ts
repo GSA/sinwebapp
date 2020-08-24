@@ -17,7 +17,8 @@ export class UserDisplayComponent implements OnInit {
 
   public user : User = { id: null, email: null, groups: null}
   public selected_User: User = { id: null, email: null, groups: null}
-  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null, 
+                                sin_description1: null, sin_description2: null, sin_group_title: null };
   public edit_mode : boolean = false;
   public saved : boolean = false;
   public status_lookup: Status[] = [];
@@ -73,14 +74,16 @@ export class UserDisplayComponent implements OnInit {
     this.sinService.updateSIN(sin).subscribe((updateSIN)=>{
       this.logger.log(`Sin #${updateSIN.sin_number} Updated`, `${this.class_name}.saveSIN`)
     })
-    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
     this.saved = true;
     this.switchModes();
   }
 
   public cancel(msg: String): void{ 
     this.logger.log('Cancelling Edit Mode', `${this.class_name}.cancel`);
-    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_description2: null, sin_group_title: null };
     this.switchModes(); 
   }
 }
