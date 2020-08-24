@@ -15,9 +15,12 @@ export class SubmitDisplayComponent implements OnInit {
   private class_name = "SubmitDisplayComponent"
 
   public submit_mode : boolean = false;
+  public edit_mode: boolean = false;
   public submitted: boolean = false;
-  public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                               sin_description1: null, sin_description2: null, sin_group_title: null };
+  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                                sin_description1: null, sin_description2: null, sin_group_title: null };
   public user_SINs: SIN[] =[];
   public status_lookup: Status[] = [];
 

@@ -32,7 +32,7 @@
     </div><br><br>
 
     <!--Status Editor-->
-    <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group')">
+    <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group') || user_group.includes('admin_group')">
         Status<br> 
         <label for="current-status">Current Status:</label>
         <span id="current-status" class="right">{{this.status_lookup[this.edit_SIN.status_id-1].name}}</span><br>
@@ -68,6 +68,7 @@
 
     </div>
 
+    <!-- Save Editor -->
     <div *ngIf = "applied_SIN || applied_Status" id="save-changes-msg" 
                 class="alert alert-warning" role="alert">Please Save Your Changes</div>
     <button type="submit" class="btn btn-default btn-sm" id ="cancel-btn"

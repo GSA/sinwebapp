@@ -42,7 +42,7 @@ export class EditDisplayComponent implements OnInit {
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
     this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                            sin_description1: null, sin_description2: null, sin_group_title: null };
-    if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer)){
+    if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer) || this.user_group.includes(GROUPS.admin)){
       this.logger.log(`Retrieving Statues For Role ${this.user_group[0]}`, `${this.class_name}.loadComponentData`)
       this.statusService.getStatuses().subscribe((statuses)=>{
         this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)

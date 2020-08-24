@@ -40,7 +40,7 @@
                               [user] = "user" [selectable] = "!edit_mode" [save_message] = "saved"
                               (selection_event)="selectSIN($event)"></app-submit-display>
         </div>
-        <div *ngIf = "user.groups.includes('approver_group') || user.groups.includes('reviewer_group')">
+        <div *ngIf = "user.groups.includes('approver_group') || user.groups.includes('reviewer_group') || user.groups.includes('admin_group')">
           <app-review-display id="review-app-component"
                               [user] = "user" [selectable] = "!edit_mode" [save_message] = "saved"
                               (selection_event)="selectSIN($event)"></app-review-display>
@@ -57,11 +57,11 @@
               <div *ngIf = "selected_SIN.status_id && selected_User.id && status_lookup.length > 0" 
                     class="panel-body">
                 SIN #:<br> <span class = "right">{{this.selected_SIN.sin_number}}</span><br>
-                Title : <br> <span class = "right">{{this.select_SIN.sin_group_title</span><br>
+                Title : <br> <span class = "right">{{this.selected_SIN.sin_group_title}}</span><br>
                 Status:<br> <span class = "right">{{this.status_lookup[this.selected_SIN.status_id-1].name}}</span><br>
                 Submitted By:<br> <span class = "right">{{this.selected_User.email}}</span><br>
-                Submitted To:<br> <span class = "right"><b>TODO</b></span><br><br>
-                Description: <br> <span class = "right"> {{this.select_Select.sin_description1}} </span>
+                Submitted To:<br> <span class = "right"><b>TODO</b></span><br>
+                Description: <br> <span class = "right"> {{this.selected_SIN.sin_description1}} </span><br><br>
 
                 <button type="submit" class = "right btn btn-default btn-sm" (click) = "switchModes()">
                   Edit</button>
