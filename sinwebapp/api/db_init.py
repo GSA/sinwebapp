@@ -62,6 +62,5 @@ def init_sindata(app, schema_editor):
                   co_phone=row[9],
                   co_email=row[10]
                 )
-            logger.info("Sin Created: %s", created.co_email)
 
 
