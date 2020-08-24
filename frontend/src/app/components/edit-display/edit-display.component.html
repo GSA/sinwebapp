@@ -31,6 +31,68 @@
                 class="btn btn-success btn-sm" id="apply-sin-disabled">Apply</button>
     </div><br><br>
 
+     <!-- Title Editor -->
+     Title <br> 
+    <label for="current-title">Current Title: </label>
+    <span id="current-title" 
+            class="right">{{this.edit_SIN.sin_group_title}}</span><br>
+    
+    <label for ="new-title">New Title: </label>
+    <span *ngIf = "buffer_SIN.sin_group_title" id="new-title" class="right">
+            <mark>{{this.buffer_SIN.sin_group_title}}</mark></span><br>
+    
+    <div class="input-group" id="title-edit-input-group">
+        <span class="input-group-addon" id="enter-new-title">Enter Title</span>
+        <input type="text" id="input-title-enabled" class="form-control"
+                placeholder="Enter New Title Here" aria-describedby="enter-new-title"
+                *ngIf = "!applied_Title" [(ngModel)]="buffer_SIN.sin_group_title">
+        <input type = "text" id ="input-title-disabled" class="form-control"
+                [placeholder]="edit_SIN.sin_group_title" aria-describedby="enter-new-title"
+                *ngIf = "applied_Title" disabled>
+    </div><br>
+
+    <div class ="btn-group right" role="group" id="title-edit-btn-group">
+        <button *ngIf="applied_Title" type="button" (click)="undoTitle()"
+                class="btn btn-danger btn-sm" id="undo-title-enabled">Undo</button>
+        <button *ngIf="!applied_Title" type="button" disabled
+                class="btn btn-danger btn-sm" id="undo-title-disabled">Undo</button>
+        <button *ngIf="!applied_Title && buffer_SIN.sin_group_title" type="button" (click)="applyTitle()"
+                class="btn btn-success btn-sm" id="apply-title-enabled">Apply</button>
+        <button *ngIf="applied_Title || !buffer_SIN.sin_group_title" type="button" disabled
+                class="btn btn-success btn-sm" id="apply-title-disabled">Apply</button>
+    </div><br><br>
+
+    <!-- Description Editor -->
+    Description<br> 
+    <label for="current-describe">Current Description: </label>
+    <span id="current-describe" 
+            class="right">{{this.edit_SIN.sin_description1}}</span><br>
+    
+    <label for ="new-describe">New Description: </label>
+    <span *ngIf = "buffer_SIN.sin_description1" id="new-describe" class="right">
+            <mark>{{this.buffer_SIN.sin_description1}}</mark></span><br>
+    
+    <div class="input-group" id="describe-input-group">
+        <span class="input-group-addon" id="enter-new-describe">Enter Description</span>
+        <input type="text" id="input-describe-enabled" class="form-control"
+                placeholder="Enter New Description Here" aria-describedby="enter-new-describe"
+                *ngIf = "!applied_Description" [(ngModel)]="buffer_SIN.sin_description1">
+        <input type = "text" id ="input-describe-disabled" class="form-control"
+                [placeholder]="edit_SIN.sin_description1" aria-describedby="enter-new-describe"
+                *ngIf = "applied_Description" disabled>
+    </div><br>
+
+    <div class ="btn-group right" role="group" id="describe-edit-btn-group">
+        <button *ngIf="applied_Description" type="button" (click)="undoDescription()"
+                class="btn btn-danger btn-sm" id="undo-describe-enabled">Undo</button>
+        <button *ngIf="!applied_Description" type="button" disabled
+                class="btn btn-danger btn-sm" id="undo-describe-disabled">Undo</button>
+        <button *ngIf="!applied_Description && buffer_SIN.sin_description1" type="button" (click)="applyDescription()"
+                class="btn btn-success btn-sm" id="apply-describe-enabled">Apply</button>
+        <button *ngIf="applied_Description || !buffer_SIN.sin_description1" type="button" disabled
+                class="btn btn-success btn-sm" id="apply-describe-disabled">Apply</button>
+    </div><br><br>
+
     <!--Status Editor-->
     <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group') || user_group.includes('admin_group')">
         Status<br> 
@@ -75,4 +137,5 @@
                 (click)="cancel()">Cancel</button>
     <button type="submit" class="btn btn-default btn-sm" id="save-btn"
                 (click)="saveAll()">Save</button>
+                
 </div>

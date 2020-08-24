@@ -4,10 +4,14 @@
     
     <!--Status Mode Panel-->
     <div *ngIf ="!submit_mode && user_SINs" class = "panel-body" id="sin-status-panel">
+        
+        <!-- Submitter Input Alerts-->
         <div *ngIf = "submitted" id="submission-message"
                 class="alert alert-success" role="alert">Thank you for your submission!</div>
         <div *ngIf = "save_message" id="save-message" 
                 class="alert alert-success" role="alert">SIN Entry Has Been Saved!</div>        
+        
+        <!-- Submitter SIN Table -->
         <table class="table" id="sin-status-table">
             <tr>
                 <th>#</th>
@@ -23,6 +27,8 @@
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
             </tr>
         </table>
+
+        <!-- Submitter Options-->
         <button type="submit" id ="new-sin-btn"
                 class = "btn btn-default btn-sm right" 
                 (click) = "switchModes()">Create New Submission</button>
@@ -30,24 +36,36 @@
 
     <!-- Submit Mode Panel-->
     <div *ngIf = "submit_mode" class = "panel-body" id="sin-submit-panel">
-        <label for="sin-submit-input"> SIN:</label>
         
+        <h1>New SIN Submission</h1><br>
         <!--SIN Number-->
-        <input [(ngModel)]="submit_SIN.sin_number" 
-                type="text" id="sin-submit-input"    
+        <div class="input-group" id ="sin-submit">
+                <span class="input-group-addon" id="new-sin-number">Enter New SIN #: </span>
+                <input [(ngModel)]="submit_SIN.sin_number" 
+                        class="form-control right"
+                        type="text" id="sin-submit-input"    
                 placeholder="Type SIN # Here"><br>
+        </div><br>
 
         <!--SIN Title-->
-        <input [(ngModel)]="submit_SIN.sin_group_title"
-                type="text" id="title-submit-input"
-                placeholder="Type Title Here"><br>
+        <div class="input-group" id ="title-submit">
+                <span class="input-group-addon" id="new-sin">Enter Title: </span>
+                <input [(ngModel)]="submit_SIN.sin_group_title"
+                        class="form-control right"
+                        type="text" id="title-submit-input"
+                        placeholder="Type Title Here"><br>
+        </div><br>
 
-        <!--SIN Description 1-->
-        <input [(ngModel)]="submit_SIN.sin_description1"
-                type="text" id="describe-submit-input"
-                placeholder="Type Description Here"><br>
-        
-
+        <!--SIN Description-->
+        <div class="input-group" id ="describe-submit">
+                <span class="input-group-addon" id="new-describe">Enter Description: </span>
+                <input [(ngModel)]="submit_SIN.sin_description1"
+                        class="form-control right"
+                        type="text" id="title-submit-input"
+                        placeholder="Type Description Here"><br>         
+        </div><br>
+       
+        <!-- Submission Options-->
         <button *ngIf="submit_SIN.sin_number" id="sin-submit-btn-enabled"
                 class="btn btn-default btn-sm right"
                 type="Submit" (click)="submitSIN()">Submit</button>
@@ -56,4 +74,5 @@
                 type = "Submit" disabled>Submit</button><br><br>
     </div>
 
+    <!-- Edit Existing SIN Mode -->
 </div>

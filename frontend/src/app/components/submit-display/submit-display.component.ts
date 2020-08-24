@@ -22,6 +22,7 @@ export class SubmitDisplayComponent implements OnInit {
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                 sin_description1: null, sin_group_title: null };
   public user_SINs: SIN[] =[];
+  public all_SINs: SIN[] =[]
   public status_lookup: Status[] = [];
 
   @Input() public user: User;
@@ -45,10 +46,25 @@ export class SubmitDisplayComponent implements OnInit {
     if(changes.selectable !== undefined){ this.loadUserSINs(); }
   }
 
+  public loadAllSINs(){
+    this.logger.log('Loading All SINs',`${this.class_name}.loadAllSINs`);
+    this.sinService.getSINs().subscribe( (sins) =>{
+      this.logger.log('All SINs Loaded', `${this.class_name}.loadAllSINs`);
+      this.all_SINs = sins;
+    })
+  }
+
+  public loadUserSINs(): void{
+    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`);
+    this.sinService.getUserSINs(this.user).subscribe( (sins)=>{
+      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`);
+      this.user_SINs = sins;
+    })
+  }
   public submitSIN(): void{
-    this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`)
+    this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`);
     this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
-      this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
+      this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`);
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description1: null, sin_group_title: null };
       this.submitted = true;
@@ -59,24 +75,16 @@ export class SubmitDisplayComponent implements OnInit {
   public clearMessage(): void {
     this.submitted = false;
   }
-
-  public loadUserSINs(): void{
-    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`)
-    this.sinService.getUserSINs(this.user).subscribe( (sins)=>{
-      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`)
-      this.user_SINs = sins;
-    })
-  }
   
   public switchModes(): void{
-    this.logger.log('Switching Modes', `${this.class_name}.switchModes`)
+    this.logger.log('Switching Modes', `${this.class_name}.switchModes`);
     this.submit_mode = !this.submit_mode;
     if(!this.submit_mode){ 
-      this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`)
+      this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`);
       this.loadUserSINs();
     }
     else{ 
-      this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
+      this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`);
       this.submitted = false;
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description1: null, sin_group_title: null };
@@ -86,10 +94,10 @@ export class SubmitDisplayComponent implements OnInit {
   }
 
   public selectSIN(sin: SIN){
-    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
+    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`);
     this.submitted = false;
     this.selected_SIN = sin;
-    this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`)
+    this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`);
     this.selection_event.emit(sin);
   }
   
