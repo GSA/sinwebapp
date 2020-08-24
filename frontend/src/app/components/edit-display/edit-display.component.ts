@@ -13,11 +13,16 @@ export class EditDisplayComponent implements OnInit {
   
   private class_name = "EditDisplayComponent";
 
-  public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-  public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-  public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_group_title: null };
+  public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_group_title: null };
+  public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null,  sin_group_title: null };
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
+  public applied_Title: boolean = false;
+  public applied_Description: boolean = false;
   public status_lookup: Status[] = [];
   public permission_status_lookup: Status[] = [];
 
@@ -37,8 +42,9 @@ export class EditDisplayComponent implements OnInit {
   private loadComponentData(){
     this.edit_SIN = Object.assign(this.edit_SIN, this.input_SIN);
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
-    this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-    if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer)){
+    this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                           sin_description1: null, sin_group_title: null };
+    if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer) || this.user_group.includes(GROUPS.admin)){
       this.logger.log(`Retrieving Statues For Role ${this.user_group[0]}`, `${this.class_name}.loadComponentData`)
       this.statusService.getStatuses().subscribe((statuses)=>{
         this.logger.log('Retrieved Statuses', `${this.class_name}.loadComponentData`)
@@ -72,22 +78,52 @@ export class EditDisplayComponent implements OnInit {
     this.applied_Status = true;
   }
 
+  public applyTitle(): void{
+    this.logger.log(`Converting edit_SIN.sin_group_title = ${this.edit_SIN.sin_group_title} to ${this.buffer_SIN.sin_group_title}`,
+                      `${this.class_name}.applyTitle`)
+    this.edit_SIN.sin_group_title = this.buffer_SIN.sin_group_title;
+    this.buffer_SIN.sin_group_title = null;
+    this.applied_Title = true;
+  }
+
+  public applyDescription(): void{
+    this.logger.log(`Converting edit_SIN.sin_description1 = ${this.edit_SIN.sin_description1} to ${this.buffer_SIN.sin_description1}`,
+                      `${this.class_name}.applyDescription`);
+    this.edit_SIN.sin_description1 = this.buffer_SIN.sin_description1;
+    this.buffer_SIN.sin_description1= null;
+    this.applied_Description = true;
+  }
+
   public undoSIN(): void{
     this.logger.log(`Resetting edit_SIN.sin_number = ${this.edit_SIN.sin_number} to ${this.undo_SIN.sin_number}`,
-                      `${this.class_name}.undoSIN`)
+                      `${this.class_name}.undoSIN`);
     this.edit_SIN.sin_number = this.undo_SIN.sin_number;
     this.applied_SIN=false;
   }
 
   public undoStatus(): void{
     this.logger.log(`Resetting edit_SIN.status_id = ${this.edit_SIN.status_id} to ${this.undo_SIN.status_id}`,
-                      `${this.class_name}.undoStatus`)
+                      `${this.class_name}.undoStatus`);
     this.edit_SIN.status_id = this.undo_SIN.status_id;
     this.applied_Status = false;
   }
 
+  public undoTitle(): void{
+    this.logger.log(`Resetting edit_SIN.sin_group_title = ${this.edit_SIN.sin_group_title} to ${this.undo_SIN.sin_group_title}`,
+                      `${this.class_name}.undoTitle`);
+    this.edit_SIN.sin_group_title = this.undo_SIN.sin_group_title;
+    this.applied_Title = false;
+  }
+
+  public undoDescription(): void{
+    this.logger.log(`Resetting edit_SIN.sin_description1 = ${this.edit_SIN.sin_description1} to ${this.undo_SIN.sin_description1}`,
+                      `${this.class_name}.undoDescription`)
+    this.edit_SIN.sin_description1 = this.undo_SIN.sin_description1;
+    this.applied_Description = false;
+  }
+
   public saveAll(): void {
-    this.logger.log(`Emitting Save Event for SIN # ${this.edit_SIN.sin_number}`, `${this.class_name}.saveAll`)
-    this.save_event.emit(this.edit_SIN)
+    this.logger.log(`Emitting Save Event for SIN # ${this.edit_SIN.sin_number}`, `${this.class_name}.saveAll`);
+    this.save_event.emit(this.edit_SIN);
   }
 }

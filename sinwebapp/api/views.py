@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from api.models import Sin, Status
-from api.models import STATUS_STATES, STATUS_FIELDS, SIN_FIELDS
+from api.models import STATUS_STATES, SIN_FIELDS
 from authentication.db_init import GROUPS
 
 from debug import DebugLogger
@@ -116,6 +116,8 @@ def sin_info_update(request):
         sin_number = body[SIN_FIELDS[2]]
         user_id = body[SIN_FIELDS[3]]
         status_id = body[SIN_FIELDS[4]]
+        sin_description = body[SIN_FIELDS[5]]
+        sin_title = body[SIN_FIELDS[6]]
 
         try:
             new_status = Status.objects.get(id=status_id)
@@ -124,14 +126,17 @@ def sin_info_update(request):
                 new_user = User.objects.get(id=user_id)
                 logger.info('User Found')
                 try:
-                    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)
+                    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user,
+                                    sin_group_title=sin_title, sin_description1=sin_description)
                     logger.info('SIN Found')   
                     new_sin.save()
                     response={
                         SIN_FIELDS[1]: sin_id,
                         SIN_FIELDS[2]: sin_number,
                         SIN_FIELDS[3]: new_status.id,
-                        SIN_FIELDS[4]: new_user.id
+                        SIN_FIELDS[4]: new_user.id,
+                        SIN_FIELDS[5]: sin_description,
+                        SIN_FIELDS[6]: sin_title
                     }
                 except Sin.DoesNotExist:
                     response = { 'message': 'SIN Does Not Exist'}
@@ -144,7 +149,6 @@ def sin_info_update(request):
             logger.info('Status Not Found')
     
     else:
-
         response = { 'message' : 'Body Parameter Parsing Error'}
         logger.info('Error Parsing Parameters in Request Body')
 
@@ -176,7 +180,13 @@ def sin_info(request):
  
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        sin_number =body['sin_number']
+        # TODO 1: use SIN_FIELDS array to verify body contains all parameters
+        # TODO 2: use SIN_FIELDS array to pull all fields from body automatically
+        # instead of doing it manually
+        sin_number = body['sin_number']
+        sin_title = body['sin_group_title']
+        sin_description = body['sin_description1']
+
         logger.info('SIN # Posting: %s', sin_number)
 
         # create submitted status
@@ -199,17 +209,22 @@ def sin_info(request):
                 sin.update(user=request.user, status=new_status)
                 logger.info('Existing SIN # Updated.')
                 return JsonResponse(sin, safe=False)
-                
+        
+        # post new sin
         except Sin.DoesNotExist:
-            sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status)
-            raw_sin = {
-                'id': sin.id,
-                'sin_number': sin_number,
-                'user_id': request.user.id,
-                'status_id': new_status.id
-            }
+            sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status,
+                                        sin_group_title=sin_title, sin_description1=sin_description)
             sin.save()
             logger.info('New SIN # Posted')
+            # TODO: determine how to serialize django model instead of doing this manually
+            raw_sin = {
+                'id': sin.id,
+                'sin_number': sin.sin_number,
+                'user_id': request.user.id,
+                'status_id': new_status.id,
+                'sin_group_title': sin.sin_group_title,
+                'sin_description1': sin.sin_description1
+            }
             return JsonResponse(raw_sin, safe=False)
             
     # retrieving information on a specific SIN
@@ -221,12 +236,17 @@ def sin_info(request):
             logger.info('Using ID Query Parameter: %s', sin)
 
             try:
+                # TODO: figure out how to serialize model instance directly like 
+                # is done below with lists of SINS
                 raw_sin = Sin.objects.get(sin_number=sin)
                 retrieved_sin = {
                     'id': raw_sin.id,
                     'sin_number': raw_sin.sin_number,
                     'user_id': raw_sin.user.id,
-                    'status_id': raw_sin.status.id
+                    'status_id': raw_sin.status.id,
+                    'sin_group_title': raw_sin.sin_group_title,
+                    'sin_description1': raw_sin.sin_description1,
+                    'sin_description2': raw_sin.sin_description2
                 }
                 logger.info('SIN Found!')
             except Sin.DoesNotExist:

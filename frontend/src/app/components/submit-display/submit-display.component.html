@@ -4,10 +4,14 @@
     
     <!--Status Mode Panel-->
     <div *ngIf ="!submit_mode && user_SINs" class = "panel-body" id="sin-status-panel">
+        
+        <!-- Submitter Input Alerts-->
         <div *ngIf = "submitted" id="submission-message"
                 class="alert alert-success" role="alert">Thank you for your submission!</div>
         <div *ngIf = "save_message" id="save-message" 
                 class="alert alert-success" role="alert">SIN Entry Has Been Saved!</div>        
+        
+        <!-- Submitter SIN Table -->
         <table class="table" id="sin-status-table">
             <tr>
                 <th>#</th>
@@ -23,24 +27,104 @@
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
             </tr>
         </table>
+
+        <!-- Submitter Options-->
+        <button type="submit" id ="edit-sin-btn"
+                class = "btn btn-default btn-sm right" 
+                (click) = "switchModes(true)">Edit Existing Submission</button>
         <button type="submit" id ="new-sin-btn"
                 class = "btn btn-default btn-sm right" 
-                (click) = "switchModes()">Create New Submission</button>
+                (click) = "switchModes(false)">Create New Submission</button>
     </div>
 
-    <!-- Submit Mode Panel-->
-    <div *ngIf = "submit_mode" class = "panel-body" id="sin-submit-panel">
-        <label for="sin-submit-input"> SIN:</label>
-        <input [(ngModel)]="submit_SIN.sin_number" 
-                type="text" id="sin-submit-input"    
+    <!-- Submit New Mode Panel-->
+    <div *ngIf = "submit_mode && !exists" class = "panel-body" id="sin-new-submit-panel">
+        
+        <h1>New SIN Submission</h1><br>
+        <!--SIN Number-->
+        <div class="input-group" id ="sin-new-submit">
+                <span class="input-group-addon" id="new-sin-number">Enter New SIN #: </span>
+                <input [(ngModel)]="submit_SIN.sin_number" 
+                        class="form-control right"
+                        type="text" id="sin-submit-input"    
                 placeholder="Type SIN # Here"><br>
+        </div><br>
 
-        <button *ngIf="submit_SIN.sin_number" id="sin-submit-btn-enabled"
+        <!--SIN Title-->
+        <div class="input-group" id ="title-new-submit">
+                <span class="input-group-addon" id="new-sin">Enter Title: </span>
+                <input [(ngModel)]="submit_SIN.sin_group_title"
+                        class="form-control right"
+                        type="text" id="title-submit-input"
+                        placeholder="Type Title Here"><br>
+        </div><br>
+
+        <!--SIN Description-->
+        <div class="input-group" id ="describe-new-submit">
+                <span class="input-group-addon" id="new-describe">Enter Description: </span>
+                <input [(ngModel)]="submit_SIN.sin_description1"
+                        class="form-control right"
+                        type="text" id="title-submit-input"
+                        placeholder="Type Description Here"><br>         
+        </div><br>
+       
+        <!-- Submission Options-->
+        <button *ngIf="submit_SIN.sin_number" id="sin-submit-new-btn-enabled"
                 class="btn btn-default btn-sm right"
                 type="Submit" (click)="submitSIN()">Submit</button>
-        <button *ngIf="!submit_SIN.sin_number" id="sin-submit-btn-disabled" 
+        <button *ngIf="!submit_SIN.sin_number" id="sin-submit-new-btn-disabled" 
                 class="btn btn-default btn-sm right"
                 type = "Submit" disabled>Submit</button><br><br>
     </div>
 
+    <!-- Submit Existing SIN Mode -->
+    <div *ngIf = "submit_mode && exists && all_SINs.length > 0" class = "panel-body" id="sin-submit-exists-panel">
+        
+        <h1>Edit SIN Submission</h1><br>
+        <!--SIN Number-->
+        <div class="input-group" id ="sin-submit-exists">
+                <span class="input-group-addon" id="new-sin-number">Current SINs: </span>
+                <select [(ngModel)]="submit_SIN.sin_number" 
+                        class="form-control right"
+                        type="text" id="sin-submit-exist-input">
+                        <option *ngFor="let sin of all_SINs"
+                                [value]="sin.sin_number"
+                                (click)="selectExistingSIN(sin)"> {{sin.sin_number}} </option>
+                </select><br>
+        </div><br>
+
+        <!--SIN Title-->
+        <div class="input-group" id ="title-exists-submit">
+                <span class="input-group-addon" id="new-title">Enter Title: </span>
+                <input [(ngModel)]="submit_SIN.sin_group_title" *ngIf ="existing_SIN.sin_number"
+                        class="form-control right"
+                        type="text" id="title-submit-exists-input-enabled"
+                        placeholder="Type Title Here">
+                <input [(ngModel)]="submit_SIN.sin_group_title" *ngIf ="!existing_SIN.sin_number"
+                        class="form-control right"
+                        type="text" id="title-submit-exists-input-dsabled"
+                        placeholder="Type Title Here" disabled>
+        </div><br>
+
+        <!--SIN Description-->
+        <div class="input-group" id ="describe-submit-exists">
+                <span class="input-group-addon" id="new-describe">Enter Description: </span>
+                <input [(ngModel)]="submit_SIN.sin_description1" *ngIf ="existing_SIN.sin_number"
+                        class="form-control right"
+                        type="text" id="title-submit-exists-input-enabled"
+                        placeholder="Type Description Here">
+                <input [(ngModel)]="submit_SIN.sin_description1" *ngIf ="!existing_SIN.sin_number"
+                        class="form-control right"
+                        type="text" id="title-submit-exists-input-disabled"
+                        placeholder="Type Description Here" disabled>      
+        </div><br>
+       
+        <!-- Submission Options-->
+        <button *ngIf="submit_SIN.sin_number" id="sin-submit-exists-btn-enabled"
+                class="btn btn-default btn-sm right"
+                type="Submit" (click)="submitSIN()">Submit</button>
+        <button *ngIf="!submit_SIN.sin_number" id="sin-submit-exists-btn-disabled" 
+                class="btn btn-default btn-sm right"
+                type = "Submit" disabled>Submit</button><br><br>
+    </div>
 </div>

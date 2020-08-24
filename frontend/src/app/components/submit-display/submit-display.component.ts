@@ -15,10 +15,16 @@ export class SubmitDisplayComponent implements OnInit {
   private class_name = "SubmitDisplayComponent"
 
   public submit_mode : boolean = false;
+  public exists : boolean;
   public submitted: boolean = false;
-  public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+  public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                               sin_description1: null, sin_group_title: null };
+  public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                                sin_description1: null, sin_group_title: null };
+  public existing_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                                sin_description1: null, sin_group_title: null };
   public user_SINs: SIN[] =[];
+  public all_SINs: SIN[] =[]
   public status_lookup: Status[] = [];
 
   @Input() public user: User;
@@ -42,49 +48,82 @@ export class SubmitDisplayComponent implements OnInit {
     if(changes.selectable !== undefined){ this.loadUserSINs(); }
   }
 
-  public submitSIN(): void{
-    this.logger.log('Submitting SIN', `${this.class_name}.submitSIN`)
-    this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
-      this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`)
-      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-      this.submitted = true;
-      this.switchModes();
+  public loadAllSINs(){
+    this.logger.log('Loading All SINs',`${this.class_name}.loadAllSINs`);
+    this.sinService.getSINs().subscribe( (sins) =>{
+      this.logger.log('All SINs Loaded', `${this.class_name}.loadAllSINs`);
+      this.all_SINs = sins;
     })
+  }
+
+  public loadUserSINs(): void{
+    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`);
+    this.sinService.getUserSINs(this.user).subscribe( (sins)=>{
+      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`);
+      this.user_SINs = sins;
+    })
+  }
+  public submitSIN(): void{
+    if(!this.exists){
+      this.logger.log('Submitting New SIN', `${this.class_name}.submitSIN`);
+      this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
+        this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`);
+        this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                              sin_description1: null, sin_group_title: null };
+        this.submitted = true;
+        this.switchModes(false);
+      })
+    }
+    else{
+      this.logger.log('Submitting Existing SIN', `${this.class_name}.submitSIN`);
+      if(!this.submit_SIN.status_id) { this.submit_SIN.status_id = this.existing_SIN.status_id; };
+      if(!this.submit_SIN.user_id) { this.submit_SIN.user_id = this.existing_SIN.user_id; };
+      if(!this.submit_SIN.id) { this.submit_SIN.id = this.existing_SIN.id; };
+      this.sinService.updateSIN(this.submit_SIN).subscribe((response)=>{
+        this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+          sin_description1: null, sin_group_title: null };
+          this.submitted = true;
+          this.switchModes(false);
+      });
+    };
   }
 
   public clearMessage(): void {
     this.submitted = false;
   }
-
-  public loadUserSINs(): void{
-    this.logger.log('Loading User SINs', `${this.class_name}.loadUserSINs`)
-    this.sinService.getUserSINs(this.user).subscribe( (sins)=>{
-      this.logger.log('User SINS Loaded', `${this.class_name}.loadUserSINs`)
-      this.user_SINs = sins;
-    })
-  }
   
-  public switchModes(): void{
-    this.logger.log('Switching Modes', `${this.class_name}.switchModes`)
+  public switchModes(exists: boolean): void{
+    this.exists = exists;
+    if(this.exists){ this.loadAllSINs(); }
+    this.logger.log('Switching Modes', `${this.class_name}.switchModes`);
     this.submit_mode = !this.submit_mode;
     if(!this.submit_mode){ 
-      this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`)
+      this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`);
       this.loadUserSINs();
     }
     else{ 
-      this.logger.log('Submission Mode Activated', `${this.class_name}.switchModes`)
+      if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
+      else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
       this.submitted = false;
-      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
-      this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null };
+      // check if submit_SIN fields are null, set equal to selected_SIN if so
+      this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_group_title: null };
+      this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+                            sin_description1: null, sin_group_title: null };
     }
   }
 
   public selectSIN(sin: SIN){
-    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`)
+    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`);
     this.submitted = false;
     this.selected_SIN = sin;
-    this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`)
+    this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`);
     this.selection_event.emit(sin);
+  }
+
+  public selectExistingSIN(sin: SIN){
+    this.logger.log(`Selecting Pre-existing SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
+    this.existing_SIN = sin;
   }
   
 }
