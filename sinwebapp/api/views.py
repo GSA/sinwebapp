@@ -126,7 +126,8 @@ def sin_info_update(request):
                 new_user = User.objects.get(id=user_id)
                 logger.info('User Found')
                 try:
-                    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user)
+                    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user,
+                                    sin_group_title=sin_title, sin_description1=sin_description)
                     logger.info('SIN Found')   
                     new_sin.save()
                     response={

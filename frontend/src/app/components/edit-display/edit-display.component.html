@@ -131,7 +131,7 @@
     </div>
 
     <!-- Save Editor -->
-    <div *ngIf = "applied_SIN || applied_Status" id="save-changes-msg" 
+    <div *ngIf = "applied_SIN || applied_Title || applied_Description || applied_Status" id="save-changes-msg" 
                 class="alert alert-warning" role="alert">Please Save Your Changes</div>
     <button type="submit" class="btn btn-default btn-sm" id ="cancel-btn"
                 (click)="cancel()">Cancel</button>
