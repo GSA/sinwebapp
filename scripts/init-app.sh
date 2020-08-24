@@ -55,6 +55,7 @@ formatted_print '--> Migrating Django Database Files' $SCRIPT_NAME
 # python manage.py migrate --fake authentication zero
 # python manage.py migrate --fake-initial
 
+python manage.py makemigrations
 python manage.py migrate
 
 # formatted_print "--> Setting <$DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL> As Superuser" $SCRIPT_NAME

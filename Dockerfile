@@ -29,7 +29,8 @@ RUN pip install -r ./requirements.txt
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir /scripts/
+RUN mkdir /scripts/ && mkdir /db/
+COPY /db/ /home/db/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
     mkdir ./static/ && mkdir ./api/
