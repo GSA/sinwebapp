@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from api.models import Sin, Status
-from api.models import STATUS_STATES, STATUS_FIELDS, SIN_FIELDS
+from api.models import STATUS_STATES, SIN_FIELDS
 from authentication.db_init import GROUPS
 
 from debug import DebugLogger
@@ -221,12 +221,17 @@ def sin_info(request):
             logger.info('Using ID Query Parameter: %s', sin)
 
             try:
+                # TODO: figure out how to serialize model instance directly like 
+                # is done below with lists of SINS
                 raw_sin = Sin.objects.get(sin_number=sin)
                 retrieved_sin = {
                     'id': raw_sin.id,
                     'sin_number': raw_sin.sin_number,
                     'user_id': raw_sin.user.id,
-                    'status_id': raw_sin.status.id
+                    'status_id': raw_sin.status.id,
+                    'sin_group_title': raw_sin.sin_group_title,
+                    'sin_description1': raw_sin.sin_description1,
+                    'sin_description2': raw_sin.sin_description2
                 }
                 logger.info('SIN Found!')
             except Sin.DoesNotExist:
