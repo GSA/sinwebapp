@@ -27,6 +27,9 @@ class SinData(models.Model):
 class Sin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    sin_number = models.CharField(max_length=1000)
+    sin_group_title = models.CharField(max_length=1000, null=True)
+    sin_description1 = models.CharField(max_length=1000, null=True)
     sinMap = models.ForeignKey(SinData, on_delete=models.SET_NULL, null= True)
 
 class Audit_Log(models.Model):
