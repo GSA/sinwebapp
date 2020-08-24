@@ -6,7 +6,7 @@ from ..db_init import init_status, init_sindata
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0003_auto_20200820_1043')
+        ('api', '0003_model_change_0')
     ]
 
     operations = [
