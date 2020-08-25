@@ -29,11 +29,10 @@ RUN pip install -r ./requirements.txt
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir /scripts/ && mkdir /db/
-COPY /db/ /home/db/
+RUN mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
-    mkdir ./static/ && mkdir ./api/
+    mkdir ./static/ && mkdir ./api/ && mkdir /db/
 
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
@@ -47,6 +46,7 @@ COPY /sinwebapp/api/ /home/sinwebapp/api/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
+COPY /db/ /home/sinwebapp/db/
 
 # START UP SCRIPT
 COPY /scripts/init-app.sh /home/scripts/init-app.sh
