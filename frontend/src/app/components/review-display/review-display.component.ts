@@ -40,6 +40,11 @@ export class ReviewDisplayComponent implements OnInit {
     if(changes.selectable !== undefined){ this.loadComponentData(); }
   }
   private loadComponentData(): void{
+    this.statusService.getStatuses().subscribe( (statuses) => {
+      this.logger.log('Statuses Retrieved', `${this.class_name}.loadComponentData`)
+      this.status_lookup = statuses;
+    })
+    
     this.sinService.getSINs().subscribe(sins => {
 
       this.logger.log('SINs Retrieved', `${this.class_name}.loadComponentData`)
@@ -59,10 +64,6 @@ export class ReviewDisplayComponent implements OnInit {
       })
     })
 
-    this.statusService.getStatuses().subscribe( (statuses) => {
-      this.logger.log('Statuses Retrieved', `${this.class_name}.loadComponentData`)
-      this.status_lookup = statuses;
-    })
   }
 
   public lookupUserEmail(sin_id: Number){

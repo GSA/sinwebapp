@@ -10,17 +10,17 @@ def init_status(apps, schema_editor):
     key_list = list(STATUS_STATES.keys()) 
     val_list = list(STATUS_STATES.values()) 
     
-    submitted = Status.objects.get_or_create(name=key_list[val_list.index(1)], 
+    submitted = Status.objects.get_or_create(id = 1, name=key_list[val_list.index(1)], 
                                              description="SIN form has been submitted for review and approval.")
-    reviewed = Status.objects.get_or_create(name=key_list[val_list.index(2)], 
+    reviewed = Status.objects.get_or_create(id = 2, name=key_list[val_list.index(2)], 
                                              description="SIN form has been reviewed and is ready for approval.")
-    change = Status.objects.get_or_create(name=key_list[val_list.index(3)], 
+    change = Status.objects.get_or_create(id = 3, name=key_list[val_list.index(3)], 
                                              description="SIN form requires change before approval.")
-    approved = Status.objects.get_or_create(name=key_list[val_list.index(4)], 
+    approved = Status.objects.get_or_create(id = 4, name=key_list[val_list.index(4)], 
                                             description="SIN form has been approved.")
-    denied = Status.objects.get_or_create(name=key_list[val_list.index(5)], 
+    denied = Status.objects.get_or_create(id = 5, name=key_list[val_list.index(5)], 
                                              description="SIN form has been denied.")
-    expired = Status.objects.get_or_create(name=key_list[val_list.index(6)],
+    expired = Status.objects.get_or_create(id = 6, name=key_list[val_list.index(6)],
                                              description="SIN form has expired.")
 
 def init_sindata(app, schema_editor):
