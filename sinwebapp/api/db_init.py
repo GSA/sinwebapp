@@ -1,5 +1,6 @@
+import csv
 from debug import DebugLogger
-from api.models import Status, STATUS_STATES
+from api.models import Status, SinData, STATUS_STATES
 
 def init_status(apps, schema_editor):
     logger = DebugLogger("api.db_init.init_status").get_logger()
@@ -21,12 +22,9 @@ def init_status(apps, schema_editor):
     expired = Status.objects.get_or_create(name=key_list[val_list.index(6)],
                                              description="SIN form has expired.")
 
-# import csv
-import csv
-from api.models import SinData
 def init_sindata(app, schema_editor):
     logger = DebugLogger("api.db_init.init_sindata").get_logger()
-    logger.info("Initializing Sin data")
+    logger.info("Initializing SIN data")
 
     # import data loop thru the objects
     # Skip first row
@@ -50,4 +48,4 @@ def init_sindata(app, schema_editor):
                 co_email=row[10]
             )
             count+=1
-            logger.info("Sin Created id # %s", count)
+            logger.info(" INSERTION # %s : (sin_number, sin_group_title) = (%s, %s) ", count, row[0], row[3])

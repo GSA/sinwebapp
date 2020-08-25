@@ -29,12 +29,12 @@ class SinData(models.Model):
     co_email = models.CharField(max_length=1000, null=True)
 
 class Sin(models.Model):
+    sin_map = models.ForeignKey(SinData, on_delete=models.PROTECT, null= True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     sin_number = models.CharField(max_length=1000)
     sin_group_title = models.CharField(max_length=1000, null=True)
     sin_description1 = models.CharField(max_length=1000, null=True)
-    sinMap = models.ForeignKey(SinData, on_delete=models.SET_NULL, null= True)
 
 class Audit_Log(models.Model):
     sin = models.ForeignKey(Sin, on_delete=models.CASCADE)
