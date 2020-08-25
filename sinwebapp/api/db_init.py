@@ -29,7 +29,7 @@ def init_sindata(app, schema_editor):
     # import data loop thru the objects
     # Skip first row
     # def import_data():
-    with open('../db/sin_data.csv') as f:
+    with open('/db/sin_data.csv') as f:
         reader = csv.reader(f)
         next(reader)
         count=0
