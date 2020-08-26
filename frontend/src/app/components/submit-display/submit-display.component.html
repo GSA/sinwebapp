@@ -74,7 +74,10 @@
                 type="Submit" (click)="submitSIN()">Submit</button>
         <button *ngIf="!submit_SIN.sin_number" id="sin-submit-new-btn-disabled" 
                 class="btn btn-default btn-sm right"
-                type = "Submit" disabled>Submit</button><br><br>
+                type = "Submit" disabled>Submit</button>
+        <button id="sin-cancel-new-btn"
+                class="btn btn-default btn-sm right"
+                type="Submit" (click)="switchModes(false)">Cancel</button><br>
     </div>
 
     <!-- Submit Existing SIN Mode -->
@@ -99,7 +102,7 @@
                 <input [(ngModel)]="submit_SIN.sin_group_title" *ngIf ="existing_SIN.sin_number"
                         class="form-control right"
                         type="text" id="title-submit-exists-input-enabled"
-                        placeholder="Type Title Here">
+                        [placeholder]="existing_SIN.sin_group_title">
                 <input [(ngModel)]="submit_SIN.sin_group_title" *ngIf ="!existing_SIN.sin_number"
                         class="form-control right"
                         type="text" id="title-submit-exists-input-dsabled"
@@ -112,7 +115,7 @@
                 <input [(ngModel)]="submit_SIN.sin_description1" *ngIf ="existing_SIN.sin_number"
                         class="form-control right"
                         type="text" id="title-submit-exists-input-enabled"
-                        placeholder="Type Description Here">
+                        [placeholder]="existing_SIN.sin_description1">
                 <input [(ngModel)]="submit_SIN.sin_description1" *ngIf ="!existing_SIN.sin_number"
                         class="form-control right"
                         type="text" id="title-submit-exists-input-disabled"
@@ -125,6 +128,9 @@
                 type="Submit" (click)="submitSIN()">Submit</button>
         <button *ngIf="!submit_SIN.sin_number" id="sin-submit-exists-btn-disabled" 
                 class="btn btn-default btn-sm right"
-                type = "Submit" disabled>Submit</button><br><br>
+                type = "Submit" disabled>Submit</button>
+        <button id="sin-cancel-exists-btn"
+                class="btn btn-default btn-sm right"
+                type="Submit" (click)="switchModes(false)">Cancel</button><br>
     </div>
 </div>

@@ -31,6 +31,7 @@ export class SubmitDisplayComponent implements OnInit {
   @Input() public selectable: boolean; 
   @Input() public save_message: boolean;
   @Output() public selection_event = new EventEmitter<SIN>();
+  @Output() public clear_event = new EventEmitter<SIN>();
 
   constructor(private sinService: SinService,
               private statusService: StatusService,
@@ -81,7 +82,7 @@ export class SubmitDisplayComponent implements OnInit {
       if(!this.submit_SIN.id) { this.submit_SIN.id = this.existing_SIN.id; };
       this.sinService.updateSIN(this.submit_SIN).subscribe((response)=>{
         this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-          sin_description1: null, sin_group_title: null };
+                              sin_description1: null, sin_group_title: null };
           this.submitted = true;
           this.switchModes(false);
       });
@@ -110,6 +111,9 @@ export class SubmitDisplayComponent implements OnInit {
                             sin_description1: null, sin_group_title: null };
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description1: null, sin_group_title: null };
+      //let listeners know selection is cleared
+      this.clear_event.emit(this.selected_SIN);
+      this.logger.log('Emitting Clear Event', `${this.class_name}.switchModes`)
     }
   }
 

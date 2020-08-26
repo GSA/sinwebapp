@@ -58,6 +58,12 @@ export class UserDisplayComponent implements OnInit {
     }
   }
 
+  public clearSelectedSIN(sin: SIN):void{
+    this.logger.log('Clearing Selected SIN', `${this.class_name}.clearSelecetedSIN`)
+    this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+      sin_description1: null, sin_group_title: null };
+  }
+
   public switchModes(): void{
     this.edit_mode = !this.edit_mode
     if(this.edit_mode){ 

@@ -6,7 +6,6 @@ import datetime
 STATUS_FIELDS = ['id', 'name', 'description']
 # Used for verfying request query parameters
 SIN_FIELDS={ 1: 'id', 2: 'sin_number', 3: 'user_id', 4: 'status_id', 5: "sin_description1", 6:"sin_group_title" }
-
 # Dictionary for querying Status model by ID via API
 STATUS_STATES = { 'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 'denied': 5, 'expired': 6 }
 

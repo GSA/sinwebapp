@@ -1,29 +1,12 @@
 ### ARGUMENTS
-## REQUIRED
-# 1: local, container or cloud: specifies the type of environment to initialize in.
-
-### DESCRIPTION
-## Initializes python web application by clearing any outstanding sessions,
-## migrating Django models to the database, setting up a super-user account,
-## collecting static files (for local deployments; the cloud automatically
-## collects static files) and starts a Gunicorn server and binds the WSGI
-## applicaiton to it.
-
-### EXAMPLE USAGE 
-## None! This script is used in the Dockerfile and manifest.yml. 
-## It executes from inside of the container running the application.
-## This script is used to initialize various properties in the Django
-## web framework and start the web server.
-
-### TODO: pass in argument to determine how migrations should proceed.
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='init-app.sh'
 nl=$'\n'
 SCRIPT_DES="This script will perform environment-specific configuration and ${nl}\
    initialization based on the provided argument. After setting up the ${nl}\
    environment, this script will run Django migrations. Finally, it will${nl}\
-   start the application server.
+   bind the WSGI Django application to a Gunicorn server and start the${nl}\
+   server on port 8000.
  ${nl} 
    EXAMPLE USAGE${nl}\
        bash init-app.sh local ${nl}${nl}\

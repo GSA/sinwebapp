@@ -1,9 +1,13 @@
+# META DATA
 FROM python:3.7.7-slim-stretch
+LABEL application="CCDA : Core Contract Data Automation"
+LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pgnaore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"
+LABEL version="prototype-1.0.0"
+LABEL description="Internal GSA application for managing SIN data"
 
 ## ENVIRONMENT VARIABLES
-    ## VCAP_SERVICES: Delivers Database Credentials to App
-    # Configured to mimic CloudFoundry deployment for minimal
-    # changes between local and cloud deployments.
+    ## VCAP_SERVICES: CloudFoundry delivers the application the database credentials through a VCAP_SERVICES environment variable. 
+    ## Mimic that configuration in the Docker image for minimal differences in the codebase.
 ENV VCAP_SERVICES='{ "aws-rds": [{ \
     "credentials": { \
      "db_name": "sinwebapp", \
@@ -46,13 +50,15 @@ COPY /sinwebapp/api/ /home/sinwebapp/api/
 COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
-COPY /db/ /home/sinwebapp/db/
+COPY /sinwebapp/db/ /home/sinwebapp/db/
 
 # START UP SCRIPT
 COPY /scripts/init-app.sh /home/scripts/init-app.sh
 COPY /scripts/util/logging.sh /home/scripts/util/logging.sh
 WORKDIR /home/scripts/
 
+# LOCALHOST PORT
 EXPOSE 8000
 
+# START UP COMMAND
 CMD ["bash","./init-app.sh","container"]

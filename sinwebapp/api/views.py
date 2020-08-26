@@ -47,15 +47,17 @@ def user_info_filtered(request):
         try:
             raw_users = User.objects.filter(id__in=ids)
             retrieved_users = []
-            # TODO: CHECK IF LENGTH IS ZERO
-            for user in raw_users.all():
-                group_list = list(user.groups.values_list('name', flat=True))
-                retrieved_users.append({
-                    'id': user.id,
-                    'email': user.email,
-                    'groups': group_list
-                })
-            logger.info('Users Found!')
+            if len(list(raw_users)) == 0:
+                retrieved_users.append({ 'message' : '0 Users Found'})
+            else:
+                for user in raw_users.all():
+                    group_list = list(user.groups.values_list('name', flat=True))
+                    retrieved_users.append({
+                        'id': user.id,
+                        'email': user.email,
+                        'groups': group_list
+                    })
+                logger.info('Users Found!')
         except User.DoesNotExist:
             retrieved_users = { 'message' : 'Users Do No Exist'}
             logger.info('Users Not Found!')
@@ -79,7 +81,6 @@ def sin_user_info(request):
         logger.info('Using User ID Query Parameter: %s', user_id)
         try:
             raw_user = User.objects.get(id=user_id)
-            # TODO: Check if length is zero
             group_list = list(raw_user.groups.values_list('name', flat=True))
             logger.info('User Found!')
             retrieved_user = {
@@ -216,7 +217,6 @@ def sin_info(request):
                                         sin_group_title=sin_title, sin_description1=sin_description)
             sin.save()
             logger.info('New SIN # Posted')
-            # TODO: determine how to serialize django model instead of doing this manually
             raw_sin = {
                 'id': sin.id,
                 'sin_number': sin.sin_number,
@@ -234,10 +234,7 @@ def sin_info(request):
         if 'id' in request.GET:
             sin=request.GET.get('id')
             logger.info('Using ID Query Parameter: %s', sin)
-
             try:
-                # TODO: figure out how to serialize model instance directly like 
-                # is done below with lists of SINS
                 raw_sin = Sin.objects.get(sin_number=sin)
                 retrieved_sin = {
                     'id': raw_sin.id,

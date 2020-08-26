@@ -29,8 +29,6 @@ then
     curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs
 fi
 
-# TODO: Ensure node, python and docker are installed!
-
 if ! command -v ng &> /dev/null
 then
     formatted_print "--> Installing Angular CLI" $SCRIPT_NAME

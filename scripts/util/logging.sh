@@ -11,5 +11,4 @@ formatted_print(){
 help_print(){
     nl=$'\n'
     echo -e "${nl}$2${nl}${nl}   $1" 
-    ## TODO: third argument is script arguments!
 }

@@ -33,12 +33,13 @@
 
     <div class="row">
       <!--User Group Specific Panel -->
-      <div class="col-md-6" id="group-specific-panel">
+      <div class="col-md-8" id="group-specific-panel">
 
         <div *ngIf="user.groups.includes('submitter_group')">
           <app-submit-display id="submit-app-component"
                               [user]="user" [selectable]="!edit_mode" [save_message]="saved"
-                              (selection_event)="selectSIN($event)"></app-submit-display>
+                              (selection_event)="selectSIN($event)"
+                              (clear_event)="clearSelectedSIN($event)"></app-submit-display>
         </div>
         <div *ngIf="user.groups.includes('approver_group') || user.groups.includes('reviewer_group') || user.groups.includes('admin_group')">
           <app-review-display id="review-app-component"
@@ -48,7 +49,7 @@
       </div>
 
       <!--User Selected SIN Panel-->
-      <div class = "col-md-6" id="sin-selection-panel">
+      <div class = "col-md-4" id="sin-selection-panel">
 
         <!-- SIN Viewer -->   
         <div *ngIf="!edit_mode" id="sin-selection-viewer" class = "panel panel-default">
