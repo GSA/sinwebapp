@@ -1,27 +1,30 @@
 <div *ngIf = "status_lookup.length > 0" class = "panel panel-default">
 
-    <div class = "panel-heading">SIN Submissions</div>
+    <div class="panel-heading">SIN Submissions</div>
     
     <!--Status Mode Panel-->
-    <div *ngIf ="!submit_mode && user_SINs" class = "panel-body" id="sin-status-panel">
+    <div id="sin-status-panel" class = "panel-body"
+        *ngIf="!submit_mode && user_SINs">
         
         <!-- Submitter Input Alerts-->
-        <div *ngIf = "submitted" id="submission-message"
-                class="alert alert-success" role="alert">Thank you for your submission!</div>
-        <div *ngIf = "save_message" id="save-message" 
-                class="alert alert-success" role="alert">SIN Entry Has Been Saved!</div>        
+        <div id="submission-message" class="alert alert-success" role="alert"
+                *ngIf="submitted">Thank you for your submission!</div>
+        <div id="save-message" class="alert alert-success" role="alert"
+                *ngIf="save_message">SIN Entry Has Been Saved!</div>        
         
         <!-- Submitter SIN Table -->
-        <table class="table" id="sin-status-table">
+        <table id="sin-status-table" class="table">
             <tr>
                 <th>#</th>
                 <th>SIN</th>
                 <th>Status</th>
             </tr>
-            <tr *ngFor = "let sin of user_SINs; let i = index;" 
-                id="sin-status-table-entry" [class.clickable] = "selectable" 
-                [class.hoverable] = "selectable" [class.selected] = "sin === selected_SIN && selectable"
-                (click) = "selectSIN(sin)">
+            <tr id="sin-status-table-entry" 
+                [class.clickable]="selectable" 
+                [class.hoverable]="selectable" 
+                [class.selected]="sin === selected_SIN && selectable"
+                (click)="selectSIN(sin)"
+                *ngFor="let sin of user_SINs; let i = index;">
                 <td>{{i + 1}}</td>
                 <td>{{sin.sin_number}}</td>
                 <td>{{this.status_lookup[this.sin.status_id-1].name}} </td>
@@ -29,108 +32,146 @@
         </table>
 
         <!-- Submitter Options-->
-        <button type="submit" id ="edit-sin-btn"
-                class = "btn btn-default btn-sm right" 
-                (click) = "switchModes(true)">Edit Existing Submission</button>
-        <button type="submit" id ="new-sin-btn"
-                class = "btn btn-default btn-sm right" 
-                (click) = "switchModes(false)">Create New Submission</button>
+        <button id="edit-sin-btn" class="btn btn-default btn-sm right" 
+                type="submit" (click)="switchModes(true)">Edit Existing Submission</button>
+        <button id="new-sin-btn" class="btn btn-default btn-sm right" 
+                type="submit" (click)="switchModes(false)">Create New Submission</button>
     </div>
 
     <!-- Submit New Mode Panel-->
-    <div *ngIf = "submit_mode && !exists" class = "panel-body" id="sin-new-submit-panel">
+    <div id="sin-new-submit-panel" class="panel-body"
+        *ngIf="submit_mode && !exists" >
         
         <h1>New SIN Submission</h1><br>
         <!--SIN Number-->
-        <div class="input-group" id ="sin-new-submit">
-                <span class="input-group-addon" id="new-sin-number">Enter New SIN #: </span>
-                <input [(ngModel)]="submit_SIN.sin_number" 
-                        class="form-control right"
-                        type="text" id="sin-submit-input"    
-                placeholder="Type SIN # Here"><br>
+        <div id="sin-new-submit" class="input-group">
+                <span id="new-sin-number" class="input-group-addon">Enter New SIN #: </span>
+                <input id="new_sin_number_input" name="new_sin_number_input" class="form-control right"
+                        required minlength="1" type="number"   
+                        placeholder="Type SIN # Here"
+                        [(ngModel)]="submit_SIN.sin_number" #new_sin_number_input="ngModel"><br>
         </div><br>
+        <!--Input Error Alerts-->
+        <div id="new-sin-number-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_sin_number_input.invalid">SIN Number Must Be A Number</div>
+        <div id="new-sin-number-required-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_sin_number_input.errors.required && new_sin_sumber_input.invalid && (new_sin_number_input.dirty || new_sin_number_input.touched)">SIN Number is Required</div>
 
         <!--SIN Title-->
-        <div class="input-group" id ="title-new-submit">
-                <span class="input-group-addon" id="new-sin">Enter Title: </span>
-                <input [(ngModel)]="submit_SIN.sin_group_title"
-                        class="form-control right"
-                        type="text" id="title-submit-input"
-                        placeholder="Type Title Here"><br>
+        <div id ="title-new-submit" class="input-group">
+                <span id="new-sin-title" class="input-group-addon">Enter Title: </span>
+                <input id="new_title_input" name="new_title_input" class="form-control right"
+                        required minlength="10" maxlength="1000" type="text" 
+                        placeholder="Type Title Here"
+                        [(ngModel)]="submit_SIN.sin_group_title" #new_title_input="ngModel"><br>
         </div><br>
+        <!-- Input Error Alert -->
+        <div id="new-title-required-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_title_input.errors.required && new_title_input.invalid && ( new_title_input.dirty || new_title_input.touched)">Title Is Required</div>
+        <div id="new-title-minlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_title_input.invalid && new_title_input.errors.minlength">Title Must Be Atleast 10 Characters</div>
+        <div id="new-title-maxlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_title_input.invalid && new_title_input.errors.maxlength">Title Cannot Exceed 1000 Characters</div>
 
         <!--SIN Description-->
-        <div class="input-group" id ="describe-new-submit">
-                <span class="input-group-addon" id="new-describe">Enter Description: </span>
-                <input [(ngModel)]="submit_SIN.sin_description1"
-                        class="form-control right"
-                        type="text" id="title-submit-input"
-                        placeholder="Type Description Here"><br>         
+        <div id ="describe-new-submit" class="input-group">
+                <span id="new-describe" class="input-group-addon">Enter Description: </span>
+                <input id="new_describe_input" name="new_describe_input" class="form-control right"
+                        required minlength="20" maxlength="1000" type="text"
+                        placeholder="Type Description Here"
+                        [(ngModel)]="submit_SIN.sin_description1" #new_describe_input="ngModel"><br>         
         </div><br>
-       
+       <!-- Input Error Alert-->
+        <div id="new-describe-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_describe_input.errors.required && new_describe_input.invalid && ( new_describe_input.dirty || new_describe_input.touched)">Description Is Required</div>
+        <div id="new-describe-minlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_describe_input.invalid && new_describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
+        <div id="new-describe-maxlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_describe_input.invalid && new_describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div>        
+
         <!-- Submission Options-->
-        <button *ngIf="submit_SIN.sin_number" id="sin-submit-new-btn-enabled"
-                class="btn btn-default btn-sm right"
-                type="Submit" (click)="submitSIN()">Submit</button>
-        <button *ngIf="!submit_SIN.sin_number" id="sin-submit-new-btn-disabled" 
-                class="btn btn-default btn-sm right"
-                type = "Submit" disabled>Submit</button>
-        <button id="sin-cancel-new-btn"
-                class="btn btn-default btn-sm right"
-                type="Submit" (click)="switchModes(false)">Cancel</button><br>
+        <button id="sin-submit-new-btn-enabled" class="btn btn-default btn-sm right"
+                type="submit" (click)="submitSIN()"
+                *ngIf="submit_SIN.sin_number && !new_sin_number_input.invalid && !new_title_input.invalid && !new_describe_input.invalid">Submit</button>
+        <button id="sin-submit-new-btn-disabled" class="btn btn-default btn-sm right"
+                type = "submit" disabled
+                *ngIf="!submit_SIN.sin_number || new_sin_number_input.invalid || new_title_input.invalid || new_describe_input.invalid">Submit</button>
+        <button id="sin-cancel-new-btn" class="btn btn-default btn-sm right"
+                type="submit" (click)="switchModes(false)">Cancel</button><br>
     </div>
 
     <!-- Submit Existing SIN Mode -->
-    <div *ngIf = "submit_mode && exists && all_SINs.length > 0" class = "panel-body" id="sin-submit-exists-panel">
+    <div id="sin-submit-exists-panel" class = "panel-body"
+        *ngIf="submit_mode && exists && all_SINs.length > 0">
         
         <h1>Edit SIN Submission</h1><br>
         <!--SIN Number-->
-        <div class="input-group" id ="sin-submit-exists">
-                <span class="input-group-addon" id="new-sin-number">Current SINs: </span>
-                <select [(ngModel)]="submit_SIN.sin_number" 
-                        class="form-control right"
-                        type="text" id="sin-submit-exist-input">
-                        <option *ngFor="let sin of all_SINs"
-                                [value]="sin.sin_number"
-                                (click)="selectExistingSIN(sin)"> {{sin.sin_number}} </option>
+        <div id="exists-sin-submit" class="input-group">
+                <span id="exists-sin-number"class="input-group-addon">Current SINs: </span>
+                <select id="exists_sin_number_input" name="exists_sin_number_input" class="form-control right"
+                        required type="number"
+                        [(ngModel)]="submit_SIN.sin_number" #exists_sin_number_input>
+                        <option [value]="sin.sin_number" (click)="selectExistingSIN(sin)"
+                                *ngFor="let sin of all_SINs"> {{sin.sin_number}} </option>
                 </select><br>
         </div><br>
+        <!-- Input Error Alert-->
+        <div id="exists-sin-number-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_sin_number_input.invalid">SIN Number Must Be A Number</div>
+        <div id="exists-sin-number-required-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_sin_number_input.errors.required && exists_sin_sumber_input.invalid && (exists_sin_number_input.dirty || exists_sin_number_input.touched)">SIN Number is Required</div>
 
         <!--SIN Title-->
-        <div class="input-group" id ="title-exists-submit">
-                <span class="input-group-addon" id="new-title">Enter Title: </span>
-                <input [(ngModel)]="submit_SIN.sin_group_title" *ngIf ="existing_SIN.sin_number"
-                        class="form-control right"
-                        type="text" id="title-submit-exists-input-enabled"
-                        [placeholder]="existing_SIN.sin_group_title">
-                <input [(ngModel)]="submit_SIN.sin_group_title" *ngIf ="!existing_SIN.sin_number"
-                        class="form-control right"
-                        type="text" id="title-submit-exists-input-dsabled"
-                        placeholder="Type Title Here" disabled>
+        <div id="exists-title-submit" class="input-group">
+                <span id="exists-title" class="input-group-addon">Enter Title: </span>
+                <input id="exists_title_input" name="exists_title_input" class="form-control right"
+                        type="text" required minlength="10" maxlength="1000"
+                        [placeholder]="existing_SIN.sin_group_title"
+                        [(ngModel)]="submit_SIN.sin_group_title" 
+                        *ngIf ="existing_SIN.sin_number" #exists_title_input>
+                <input id="exists-title-submit-input-dsabled" class="form-control right"
+                        type="text" disabled placeholder="Type Title Here"
+                        [(ngModel)]="submit_SIN.sin_group_title" 
+                        *ngIf ="!existing_SIN.sin_number">
         </div><br>
+        <!-- Input Error Alert -->
+        <div id="exists-title-required-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_title_input.errors.required && exists_title_input.invalid && ( exists_title_input.dirty || exists_title_input.touched)">Title Is Required</div>
+        <div id="exists-title-minlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_title_input.invalid && exists_title_input.errors.minlength">Title Must Be Atleast 10 Characters</div>
+        <div id="exists-title-maxlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_title_input.invalid && exists_title_input.errors.maxlength">Title Cannot Exceed 1000 Characters</div>
+
 
         <!--SIN Description-->
         <div class="input-group" id ="describe-submit-exists">
                 <span class="input-group-addon" id="new-describe">Enter Description: </span>
-                <input [(ngModel)]="submit_SIN.sin_description1" *ngIf ="existing_SIN.sin_number"
-                        class="form-control right"
-                        type="text" id="title-submit-exists-input-enabled"
-                        [placeholder]="existing_SIN.sin_description1">
+                <input id="exists_describe_input" name="exists_describe_input" class="form-control right"
+                        type="text" required minlength="20" maxlength="1000" 
+                        [placeholder]="existing_SIN.sin_description1"
+                        [(ngModel)]="submit_SIN.sin_description1" 
+                        *ngIf ="existing_SIN.sin_number" #exists_describe_input>
                 <input [(ngModel)]="submit_SIN.sin_description1" *ngIf ="!existing_SIN.sin_number"
                         class="form-control right"
                         type="text" id="title-submit-exists-input-disabled"
                         placeholder="Type Description Here" disabled>      
         </div><br>
+        <!-- Input Error Alert-->
+        <div id="exists-describe-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_describe_input.errors.required && exists_describe_input.invalid && ( exists_describe_input.dirty || exists_describe_input.touched)">Description Is Required</div>
+        <div id="exists-describe-minlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="new_describe_input.invalid && new_describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
+        <div id="exists-describe-maxlength-error-message" class="alert alert-danger" role="alert"
+                *ngIf="exists_describe_input.invalid && exists_describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div> 
        
         <!-- Submission Options-->
-        <button *ngIf="submit_SIN.sin_number" id="sin-submit-exists-btn-enabled"
-                class="btn btn-default btn-sm right"
-                type="Submit" (click)="submitSIN()">Submit</button>
-        <button *ngIf="!submit_SIN.sin_number" id="sin-submit-exists-btn-disabled" 
-                class="btn btn-default btn-sm right"
-                type = "Submit" disabled>Submit</button>
-        <button id="sin-cancel-exists-btn"
-                class="btn btn-default btn-sm right"
+        <button id="sin-submit-exists-btn-enabled" class="btn btn-default btn-sm right"
+                type="Submit" (click)="submitSIN()"
+                *ngIf="submit_SIN.sin_number && !exists_sin_number_input.invalid && !exists_title_input.invalid && !exists_describe_input.invalid" >Submit</button>
+        <button id="sin-submit-exists-btn-disabled" class="btn btn-default btn-sm right"
+                type = "Submit" disabled
+                *ngIf="!submit_SIN.sin_numbe || exists_sin_number_input.invalid || exists_title_input.invalid || exists_describe_input.invalid" >Submit</button>
+        <button id="sin-cancel-exists-btn" class="btn btn-default btn-sm right"
                 type="Submit" (click)="switchModes(false)">Cancel</button><br>
     </div>
 </div>

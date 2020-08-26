@@ -31,7 +31,7 @@ class DebugMiddleware:
 
                 self.logger.info('>>> Cookie Header: %s', request.headers['Cookie'])
                 if 'X-CSRFToken' in request.headers:
-                    self.logger.info('>>> X-CSRFTOKEN Header: %s', request.headers['X-CSRFTOKEN']) 
+                    self.logger.info('>>> X-CSRFTOKEN Header: %s', request.headers['X-CSRFTOKEN'][0:20]) 
 
         response = self.get_response(request)
 

@@ -3,32 +3,39 @@
     <!--SIN editor-->    
     SIN #<br> 
     <label for="current-sin-number">Current SIN #: </label>
-    <span id="current-sin-number" 
-            class="right">{{this.edit_SIN.sin_number}}</span><br>
+    <span id="current-sin-number" class="right">{{this.edit_SIN.sin_number}}</span><br>
     
     <label for ="new-sin-number">New SIN #: </label>
-    <span *ngIf = "buffer_SIN.sin_number" id="new-sin-number" class="right">
-            <mark>{{this.buffer_SIN.sin_number}}</mark></span><br>
+    <span id="new-sin-number" class="right"
+        *ngIf = "buffer_SIN.sin_number"> <mark>{{this.buffer_SIN.sin_number}}</mark></span><br>
     
-    <div class="input-group" id="sin-edit-input-group">
-        <span class="input-group-addon" id="enter-new-sin-number">Enter New SIN #</span>
-        <input type="text" id="input-sin-number-enabled" class="form-control"
-                placeholder="Enter New SIN # Here" aria-describedby="enter-new-sin-number"
-                *ngIf = "!applied_SIN" [(ngModel)]="buffer_SIN.sin_number">
-        <input type = "text" id ="input-sin-number-disabled" class="form-control"
-                [placeholder]="edit_SIN.sin_number" aria-describedby="enter-new-sin-number"
-                *ngIf = "applied_SIN" disabled>
+    <div id="sin-edit-input-group" class="input-group">
+        <span id="enter-new-sin-number" class="input-group-addon">Enter New SIN #</span>
+        <input id="input-sin-number-enabled" class="form-control" aria-describedby="enter-new-sin-number"
+                type="text"
+                placeholder="Enter New SIN # Here"
+                *ngIf = "!applied_SIN" 
+                [(ngModel)]="buffer_SIN.sin_number">
+        <input id ="input-sin-number-disabled" class="form-control" aria-describedby="enter-new-sin-number"
+                type = "text" disabled
+                [placeholder]="edit_SIN.sin_number"
+                *ngIf = "applied_SIN">
     </div><br>
 
-    <div class ="btn-group right" role="group" id="sin-edit-btn-group">
-        <button *ngIf="applied_SIN" type="button" (click)="undoSIN()"
-                class="btn btn-danger btn-sm" id="undo-sin-enabled">Undo</button>
+    <div id="sin-edit-btn-group" class ="btn-group right" role="group">
+        <button id="undo-sin-enabled" class="btn btn-danger btn-sm"
+                type="button" 
+                (click)="undoSIN()"
+                *ngIf="applied_SIN">Undo</button>
         <button *ngIf="!applied_SIN" type="button" disabled
-                class="btn btn-danger btn-sm" id="undo-sin-disabled">Undo</button>
-        <button *ngIf="!applied_SIN && buffer_SIN.sin_number" type="button" (click)="applySIN()"
-                class="btn btn-success btn-sm" id="apply-sin-enabled">Apply</button>
-        <button *ngIf="applied_SIN || !buffer_SIN.sin_number" type="button" disabled
-                class="btn btn-success btn-sm" id="apply-sin-disabled">Apply</button>
+                id="undo-sin-disabled" class="btn btn-danger btn-sm">Undo</button>
+        <button id="apply-sin-enabled" class="btn btn-success btn-sm"
+                type="button" 
+                (click)="applySIN()"
+                *ngIf="!applied_SIN && buffer_SIN.sin_number">Apply</button>
+        <button id="apply-sin-disabled" class="btn btn-success btn-sm"
+                type="button" disabled
+                *ngIf="applied_SIN || !buffer_SIN.sin_number">Apply</button>
     </div><br><br>
 
      <!-- Title Editor -->

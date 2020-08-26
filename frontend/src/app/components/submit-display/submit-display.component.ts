@@ -12,8 +12,7 @@ import { SinService } from 'src/app/services/sin.service';
 })
 export class SubmitDisplayComponent implements OnInit {
 
-  private class_name = "SubmitDisplayComponent"
-
+  private class_name = "SubmitDisplayComponent";
   public submit_mode : boolean = false;
   public exists : boolean;
   public submitted: boolean = false;
