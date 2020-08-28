@@ -188,8 +188,10 @@
 
     <!-- Save Editor -->
         <div id="save-changes-msg" class="alert alert-warning" role="alert"
-                *ngIf = "applied_SIN || applied_Title || applied_Description || applied_Status">Please Save Your Changes</div>
-        <!--Input Buttons-->
+                *ngIf = "(applied_SIN || applied_Title || applied_Description || applied_Status ) && (!invalid_SIN && !invalid_Title && !invalid_Description)">Please Save Your Changes</div>
+        <div id="error-message" class="alert alert-danger" role="alert"
+                *ngIf="invalid_SIN || invalid_Title || invalid_Description">One or more of your field changes is invalid. Please validate changes before saving.</div>
+                <!--Input Buttons-->
         <button id ="cancel-btn" class="btn btn-default btn-sm"
                 type="submit"
                 (click)="cancel()">Cancel</button>
