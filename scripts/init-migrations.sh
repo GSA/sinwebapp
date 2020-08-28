@@ -1,7 +1,8 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='init-migrations.sh'
 nl=$'\n'
-SCRIPT_DES=""
+SCRIPT_DES="This script will scrub the existing migrations from the application,${nl}\
+    and then create fresh migrations to ensure the model is up to date."
 source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]
@@ -21,10 +22,10 @@ else
         cp "$APP_DIR/api/authentication/migrations/0002_authentication_data.py" "$APP_DIR/db/0002_authentication_data.py"
     fi
     
-    formatted_print "--> Cleaning Migrations In All $APP_DIR Modules" $SCRIPT_NAME
-    formatted_print '--> Cleaning \e[4m/api/\e[0m migrations/ Directory' $SCRIPT_NAME
+    formatted_print "--> Cleaning Migrations In All \e[4m$APP_DIR/\e[0m Modules" $SCRIPT_NAME
+    formatted_print '--> Cleaning \e[4m/api/migrations/\e[0m Directory' $SCRIPT_NAME
     rm -r $APP_DIR/api/migrations/
-    formatted_print '--> Cleaning \e[4m/api/\e[0m authentication/ Directory' $SCRIPT_NAME
+    formatted_print '--> Cleaning \e[4m/api/authentication/\e[0m Directory' $SCRIPT_NAME
     rm -r $APP_DIR/authentication/migrations/
 
     formatted_print "--> Creating New Migrations"
@@ -36,8 +37,9 @@ else
 
     if [ ! -d "$APP_DIR/authentication/migrations/" ]
     then
-        formatted_print '--> No \e[4m/authentication/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
+        formatted_print '--> No \e[4m/authentication/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
         mkdir -p "$APP_DIR/authentication/migrations/"
+        touch "$APP_DIR/authentication/migrations/__init__.py"
     fi
 
     cp  "$APP_DIR/db/0002_authentication_data.py" "$APP_DIR/authentication/migrations/0002_authentication_data.py"

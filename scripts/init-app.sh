@@ -11,7 +11,7 @@ SCRIPT_DES="This script will perform environment-specific configuration and ${nl
    EXAMPLE USAGE${nl}\
        bash init-app.sh local ${nl}${nl}\
    ARGUMENT - REQUIRED${nl}\
-${nl}       local - environment for local applicatoin.\
+${nl}       local - environment for local application.\
 ${nl}       container - environment for container application \
 ${nl}       cloud - environment for cloud application"
 source "$SCRIPT_DIR/util/logging.sh"

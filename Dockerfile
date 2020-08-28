@@ -53,6 +53,7 @@ COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY /sinwebapp/db/ /home/sinwebapp/db/
 
 # START UP SCRIPT
+COPY /scripts/init-migrations.sh /home/scripts/init-migrations.sh
 COPY /scripts/init-app.sh /home/scripts/init-app.sh
 COPY /scripts/util/logging.sh /home/scripts/util/logging.sh
 WORKDIR /home/scripts/
