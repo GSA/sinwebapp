@@ -3,7 +3,7 @@ SCRIPT_NAME='build-container.sh'
 nl=$'\n'
 SCRIPT_DES="This script will stop and remove any Docker containers currently \
 running on your machine,${nl}   clear the Docker cache, configure the frontend \
-application's HTTP context to point to the${nl}   Cloud, build the application \
+application's HTTP context for containers,${nl}   build the application \
 images, delete any dangling images leftover after the build${nl}   completes and \
 then orchestrate the application the application images through docker-compose."
 source "$SCRIPT_DIR/util/logging.sh"

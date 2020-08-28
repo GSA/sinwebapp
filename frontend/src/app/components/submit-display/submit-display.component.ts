@@ -6,6 +6,57 @@ import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 import { SinService } from 'src/app/services/sin.service';
 
+// SubmitDisplayComponent
+// 
+//  Implemented Hierarchy : App -> UserDisplay -> SubmitDisplay
+//  
+//  SubmitDisplayComponent is a child of the UserDisplayComponent. It 
+//  receives information through input and passes information back to 
+//  the parent through events the parent registers to listen to.
+//
+//  Description
+//    
+//  This component allows an authenticated user with valid group permissions
+//  to submit a new SIN submission or edit an existing SIN submission. This 
+//  component consumes user input and passes it onto the backend for processing. 
+//  Once it is done with the user, it will emit an event signalling to the parent 
+//  component what type of transaction has occured. See Output Events for more information.
+//
+//  HTML Attribute Input: [user], [selectable], [save_message], [clear_switch]
+//  
+//  As input, this component requires the user authenticated with the current 
+//  session, a boolean flag that determines whether or not the SINS displayed
+//  will be selectable (i.e, clickable and highlightable), a boolean flag
+//  that determines whether or not to display a save message to the user and
+//  a boolean flag that will signal to the component to clear any highlighted
+//  user selections anytime it changes value, true or false.
+//  
+//  In the application, the variable, save_message, signals to the child
+//  component a save_event has occured in the parent component and an appropriate
+//  message should be displayed on screen.
+//
+//  If thisUser is an object of type User, then
+
+//        <app-submit-display [user]="thisUser" [selectable]="true" 
+//                            [save_message]="true" [clear_switch]="true"></app-submit-display>
+//    
+//    will create an HTML component binded to the Angular component defined in this
+//    this class. 
+//
+//  Output Events
+//
+//   This component emits two types of events: selection_events and clear_events. 
+//   selection_events occur when the user clicks on one of the SINs in the displayed
+//   list. A clear_event occurs when the user causes the selection to clear. If 
+//   doThis(object: Object) and doThat(object: Object) are methods in the parent component, 
+//   then you can listen to the save_event and cancel_event with the following tag,
+//
+//        <app-submit-display [user]="thisUser" [selectable]="true" [save_message]="true" 
+//                      (clear_event)="doThis($event)" (selection_event)="doThat($event)"></app-submit-display>
+//
+//    A selection_event will contain the SIN that has been selected by the user. A 
+//    a clear_event will contain the SIN that has been cleared from the selection.
+
 @Component({
   selector: 'app-submit-display',
   templateUrl: './submit-display.component.html'
@@ -29,6 +80,7 @@ export class SubmitDisplayComponent implements OnInit {
   @Input() public user: User;
   @Input() public selectable: boolean; 
   @Input() public save_message: boolean;
+  @Input() public clear_switch: boolean;
   @Output() public selection_event = new EventEmitter<SIN>();
   @Output() public clear_event = new EventEmitter<SIN>();
 
@@ -46,6 +98,10 @@ export class SubmitDisplayComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
     if(changes.selectable !== undefined){ this.loadUserSINs(); }
+    if(changes.clear_switch !== undefined) { 
+      this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
+              sin_description1: null, sin_group_title: null };
+    }
   }
 
   public loadAllSINs(){

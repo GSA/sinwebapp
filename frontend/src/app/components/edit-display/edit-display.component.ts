@@ -37,10 +37,11 @@ import { StatusService } from 'src/app/services/status.service';
 //    then you can listen to the save_event and cancel_event with the following tag,
 //
 //        <app-edit-display [input_SIN]="thisSIN" [user_group] ></app-edit-display
-//                      (save_event)="doThis($event)" (cancel_event)="doThat($event)">
+//                      (save_event)="doThis($event)" (cancel_event)="doThat($event)"></app-edit-display>
 //
 //    The case of a save_event, the event Object will contain the SIN object the user edited
-//    and passed to the backend application for persisting in the database.
+//    and passed to the backend application for persisting in the database. A cancel_event
+//    will contain a null SIN
 
 @Component({
   selector: 'app-edit-display',
@@ -60,6 +61,10 @@ export class EditDisplayComponent implements OnInit {
   public applied_Status: boolean = false;
   public applied_Title: boolean = false;
   public applied_Description: boolean = false;
+  public invalid_SIN: boolean = false;
+  public invalid_Status: boolean = false;
+  public invalid_Title: boolean = false;
+  public invalid_Description: boolean = false;
   public status_lookup: Status[] = [];
   public permission_status_lookup: Status[] = [];
 
@@ -105,6 +110,7 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN.sin_number = this.buffer_SIN.sin_number;
     this.buffer_SIN.sin_number = null;
     this.applied_SIN = true;
+    this.validateInput();
   }
 
   public applyStatus(): void{
@@ -121,6 +127,7 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN.sin_group_title = this.buffer_SIN.sin_group_title;
     this.buffer_SIN.sin_group_title = null;
     this.applied_Title = true;
+    this.validateInput();
   }
 
   public applyDescription(): void{
@@ -129,6 +136,7 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN.sin_description1 = this.buffer_SIN.sin_description1;
     this.buffer_SIN.sin_description1= null;
     this.applied_Description = true;
+    this.validateInput();
   }
 
   public undoSIN(): void{
@@ -136,6 +144,7 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoSIN`);
     this.edit_SIN.sin_number = this.undo_SIN.sin_number;
     this.applied_SIN=false;
+    this.validateInput();
   }
 
   public undoStatus(): void{
@@ -143,6 +152,7 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoStatus`);
     this.edit_SIN.status_id = this.undo_SIN.status_id;
     this.applied_Status = false;
+    this.validateInput();
   }
 
   public undoTitle(): void{
@@ -150,6 +160,7 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoTitle`);
     this.edit_SIN.sin_group_title = this.undo_SIN.sin_group_title;
     this.applied_Title = false;
+    this.validateInput();
   }
 
   public undoDescription(): void{
@@ -157,6 +168,16 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoDescription`)
     this.edit_SIN.sin_description1 = this.undo_SIN.sin_description1;
     this.applied_Description = false;
+    this.validateInput();
+  }
+
+  public validateInput(): void {
+    if(!isNaN(this.edit_SIN.sin_number)){ this.invalid_SIN = false; }
+    else { this.invalid_SIN = true; }
+    if(this.edit_SIN.sin_group_title.length > 10 && this.edit_SIN.sin_group_title.length < 1000) { this.invalid_Title = false; }
+    else { this.invalid_Title = true; }
+    if(this.edit_SIN.sin_description1.length > 20 && this.edit_SIN.sin_description1.length < 1000) { this.invalid_Description = false; }
+    else{ this.invalid_Description = true;}
   }
 
   public saveAll(): void {

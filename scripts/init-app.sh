@@ -50,8 +50,7 @@ else
         # python manage.py clearsessions
     fi
 
-    formatted_print '--> Creating New Migrations, If Needed' $SCRIPT_NAME
-    python manage.py makemigrations
+    # bash $SCRIPT_DIR/init-migrations.sh
 
     formatted_print '--> Migrating Django Database Files' $SCRIPT_NAME
     # python manage.py migrate --fake authentication zero

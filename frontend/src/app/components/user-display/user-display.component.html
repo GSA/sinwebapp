@@ -1,24 +1,26 @@
-<div *ngIf = "user.groups && user.email">
+<div *ngIf="user.groups && user.email">
 
   <!--NAV Bar-->
-  <nav class="navbar navbar-default" id="sin-navbar">
-    <div class="container-fluid">
+  <nav id="app-navbar" class="navbar navbar-default">
+    <div id="navbar" class="container-fluid">
 
-      <div class="navbar-header left">Menu</div>
-      <ul class="nav navbar-nav">
-        <li *ngIf = "user.groups.includes('admin_group')" 
-            class="active"><a href="/admin">Admin</a></li>
-      </ul>
-
+      <div class="navbar-header">
+        <div class="navbar-brand">Menu</div>
+        <ul class="nav navbar-nav">
+          <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
+        </ul>
+      </div>
+      
     </div>
   </nav>
 
   <!--Application Container-->
-  <div class="container-fluid" id="sin-application">
+  <div id="sin-application" class="container-fluid">
 
     <!--User Details Panel-->
-    <div class="row">
-      <div class="col-md" id="user-details-panel">
+    <div id="row-1" class="row"
+        *ngIf="DEBUG">
+      <div id="user-details-panel" class="col-md">
 
         <div class="panel panel-default" >    
           <div class="panel-heading">User Details</div>
@@ -31,49 +33,54 @@
       </div>
     </div>
 
-    <div class="row">
+    <div id="row-2" class="row">
       <!--User Group Specific Panel -->
-      <div class="col-md-8" id="group-specific-panel">
+      <div id="group-specific-panel" class="col-md-8">
 
         <div *ngIf="user.groups.includes('submitter_group')">
           <app-submit-display id="submit-app-component"
-                              [user]="user" [selectable]="!edit_mode" [save_message]="saved"
+                              [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
                               (selection_event)="selectSIN($event)"
-                              (clear_event)="clearSelectedSIN($event)"></app-submit-display>
+                              (clear_event)="clearSelectedSIN($event, true)"></app-submit-display>
         </div>
         <div *ngIf="user.groups.includes('approver_group') || user.groups.includes('reviewer_group') || user.groups.includes('admin_group')">
           <app-review-display id="review-app-component"
-                              [user] = "user" [selectable] = "!edit_mode" [save_message] = "saved"
+                              [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
                               (selection_event)="selectSIN($event)"></app-review-display>
         </div>
       </div>
 
       <!--User Selected SIN Panel-->
-      <div class = "col-md-4" id="sin-selection-panel">
+      <div id="sin-selection-panel" class="col-md-4">
 
         <!-- SIN Viewer -->   
-        <div *ngIf="!edit_mode" id="sin-selection-viewer" class = "panel panel-default">
+        <div id="sin-selection-viewer" class="panel panel-default"
+            *ngIf="!edit_mode">
         
               <div class="panel-heading">SIN Details</div>
 
-              <div *ngIf="!selected_SIN.sin_number" class="panel-body"> Select a SIN</div>
+              <div id="default-panel-message" class="panel-body"
+                  *ngIf="!selected_SIN.sin_number"> Select a SIN</div>
 
-              <div *ngIf = "selected_SIN.status_id && selected_User.id && status_lookup.length > 0" 
-                    class="panel-body">
-                SIN #:<br> <span class = "right">{{this.selected_SIN.sin_number}}</span><br>
-                Title : <br> <span class = "right">{{this.selected_SIN.sin_group_title}}</span><br>
-                Status:<br> <span class = "right">{{this.status_lookup[this.selected_SIN.status_id-1].name}}</span><br>
-                Submitted By:<br> <span class = "right">{{this.selected_User.email}}</span><br>
-                Submitted To:<br> <span class = "right"><b>TODO</b></span><br>
-                Description: <br> <span class = "right"> {{this.selected_SIN.sin_description1}} </span><br><br>
+              <div id="selected-sin" class="panel-body" 
+                  *ngIf="selected_SIN.status_id && selected_User.id && status_lookup.length > 0" >
+                SIN #:<br> <span class="right">{{this.selected_SIN.sin_number}}</span><br>
+                Title : <br> <span class="right">{{this.selected_SIN.sin_group_title}}</span><br>
+                Status:<br> <span class="right">{{this.status_lookup[this.selected_SIN.status_id-1].name}}</span><br>
+                Submitted By:<br> <span class="right">{{this.selected_User.email}}</span><br>
+                Submitted To:<br> <span class="right"><b>TODO</b></span><br>
+                Description: <br> <span class="right"> {{this.selected_SIN.sin_description1}} </span><br><br>
 
-                <button type="submit" class = "right btn btn-default btn-sm" (click) = "switchModes()">
-                  Edit</button>
+                <button id="edit-selection-btn" class="right btn btn-default btn-sm" 
+                        type="submit" (click)="switchModes()"> Edit</button>
+                <button id="clear-selection-btn" class="right btn btn-default btn-sm" 
+                        type="submit" (click) ="clearSelectedSIN(selected_SIN, false)"> Clear</button>
               </div>
         </div>
 
         <!-- SIN Editor-->
-        <div *ngIf = "edit_mode" id="sin-selection-editor" class = "panel panel-default">
+        <div id="sin-selection-editor" class = "panel panel-default"
+            *ngIf = "edit_mode">
           <div class="panel-heading">SIN Editor</div>
           <app-edit-display id="edit-app-component" 
                             [input_SIN] ="selected_SIN" [user_group]="user.groups"
@@ -84,9 +91,10 @@
     </div>
 
     <!--Application Logger Panel-->
-    <div class = "row">
+    <div id="row-3" class="row"
+        *ngIf="DEBUG">
 
-      <div class = "col-md-12" id="application-logger-panel">
+      <div class="col-md-12" id="application-logger-panel">
         <app-logger></app-logger>
       </div>
       
