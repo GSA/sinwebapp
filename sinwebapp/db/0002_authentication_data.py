@@ -7,6 +7,7 @@ from ..db_init import init_groups, init_permissions, init_group_permissions, ini
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('auth','0011_update_proxy_permissions')
     ]
 
     operations = [

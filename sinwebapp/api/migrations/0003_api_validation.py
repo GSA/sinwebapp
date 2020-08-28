@@ -16,10 +16,10 @@ from ..db_init import init_status, init_sindata, populate_sins
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0001_init')
+        ('authentication', '0002_authentication_data'),
+        ('api', '0002_api_data')
     ]
 
     operations = [
-        migrations.RunPython(init_status),
-        migrations.RunPython(init_sindata)
+        migrations.RunPython(populate_sins)
     ]

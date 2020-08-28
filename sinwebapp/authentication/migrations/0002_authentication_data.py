@@ -3,20 +3,11 @@
 from django.db import migrations
 from ..db_init import init_groups, init_permissions, init_group_permissions, init_default_users
 
-# This migration gets copied over to the /db/ during the init-migrations.sh script
-# when docker-compose is scrubbing existing migrations from the application before
-# creating a fresh migration for each module in the Django applicaiton. These custom
-# migrations do not get recreated during 
-#
-#   python manage.py makemigrations
-#
-# Furthermore, since these migrations initialize data in the database, they depend on
-# the model migrations automatically created by Django before they can be run. 
-# Therefore, they need to be stored and copied back into the application after 
-# Django has generated new migrations. 
+
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('auth','0011_update_proxy_permissions')
     ]
 
     operations = [

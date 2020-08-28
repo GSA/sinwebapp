@@ -12,14 +12,21 @@ else
     formatted_print "--> Initializing Django Migrations" $SCRIPT_NAME
     APP_DIR="$SCRIPT_DIR/../sinwebapp"
 
-    formatted_print '--> Copying Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
+    formatted_print '--> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
     if [ -f "$APP_DIR/api/migrations/0002_api_data.py" ]
     then
-        cp "$APP_DIR/api/migrations/0002_api_data.py" "$APP_DIR/db/0002_api_data.py"
+        formatted_print 'Caching 0002_api_data.py' $SCRIPT_NAME
+        cp -R "$APP_DIR/api/migrations/0002_api_data.py" "$APP_DIR/db/0002_api_data.py"
     fi
-    if [ -f "$APP_DIR/api/authentication/migrations/0002_authentication_data.py" ]
+    if [ -f "$APP_DIR/api/migrations/0003_api_validation.py" ]
     then
-        cp "$APP_DIR/api/authentication/migrations/0002_authentication_data.py" "$APP_DIR/db/0002_authentication_data.py"
+        formatted_print 'Caching 0003_api_validation.py' $SCRIPT_NAME
+        cp -R "$APP_DIR/api/migrations/0003_api_validation.py" "$APP_DIR/db/0003_api_validation.py"
+    fi
+    if [ -f "$APP_DIR/authentication/migrations/0002_authentication_data.py" ]
+    then
+        formatted_print 'Caching 0002_authentication_data.py' $SCRIPT_NAME
+        cp -R "$APP_DIR/authentication/migrations/0002_authentication_data.py" "$APP_DIR/db/0002_authentication_data.py"
     fi
     
     formatted_print "--> Cleaning Migrations In All \e[4m$APP_DIR/\e[0m Modules" $SCRIPT_NAME
@@ -28,12 +35,15 @@ else
     formatted_print '--> Cleaning \e[4m/api/authentication/\e[0m Directory' $SCRIPT_NAME
     rm -r $APP_DIR/authentication/migrations/
 
-    formatted_print "--> Creating New Migrations"
+    formatted_print "--> Creating New Model Migrations"
     cd $APP_DIR
     python manage.py makemigrations api --name init
     python manage.py makemigrations authentication --name init
+    python manage.py makemigrations
 
-    cp "$APP_DIR/db/0002_api_data.py" "$APP_DIR/api/migrations/0002_api_data.py"
+    formatted_print '--> Copying Custom Data Migrations Back Into Application' $SCRIPT_NAME
+    cp -R "$APP_DIR/db/0002_api_data.py" "$APP_DIR/api/migrations/0002_api_data.py"
+    cp -R "$APP_DIR/db/0003_api_validation.py" "$APP_DIR/api/migrations/0003_api_validation.py"
 
     if [ ! -d "$APP_DIR/authentication/migrations/" ]
     then
@@ -42,5 +52,5 @@ else
         touch "$APP_DIR/authentication/migrations/__init__.py"
     fi
 
-    cp  "$APP_DIR/db/0002_authentication_data.py" "$APP_DIR/authentication/migrations/0002_authentication_data.py"
+    cp -R "$APP_DIR/db/0002_authentication_data.py" "$APP_DIR/authentication/migrations/0002_authentication_data.py"
 fi
