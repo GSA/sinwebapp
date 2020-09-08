@@ -14,7 +14,10 @@ else
     then
         cp $SCRIPT_DIR/init-app.sh $SCRIPT_DIR/../sinwebapp/init-app.sh
     fi
-
+    if [ ! -f "$SCRIPT_DIR/../sinwebapp/init-migrations.sh" ]
+    then
+        cp $SCRIPT_DIR/init-migrations.sh $SCRIPT_DIR/../sinwebapp/init-migrations.sh
+    fi
     if [ ! -d "$SCRIPT_DIR/../sinwebapp/util" ]
     then
         mkdir $SCRIPT_DIR/../sinwebapp/util/

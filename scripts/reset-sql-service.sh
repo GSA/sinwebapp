@@ -16,6 +16,7 @@ else
     formatted_print '--> Clearing Existing Service' $SCRIPT_NAME
 
     cf unbind-service sinweb sin-sql
+    cf delete-service-key sin-sql SERVICE_CONNECT -f
     cf delete-service sin-sql -f
 
     formatted_print '--> Creating New SQL Service' $SCRIPT_NAME

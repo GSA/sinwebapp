@@ -2,14 +2,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='init-migrations.sh'
 nl=$'\n'
 SCRIPT_DES="This script will scrub the existing migrations from the application,${nl}\
-    and then create fresh migrations to ensure the model is up to date.
-${nl} 
-   EXAMPLE USAGE${nl}\
-       bash init-migrations.sh local ${nl}${nl}\
-   ARGUMENT - REQUIRED${nl}\
-${nl}       local - initialize migrations on local environment\
-${nl}       container - initialize migrations on container environment\
-${nl}       cloud - initialize migrations on cloud environment"
+    and then create fresh migrations to ensure the model is up to date."
 source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]
@@ -17,10 +10,7 @@ then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
     formatted_print "--> Initializing Django Migrations" $SCRIPT_NAME
-    if [ "$1" == "local" ] || [ "$1" == "container" ]
-    then
-        APP_DIR="$SCRIPT_DIR/../sinwebapp"
-    fi
+    APP_DIR="$SCRIPT_DIR/../sinwebapp"
 
     formatted_print '--> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
     if [ -f "$APP_DIR/api/migrations/0002_api_data.py" ]

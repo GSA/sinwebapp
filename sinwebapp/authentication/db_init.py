@@ -74,7 +74,10 @@ def init_default_users(app, schema_editor):
     super_name = os.getenv('DJANGO_SUPERUSER_USERNAME')
     super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
     super_pass = os.getenv('DJANGO_SUPERUSER_PASSWORD')
-    super_user = User.objects.create_superuser(username=super_name, email=super_email, password=super_pass)
-    admin_group = Group.objects.get(name=GROUPS['admin'])
-    admin_group.user_set.add(super_user)
-    super_user.save()
+    try:
+        super_user = User.objects.create_superuser(username=super_name, email=super_email, password=super_pass)
+        admin_group = Group.objects.get(name=GROUPS['admin'])
+        admin_group.user_set.add(super_user)
+        super_user.save()
+    except:
+        logger.info('Super User Exists')

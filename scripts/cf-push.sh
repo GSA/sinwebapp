@@ -83,9 +83,6 @@ else
         then
             formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/clean-app.sh
-            formatted_print '--> Removing Initialization Script From Applcation' $SCRIPT_NAME
-            rm -r $SCRIPT_DIR/../sinwebapp/init-app.sh
-            rm -r $SCRIPT_DIR/../sinwebapp/util/logging.sh
         elif [ "$input" == "trail" ]
         then
             formatted_print '--> Trailing CF Logs' $SCRIPT_NAME
