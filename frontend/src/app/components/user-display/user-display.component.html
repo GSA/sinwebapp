@@ -65,11 +65,11 @@
               <div id="selected-sin" class="panel-body" 
                   *ngIf="selected_SIN.status_id && selected_User.id && status_lookup.length > 0" >
                 SIN #:<br> <span class="right">{{this.selected_SIN.sin_number}}</span><br>
-                Title : <br> <span class="right">{{this.selected_SIN.sin_group_title}}</span><br>
+                Title : <br> <span class="right">{{this.selected_SIN.sin_title}}</span><br>
                 Status:<br> <span class="right">{{this.status_lookup[this.selected_SIN.status_id-1].name}}</span><br>
                 Submitted By:<br> <span class="right">{{this.selected_User.email}}</span><br>
                 Submitted To:<br> <span class="right"><b>TODO</b></span><br>
-                Description: <br> <span class="right"> {{this.selected_SIN.sin_description1}} </span><br><br>
+                Description: <br> <span class="right"> {{this.selected_SIN.sin_description}} </span><br><br>
 
                 <button id="edit-selection-btn" class="right btn btn-default btn-sm" 
                         type="submit" (click)="switchModes()"> Edit</button>

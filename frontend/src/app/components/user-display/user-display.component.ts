@@ -53,7 +53,7 @@ export class UserDisplayComponent implements OnInit {
     // User selected SIN from list. This variable is set through 
     // events emitted from child components. 
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null, 
-                                sin_description1: null, sin_group_title: null };
+                                sin_description: null, sin_title: null };
     // determines whether or not the third panel is a SIN field viewer or editor pane.
   public edit_mode : boolean = false;
     // determines whether or not to display a saved message on screen
@@ -102,7 +102,7 @@ export class UserDisplayComponent implements OnInit {
   public clearSelectedSIN(sin: SIN, fromEvent : boolean):void{
     this.logger.log('Clearing Selected SIN', `${this.class_name}.clearSelecetedSIN`)
     this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-      sin_description1: null, sin_group_title: null };
+      sin_description: null, sin_title: null };
     if(!fromEvent){ this.switcher=!this.switcher;}
   }
 
@@ -123,7 +123,7 @@ export class UserDisplayComponent implements OnInit {
       this.logger.log(`Sin #${updateSIN.sin_number} Updated`, `${this.class_name}.saveSIN`)
     })
     this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
+                            sin_description: null, sin_title: null };
     this.saved = true;
     this.switchModes();
   }
@@ -131,7 +131,7 @@ export class UserDisplayComponent implements OnInit {
   public cancel(msg: String): void{ 
     this.logger.log('Cancelling Edit Mode', `${this.class_name}.cancel`);
     this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
+                            sin_description: null, sin_title: null };
     this.switchModes(); 
   }
 }

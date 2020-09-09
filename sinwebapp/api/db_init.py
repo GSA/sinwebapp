@@ -29,7 +29,7 @@ def init_sindata(app, schema_editor):
     logger = DebugLogger("api.db_init.init_sindata").get_logger()
     logger.info("Initializing SinData")
 
-    filepath = BASE_DIR+'/db/sin_data.csv'
+    filepath = BASE_DIR+'/db/mas_sin_attributes.csv'
     logger.info('Opening CSV Located at: %s', filepath)
 
     with open(filepath) as f:
@@ -39,15 +39,20 @@ def init_sindata(app, schema_editor):
         modulo = randint(70, 120)
         logger.info("Randomizing Debug Output Because Why Not")
         for row in reader:
+            state_flag = True if row[5] == 'Y' else False
+            set_flag = True if row[6] == 'Y' else False
+            t_flag = True if row[9] == 'Y' else False
+            o_flag = True if row[10] == 'Y' else False
+            end = row[4] if 'NULL' not in row[4] else None
             created = SinData.objects.get_or_create(
-                sin_number=row[0], schedule_number=row[1], special_item_number=row[2],
-                sin_group_title=row[3], sin_description1=row[4], sin_description2=row[5],
-                sin_order=row[6], co_fname=row[7], co_lname=row[8], co_phone=row[9],
-                co_email=row[10]
+                sin_number=row[0], sin_title=row[1], sin_description=row[2], 
+                begin_date=row[3], end_date=end, state_and_local=state_flag,
+                set_aside=set_flag, service_comm_code=row[7], 
+                tdr_flag=t_flag, olm_flag=o_flag, max_order_limit=row[11]
             )
             count+=1
             if count%modulo == 0:
-                logger.info(" INSERTION # %s : (sin_number, sin_description1) = (%s, %s) ", count, row[0], row[4][0:50])
+                logger.info(" INSERTION # %s : (sin_number, sin_description) = (%s, %s) ", count, row[0], row[4][0:50])
 
 def populate_sins(app, schema_editor):
     logger = DebugLogger("api.db_init.populate_sins").get_logger()
@@ -72,30 +77,30 @@ def populate_sins(app, schema_editor):
         try:
             if sin['sin_number']:
                 try:
-                    if sin['sin_group_title']:
+                    if sin['sin_title']:
                         try:
-                            if sin['sin_description1']:
+                            if sin['sin_description']:
                                 Sin.objects.get_or_create(user=super_user, status=expired_status, sin_map=this_raw_sin,
-                                                            sin_number=sin['sin_number'], sin_group_title=sin['sin_group_title'], 
-                                                            sin_description1=sin['sin_description1'])
+                                                            sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
+                                                            sin_description=sin['sin_description'])
                                 if count%modulo == 0:
                                     logger.info('SinDate Table Entry # %s Validated', sin['id'])
                                     logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
                             else:
                                 if count%modulo == 0:
-                                    logger.info('Null "sin_description1" Field For Entry %s', sin['id'])
+                                    logger.info('Null "sin_description" Field For Entry %s', sin['id'])
                                     logger.warn('Preventing Insertion Into Sin Table')
                         except NameError:
                             if count%modulo == 0:
-                                logger.info('Undefined "sin_description1" field for entry # %s', sin['id'])
+                                logger.info('Undefined "sin_description" field for entry # %s', sin['id'])
                                 logger.warn('Preventing Insertion Into Sin Table')
                     else:
                         if count%modulo == 0:
-                            logger.info('Null "sin_group_title" Field For Entry %s', sin['id'])
+                            logger.info('Null "sin_title" Field For Entry %s', sin['id'])
                             logger.warn('Preventing Insertion Into Sin Table')
                 except NameError:
                     if count%modulo == 0:
-                        logger.info('Undefined "sin_group_title" field for entry # %s', sin['id'])
+                        logger.info('Undefined "sin_title" field for entry # %s', sin['id'])
                         logger.warn('Preventing Insertion Into Sin Table')
 
             else:

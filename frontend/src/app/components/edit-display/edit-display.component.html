@@ -51,24 +51,24 @@
      Title <br> 
          <!--Current Title-->
     <label for="current-title">Current Title: </label>
-    <span id="current-title" class="right">{{this.edit_SIN.sin_group_title}}</span><br>
+    <span id="current-title" class="right">{{this.edit_SIN.sin_title}}</span><br>
 
        <!--New Title-->
     <label for ="new-title">New Title: </label>
     <span id="new-title" class="right"
-        *ngIf = "buffer_SIN.sin_group_title"> <mark>{{this.buffer_SIN.sin_group_title}}</mark></span><br>
+        *ngIf = "buffer_SIN.sin_title"> <mark>{{this.buffer_SIN.sin_title}}</mark></span><br>
     <div id="title-edit-input-group" class="input-group">
         <span id="enter-new-title" class="input-group-addon">Enter Title</span>
         <input id="input-title-enabled" class="form-control" aria-describedby="enter-new-title-enabled"
                 type="text"
                 placeholder="Enter New Title Here" 
                 *ngIf="!applied_Title" 
-                [(ngModel)]="buffer_SIN.sin_group_title">
+                [(ngModel)]="buffer_SIN.sin_title">
         <input id="input-title-disabled" class="form-control" aria-describedby="enter-new-title-disabled"
                 type="text" disabled
-                [placeholder]="edit_SIN.sin_group_title"
+                [placeholder]="edit_SIN.sin_title"
                 *ngIf = "applied_Title" 
-                [(ngModel)]="buffer_SIN.sin_group_title">
+                [(ngModel)]="buffer_SIN.sin_title">
     </div><br>
         <!--Input Error Alerts-->
         <div id ="invalid-title-error-message" class = "alert alert-danger" role = alert
@@ -87,10 +87,10 @@
         <button id="apply-title-enabled" class="btn btn-success btn-sm"
                 type="button" 
                 (click)="applyTitle()"
-                *ngIf="!applied_Title && buffer_SIN.sin_group_title">Apply</button>
+                *ngIf="!applied_Title && buffer_SIN.sin_title">Apply</button>
         <button id="apply-title-disabled" class="btn btn-success btn-sm"
                 type="button" disabled
-                *ngIf="applied_Title || !buffer_SIN.sin_group_title" >Apply</button>
+                *ngIf="applied_Title || !buffer_SIN.sin_title" >Apply</button>
     </div><br><br>
 
     <!-- Description Editor -->
@@ -98,24 +98,24 @@
         <!--Current Description-->
     <label for="current-describe">Current Description: </label>
     <span id="current-describe" 
-            class="right">{{this.edit_SIN.sin_description1}}</span><br>
+            class="right">{{this.edit_SIN.sin_description}}</span><br>
     
         <!--New Description-->
     <label for ="new-describe">New Description: </label>
     <span id="new-describe" class="right"
-        *ngIf = "buffer_SIN.sin_description1"> <mark>{{this.buffer_SIN.sin_description1}}</mark></span><br>
+        *ngIf = "buffer_SIN.sin_description"> <mark>{{this.buffer_SIN.sin_description}}</mark></span><br>
     <div id="describe-input-group" class="input-group">
         <span id="enter-new-describe" class="input-group-addon">Enter Description</span>
         <input id="input-describe-enabled" class="form-control" aria-describedby="enter-new-describe-enabled"
                 type="text"
                 placeholder="Enter New Description Here"
                 *ngIf = "!applied_Description" 
-                [(ngModel)]="buffer_SIN.sin_description1">
+                [(ngModel)]="buffer_SIN.sin_description">
         <input id="input-describe-disbled" class="form-control" aria-describedby="enter-new-describe-disabled"
                 type = "text" disabled 
-                [placeholder]="edit_SIN.sin_description1"
+                [placeholder]="edit_SIN.sin_description"
                 *ngIf = "applied_Description" 
-                [(ngModel)]="buffer_SIN.sin_description1">
+                [(ngModel)]="buffer_SIN.sin_description">
     </div><br>
     <!--Input Error Alerts-->
     <div id ="invalid-description-error-message" class = "alert alert-danger" role = alert
@@ -133,10 +133,10 @@
         <button id="apply-describe-enabled" class="btn btn-success btn-sm"
                 type="button" 
                 (click)="applyDescription()"
-                *ngIf="!applied_Description && buffer_SIN.sin_description1">Apply</button>
+                *ngIf="!applied_Description && buffer_SIN.sin_description">Apply</button>
         <button id="apply-describe-disabled" class="btn btn-success btn-sm"
                 type="button" disabled 
-                *ngIf="applied_Description || !buffer_SIN.sin_description1">Apply</button>
+                *ngIf="applied_Description || !buffer_SIN.sin_description">Apply</button>
     </div><br><br>
 
     <!--Status Editor-->

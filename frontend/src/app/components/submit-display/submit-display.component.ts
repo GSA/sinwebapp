@@ -68,11 +68,11 @@ export class SubmitDisplayComponent implements OnInit {
   public exists : boolean;
   public submitted: boolean = false;
   public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                               sin_description1: null, sin_group_title: null };
+                               sin_description: null, sin_title: null };
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                                sin_description1: null, sin_group_title: null };
+                                sin_description: null, sin_title: null };
   public existing_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                                sin_description1: null, sin_group_title: null };
+                                sin_description: null, sin_title: null };
   public user_SINs: SIN[] =[];
   public all_SINs: SIN[] =[]
   public status_lookup: Status[] = [];
@@ -100,7 +100,7 @@ export class SubmitDisplayComponent implements OnInit {
     if(changes.selectable !== undefined){ this.loadUserSINs(); }
     if(changes.clear_switch !== undefined) { 
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-              sin_description1: null, sin_group_title: null };
+              sin_description: null, sin_title: null };
     }
   }
 
@@ -125,7 +125,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.sinService.postSIN(this.submit_SIN).subscribe((response)=>{
         this.logger.log('SIN Submitted', `${this.class_name}.submitSIN`);
         this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                              sin_description1: null, sin_group_title: null };
+                              sin_description: null, sin_title: null };
         this.submitted = true;
         this.switchModes(false);
       })
@@ -137,7 +137,7 @@ export class SubmitDisplayComponent implements OnInit {
       if(!this.submit_SIN.id) { this.submit_SIN.id = this.existing_SIN.id; };
       this.sinService.updateSIN(this.submit_SIN).subscribe((response)=>{
         this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                              sin_description1: null, sin_group_title: null };
+                              sin_description: null, sin_title: null };
           this.submitted = true;
           this.switchModes(false);
       });
@@ -163,9 +163,9 @@ export class SubmitDisplayComponent implements OnInit {
       this.submitted = false;
       // check if submit_SIN fields are null, set equal to selected_SIN if so
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
+                            sin_description: null, sin_title: null };
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
+                            sin_description: null, sin_title: null };
       //let listeners know selection is cleared
       this.clear_event.emit(this.selected_SIN);
       this.logger.log('Emitting Clear Event', `${this.class_name}.switchModes`)

@@ -52,11 +52,11 @@ export class EditDisplayComponent implements OnInit {
   private class_name = "EditDisplayComponent";
 
   public edit_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
+                            sin_description: null, sin_title: null };
   public undo_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null, sin_group_title: null };
+                            sin_description: null, sin_title: null };
   public buffer_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                            sin_description1: null,  sin_group_title: null };
+                            sin_description: null,  sin_title: null };
   public applied_SIN : boolean = false;
   public applied_Status: boolean = false;
   public applied_Title: boolean = false;
@@ -85,7 +85,7 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN = Object.assign(this.edit_SIN, this.input_SIN);
     this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
     this.buffer_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-                           sin_description1: null, sin_group_title: null };
+                           sin_description: null, sin_title: null };
     if(this.user_group.includes(GROUPS.approver) || this.user_group.includes(GROUPS.reviewer) || this.user_group.includes(GROUPS.admin)){
       this.logger.log(`Retrieving Statues For Role ${this.user_group[0]}`, `${this.class_name}.loadComponentData`)
       this.statusService.getStatuses().subscribe((statuses)=>{
@@ -122,19 +122,19 @@ export class EditDisplayComponent implements OnInit {
   }
 
   public applyTitle(): void{
-    this.logger.log(`Converting edit_SIN.sin_group_title = ${this.edit_SIN.sin_group_title} to ${this.buffer_SIN.sin_group_title}`,
+    this.logger.log(`Converting edit_SIN.sin_title = ${this.edit_SIN.sin_title} to ${this.buffer_SIN.sin_title}`,
                       `${this.class_name}.applyTitle`)
-    this.edit_SIN.sin_group_title = this.buffer_SIN.sin_group_title;
-    this.buffer_SIN.sin_group_title = null;
+    this.edit_SIN.sin_title = this.buffer_SIN.sin_title;
+    this.buffer_SIN.sin_title = null;
     this.applied_Title = true;
     this.validateInput();
   }
 
   public applyDescription(): void{
-    this.logger.log(`Converting edit_SIN.sin_description1 = ${this.edit_SIN.sin_description1} to ${this.buffer_SIN.sin_description1}`,
+    this.logger.log(`Converting edit_SIN.sin_description = ${this.edit_SIN.sin_description} to ${this.buffer_SIN.sin_description}`,
                       `${this.class_name}.applyDescription`);
-    this.edit_SIN.sin_description1 = this.buffer_SIN.sin_description1;
-    this.buffer_SIN.sin_description1= null;
+    this.edit_SIN.sin_description = this.buffer_SIN.sin_description;
+    this.buffer_SIN.sin_description= null;
     this.applied_Description = true;
     this.validateInput();
   }
@@ -156,27 +156,27 @@ export class EditDisplayComponent implements OnInit {
   }
 
   public undoTitle(): void{
-    this.logger.log(`Resetting edit_SIN.sin_group_title = ${this.edit_SIN.sin_group_title} to ${this.undo_SIN.sin_group_title}`,
+    this.logger.log(`Resetting edit_SIN.sin_title = ${this.edit_SIN.sin_title} to ${this.undo_SIN.sin_title}`,
                       `${this.class_name}.undoTitle`);
-    this.edit_SIN.sin_group_title = this.undo_SIN.sin_group_title;
+    this.edit_SIN.sin_title = this.undo_SIN.sin_title;
     this.applied_Title = false;
     this.validateInput();
   }
 
   public undoDescription(): void{
-    this.logger.log(`Resetting edit_SIN.sin_description1 = ${this.edit_SIN.sin_description1} to ${this.undo_SIN.sin_description1}`,
+    this.logger.log(`Resetting edit_SIN.sin_description = ${this.edit_SIN.sin_description} to ${this.undo_SIN.sin_description}`,
                       `${this.class_name}.undoDescription`)
-    this.edit_SIN.sin_description1 = this.undo_SIN.sin_description1;
+    this.edit_SIN.sin_description = this.undo_SIN.sin_description;
     this.applied_Description = false;
     this.validateInput();
   }
 
   public validateInput(): void {
-    if(!isNaN(this.edit_SIN.sin_number)){ this.invalid_SIN = false; }
+    if(!this.edit_SIN.sin_number){ this.invalid_SIN = false; }
     else { this.invalid_SIN = true; }
-    if(this.edit_SIN.sin_group_title.length > 10 && this.edit_SIN.sin_group_title.length < 1000) { this.invalid_Title = false; }
+    if(this.edit_SIN.sin_title.length > 10 && this.edit_SIN.sin_title.length < 1000) { this.invalid_Title = false; }
     else { this.invalid_Title = true; }
-    if(this.edit_SIN.sin_description1.length > 20 && this.edit_SIN.sin_description1.length < 1000) { this.invalid_Description = false; }
+    if(this.edit_SIN.sin_description.length > 20 && this.edit_SIN.sin_description.length < 1000) { this.invalid_Description = false; }
     else{ this.invalid_Description = true;}
   }
 

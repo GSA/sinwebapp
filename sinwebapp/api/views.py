@@ -128,7 +128,7 @@ def sin_info_update(request):
                 logger.info('User Found')
                 try:
                     new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user,
-                                    sin_group_title=sin_title, sin_description1=sin_description)
+                                    sin_title=sin_title, sin_description=sin_description)
                     logger.info('SIN Found')   
                     new_sin.save()
                     response={
@@ -185,8 +185,8 @@ def sin_info(request):
         # TODO 2: use SIN_FIELDS array to pull all fields from body automatically
         # instead of doing it manually
         sin_number = body['sin_number']
-        sin_title = body['sin_group_title']
-        sin_description = body['sin_description1']
+        sin_title = body['sin_title']
+        sin_description = body['sin_description']
 
         logger.info('SIN # Posting: %s', sin_number)
 
@@ -214,7 +214,7 @@ def sin_info(request):
         # post new sin
         except Sin.DoesNotExist:
             sin = Sin.objects.create(sin_number=sin_number, user=request.user, status=new_status,
-                                        sin_group_title=sin_title, sin_description1=sin_description)
+                                        sin_title=sin_title, sin_description=sin_description)
             sin.save()
             logger.info('New SIN # Posted')
             raw_sin = {
@@ -222,8 +222,8 @@ def sin_info(request):
                 'sin_number': sin.sin_number,
                 'user_id': request.user.id,
                 'status_id': new_status.id,
-                'sin_group_title': sin.sin_group_title,
-                'sin_description1': sin.sin_description1
+                'sin_title': sin.sin_title,
+                'sin_description': sin.sin_description
             }
             return JsonResponse(raw_sin, safe=False)
             
@@ -241,9 +241,8 @@ def sin_info(request):
                     'sin_number': raw_sin.sin_number,
                     'user_id': raw_sin.user.id,
                     'status_id': raw_sin.status.id,
-                    'sin_group_title': raw_sin.sin_group_title,
-                    'sin_description1': raw_sin.sin_description1,
-                    'sin_description2': raw_sin.sin_description2
+                    'sin_title': raw_sin.sin_title,
+                    'sin_description': raw_sin.sin_description
                 }
                 logger.info('SIN Found!')
             except Sin.DoesNotExist:

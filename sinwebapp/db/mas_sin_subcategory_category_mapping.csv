@@ -1,0 +1,321 @@
+﻿SIN,subCategoryCode,subCategoryTitle,reportOffice,categoryCode,categoryTitle
+334290OS,A01,Audio Visual Products,P,A,Office Management
+334310,A01,Audio Visual Products,P,A,Office Management
+334511T,A01,Audio Visual Products,P,A,Office Management
+541990AV,A02,Audio Visual Services,P,A,Office Management
+518210DC,A03,Document Services,P,A,Office Management
+541611LIT,A03,Document Services,P,A,Office Management
+561439,A03,Document Services,P,A,Office Management
+561990,A03,Document Services,P,A,Office Management
+561499M,A04,Mail Management,P,A,Office Management
+811212R,A05,Office Management Maintenance and Repair,P,A,Office Management
+811212SA,A05,Office Management Maintenance and Repair,P,A,Office Management
+511130,A06,Media Products,N,A,Office Management
+5191M,A06,Media Products,N,A,Office Management
+511120,A07,Media Services,N,A,Office Management
+561410,A07,Media Services,N,A,Office Management
+541611O,A08,Office Services,P,A,Office Management
+541614OR,A08,Office Services,P,A,Office Management
+561110,A08,Office Services,P,A,Office Management
+561320SBSA,A08,Office Services,P,A,Office Management
+561499N,A08,Office Services,P,A,Office Management
+333318,A09,Office Supplies,N,A,Office Management
+333318SBSA,A09,Office Supplies,N,A,Office Management
+339940,A09,Office Supplies,N,A,Office Management
+339940OS4,A09,Office Supplies,N,A,Office Management
+339940OVER,A09,Office Supplies,N,A,Office Management
+339940SVC,A09,Office Supplies,N,A,Office Management
+325992,A10,Printing and Photographic Equipment,P,A,Office Management
+333244,A10,Printing and Photographic Equipment,P,A,Office Management
+333249,A10,Printing and Photographic Equipment,P,A,Office Management
+333316C,A10,Printing and Photographic Equipment,P,A,Office Management
+333316CPC,A10,Printing and Photographic Equipment,P,A,Office Management
+333316F,A10,Printing and Photographic Equipment,P,A,Office Management
+333316M,A10,Printing and Photographic Equipment,P,A,Office Management
+333316OS,A10,Printing and Photographic Equipment,P,A,Office Management
+333316P,A10,Printing and Photographic Equipment,P,A,Office Management
+532420C,A10,Printing and Photographic Equipment,P,A,Office Management
+532420LC,A10,Printing and Photographic Equipment,P,A,Office Management
+532420LT,A10,Printing and Photographic Equipment,P,A,Office Management
+532420LTOP,A10,Printing and Photographic Equipment,P,A,Office Management
+541611MPS,A10,Printing and Photographic Equipment,P,A,Office Management
+493110RM,A11,Records Management,P,A,Office Management
+518210ERM,A11,Records Management,P,A,Office Management
+561210FAC,B01,Facilities Maintenance and Repair,L,B,Facilities
+238320,B02,Facilities Services,L,B,Facilities
+541690E,B02,Facilities Services,L,B,Facilities
+561210FS,B02,Facilities Services,L,B,Facilities
+561730,B02,Facilities Services,L,B,Facilities
+334512,B03,Facilities Solutions,L,B,Facilities
+541513,B03,Facilities Solutions,L,B,Facilities
+561210SB,B03,Facilities Solutions,L,B,Facilities
+811310MR,B03,Facilities Solutions,L,B,Facilities
+322291,B04,Facilities Supplies,F,B,Facilities
+326199,B04,Facilities Supplies,F,B,Facilities
+332321,B04,Facilities Supplies,F,B,Facilities
+333318F,B04,Facilities Supplies,F,B,Facilities
+339113G,B04,Facilities Supplies,F,B,Facilities
+339994,B04,Facilities Supplies,F,B,Facilities
+311423,B05,Food Service Equipment,F,B,Facilities
+332215T,B05,Food Service Equipment,F,B,Facilities
+333241,B05,Food Service Equipment,F,B,Facilities
+333415REM,B05,Food Service Equipment,F,B,Facilities
+335220,B05,Food Service Equipment,F,B,Facilities
+336999,B05,Food Service Equipment,F,B,Facilities
+238160,B06,Structures,F,B,Facilities
+321991,B06,Structures,F,B,Facilities
+332311,B06,Structures,F,B,Facilities
+332311P,B06,Structures,F,B,Facilities
+332312,B06,Structures,F,B,Facilities
+532490P,B06,Structures,F,B,Facilities
+314110,C01,Flooring,P,C,Furniture and Furnishings
+314110SBSA,C01,Flooring,P,C,Furniture and Furnishings
+321918,C01,Flooring,P,C,Furniture and Furnishings
+321918PF,C01,Flooring,P,C,Furniture and Furnishings
+541614CF,C02,Furniture Services,P,C,Furniture and Furnishings
+337127CSB,C03,Healthcare Furniture,P,C,Furniture and Furnishings
+339113H,C03,Healthcare Furniture,P,C,Furniture and Furnishings
+3FURNISH,C04,Household Dormitory and Quarters Furniture,P,C,Furniture and Furnishings
+337121H,C04,Household Dormitory and Quarters Furniture,P,C,Furniture and Furnishings
+337122SBSA,C04,Household Dormitory and Quarters Furniture,P,C,Furniture and Furnishings
+332439MLB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+33712,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337122OSB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337127,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337127CFSB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337127CISB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337127INT,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337127LFSB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337127TLSB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+33721RSB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+33721SBSA,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+33721T,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337215MSB,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+337215SBSA,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+532289,C05,Miscellaneous Furniture,P,C,Furniture and Furnishings
+33721,C06,Office Furniture,P,C,Furniture and Furnishings
+337121P,C07,Packaged Furniture,P,C,Furniture and Furnishings
+337127P,C07,Packaged Furniture,P,C,Furniture and Furnishings
+33721P,C07,Packaged Furniture,P,C,Furniture and Furnishings
+339113P,C07,Packaged Furniture,P,C,Furniture and Furnishings
+339950,C08,Signs,P,C,Furniture and Furnishings
+339920PARK,C09,Fitness Solutions,P,C,Furniture and Furnishings
+339920S,C09,Fitness Solutions,P,C,Furniture and Furnishings
+339930,C09,Fitness Solutions,P,C,Furniture and Furnishings
+713940,C09,Fitness Solutions,P,C,Furniture and Furnishings
+713940PACK,C09,Fitness Solutions,P,C,Furniture and Furnishings
+812990,C09,Fitness Solutions,P,C,Furniture and Furnishings
+561611,D01,Background Investigation,2,D,Human Capital
+541214HR,D02,Compensation and Benefits,2,D,Human Capital
+524292,D03,Human Resources,2,D,Human Capital
+54161,D03,Human Resources,2,D,Human Capital
+541611W,D03,Human Resources,2,D,Human Capital
+541612EPM,D03,Human Resources,2,D,Human Capital
+541612ER,D03,Human Resources,2,D,Human Capital
+541612HC,D03,Human Resources,2,D,Human Capital
+541612LOB,D03,Human Resources,2,D,Human Capital
+541612LR,D03,Human Resources,2,D,Human Capital
+541612OPM,D03,Human Resources,2,D,Human Capital
+541612PSSC,D03,Human Resources,2,D,Human Capital
+561EEO,D03,Human Resources,2,D,Human Capital
+56131,D03,Human Resources,2,D,Human Capital
+611430TD,D03,Human Resources,2,D,Human Capital
+624SS,D04,Social Services,2,D,Human Capital
+325611,E01,Cleaning Supplies,F,E,Industrial Products and Services
+325612,E01,Cleaning Supplies,F,E,Industrial Products and Services
+326220,E02,Fire/Rescue/Safety/Environmental Protection Equipment,F,E,Industrial Products and Services
+339999S,E02,Fire/Rescue/Safety/Environmental Protection Equipment,F,E,Industrial Products and Services
+333914,E03,Fuel Management,F,E,Industrial Products and Services
+332510,E04,Hardware and Tools,L,E,Industrial Products and Services
+332510C,E04,Hardware and Tools,L,E,Industrial Products and Services
+332510S,E04,Hardware and Tools,L,E,Industrial Products and Services
+333TOOL,E04,Hardware and Tools,L,E,Industrial Products and Services
+333112,E04,Hardware and Tools,L,E,Industrial Products and Services
+532310,E04,Hardware and Tools,L,E,Industrial Products and Services
+314120,E05,Industrial Products,F,E,Industrial Products and Services
+321920,E05,Industrial Products,F,E,Industrial Products and Services
+324110,E05,Industrial Products,F,E,Industrial Products and Services
+324191,E05,Industrial Products,F,E,Industrial Products and Services
+325320,E05,Industrial Products,F,E,Industrial Products and Services
+325998,E05,Industrial Products,F,E,Industrial Products and Services
+325998W,E05,Industrial Products,F,E,Industrial Products and Services
+327910,E05,Industrial Products,F,E,Industrial Products and Services
+331315A,E05,Industrial Products,F,E,Industrial Products and Services
+332913,E05,Industrial Products,F,E,Industrial Products and Services
+332999BMS,E05,Industrial Products,F,E,Industrial Products and Services
+332999P,E05,Industrial Products,F,E,Industrial Products and Services
+3331SBSA,E05,Industrial Products,F,E,Industrial Products and Services
+333120,E05,Industrial Products,F,E,Industrial Products and Services
+333414,E05,Industrial Products,F,E,Industrial Products and Services
+333415HVAC,E05,Industrial Products,F,E,Industrial Products and Services
+333912,E05,Industrial Products,F,E,Industrial Products and Services
+333922,E05,Industrial Products,F,E,Industrial Products and Services
+333923S,E05,Industrial Products,F,E,Industrial Products and Services
+33512,E05,Industrial Products,F,E,Industrial Products and Services
+335220D,E05,Industrial Products,F,E,Industrial Products and Services
+335220E,E05,Industrial Products,F,E,Industrial Products and Services
+335911,E05,Industrial Products,F,E,Industrial Products and Services
+335999,E05,Industrial Products,F,E,Industrial Products and Services
+532412,E05,Industrial Products,F,E,Industrial Products and Services
+333921,E06,Machinery and Components,R,E,Industrial Products and Services
+333923,E06,Machinery and Components,R,E,Industrial Products and Services
+333924,E06,Machinery and Components,R,E,Industrial Products and Services
+811310,E07,Industrial Products and Services Maintenance and Repair,F,E,Industrial Products and Services
+3PACK,E08,Packaging,N,E,Industrial Products and Services
+322220,E08,Packaging,N,E,Industrial Products and Services
+333997,E09,Test and Measurement Supplies,F,E,Industrial Products and Services
+54151ECOM,F01,Electronic Commerce,Z,F,Information Technology
+33411,F02,IT Hardware,Z,F,Information Technology
+33411REF,F02,IT Hardware,Z,F,Information Technology
+532420L,F02,IT Hardware,Z,F,Information Technology
+532420R,F02,IT Hardware,Z,F,Information Technology
+811212,F02,IT Hardware,Z,F,Information Technology
+54151HACS,F03,IT Services,Z,F,Information Technology
+54151HEAL,F03,IT Services,Z,F,Information Technology
+54151S,F03,IT Services,Z,F,Information Technology
+511210,F04,IT Software,Z,F,Information Technology
+54151,F04,IT Software,Z,F,Information Technology
+518210C,F05,IT Solutions,Z,F,Information Technology
+541370GEO,F05,IT Solutions,Z,F,Information Technology
+541519CDM,F05,IT Solutions,Z,F,Information Technology
+541519ICAM,F05,IT Solutions,Z,F,Information Technology
+541519PIV,F05,IT Solutions,Z,F,Information Technology
+541519PKI,F05,IT Solutions,Z,F,Information Technology
+561422,F05,IT Solutions,Z,F,Information Technology
+611420,F06,IT Training,Z,F,Information Technology
+517312,F07,Telecommunications,Z,F,Information Technology
+517410,F07,Telecommunications,Z,F,Information Technology
+339999ASB,G01,Awards,P,G,Miscellaneous
+339999F,G02,Flags,P,G,Miscellaneous
+339992,G03,Musical Instrument,P,G,Miscellaneous
+335210,G04,Personal Hair Care Items,F,G,Miscellaneous
+3152,G05,Apparel,F,G,Miscellaneous
+315210,G05,Apparel,F,G,Miscellaneous
+316210,G05,Apparel,F,G,Miscellaneous
+339113PA,G05,Apparel,F,G,Miscellaneous
+ANCILLARY,G06,Complementary SINs,P,G,Miscellaneous
+ANCRA,G06,Complementary SINs,P,G,Miscellaneous
+NEW,G06,Complementary SINs,P,G,Miscellaneous
+OLM,G06,Complementary SINs,P,G,Miscellaneous
+238910,G06,Complementary SINs,P,G,Miscellaneous
+4PL,G06,Complementary SINs,P,G,Miscellaneous
+541611,H01,Business Administrative Services,T,H,Professional Services
+561450,H01,Business Administrative Services,T,H,Professional Services
+541620,H02,Environmental Services,T,H,Professional Services
+562112,H02,Environmental Services,T,H,Professional Services
+562910REM,H02,Environmental Services,T,H,Professional Services
+522310,H03,Financial Services,T,H,Professional Services
+531210,H03,Financial Services,T,H,Professional Services
+541211,H03,Financial Services,T,H,Professional Services
+541214,H03,Financial Services,T,H,Professional Services
+541219,H03,Financial Services,T,H,Professional Services
+561440,H03,Financial Services,T,H,Professional Services
+541990IPS,H04,Identity Protection Services,T,H,Professional Services
+541990RISK,H04,Identity Protection Services,T,H,Professional Services
+541930,H05,Language Services,T,H,Professional Services
+611630,H05,Language Services,T,H,Professional Services
+541110,H06,Legal Services,T,H,Professional Services
+541614,H07,Logistical Services,T,H,Professional Services
+541614SVC,H07,Logistical Services,T,H,Professional Services
+323111SBSA,H08,Marketing and Public Relations,T,H,Professional Services
+512110,H08,Marketing and Public Relations,T,H,Professional Services
+541430,H08,Marketing and Public Relations,T,H,Professional Services
+541511,H08,Marketing and Public Relations,T,H,Professional Services
+541613,H08,Marketing and Public Relations,T,H,Professional Services
+541810,H08,Marketing and Public Relations,T,H,Professional Services
+541810ODC,H08,Marketing and Public Relations,T,H,Professional Services
+541820,H08,Marketing and Public Relations,T,H,Professional Services
+541850,H08,Marketing and Public Relations,T,H,Professional Services
+541910,H08,Marketing and Public Relations,T,H,Professional Services
+541922,H08,Marketing and Public Relations,T,H,Professional Services
+561920,H08,Marketing and Public Relations,T,H,Professional Services
+541330ENG,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541370GIS,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541420,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541690,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541715,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+333318TDTM,H10,Training,2,H,Professional Services
+611TRAINAW,H10,Training,2,H,Professional Services
+611430,H10,Training,2,H,Professional Services
+611512,H10,Training,2,H,Professional Services
+611710,H10,Training,2,H,Professional Services
+333999,I01,Laboratory Animals,F,I,Scientific Management and Solutions
+333314,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+333415,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+334513,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+334515,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+334516,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+334519ENV,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+339113LAB,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+532490L,I02,Laboratory Equipment,F,I,Scientific Management and Solutions
+339112,I03,Medical Equipment,F,I,Scientific Management and Solutions
+339113R,I03,Medical Equipment,F,I,Scientific Management and Solutions
+532490ESA,I04,Scientific Services,F,I,Scientific Management and Solutions
+541990TAD,I04,Scientific Services,F,I,Scientific Management and Solutions
+611430TTS,I04,Scientific Services,F,I,Scientific Management and Solutions
+334511,I05,Search and Navigation,F,I,Scientific Management and Solutions
+541380,I06,Testing and Analysis,F,I,Scientific Management and Solutions
+561621H,J01,Marine and Harbor,F,J,Security and Protection
+3FIRE,J02,Protective Equipment,F,J,Security and Protection
+332216,J02,Protective Equipment,F,J,Security and Protection
+332312F,J02,Protective Equipment,F,J,Security and Protection
+332994,J02,Protective Equipment,F,J,Security and Protection
+332999,J02,Protective Equipment,F,J,Security and Protection
+332999S,J02,Protective Equipment,F,J,Security and Protection
+333314NV,J02,Protective Equipment,F,J,Security and Protection
+334220,J02,Protective Equipment,F,J,Security and Protection
+334519,J02,Protective Equipment,F,J,Security and Protection
+336320,J02,Protective Equipment,F,J,Security and Protection
+336413,J02,Protective Equipment,F,J,Security and Protection
+336992,J02,Protective Equipment,F,J,Security and Protection
+337215,J02,Protective Equipment,F,J,Security and Protection
+339920,J02,Protective Equipment,F,J,Security and Protection
+812910,J03,Security Animals and Related Services,F,J,Security and Protection
+334118,J04,Security Services,F,J,Security and Protection
+541330L,J04,Security Services,F,J,Security and Protection
+541330SEC,J04,Security Services,F,J,Security and Protection
+541990L,J04,Security Services,F,J,Security and Protection
+561612,J04,Security Services,F,J,Security and Protection
+611430ST,J04,Security Services,F,J,Security and Protection
+334290,J05,Security Systems,F,J,Security and Protection
+334290L,J05,Security Systems,F,J,Security and Protection
+334290PACS,J05,Security Systems,F,J,Security and Protection
+325412,J06,Testing Equipment,F,J,Security and Protection
+339999E,J06,Testing Equipment,F,J,Security and Protection
+81111,K01,Automotive Body Maintenance and Repair,R,K,Transportation and Logistics Services
+811122,K01,Automotive Body Maintenance and Repair,R,K,Transportation and Logistics Services
+326211,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+326212,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+333318T,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+3361,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+3361E,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+3361V,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+33611,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336211,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336211V,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336212,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+3363,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+3363P,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336350,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336611,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336612,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336612R,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+336991,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+488190,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+532112,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+532120,K02,Motor Vehicles (non-Combat),R,K,Transportation and Logistics Services
+492110,K03,Package Delivery,Q,K,Transportation and Logistics Services
+492210SB,K03,Package Delivery,Q,K,Transportation and Logistics Services
+332439,K04,Packaging Services,N,K,Transportation and Logistics Services
+334419,K04,Packaging Services,N,K,Transportation and Logistics Services
+561910,K04,Packaging Services,N,K,Transportation and Logistics Services
+481211B,K05,Transportation of Things,Q,K,Transportation and Logistics Services
+481211O,K05,Transportation of Things,Q,K,Transportation and Logistics Services
+485,K05,Transportation of Things,Q,K,Transportation and Logistics Services
+532111,K05,Transportation of Things,Q,K,Transportation and Logistics Services
+531,L01,Employee Relocation,4,L,Travel
+541511T,L01,Employee Relocation,4,L,Travel
+531110,L02,Lodging,4,L,Travel
+561599L,L02,Lodging,4,L,Travel
+561510,L03,Travel Agent and Misc. Services,4,L,Travel
+561599,L03,Travel Agent and Misc. Services,4,L,Travel

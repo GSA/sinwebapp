@@ -3,6 +3,6 @@ export interface SIN{
     sin_number: number,
     status_id: number,
     user_id: number,
-    sin_description1: string,
-    sin_group_title: string
+    sin_description: string,
+    sin_title: string
 }
