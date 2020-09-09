@@ -33,6 +33,12 @@ In addition, if the data model is changed, the migrations stored within each app
 
 > python manage.py makemigrations
 
+Rather than manually deleting and recreating the migrations, you can also invoke the <i>/scripts/init-migration.sh</i> BASH script. This script will scrub the application of existing migrations, preserve the custom migrations that create application specific schema, re-initialize generic migrations and then finally copy the custom migrations back into the application. This script is also used during docker and cloud deployments for the same reason, so an argument of <i>local</i> must be provided, i.e. execute
+
+> bash ./scripts/init-migrations.sh local
+
+any time the Django models are changed to ensure the fidelity of local migrations. Docker and cloud deployments will automatically invoke this script.
+
 ### B. Superuser
 
 The superuser of the database is controlled by environment variabless, DJANGO_SUPERUSER_*. These variables are loaded into it the initialization script and passed into Django while it is starting up. The local environment variables are set in the <i>/env/local.sh</i> script, the docker environment variables are set in the <i>/env/container.env</i> file, while the cloud environment variables can set manually with the <i>cf cli</i> or loaded in through the <i>/env/cloud.sh</i> script when invoking the <i>/scripts/setup-cloud-env.sh</i> script.
