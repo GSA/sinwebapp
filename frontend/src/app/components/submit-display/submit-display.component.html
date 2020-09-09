@@ -134,7 +134,7 @@
                 <span id="exists-title" class="input-group-addon">Enter Title: </span>
                 <input id="exists_title_input" name="exists_title_input" class="form-control right"
                         type="text" required minlength="10" maxlength="1000"
-                        [placeholder]="existing_SIN.sin_title"
+                        [value]="existing_SIN.sin_title"
                         [(ngModel)]="submit_SIN.sin_title" 
                         #exists_title_input="ngModel">
 
@@ -156,7 +156,7 @@
                 <span class="input-group-addon" id="new-describe">Enter Description: </span>
                 <input id="exists_describe_input" name="exists_describe_input" class="form-control right"
                         type="text" required minlength="20" maxlength="1000" 
-                        [placeholder]="existing_SIN.sin_description"
+                        [value]="existing_SIN.sin_description"
                         [(ngModel)]="submit_SIN.sin_description" 
                         #exists_describe_input="ngModel">   
         </div><br>

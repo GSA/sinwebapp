@@ -20,7 +20,7 @@
                 [(ngModel)]="buffer_SIN.sin_number">
         <input id ="input-sin-number-disabled" class="form-control" aria-describedby="enter-new-sin-number"
                 type = "text" disabled
-                [placeholder]="edit_SIN.sin_number"
+                [value]="edit_SIN.sin_number"
                 *ngIf="applied_SIN" 
                 [(ngModel)]="buffer_SIN.sin_number">
     </div><br>
@@ -66,7 +66,7 @@
                 [(ngModel)]="buffer_SIN.sin_title">
         <input id="input-title-disabled" class="form-control" aria-describedby="enter-new-title-disabled"
                 type="text" disabled
-                [placeholder]="edit_SIN.sin_title"
+                [value]="edit_SIN.sin_title"
                 *ngIf = "applied_Title" 
                 [(ngModel)]="buffer_SIN.sin_title">
     </div><br>
@@ -113,7 +113,7 @@
                 [(ngModel)]="buffer_SIN.sin_description">
         <input id="input-describe-disbled" class="form-control" aria-describedby="enter-new-describe-disabled"
                 type = "text" disabled 
-                [placeholder]="edit_SIN.sin_description"
+                [value]="edit_SIN.sin_description"
                 *ngIf = "applied_Description" 
                 [(ngModel)]="buffer_SIN.sin_description">
     </div><br>
