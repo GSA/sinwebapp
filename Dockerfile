@@ -36,7 +36,8 @@ WORKDIR /home/
 RUN mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
-    mkdir ./static/ && mkdir ./api/ && mkdir /db/
+    mkdir ./static/ && mkdir ./api/ && mkdir ./db/ \
+    mkdir ./files/
 
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
@@ -51,6 +52,7 @@ COPY /sinwebapp/core/ /home/sinwebapp/core/
 COPY /sinwebapp/debug.py /home/sinwebapp/
 COPY /sinwebapp/manage.py /home/sinwebapp/
 COPY /sinwebapp/db/ /home/sinwebapp/db/
+COPY /sinwebapp/files/ /home/sinwebapp/files/
 
 # START UP SCRIPT
 COPY /scripts/init-migrations.sh /home/scripts/init-migrations.sh
