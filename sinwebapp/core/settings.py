@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     'authentication.apps.AuthenticationConfig',
     'api.apps.ApiConfig',
+    'files.apps.FilesConfig'
 ]
 
 MIDDLEWARE = [

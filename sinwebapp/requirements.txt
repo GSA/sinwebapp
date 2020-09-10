@@ -13,5 +13,7 @@ django-referrer-policy==1.0.0
 djangorestframework==3.11.0
 
 # OAuth Dependencies
-# Build from wheel to debug workflow
 cg-django-uaa==2.0.0
+
+# S3 Dependencies
+boto3==1.14.58
