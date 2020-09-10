@@ -62,7 +62,7 @@ export class UserDisplayComponent implements OnInit {
     // has been cleared from within this component.
   public switcher: boolean = false;
     // flag to allow admin to view page as basic user
-  public admin_view_as_user = false;
+  public admin_view_as_user : boolean = false;
     // table for converting status_ids into status names.
   public status_lookup: Status[] = [];
 

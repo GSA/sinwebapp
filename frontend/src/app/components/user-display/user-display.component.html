@@ -9,6 +9,14 @@
         <ul class="nav navbar-nav">
           <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
         </ul>
+        <div clas ="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select A Role<span class="caret"></span></button>
+          <ul id="admin-role-switcher" class="dropdown-menu"
+              [(ngModel)]="admin_view_as_user">
+              <li><a href="#" value ="true">Submitter</a></li>
+              <li><a href="#" value ="false">Administrator</a></li>
+          </ul>
+        </div>
       </div>
       
     </div>
@@ -46,7 +54,7 @@
       <!--User Group Specific Panel -->
       <div id="group-specific-panel" class="col-md-8">
 
-        <div *ngIf="user.groups.includes('submitter_group')|| ( user.groups.includes('admin_group') && !admin_view_as_user )">
+        <div *ngIf="user.groups.includes('submitter_group') || ( user.groups.includes('admin_group') && admin_view_as_user )">
           <app-submit-display id="submit-app-component"
                               [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
                               (selection_event)="selectSIN($event)"
