@@ -39,7 +39,7 @@ else
         fi
         if [ -f "$APP_DIR/authentication/migrations/0002_authentication_data.py" ]
         then
-            formatted_print '-->Caching 0002_authentication_data.py' $SCRIPT_NAME
+            formatted_print '--> Caching 0002_authentication_data.py' $SCRIPT_NAME
             cp -R "$APP_DIR/authentication/migrations/0002_authentication_data.py" "$APP_DIR/db/0002_authentication_data.py"
         fi
         

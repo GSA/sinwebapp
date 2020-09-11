@@ -97,7 +97,22 @@
         </div>       
 
         <!-- File Attachment -->
-
+        <div *ngIf="submit_SIN.sin_number">
+                <form method="post" enctype="multipart/form-data"
+                        action="/files/upload">
+                        <div id="sin-number-group" class="form-group" hidden>
+                                <input id="sin-number-upload" class ="form-control" 
+                                        type="text" name="sin_number" [(ngModel)]="submit_SIN.sin_number" disabled>
+                        </div>
+                        <div id="file-upload-group" class="form-group" >
+                                <label for="file-upload">Select An Attachment</label>
+                                <input id="file-upload" class ="form-control" 
+                                        type="file" name="file">
+                        </div>
+                        <button id="form-upload-submit-btn" class ="btn btn-default" 
+                                type="submit">Upload Attachment</button>
+                </form>
+        </div>
 
         <!-- Submission Options-->
         <button id="sin-submit-new-btn-enabled" class="btn btn-default btn-sm right"
