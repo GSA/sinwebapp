@@ -29,17 +29,17 @@ else
         formatted_print '--> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
         if [ -f "$APP_DIR/api/migrations/0002_api_data.py" ]
         then
-            formatted_print 'Caching 0002_api_data.py' $SCRIPT_NAME
+            formatted_print '--> Caching 0002_api_data.py' $SCRIPT_NAME
             cp -R "$APP_DIR/api/migrations/0002_api_data.py" "$APP_DIR/db/0002_api_data.py"
         fi
         if [ -f "$APP_DIR/api/migrations/0003_api_validation.py" ]
         then
-            formatted_print 'Caching 0003_api_validation.py' $SCRIPT_NAME
+            formatted_print '--> Caching 0003_api_validation.py' $SCRIPT_NAME
             cp -R "$APP_DIR/api/migrations/0003_api_validation.py" "$APP_DIR/db/0003_api_validation.py"
         fi
         if [ -f "$APP_DIR/authentication/migrations/0002_authentication_data.py" ]
         then
-            formatted_print 'Caching 0002_authentication_data.py' $SCRIPT_NAME
+            formatted_print '-->Caching 0002_authentication_data.py' $SCRIPT_NAME
             cp -R "$APP_DIR/authentication/migrations/0002_authentication_data.py" "$APP_DIR/db/0002_authentication_data.py"
         fi
         
