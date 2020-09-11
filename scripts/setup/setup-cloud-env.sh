@@ -51,6 +51,9 @@ then
     cf delete-service sin-sql -f
 fi
 
+formatted_print '--> Creating S3 Service' $SCRIPT_NAME
+cf create-service s3 basic sin-s3
+
 formatted_print '--> Creating SQL Service' $SCRIPT_NAME
 cf create-service aws-rds medium-psql sin-sql
 
@@ -92,7 +95,6 @@ cf set-env sinweb UAA_CLIENT_SECRET $CLIENT_SECRET
 source $SCRIPT_DIR/../../env/cloud.sh
 cf set-env sinweb DJANGO_SUPERUSER_USERNAME $DJANGO_SUPERUSER_USERNAME
 cf set-env sinweb DJANGO_SUPERUSER_EMAIL $DJANGO_SUPERUSER_EMAIL
-cf set-env sinweb DJANGO_SUPERUSER_PASSWORD $DJANGO_SUPERUSER_PASSWORD
 
 formatted_print '--> Environment built on the Cloud. Use \e[3mcf-push.sh\e[0m to push application onto the Cloud.'
 

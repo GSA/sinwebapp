@@ -26,7 +26,13 @@ else
     then
         # set environment variables
         formatted_print '--> Setting Environment Variables' $SCRIPT_NAME
-        source $SCRIPT_DIR/../env/local.sh
+        if [ -f "$SCRIPT_DIR/../env/local.env" ]
+        then
+            set -o allexport
+            source $SCRIPT_DIR/../env/local.env
+            set +o allexport
+        fi
+        printenv
 
         formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-scripts.sh
@@ -40,6 +46,7 @@ else
         formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
+        ls 
     elif [ "$1" == "container" ]
     then
         formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
@@ -48,19 +55,14 @@ else
     then
         formatted_print "--> Clearing Sessions" $SCRIPT_NAME
         # python manage.py clearsessions
+        python ./files/s3_manager.py create_bucket
     fi
 
     formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/init-migrations.sh $1
 
     formatted_print '--> Migrating Django Database Files' $SCRIPT_NAME
-    # python manage.py migrate --fake authentication zero
-    # python manage.py migrate --fake-initial
-
     python manage.py migrate
-
-    # formatted_print "--> Setting <$DJANGO_SUPERUSER_USERNAME, $DJANGO_SUPERUSER_EMAIL> As Superuser" $SCRIPT_NAME
-    # python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME --noinput --email $DJANGO_SUPERUSER_EMAIL
 
     formatted_print '--> Printing Configuration' $SCRIPT_NAME
     python debug.py
@@ -80,7 +82,7 @@ else
     elif [ "$1" == "cloud" ]
     then
         formatted_print '--> Testing Email Service' $SCRIPT_NAME
-        # python email_test.py
+        # python ./tests/email_test.py
         formatted_print '--> Deploying Gunicorn Server Onto The Cloud' $SCRIPT_NAME
         gunicorn core.wsgi:application 
     fi

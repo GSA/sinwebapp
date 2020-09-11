@@ -28,9 +28,9 @@ else
         rm $SCRIPT_DIR/../sinwebapp/init-app.sh
     fi
 
-    if [ -f "$SCRIPT_DIR/../sinwebapp/init-app.sh" ]
+    if [ -f "$SCRIPT_DIR/../sinwebapp/init-migrations.sh" ]
     then 
-        formatted_print '--> Cleaning \e[4m/sinwebapp/init-app.sh\e[0m File' $SCRIPT_NAME
+        formatted_print '--> Cleaning \e[4m/sinwebapp/init-migrations.sh\e[0m File' $SCRIPT_NAME
         rm $SCRIPT_DIR/../sinwebapp/init-migrations.sh
     fi
 
