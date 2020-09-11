@@ -18,22 +18,26 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_ENV = os.getenv('ENVIRONMENT')
 SECRET_KEY = 'thisismyriflethisismygun'
 
-if APP_ENV == 'cloud' or APP_ENV == 'container':
+if APP_ENV == 'cloud':
+    DEBUG = True
+    aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 else:
+    DEBUG = True
+    aws_creds={
+        'access_key_id': os.getenv('AWS_ACCESS_KEY_ID'),
+        'secret_access_key': os.getenv('AWS_SECRET_ACCESS_KEY'),
+        'bucket': os.getenv('AWS_BUCKET_NAME'),
+        'region': os.getenv('AWS_DEFAULT_REGION'),
+    }
     db_creds={
-        'host': 'localhost',
-        'db_name': 'sinwebapp',
-        'username': 'postgres',
-        'password': 'root',
-        'port': '5432'
+        'host': os.getenv('POSTGRES_HOST'),
+        'db_name': os.getenv('POSTGRES_DB'),
+        'username': os.getenv('POSTGRES_USER'),
+        'password': os.getenv('POSTGRES_PASSWORD'),
+        'port': os.getenv('POSTGRES_PORT')
     }
 
-
-if APP_ENV == "cloud":
-    DEBUG = True
-else: 
-    DEBUG = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',

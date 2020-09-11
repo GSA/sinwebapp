@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from files.forms import UploadFileForm
+from core.settings import APP_ENV
 
 from debug import DebugLogger
 
@@ -10,13 +11,17 @@ def upload_file(request):
     logger = DebugLogger("sinwebapp.files.views.upload_file").get_logger()
     logger.info('Posting File Form To S3...')
     if request.method == 'POST':
-            form = UploadFileForm(request.POST, request.FILES)
-            if form.is_valid():
-                logger.info('Form Validated')
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            logger.info('Form Validated')
+            if APP_ENV == "cloud":
                 # TODO: upload to S3
                 pass
             else:
-                logger.info('Form Not Validated')
+                # TODO: upload to local filesystem
+                pass
+        else:
+            logger.info('Form Not Validated')
 
 @login_required
 def download_file(request):

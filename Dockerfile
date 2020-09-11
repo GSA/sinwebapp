@@ -8,14 +8,14 @@ LABEL description="Internal GSA application for managing SIN data"
 ## ENVIRONMENT VARIABLES
     ## VCAP_SERVICES: CloudFoundry delivers the application the database credentials through a VCAP_SERVICES environment variable. 
     ## Mimic that configuration in the Docker image for minimal differences in the codebase.
-ENV VCAP_SERVICES='{ "aws-rds": [{ \
-    "credentials": { \
-     "db_name": "sinwebapp", \
-     "host": "database", \
-     "password": "root", \
-     "port": "5432", \
-     "username": "postgres" \ 
-    }}]}'
+## ENV VCAP_SERVICES='{ "aws-rds": [{ \
+    ## "credentials": { \
+    ## "db_name": "sinwebapp", \
+    ## "host": "database", \
+    ## "password": "root", \
+    ## "port": "5432", \
+    ## "username": "postgres" \ 
+##    }}]}'
 
 ## DEPENDENCIES
 RUN apt-get update -y && apt-get install -y curl wait-for-it
