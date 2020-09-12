@@ -66,9 +66,10 @@ import { FileService } from 'src/app/services/file.service';
 export class SubmitDisplayComponent implements OnInit {
 
   private class_name = "SubmitDisplayComponent";
-  public submit_mode : boolean = false;
   public exists : boolean;
+  public submit_mode : boolean = false;
   public submitted: boolean = false;
+  public uploaded: boolean = false;
   public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                sin_description: null, sin_title: null };
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
@@ -209,7 +210,8 @@ export class SubmitDisplayComponent implements OnInit {
   
   public submitFile(){
     this.fileService.uploadFile(this.fileForm).subscribe( () =>{
-      this.logger.log('File Submitted', `${this.class_name}.submitFile`)
+      this.logger.log('File Submitted', `${this.class_name}.submitFile`);
+      this.uploaded = true;
     })
   }
 
