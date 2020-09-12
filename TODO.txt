@@ -1,0 +1,6 @@
+- tear down and reinstantiate SQL service since model changed
+- upload file on edit-display and edit existing sin on submit-display
+- need endpoints to download all files from s3
+    - don't want to download if you don't have to
+- need icon on list for attachements?
+- use [disabled] bind in edit-display component for validatoins
