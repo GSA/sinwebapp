@@ -24,10 +24,14 @@ export class FileService {
     formData.append('file', form.get('file').value)
     formData.append('sin_number', form.get('sin_number').value)
 
-    return this.http.post<FormData>(this.context.getFileUploadUrl(), formData).pipe( 
-      tap( () => { this.logger.log( "Posting SIN", `${this.class_name}.postSIN`);}),
-      catchError(this.handleError('postSIN'))
+    return this.http.post<FormData>(this.context.getFileUploadUrl().toString(), formData).pipe( 
+      tap( () => { this.logger.log( "Posting File Form", `${this.class_name}.uploadFile`);}),
+      catchError(this.handleError('uploadFile'))
     );
+  }
+
+  public downloadFile(sin){
+
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
