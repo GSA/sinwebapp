@@ -97,20 +97,27 @@
         </div>       
 
         <!-- File Attachment -->
+        <!-- DO THIS THE ANGULAR WAY, FOOL-->
         <div *ngIf="submit_SIN.sin_number">
-                <form method="post" enctype="multipart/form-data"
-                        action="/files/upload">
-                        <div id="sin-number-group" class="form-group" hidden>
-                                <input id="sin-number-upload" class ="form-control" 
-                                        type="text" name="sin_number" [(ngModel)]="submit_SIN.sin_number" disabled>
-                        </div>
-                        <div id="file-upload-group" class="form-group" >
+                <form [formGroup]='fileForm' (ngSubmit)='submitFile()'>
+                        <div id="enabled-file-upload-group" class="form-group" >
                                 <label for="file-upload">Select An Attachment</label>
                                 <input id="file-upload" class ="form-control" 
-                                        type="file" name="file">
+                                        type="file" name="file" (change)="selectFile($event)">
                         </div>
-                        <button id="form-upload-submit-btn" class ="btn btn-default" 
+                        <button id="enabled-form-upload-submit-btn" class ="btn btn-default" 
                                 type="submit">Upload Attachment</button>
+                </form>
+        </div>
+        <div *ngIf="!submit_SIN.sin_number">
+                <form>
+                        <div id="disabled file-upload-group" class="form-group" >
+                                <label for="file-upload">Select An Attachment</label>
+                                <input id="file-upload" class ="form-control" 
+                                        type="file" name="file" disabled>
+                        </div>
+                        <button id="disabled-form-upload-submit-btn" class ="btn btn-default" 
+                                type="submit" disabled>Upload Attachment</button>
                 </form>
         </div>
 

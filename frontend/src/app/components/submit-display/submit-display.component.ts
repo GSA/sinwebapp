@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { SIN } from 'src/app/models/sin';
 import { User } from 'src/app/models/user';
 import { Status } from 'src/app/models/status';
 import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 import { SinService } from 'src/app/services/sin.service';
+import { FileService } from 'src/app/services/file.service';
 
 // SubmitDisplayComponent
 // 
@@ -76,6 +78,7 @@ export class SubmitDisplayComponent implements OnInit {
   public user_SINs: SIN[] =[];
   public all_SINs: SIN[] =[]
   public status_lookup: Status[] = [];
+  public fileForm: FormGroup;
 
   @Input() public user: User;
   @Input() public selectable: boolean; 
@@ -84,12 +87,22 @@ export class SubmitDisplayComponent implements OnInit {
   @Output() public selection_event = new EventEmitter<SIN>();
   @Output() public clear_event = new EventEmitter<SIN>();
 
-  constructor(private sinService: SinService,
+  constructor(private formBuilder: FormBuilder,
+              private fileService: FileService,
+              private sinService: SinService,
               private statusService: StatusService,
-              private logger: LogService) { }
+              private logger: LogService) {
+
+
+  }
 
   ngOnInit() { 
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
+    this.logger.log('Building FormGroup for FileForm', `${this.class_name}.ngOnInit`)
+    this.fileForm = this.formBuilder.group({
+      sin_number: [''],
+      file: ['']
+    })
     this.loadUserSINs();
     this.statusService.getStatuses().subscribe( (statuses) => {
       this.status_lookup = statuses;
@@ -119,6 +132,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.user_SINs = sins;
     })
   }
+
   public submitSIN(): void{
     if(!this.exists){
       this.logger.log('Submitting New SIN', `${this.class_name}.submitSIN`);
@@ -184,5 +198,19 @@ export class SubmitDisplayComponent implements OnInit {
     this.logger.log(`Selecting Pre-existing SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
     this.existing_SIN = sin;
   }
+
+  public selectFile(event){
+    if(event.target.files.length > 0 ){
+      const userFile = event.target.files[0];
+      this.fileForm.get('sin_number').setValue(this.submit_SIN.sin_number);
+      this.fileForm.get('file').setValue(userFile);
+    }
+  }
   
+  public submitFile(){
+    this.fileService.uploadFile(this.fileForm).subscribe( () =>{
+      this.logger.log('File Submitted', `${this.class_name}.submitFile`)
+    })
+  }
+
 }
