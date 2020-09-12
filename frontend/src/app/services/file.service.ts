@@ -25,7 +25,7 @@ export class FileService {
     formData.append('sin_number', form.get('sin_number').value)
 
     return this.http.post<FormData>(this.context.getFileUploadUrl().toString(), formData).pipe( 
-      tap( () => { this.logger.log( "Posting File Form", `${this.class_name}.uploadFile`);}),
+      tap( () => { this.logger.log( "Posting File Form", `${this.class_name}.uploadFiles`);}),
       catchError(this.handleError('uploadFile'))
     );
   }
