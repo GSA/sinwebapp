@@ -55,7 +55,7 @@ else
     then
         formatted_print "--> Clearing Sessions" $SCRIPT_NAME
         # python manage.py clearsessions
-        python ./files/s3_manager.py create_bucket
+        # python ./files/s3_manager.py create_bucket
     fi
 
     formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME

@@ -1,21 +1,9 @@
 # META DATA
 FROM python:3.7.7-slim-stretch
 LABEL application="CCDA : Core Contract Data Automation"
-LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pgnaore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"
+LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"
 LABEL version="prototype-1.0.0"
 LABEL description="Internal GSA application for managing SIN data"
-
-## ENVIRONMENT VARIABLES
-    ## VCAP_SERVICES: CloudFoundry delivers the application the database credentials through a VCAP_SERVICES environment variable. 
-    ## Mimic that configuration in the Docker image for minimal differences in the codebase.
-ENV VCAP_SERVICES='{ "aws-rds": [{ \
-    "credentials": { \
-     "db_name": "sinwebapp", \
-     "host": "database", \
-     "password": "root", \
-     "port": "5432", \
-     "username": "postgres" \ 
-    }}]}'
 
 ## DEPENDENCIES
 RUN apt-get update -y && apt-get install -y curl wait-for-it

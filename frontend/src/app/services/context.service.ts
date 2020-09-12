@@ -71,4 +71,7 @@ export class ContextService {
     return `${Context.USER_STATUS_ENDPOINT}`
   }
 
+  public getFileUploadUrl(): String{
+    return `${Context.FILE_UPLOAD_ENDPOINT}/`
+  }
 }
