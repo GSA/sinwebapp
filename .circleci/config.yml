@@ -40,6 +40,16 @@ jobs:
                 name: Install Python Requirements
                 command: pip install -r ./sinwebapp/requirements.txt
             - run:
+                name: Waiting for Postgres to be ready
+                command: |
+                    for i in `seq 1 10`;
+                    do
+                        nc -z localhost 5432 && echo Success && exit 0
+                        echo -n .
+                        sleep 1
+                    done
+                    echo Failed waiting for Postgres && exit 1
+            - run:
                 name: Ensure Migrations Are Up To Date
                 command: bash ./scripts/init-migrations.sh container
             - run:

@@ -84,7 +84,7 @@ else
         gunicorn core.wsgi:application --workers 3
     elif [ "$1" == "cloud" ]
     then
-        formatted_print '--> Testing Email Service' $SCRIPT_NAME
+        # formatted_print '--> Testing Email Service' $SCRIPT_NAME
         # python ./tests/email_test.py
         formatted_print '--> Deploying Gunicorn Server Onto The Cloud' $SCRIPT_NAME
         gunicorn core.wsgi:application 

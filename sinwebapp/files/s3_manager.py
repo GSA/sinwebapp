@@ -36,7 +36,7 @@ def upload(file_name, object_name):
 
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_fileobj(Filename=file_name, Bucket=aws_creds["bucket"], Key=str(object_name))
+        response = s3_client.upload_fileobj(Fileobj=file_name, Bucket=aws_creds["bucket"], Key=str(object_name))
         return True
     except ClientError as e:
         logger.warn('Error Occured Uploading File %s To S3 Bucket: "%s"', file_name, aws_creds["bucket"], e)
