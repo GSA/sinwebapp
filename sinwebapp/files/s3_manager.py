@@ -5,6 +5,14 @@ from core.settings import aws_creds
 
 from debug import DebugLogger
 
+# Returns an S3 Client authenticted with credentials in settings.py
+def get_s3_client():
+    logger = DebugLogger("sinwebapp.files.s3_manager.get_s3_client").get_logger()
+    logger.info('Instantiating boto3 S3 Client')
+    return boto3.client('s3',
+                        aws_access_key_id=aws_creds['access_key_id'],
+                        aws_secret_access_key=aws_creds['secret_access_key'],
+                        region_name=aws_creds['region'])
 
 # Returns True if 'bucket_name' is created successfully. Returns False if 'bucket_name' 
 # creation fails
@@ -34,7 +42,7 @@ def upload(file_name, object_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.upload").get_logger()
     logger.info('Uploading File "%s" To S3 Bucket "%s" With Key "%s"', file_name, aws_creds["bucket"], object_name)
 
-    s3_client = boto3.client('s3')
+    s3_client = get_s3_client()
     try:
         response = s3_client.upload_fileobj(Fileobj=file_name, Bucket=aws_creds["bucket"], Key=str(object_name))
         return True
@@ -47,7 +55,10 @@ def upload(file_name, object_name):
 def download(file_name, object_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.download").get_logger()
     logger.info('Downloading File "%s" From S3 Bucket "%s": %s', file_name, aws_creds["bucket"])
-    
+
+    my_session = boto3.session.Session(aws_access_key_id=aws_creds['access_key_id'],
+                                        aws_secret_access_key=aws_creds['secret_access_key'],
+                                        region_name=aws_creds['region'])
     s3_resources = boto3.resource('s3')
     try:
         response = s3_resources.Object(bucket_name=aws_creds["bucket"], key=object_name).get()['Body'].read()
@@ -61,7 +72,7 @@ def delete(file_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.delete").get_logger()
     logger.info('Deleting File "%s" From S3 Bucket "%s" : "%s"', file_name, aws_creds["bucket"])
     
-    s3_client = boto3.client("s3")
+    s3_client = get_s3_client()
     try:
         response = s3_client.delete_object(file_name)
         return True
@@ -73,7 +84,7 @@ def list_all():
     logger = DebugLogger("sinwebapp.files.s3_manager.list_all").get_logger()
     logger.info('Retrieving List Of Files From S3 Bucket %s', aws_creds["bucket"])
 
-    s3_client = boto3.client("s3")
+    s3_client = get_s3_client()
 
     try:
         response = s3_client.list_objects_v2(Bucket=aws_creds["bucket"])
@@ -85,8 +96,8 @@ def list_all():
 def list_for_sin(sin_number):
     logger = DebugLogger("sinwebapp.files.s3_manager.list_for_sin").get_logger()
     logger.info('Retrieving List Of Files From S3 Bucket "%s"', aws_creds["bucket"])
-
-    s3_client = boto3.client("s3")
+    
+    s3_client = get_s3_client()
 
     try:
         response = s3_client.list_objects_v2(Bucket=aws_creds["bucket"], Prefix=str(sin_number))
