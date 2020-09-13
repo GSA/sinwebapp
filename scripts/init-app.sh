@@ -46,11 +46,17 @@ else
         formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
-        ls 
+        formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+        bash $SCRIPT_DIR/init-migrations.sh $1
+
     elif [ "$1" == "container" ]
     then
         formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
+
+        formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+        bash $SCRIPT_DIR/init-migrations.sh $1
+
     elif [ "$1" == "cloud" ]
     then
         formatted_print "--> Clearing Sessions" $SCRIPT_NAME
@@ -58,8 +64,6 @@ else
         # python ./files/s3_manager.py create_bucket
     fi
 
-    formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
-    bash $SCRIPT_DIR/init-migrations.sh $1
 
     formatted_print '--> Migrating Django Database Files' $SCRIPT_NAME
     python manage.py migrate

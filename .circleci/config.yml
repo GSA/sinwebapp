@@ -14,6 +14,9 @@ jobs:
             - run: 
                 name: Install OS Dependencies
                 command: apt-get update -y && apt-get install -y curl
+            - run:
+                name: Clean Application
+                command: bash ./scripts/clean-app.sh
             - run: 
                 name: Download And Install Node
                 command: curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs 
@@ -24,15 +27,19 @@ jobs:
                 name: Install Dependencies And Build Frontend
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
             - run:
+                name: Ensure Migrations Are Up To Date
+                command: bash ./scripts/init-migrations.sh
+            - run:
                 name: Copy Initialization Scripts Into Application
                 command: bash ./scripts/init-scripts.sh 
             - persist_to_workspace: 
                 root: ./sinwebapp/
                 paths: 
+                    - ./api/migrations/
+                    - ./authentication/migrations/
                     - ./static/
                     - ./util/
                     - ./init-app.sh
-                    - ./init-migrations.sh
 
     deploy_dev:    
         executor: application-build

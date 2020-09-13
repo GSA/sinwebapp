@@ -1,7 +1,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='init-scripts.sh'
 nl=$'\n'
-SCRIPT_DES="This script is used during local initialization to copy over necessary scripts ${nl}\
+SCRIPT_DES="This script is used during initialization to copy over necessary scripts ${nl}\
    into the backend application before the application server starts."
 source "$SCRIPT_DIR/util/logging.sh"
 
@@ -13,10 +13,6 @@ else
     if [ ! -f "$SCRIPT_DIR/../sinwebapp/init-app.sh" ]
     then
         cp $SCRIPT_DIR/init-app.sh $SCRIPT_DIR/../sinwebapp/init-app.sh
-    fi
-    if [ ! -f "$SCRIPT_DIR/../sinwebapp/init-migrations.sh" ]
-    then
-        cp $SCRIPT_DIR/init-migrations.sh $SCRIPT_DIR/../sinwebapp/init-migrations.sh
     fi
     if [ ! -d "$SCRIPT_DIR/../sinwebapp/util" ]
     then
