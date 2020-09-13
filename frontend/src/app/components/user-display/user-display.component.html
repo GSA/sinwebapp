@@ -47,7 +47,7 @@
     <div id="row-3" class="row">
       <!--User Group Specific Panel -->
       <div id="group-specific-panel" class="col-md-8">
-        {{admin_view_as_user}}
+
         <div *ngIf="user.groups.includes('submitter_group') || ( user.groups.includes('admin_group') && admin_view_as_user )">
           <app-submit-display id="submit-app-component"
                               [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
