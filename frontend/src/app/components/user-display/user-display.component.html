@@ -5,21 +5,23 @@
     <div id="navbar" class="container-fluid">
 
       <div class="navbar-header">
-        <div class="navbar-brand">Menu</div>
+        <a class="navbar-brand">Menu</div>
       </div> 
+
       <ul class="nav navbar-nav">
         <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="user.groups.includes('admin_group')" class="dropdown right">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select A Role<span class="caret"></span></button>
+        <li *ngIf="user.groups.includes('admin_group')" class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" 
+              type="button" data-toggle="dropdown">Select A Role<span class="caret"></span></button>
           <ul id="admin-role-switcher" class="dropdown-menu">
               <li><a (click)="switchRole(true)">Submitter</a></li>
               <li><a (click)="switchRole(false)">Administrator</a></li>
           </ul>
         </li>
       </ul>
-      
+
     </div>
   </nav>
 
