@@ -20,18 +20,35 @@ class DebugMiddleware:
 
             for key, value in request.session.items():
                 if value is not None:
-                    self.logger.info('>>> Session Variable %s = %s', key, value)
+                    if len(key)>20:
+                        print_key = key[:20]
+                    else:
+                        print_key = key
+                    if len(value)>20:
+                        print_value = value[:20]
+                    else:
+                        print_value = value
+                    self.logger.info('>>> Session Variable %s = %s', print_key, print_value)
 
             if hasattr(request, 'user'):
                 self.logger.info('>>> Session User: %s', request.user)
    
             if request.path == '/api/sin/':
                 for key, value in request.headers.items():
-                    self.logger.info('>>> Request Header: %s', key)
+                    if len(key) > 20 : 
+                        print_key = key[:20]
+                    else:
+                        print_key = key
+                    self.logger.info('>>> Request Header: %s', print_key)
 
-                self.logger.info('>>> Cookie Header: %s', request.headers['Cookie'])
-                if 'X-CSRFToken' in request.headers:
-                    self.logger.info('>>> X-CSRFTOKEN Header: %s', request.headers['X-CSRFTOKEN'][0:20]) 
+            if len(request.headers['Cookie']) > 20:
+                print_cookie = request.headers['Cookie'][:20]
+            else:
+                print_cookie = request.headers['Cookie']
+
+            self.logger.info('>>> Cookie Header: %s', print_cookie)
+            if 'X-CSRFToken' in request.headers:
+                self.logger.info('>>> X-CSRFTOKEN Header: %s', request.headers['X-CSRFTOKEN'][0:20]) 
 
         response = self.get_response(request)
 
