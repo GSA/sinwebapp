@@ -27,6 +27,9 @@ jobs:
                 name: Install Dependencies And Build Frontend
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
             - run:
+                name: Install Python Requirements
+                command: pip install -r ./sinwebapp/requirements.txt
+            - run:
                 name: Ensure Migrations Are Up To Date
                 command: bash ./scripts/init-migrations.sh container
             - run:
