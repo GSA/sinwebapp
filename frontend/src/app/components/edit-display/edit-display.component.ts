@@ -110,7 +110,6 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN.sin_number = this.buffer_SIN.sin_number;
     this.buffer_SIN.sin_number = null;
     this.applied_SIN = true;
-    this.validateInput();
   }
 
   public applyStatus(): void{
@@ -127,7 +126,6 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN.sin_title = this.buffer_SIN.sin_title;
     this.buffer_SIN.sin_title = null;
     this.applied_Title = true;
-    this.validateInput();
   }
 
   public applyDescription(): void{
@@ -136,7 +134,6 @@ export class EditDisplayComponent implements OnInit {
     this.edit_SIN.sin_description = this.buffer_SIN.sin_description;
     this.buffer_SIN.sin_description= null;
     this.applied_Description = true;
-    this.validateInput();
   }
 
   public undoSIN(): void{
@@ -144,7 +141,6 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoSIN`);
     this.edit_SIN.sin_number = this.undo_SIN.sin_number;
     this.applied_SIN=false;
-    this.validateInput();
   }
 
   public undoStatus(): void{
@@ -152,7 +148,6 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoStatus`);
     this.edit_SIN.status_id = this.undo_SIN.status_id;
     this.applied_Status = false;
-    this.validateInput();
   }
 
   public undoTitle(): void{
@@ -160,7 +155,6 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoTitle`);
     this.edit_SIN.sin_title = this.undo_SIN.sin_title;
     this.applied_Title = false;
-    this.validateInput();
   }
 
   public undoDescription(): void{
@@ -168,16 +162,6 @@ export class EditDisplayComponent implements OnInit {
                       `${this.class_name}.undoDescription`)
     this.edit_SIN.sin_description = this.undo_SIN.sin_description;
     this.applied_Description = false;
-    this.validateInput();
-  }
-
-  public validateInput(): void {
-    if(!this.edit_SIN.sin_number){ this.invalid_SIN = false; }
-    else { this.invalid_SIN = true; }
-    if(this.edit_SIN.sin_title.length > 10 && this.edit_SIN.sin_title.length < 1000) { this.invalid_Title = false; }
-    else { this.invalid_Title = true; }
-    if(this.edit_SIN.sin_description.length > 20 && this.edit_SIN.sin_description.length < 1000) { this.invalid_Description = false; }
-    else{ this.invalid_Description = true;}
   }
 
   public saveAll(): void {

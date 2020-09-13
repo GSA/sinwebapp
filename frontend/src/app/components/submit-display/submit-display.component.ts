@@ -64,12 +64,25 @@ import { FileService } from 'src/app/services/file.service';
   templateUrl: './submit-display.component.html'
 })
 export class SubmitDisplayComponent implements OnInit {
+  // TODO: Load in existing attachments to display for a given selected SIN
 
   private class_name = "SubmitDisplayComponent";
+
+  // BINARY COMPONENT FLAGS
+    // determines whether or not user will create new or edit existing sin
   public exists : boolean;
+    // determines whether or not user is viewing all sins or submitting
   public submit_mode : boolean = false;
+    // determines whether or not the user has submitted a SIN
   public submitted: boolean = false;
-  public uploaded: boolean = false;
+    // determines whether or not the user has selected a file to upload
+  public file_selected: boolean = false;
+    // determines if fields are entered
+  public step_1_complete: boolean = false;
+    // determines if file is attached, needs initialized to null to trick disabled HTML attribute
+  public step_2_complete: boolean = false;
+
+
   public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                sin_description: null, sin_title: null };
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
@@ -98,6 +111,7 @@ export class SubmitDisplayComponent implements OnInit {
   }
 
   ngOnInit() { 
+    this.logger.log(`step_1_complete: ${this.step_1_complete}`, `${this.class_name}.ngOnInit`)
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
     this.logger.log('Building FormGroup for FileForm', `${this.class_name}.ngOnInit`)
     this.fileForm = this.formBuilder.group({
@@ -171,17 +185,18 @@ export class SubmitDisplayComponent implements OnInit {
     if(!this.submit_mode){ 
       this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`);
       this.loadUserSINs();
+      this.step_1_complete = false;
+      this.step_2_complete = false;
+      this.file_selected = false;
     }
     else{ 
       if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
       else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
       this.submitted = false;
-      // check if submit_SIN fields are null, set equal to selected_SIN if so
       this.submit_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description: null, sin_title: null };
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description: null, sin_title: null };
-      //let listeners know selection is cleared
       this.clear_event.emit(this.selected_SIN);
       this.logger.log('Emitting Clear Event', `${this.class_name}.switchModes`)
     }
@@ -205,14 +220,21 @@ export class SubmitDisplayComponent implements OnInit {
       const userFile = event.target.files[0];
       this.fileForm.get('sin_number').setValue(this.submit_SIN.sin_number);
       this.fileForm.get('file').setValue(userFile);
+      this.file_selected = true;
     }
   }
   
   public submitFile(){
     this.fileService.uploadFile(this.fileForm).subscribe( () =>{
       this.logger.log('File Submitted', `${this.class_name}.submitFile`);
-      this.uploaded = true;
+      this.step_2_complete = true;
     })
   }
+
+  public bypassFileUpload(){ this.step_2_complete=true; }
+
+  public submitFields(){ this.step_1_complete = true; }
+
+  public editFields(){ this.step_1_complete = false; }
 
 }

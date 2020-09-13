@@ -24,7 +24,7 @@ WORKDIR /home/
 RUN mkdir /scripts/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
-    mkdir ./static/ && mkdir ./api/ && mkdir ./db/ \
+    mkdir ./static/ && mkdir ./api/ && mkdir ./db/ && \
     mkdir ./files/ && mkdir ./tests/
 
 ## BUILD FRONTEND

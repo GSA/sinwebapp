@@ -27,27 +27,37 @@ def upload_file(request):
                 upload_check = upload(request.FILES['file'], request.POST['sin_number'])
                 if upload_check:
                     logger.info('File Uploaded')
-                    response = { 'message': 'File Uploaded'}
+                    response = { 'message': 'File Uploaded To S3' }
                 else:
                     logger.warn('Error Uploading File')
-                    response = { 'message': 'Error Uploading File'}
+                    response = { 'message': 'Error Uploading File To S3' }
 
             else:
-                logger.info('Saving File To Local Filesystem')
+                if APP_ENV == "container":
+                    logger.info('Saving File To Container File System')
+                elif APP_ENV == "local":
+                    logger.info('Saving File To Local File System')
+
                 local_upload = request.FILES['file']
                 sin = request.POST['sin_number']
                 save_file= LOCAL_SAVE_DIR + sin + '.pdf'
                 with open(save_file,'wb+') as destination:
                     for chunk in local_upload.chunks():
                         destination.write(chunk)
-                response = { 'message' : f"File Uploaded Locally To {save_file}"}
+
+                if APP_ENV == "container":
+                    logger.info('File Uploaded To Container File System At /sinwebapp_1_container%s', save_file)
+                    response = { 'message' : f"File Uploaded To Container File System At /sinwebapp_1_container{save_file}" }
+                elif APP_ENV == "local":
+                    logger.info('File Uploaded To Local File System At %s', save_file)
+                    response = { 'message' : f"File Uploaded To Local File System At {save_file}" }
 
         else:
             logger.warn('Error Validating Form')
-            response = { 'message' : 'Error Validating Form'}
+            response = { 'message' : 'Error Validating Form' }
     else:
         logger.warn("Request Attempted To Access /file/upload/ Without POST")
-        response = { 'message': 'Upload Files Through POST method'}
+        response = { 'message': 'Upload Files Through POST method' }
     return JsonResponse(response, safe=False)
 
 @login_required

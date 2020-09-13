@@ -8,7 +8,7 @@
         
         <!-- Submitter Input Alerts-->
         <div id="submission-message" class="alert alert-success" role="alert"
-                *ngIf="submitted">Thank you for your submission!</div>
+                *ngIf="submitted">Thank You For Your submission!</div>
         <div id="save-message" class="alert alert-success" role="alert"
                 *ngIf="save_message">SIN Entry Has Been Saved!</div>        
         
@@ -43,15 +43,23 @@
         *ngIf="submit_mode && !exists" >
         
         <h1>New SIN Submission</h1><br>
+
+        <!--No Steps Complete Warning Message -->
+        <div id="step-1-warning-msg" class="alert alert-warning" role="alert"
+                *ngIf="!step_1_complete && !step_2_complete && (!submit_SIN.sin_number || !submit_SIN.sin_title || !submit_SIN.sin_description)">
+                Please Fill Out And Save The Following Fields</div>
+
         <!--SIN Number-->
         <div id="sin-new-submit" class="input-group">
                 <span id="new-sin-number" class="input-group-addon">Enter New SIN #: </span>
                 <input id="new_sin_number_input" name="new_sin_number_input" class="form-control right"
                         required minlength="1" type="text"   
                         placeholder="Type SIN # Here"
-                        [(ngModel)]="submit_SIN.sin_number" #new_sin_number_input="ngModel"><br>
+                        [(ngModel)]="submit_SIN.sin_number" 
+                        [disabled]="step_1_complete"
+                        #new_sin_number_input="ngModel"><br>
         </div><br>
-        <!--Input Error Alerts-->
+                <!-- SIN Number Input Error Alerts-->
         <div id="new-sin-number-error-message" class="alert alert-danger" role="alert"
                 *ngIf="new_sin_number_input.invalid && (new_sin_number_input.dirty || new_sin_number_input.touched)">
                 <div id="new-sin-number-required-error-message"
@@ -64,9 +72,11 @@
                 <input id="new_title_input" name="new_title_input" class="form-control right"
                         required minlength="10" maxlength="1000" type="text" 
                         placeholder="Type Title Here"
-                        [(ngModel)]="submit_SIN.sin_title" #new_title_input="ngModel"><br>
+                        [(ngModel)]="submit_SIN.sin_title" 
+                        [disabled]="step_1_complete"
+                        #new_title_input="ngModel"><br>
         </div><br>
-        <!-- Input Error Alert -->
+                <!-- SIN Title Input Error Alert -->
         <div id="new-title-error-message" class="alert alert-danger" role="alert"
                 *ngIf="new_title_input.invalid && ( new_title_input.dirty || new_title_input.touched)">
                 <div id="new-title-required-error-message"
@@ -83,9 +93,11 @@
                 <input id="new_describe_input" name="new_describe_input" class="form-control right"
                         required minlength="20" maxlength="1000" type="text"
                         placeholder="Type Description Here"
-                        [(ngModel)]="submit_SIN.sin_description" #new_describe_input="ngModel"><br>         
+                        [(ngModel)]="submit_SIN.sin_description" 
+                        [disabled]="step_1_complete"
+                        #new_describe_input="ngModel"><br>         
         </div><br>
-       <!-- Input Error Alert-->
+                <!-- SIN Description Input Error Alert-->
         <div id="new-describe-error-message" class="alert alert-danger" role="alert"
                 *ngIf="new_describe_input.invalid && ( new_describe_input.dirty || new_describe_input.touched)">
                 <div id="new-describe-required-error-message"
@@ -94,42 +106,50 @@
                         *ngIf="new_describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
                 <div id="new-describe-maxlength-error-message"
                         *ngIf="new_describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div> 
-        </div>       
-
+        </div>    
+        
+        <!--Save Fields-->
+        <button id="step-1-submit-new-btn-enabled" class="btn btn-default btn-sm right"
+                type="submit" 
+                (click)="submitFields()"
+                [disabled]="!submit_SIN.sin_number || new_sin_number_input.invalid || new_title_input.invalid || new_describe_input.invalid || step_1_complete">
+                Save Fields</button><br><br>
+        
+                <!--Step 1 Complete Warning Message -->
+        <div id="step-1-warning-msg" class="alert alert-warning" role="alert"
+                *ngIf="step_1_complete && !step_2_complete">Please Upload An Attachment Or Select No Attachment</div>
+        
         <!-- File Attachment -->
-        <!-- DO THIS THE ANGULAR WAY, FOOL-->
-        <div *ngIf="submit_SIN.sin_number">
-                <form [formGroup]='fileForm' (ngSubmit)='submitFile()'>
-                        <div id="enabled-file-upload-group" class="form-group" >
-                                <label for="file-upload">Select An Attachment</label>
-                                <input id="file-upload" class ="form-control" 
-                                        type="file" name="file" (change)="selectFile($event)">
-                        </div>
-                        <button id="enabled-form-upload-submit-btn" class ="btn btn-default" 
-                                type="submit">Upload Attachment</button>
-                </form>
-        </div>
-        <div *ngIf="!submit_SIN.sin_number">
-                <form>
-                        <div id="disabled file-upload-group" class="form-group" >
-                                <label for="file-upload">Select An Attachment</label>
-                                <input id="file-upload" class ="form-control" 
-                                        type="file" name="file" disabled>
-                        </div>
-                        <button id="disabled-form-upload-submit-btn" class ="btn btn-default" 
-                                type="submit" disabled>Upload Attachment</button>
-                </form>
-        </div>
+        <form [formGroup]='fileForm' (ngSubmit)='submitFile()'>
+                <div id="new-file-upload-group" class="form-group" >
+                        <label for="new-upload">Select An Attachment</label>
+                        <input id="new-upload" name="file" class ="form-control right" 
+                                type="file" 
+                                (change)="selectFile($event)"
+                                [disabled]="!step_1_complete || step_2_complete || !submit_SIN.sin_number">
+                </div>
+                <button id="new-upload-submit-btn" class="btn btn-default right" 
+                        type="submit" 
+                        [disabled]="!file_selected || step_2_complete">Upload Attachment</button>
+                <button id="new-no-upload-submit-btn" class="btn btn-default right"
+                        type="button"
+                        (click)="bypassFileUpload()"
+                        [disabled]="!step_1_complete || step_2_complete || !submit_SIN.sin_number">No Attachment</button>
+        </form><br><br><br>
 
-        <!-- Submission Options-->
-        <button id="sin-submit-new-btn-enabled" class="btn btn-default btn-sm right"
-                type="submit" (click)="submitSIN()"
-                *ngIf="submit_SIN.sin_number && !new_sin_number_input.invalid && !new_title_input.invalid && !new_describe_input.invalid">Submit</button>
-        <button id="sin-submit-new-btn-disabled" class="btn btn-default btn-sm right"
-                type = "submit" disabled
-                *ngIf="!submit_SIN.sin_number || new_sin_number_input.invalid || new_title_input.invalid || new_describe_input.invalid">Submit</button>
+                <!-- Step 2 Complete Warning Message -->
+        <div id="step-2-complete-warning-msg" class="alert alert-warning" role="alert"
+                *ngIf="step_1_complete && step_2_complete">Please Complete Submission</div>
+
+        <!-- Submission Options -->
+        <button id="complete-submit-new-btn" class="btn btn-default btn-sm right"
+                type="submit" 
+                (click)="submitSIN()"
+                [disabled]="!step_1_complete || !step_2_complete">
+                Submit</button>
         <button id="sin-cancel-new-btn" class="btn btn-default btn-sm right"
-                type="submit" (click)="switchModes(false)">Cancel</button><br>
+                type="submit" 
+                (click)="switchModes(false)">Cancel</button><br>
     </div>
 
     <!-- Submit Existing SIN Mode -->
@@ -142,29 +162,32 @@
                 <span id="exists-sin-number"class="input-group-addon">Current SINs: </span>
                 <select id="exists_sin_number_input" name="exists_sin_number_input" class="form-control right"
                         required 
-                        [(ngModel)]="submit_SIN.sin_number" #exists_sin_number_input="ngModel">
+                        [disabled]="step_1_complete"
+                        [(ngModel)]="submit_SIN.sin_number" 
+                        #exists_sin_number_input="ngModel">
                         <option [value]="sin.sin_number" (click)="selectExistingSIN(sin)"
                                 *ngFor="let sin of all_SINs"> {{sin.sin_number}} </option>
                 </select><br>
         </div><br>
-        <!-- Input Error Alert-->
+                <!-- SIN Number Input Error Alert-->
         <div id="exists-sin-number-error-message" class="alert alert-danger" role="alert"
                 *ngIf="exists_sin_number_input.invalid && (exists_sin_number_input.dirty || exists_sin_number_input.touched)">
                 <div id="exists-sin-number-required-error-message"
                         *ngIf="exists_sin_number_input.errors.required">SIN Number is Required</div>
         </div>
 
-        <!--SIN Title-->
+                <!--SIN Title-->
         <div id="exists-title-submit" class="input-group">
                 <span id="exists-title" class="input-group-addon">Enter Title: </span>
                 <input id="exists_title_input" name="exists_title_input" class="form-control right"
                         type="text" required minlength="10" maxlength="1000"
                         [value]="existing_SIN.sin_title"
+                        [disabled]="step_1_complete || !submit_SIN.sin_number"
                         [(ngModel)]="submit_SIN.sin_title" 
                         #exists_title_input="ngModel">
 
         </div><br>
-        <!-- Input Error Alert -->
+                <!-- SIN Title Input Error Alert -->
         <div id="exists-title-error-message" class="alert alert-danger" role="alert"
                 *ngIf="exists_title_input.invalid && ( exists_title_input.dirty || exists_title_input.touched)">
                 <div id="exists-title-required-message" 
@@ -182,10 +205,11 @@
                 <input id="exists_describe_input" name="exists_describe_input" class="form-control right"
                         type="text" required minlength="20" maxlength="1000" 
                         [value]="existing_SIN.sin_description"
+                        [disabled]="step_1_complete || !submit_SIN.sin_number"
                         [(ngModel)]="submit_SIN.sin_description" 
                         #exists_describe_input="ngModel">   
         </div><br>
-        <!-- Input Error Alert-->
+                <!-- SIN Description Input Error Alert-->
         <div id="exists-describe-error-message" class="alert alert-danger" role="alert"
                 *ngIf="exists_describe_input.invalid && ( exists_describe_input.dirty || exists_describe_input.touched)">
                 <div id="exists-describe-required-error-message" 
@@ -196,16 +220,46 @@
                         *ngIf="exists_describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div> 
         </div>
 
+         <!--Step 1 Complete Warning Message -->
+         <div id="step-1-warning-msg" class="alert alert-warning" role="alert"
+                *ngIf="step_1_complete && !step_2_complete">Please Upload An Attachment Or Select No Attachment</div>
+
+        <!--Save Fields-->
+        <button id="step-1-submit-exists-btn-enabled" class="btn btn-default btn-sm right"
+                type="submit" 
+                (click)="submitFields()"
+                [disabled]="!submit_SIN.sin_number || exists_sin_number_input.invalid || exists_title_input.invalid || exists_describe_input.invalid || step_1_complete">
+                Save Fields</button><br><br>
+
+        
         <!-- File Attachment -->
-       
+        <!-- TODO: Load in existing attachments for a given sin and display them-->
+        <form [formGroup]='fileForm' (ngSubmit)='submitFile()'>
+                <div id="exists-upload-group" class="form-group" >
+                        <label for="exists-upload">Select An Attachment</label>
+                        <input id="exists-upload" name="file" class ="form-control right" 
+                                type="file" 
+                                (change)="selectFile($event)"
+                                [disabled]="!step_1_complete || step_2_complete || !submit_SIN.sin_number">
+                </div>
+                <button id="exists-upload-submit-btn" class="btn btn-default right" 
+                        type="submit" 
+                        [disabled]="!file_selected || step_2_complete">Upload Attachment</button>
+                <button id="exists-no-upload-submit-btn" class="btn btn-default right"
+                        type="button"
+                        (click)="bypassFileUpload()"
+                        [disabled]="!step_1_complete || step_2_complete || !submit_SIN.sin_number">No Attachment</button>
+        </form><br><br><br>
+
+        <!-- Step 2 Complete Warning Message -->
+        <div id="step-2-complete-warning-msg" class="alert alert-warning" role="alert"
+                *ngIf="step_1_complete && step_2_complete">Please Complete Submission</div>
+                
         <!-- Submission Options-->
         <button id="sin-submit-exists-btn-enabled" class="btn btn-default btn-sm right"
-                type="Submit" (click)="submitSIN()"
-                *ngIf="submit_SIN.sin_number && !exists_sin_number_input.invalid && !exists_title_input.invalid && !exists_describe_input.invalid" >Submit</button>
-        <button id="sin-submit-exists-btn-disabled" class="btn btn-default btn-sm right"
-                type = "Submit" disabled
-                *ngIf="!submit_SIN.sin_number || exists_sin_number_input.invalid || exists_title_input.invalid || exists_describe_input.invalid" >Submit</button>
+                type="submit" (click)="submitSIN()"
+                [disabled]="!step_1_complete || !step_2_complete ">Submit</button>
         <button id="sin-cancel-exists-btn" class="btn btn-default btn-sm right"
-                type="Submit" (click)="switchModes(false)">Cancel</button><br>
+                type="submit" (click)="switchModes(false)">Cancel</button><br>
     </div>
 </div>
