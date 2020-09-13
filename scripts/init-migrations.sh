@@ -21,6 +21,16 @@ else
         formatted_print "ERROR: No Argument Provided" $SCRIPT_NAME
     else
         formatted_print "--> Initializing Django Migrations" $SCRIPT_NAME
+        if [ "$1" == "local" ]
+        then
+            formatted_print '--> Setting Environment Variables' $SCRIPT_NAME
+            if [ -f "$SCRIPT_DIR/../env/local.env" ]
+            then
+                set -o allexport
+                source $SCRIPT_DIR/../env/local.env
+                set +o allexport
+            fi
+        fi
         if [ "$1" == "local" ] || [ "$1" == "container" ]
         then
             APP_DIR="$SCRIPT_DIR/../sinwebapp"

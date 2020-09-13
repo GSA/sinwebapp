@@ -32,7 +32,6 @@ else
             source $SCRIPT_DIR/../env/local.env
             set +o allexport
         fi
-        printenv
 
         formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-scripts.sh
