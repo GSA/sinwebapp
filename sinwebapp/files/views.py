@@ -71,9 +71,15 @@ def list_files(request):
     if request.method == 'GET':
         if 'sin_number' in request.GET:
             sin_number = request.GET.get('sin_number')
-            response = list_for_sin(sin_number)
+            if APP_ENV == 'cloud':
+                response = list_for_sin(sin_number)
+            else:
+
         else:
-            response = list_all()
+            if APP_ENV == 'cloud':
+                response = list_all()
+            else:
+                pass
     else:
         logger.info('Request Attempted To Access /file/list_files/ Without GET')
         response = { 'message': 'something went wrong'}

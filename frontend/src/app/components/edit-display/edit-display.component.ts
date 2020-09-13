@@ -61,10 +61,6 @@ export class EditDisplayComponent implements OnInit {
   public applied_Status: boolean = false;
   public applied_Title: boolean = false;
   public applied_Description: boolean = false;
-  public invalid_SIN: boolean = false;
-  public invalid_Status: boolean = false;
-  public invalid_Title: boolean = false;
-  public invalid_Description: boolean = false;
   public status_lookup: Status[] = [];
   public permission_status_lookup: Status[] = [];
 

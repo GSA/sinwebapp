@@ -45,7 +45,7 @@
         <h1>New SIN Submission</h1><br>
 
         <!--No Steps Complete Warning Message -->
-        <div id="step-1-warning-msg" class="alert alert-warning" role="alert"
+        <div id="step-1-new-warning-msg" class="alert alert-warning" role="alert"
                 *ngIf="!step_1_complete && !step_2_complete && (!submit_SIN.sin_number || !submit_SIN.sin_title || !submit_SIN.sin_description)">
                 Please Fill Out And Save The Following Fields</div>
 
@@ -105,7 +105,7 @@
                 <div id="new-describe-minlength-error-message"
                         *ngIf="new_describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
                 <div id="new-describe-maxlength-error-message"
-                        *ngIf="new_describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div> 
+                        *ngIf="new_describe_input.errors.maxlength">Description Cannot Exceed 2000 Characters</div> 
         </div>    
         
         <!--Save Fields-->
@@ -157,6 +157,12 @@
         *ngIf="submit_mode && exists && all_SINs.length > 0">
         
         <h1>Edit SIN Submission</h1><br>
+
+        <!--No Steps Complete Warning Message -->
+        <div id="step-1-exists-warning-msg" class="alert alert-warning" role="alert"
+                *ngIf="!step_1_complete && !step_2_complete && (!submit_SIN.sin_number)">
+                Please Select An Existing SIN From The Dropdown Menu</div>
+
         <!--SIN Number-->
         <div id="exists-sin-submit" class="input-group">
                 <span id="exists-sin-number"class="input-group-addon">Current SINs: </span>
@@ -203,7 +209,7 @@
         <div class="input-group" id ="describe-submit-exists">
                 <span class="input-group-addon" id="new-describe">Enter Description: </span>
                 <input id="exists_describe_input" name="exists_describe_input" class="form-control right"
-                        type="text" required minlength="20" maxlength="1000" 
+                        type="text" required minlength="20" maxlength="2000" 
                         [value]="existing_SIN.sin_description"
                         [disabled]="step_1_complete || !submit_SIN.sin_number"
                         [(ngModel)]="submit_SIN.sin_description" 
@@ -217,7 +223,7 @@
                 <div id="exists-describe-minlength-error-message" 
                         *ngIf="exists_describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
                 <div id="exists-describe-maxlength-error-message"
-                        *ngIf="exists_describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div> 
+                        *ngIf="exists_describe_input.errors.maxlength">Description Cannot Exceed 2000 Characters</div> 
         </div>
 
          <!--Step 1 Complete Warning Message -->
