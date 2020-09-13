@@ -31,6 +31,10 @@
 - [Django: Cross Site Request Forgery Tokens](https://docs.djangoproject.com/en/3.0/ref/csrf/)<br>
 - [Angular: XRSF Security Protection](https://angular.io/guide/http#security-xsrf-protection)<br>
 - [Angular: HttpClient XSRF Module](https://angular.io/api/common/http/HttpClientXsrfModule)<br><br>
+### AWS Simple Store Service
+- [AWS: Boto3 Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)<br>
+- [AWS: Boto3 S3 Client Examples](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-examples.html)<br>
+- [AWS: Boto3 S3 Client API](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html)<br>
 ### Relevant Stack Discussions
 - [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Python: Extracting Extension From Filename In Python](https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python)<br>

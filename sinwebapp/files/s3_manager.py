@@ -30,16 +30,13 @@ def create_bucket(bucket_name, region=None):
 
 # Returns True is 'file_name' is uploaded successfully. Returns False is 'file_name' upload 
 # fails.
-def upload(file_name, object_name=None):
+def upload(file_name, object_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.upload").get_logger()
-    logger.info('Uploading File "%s" To S3 Bucket "%s"', file_name, aws_creds["bucket"])
+    logger.info('Uploading File "%s" To S3 Bucket "%s" With Key "%s"', file_name, aws_creds["bucket"], object_name)
 
-    if object_name is None:
-        object_name = file_name
-    
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_file(file_name, aws_creds["bucket"], str(object_name))
+        response = s3_client.upload_fileobj(Filename=file_name, Bucket=aws_creds["bucket"], Key=str(object_name))
         return True
     except ClientError as e:
         logger.warn('Error Occured Uploading File %s To S3 Bucket: "%s"', file_name, aws_creds["bucket"], e)
@@ -47,16 +44,13 @@ def upload(file_name, object_name=None):
 
 # Returns download if 'file_name' is found within S3. Returns None if 'file_name' doesn't 
 # exist within S3.
-def download(file_name, object_name=None):
+def download(file_name, object_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.download").get_logger()
     logger.info('Downloading File "%s" From S3 Bucket "%s": %s', file_name, aws_creds["bucket"])
-
-    if object_name is None:
-        object_name = file_name
     
-    s3_client = boto3.client('s3')
+    s3_resources = boto3.resource('s3')
     try:
-        response = s3_client.download_file(aws_creds["bucket"], object_name, file_name)
+        response = s3_resources.Object(bucket_name=aws_creds["bucket"], key=object_name).get()['Body'].read()
         return response
     except ClientError as e:
         logger.warn('Error Occured Downloading File "%s" From S3 Bucket "%s": %s', file_name, aws_creds["bucket"], e)

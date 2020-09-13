@@ -25,7 +25,7 @@ def upload_file(request):
 
             if APP_ENV == "cloud":
                 logger.info('Uploading File To S3 Storage Bucket')
-                upload_check = upload(request.FILES['file'], str(request.POST['sin_number']))
+                upload_check = upload(request.FILES['file'], request.POST['sin_number'])
                 if upload_check:
                     logger.info('File Uploaded')
                     response = { 'message': 'File Uploaded To S3' }
