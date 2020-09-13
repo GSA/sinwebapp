@@ -16,6 +16,11 @@ executors:
                 POSTGRES_PORT: 5432
         working_directory: /home/
 
+    application-push:
+        docker:
+            - image: debian:stretch-slim
+        working_directory: /home/
+
 jobs:
     build:
         executor: application-build
@@ -65,7 +70,7 @@ jobs:
                     - ./init-app.sh
 
     deploy_dev:    
-        executor: application-build
+        executor: application-push
         steps:
             - checkout
             - attach_workspace:
