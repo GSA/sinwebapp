@@ -32,6 +32,7 @@ jobs:
                     - ./static/
                     - ./util/
                     - ./init-app.sh
+                    - ./init-migrations.sh
 
     deploy_dev:    
         executor: application-build
