@@ -20,28 +20,28 @@ class DebugMiddleware:
 
             for key, value in request.session.items():
                 if value is not None:
-                    if len(key)>20:
+                    if len(str(key))>20:
                         print_key = key[:20]
                     else:
                         print_key = key
-                    if len(value)>20:
+                    if len(str(value))>20:
                         print_value = value[:20]
                     else:
                         print_value = value
-                    self.logger.info('>>> Session Variable %s = %s', print_key, print_value)
+                    self.logger.info('>>> Session Variable %s = %s', print_key, value)
 
             if hasattr(request, 'user'):
                 self.logger.info('>>> Session User: %s', request.user)
    
             if request.path == '/api/sin/':
                 for key, value in request.headers.items():
-                    if len(key) > 20 : 
+                    if len(str(key)) > 20 : 
                         print_key = key[:20]
                     else:
                         print_key = key
                     self.logger.info('>>> Request Header: %s', print_key)
 
-            if len(request.headers['Cookie']) > 20:
+            if len(str(request.headers['Cookie'])) > 20:
                 print_cookie = request.headers['Cookie'][:20]
             else:
                 print_cookie = request.headers['Cookie']
