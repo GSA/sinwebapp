@@ -76,31 +76,46 @@ def list_files(request):
         if 'sin_number' in request.GET:
             sin_number = request.GET.get('sin_number')
             logger.info('Query Parameter Detected, Filtering List By Sin #: %s', sin_number)
+
             if APP_ENV == 'cloud':
                 logger.info('Cloud Environment Detected')
                 logger.info('Retrieving List From S3')
-                response = list_for_sin(sin_number)
+                raw_list = list_for_sin(sin_number)
+                response = {}
+                index = 1
+
+                for item in raw_list:
+                    response.update(index, item)
+                    index+=1
             else:
+
                 if APP_ENV == 'container':
                     logger.info('Container Environment Detected')
                     logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container',this_directory)
+
                 elif APP_ENV == 'local':
                     logger.info('Local Environment Detected')
                     logger.info('Retrieving File List From %s', this_directory)
+
                 whole_file_list = os.listdir(os.path.join(this_directory,'local_uploads'))
-                matched_list = {}
+                response = {}
                 index = 1             
+
                 for f in whole_file_list:
                     if sin_number in f:
-                        matched_list.update(index, f)
+                        response.update(index, f)
                         index+=1
-                response = matched_list
+
         else:
             logger.info('No Query Parameters Detected, Listing All Files')
             if APP_ENV == 'cloud':
                 logger.info('Cloud Environment Detected')
                 logger.info('Retrieving List From S3')
-                response = list_all()
+                raw_list= list_all()
+                response = {}
+                index = 1
+                for item in raw_list:
+                    pass 
             else:
                 if APP_ENV == 'container':
                     logger.info('Container Environment Detected')

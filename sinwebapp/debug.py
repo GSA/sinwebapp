@@ -42,10 +42,6 @@ class DebugLogger():
         self.logger.info('> UAA Token URL: %s', config.UAA_TOKEN_URL)
         self.logger.info('> UAA Login Redirect URL: %s', config.LOGIN_REDIRECT_URL)
         self.logger.info("-------------------------------------------------")
-        self.logger.info("> AWS S3 Configuration")
-        self.logger.info('> AWS Bucket Name: %s', config.aws_creds['bucket'])
-        self.logger.info('> AWS Region: %s', config.aws_creds['region'])
-        self.logger.info("-------------------------------------------------")
         self.logger.info("# Miscellanous Configuration")
         self.logger.info('> CSRF Header Name: %s', config.CSRF_HEADER_NAME)
         for folder in config.STATICFILES_DIR:  

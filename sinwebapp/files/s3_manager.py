@@ -87,7 +87,7 @@ def list_all():
     s3_client = get_s3_client()
 
     try:
-        response = s3_client.list_objects_v2(Bucket=aws_creds["bucket"])
+        response = s3_client.list_objects_v2(Bucket=aws_creds["bucket"])['Contents']
         return response
     except ClientError as e:
         logger.warn('Error Occured Retrieving Files From S3 Bucket "%s"', aws_creds["bucket"])
@@ -100,9 +100,7 @@ def list_for_sin(sin_number):
     s3_client = get_s3_client()
 
     try:
-        response = s3_client.list_objects_v2(Bucket=aws_creds["bucket"], Prefix=str(sin_number))
-        contents=response["Contents"]
-        logger.info('These are the contents: %s', contents)
+        response = s3_client.list_objects_v2(Bucket=aws_creds["bucket"], Prefix=str(sin_number))['Contents']
         return response
     except ClientError as e:
         logger.warn('Error Occured Retrieving Files From S3 Bucket "%s"', aws_creds["bucket"])
