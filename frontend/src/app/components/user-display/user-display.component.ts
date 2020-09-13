@@ -137,4 +137,6 @@ export class UserDisplayComponent implements OnInit {
                             sin_description: null, sin_title: null };
     this.switchModes(); 
   }
+
+  public switchRole(flag: boolean): void{ this.admin_view_as_user = flag; }
 }

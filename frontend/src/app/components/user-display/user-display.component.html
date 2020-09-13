@@ -6,18 +6,19 @@
 
       <div class="navbar-header">
         <div class="navbar-brand">Menu</div>
-        <ul class="nav navbar-nav">
-          <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
-        </ul>
-        <div clas ="dropdown">
+      </div> 
+      <ul class="nav navbar-nav">
+        <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="user.groups.includes('admin_group')" class="dropdown right">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select A Role<span class="caret"></span></button>
-          <ul id="admin-role-switcher" class="dropdown-menu"
-              [(ngModel)]="admin_view_as_user">
-              <li><a href="#" value ="true">Submitter</a></li>
-              <li><a href="#" value ="false">Administrator</a></li>
+          <ul id="admin-role-switcher" class="dropdown-menu">
+              <li><a (click)="switchRole(true)">Submitter</a></li>
+              <li><a (click)="switchRole(false)">Administrator</a></li>
           </ul>
-        </div>
-      </div>
+        </li>
+      </ul>
       
     </div>
   </nav>
@@ -40,20 +41,11 @@
       
       </div>
     </div>
-
-    <div id="row-2" class="row"
-        *ngIf="user.groups.includes('admin_group')">
-      <select id="admin-role-switcher"
-              [(ngModel)]="admin_view_as_user">
-        <option value="false">Administrator</option>
-        <option value="true">Submitter</option>
-      </select>
-    </div>
     
     <div id="row-3" class="row">
       <!--User Group Specific Panel -->
       <div id="group-specific-panel" class="col-md-8">
-
+        {{admin_view_as_user}}
         <div *ngIf="user.groups.includes('submitter_group') || ( user.groups.includes('admin_group') && admin_view_as_user )">
           <app-submit-display id="submit-app-component"
                               [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
