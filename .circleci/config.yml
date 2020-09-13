@@ -23,7 +23,7 @@ jobs:
             - checkout
             - run: 
                 name: Install OS Dependencies
-                command: apt-get update -y && apt-get install -y curl
+                command: apt-get update -y && apt-get install -y curl netcat
             - run:
                 name: Clean Application
                 command: bash ./scripts/clean-app.sh
@@ -36,6 +36,9 @@ jobs:
             - run:
                 name: Install Dependencies And Build Frontend
                 command: npm install -g @angular/cli@8.2.0 && bash ./scripts/build-frontend.sh
+            - run:
+                name: Copy Initialization Scripts Into Application
+                command: bash ./scripts/init-scripts.sh 
             - run:
                 name: Install Python Requirements
                 command: pip install -r ./sinwebapp/requirements.txt
@@ -52,9 +55,6 @@ jobs:
             - run:
                 name: Ensure Migrations Are Up To Date
                 command: bash ./scripts/init-migrations.sh container
-            - run:
-                name: Copy Initialization Scripts Into Application
-                command: bash ./scripts/init-scripts.sh 
             - persist_to_workspace: 
                 root: ./sinwebapp/
                 paths: 
