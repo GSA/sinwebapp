@@ -76,7 +76,7 @@ def delete(file_name):
         return False
 
 def list_all():
-    logger = DebugLogger("sinwebapp.files.s3_manager.list_files").get_logger()
+    logger = DebugLogger("sinwebapp.files.s3_manager.list_all").get_logger()
     logger.info('Retrieving List Of Files From S3 Bucket %s', aws_creds["bucket"])
 
     s3_client = boto3.client("s3")
@@ -89,8 +89,8 @@ def list_all():
         return None
 
 def list_for_sin(sin_number):
-    logger = DebugLogger("sinwebapp.files.s3_manager.list_files").get_logger()
-    logger.info('Retrieving List Of Files From S3 Bucket %s', aws_creds["bucket"])
+    logger = DebugLogger("sinwebapp.files.s3_manager.list_for_sin").get_logger()
+    logger.info('Retrieving List Of Files From S3 Bucket "%s"', aws_creds["bucket"])
 
     s3_client = boto3.client("s3")
 
