@@ -149,6 +149,6 @@ else:
 # Static Configuration
 STATIC_URL = '/static/'
 STATICFILES_DIR = [
-    os.path.join(BASE_DIR, "static")
+    os.path.join(os.path.dirname(BASE_DIR), 'assets')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

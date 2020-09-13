@@ -3,8 +3,8 @@ applications:
 path: ./sinwebapp/
 buildpack: https://github.com/cloudfoundry/python-buildpack.git
 stack: cflinuxfs3
-disk_quota: 300M
-memory: 100M
+disk_quota: 500M
+memory: 250M
 services:
     - sin-sql
     - sin-s3

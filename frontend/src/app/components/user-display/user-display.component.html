@@ -5,12 +5,23 @@
     <div id="navbar" class="container-fluid">
 
       <div class="navbar-header">
-        <div class="navbar-brand">Menu</div>
-        <ul class="nav navbar-nav">
-          <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
-        </ul>
-      </div>
-      
+        <a class="navbar-brand">Menu</a>
+      </div> 
+
+      <ul class="nav navbar-nav">
+        <li *ngIf="user.groups.includes('admin_group')" class="active"><a href="/admin">Admin</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="user.groups.includes('admin_group')" class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" 
+              type="button" data-toggle="dropdown">Select A Role<span class="caret"></span></button>
+          <ul id="admin-role-switcher" class="dropdown-menu">
+              <li><a (click)="switchRole(true)">Submitter</a></li>
+              <li><a (click)="switchRole(false)">Administrator</a></li>
+          </ul>
+        </li>
+      </ul>
+
     </div>
   </nav>
 
@@ -32,18 +43,18 @@
       
       </div>
     </div>
-
-    <div id="row-2" class="row">
+    
+    <div id="row-3" class="row">
       <!--User Group Specific Panel -->
       <div id="group-specific-panel" class="col-md-8">
 
-        <div *ngIf="user.groups.includes('submitter_group')">
+        <div *ngIf="user.groups.includes('submitter_group') || ( user.groups.includes('admin_group') && admin_view_as_user )">
           <app-submit-display id="submit-app-component"
                               [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
                               (selection_event)="selectSIN($event)"
                               (clear_event)="clearSelectedSIN($event, true)"></app-submit-display>
         </div>
-        <div *ngIf="user.groups.includes('approver_group') || user.groups.includes('reviewer_group') || user.groups.includes('admin_group')">
+        <div *ngIf="user.groups.includes('approver_group') || user.groups.includes('reviewer_group') || ( user.groups.includes('admin_group') && !admin_view_as_user ) ">
           <app-review-display id="review-app-component"
                               [user]="user" [selectable]="!edit_mode" [save_message]="saved" [clear_switch]="switcher"
                               (selection_event)="selectSIN($event)"></app-review-display>

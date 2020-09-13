@@ -40,6 +40,8 @@ class DebugLogger():
         self.logger.info("-------------------------------------------------")
         self.logger.info("# Miscellanous Configuration")
         self.logger.info('> CSRF_HEADER_NAME: %s', config.CSRF_HEADER_NAME)
+        for folder in config.STATICFILES_DIR:  
+            self.logger.info('> STATICFILES_DIR: %s', folder)
         self.logger.info("-------------------------------------------------")
 
 if __name__ == "__main__":

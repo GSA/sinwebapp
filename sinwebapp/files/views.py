@@ -24,7 +24,7 @@ def upload_file(request):
 
             if APP_ENV == "cloud":
                 logger.info('Uploading File To S3 Storage Bucket')
-                upload_check = upload(request.FILES['file'], request.POST['sin_number'])
+                upload_check = upload(request.FILES['file'], str(request.POST['sin_number']))
                 if upload_check:
                     logger.info('File Uploaded')
                     response = { 'message': 'File Uploaded To S3' }
@@ -39,7 +39,7 @@ def upload_file(request):
                     logger.info('Saving File To Local File System')
 
                 local_upload = request.FILES['file']
-                sin = request.POST['sin_number']
+                sin = str(request.POST['sin_number'])
                 save_file= LOCAL_SAVE_DIR + sin + '.pdf'
                 with open(save_file,'wb+') as destination:
                     for chunk in local_upload.chunks():

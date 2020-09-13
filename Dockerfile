@@ -11,7 +11,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 RUN npm install -g @angular/cli@8.2.0
 WORKDIR /home/
-RUN mkdir /sinwebapp/ && mkdir /frontend/
+RUN mkdir ./sinwebapp/ && mkdir ./frontend/
 COPY /frontend/package.json /home/frontend/package.json
 WORKDIR /home/frontend/
 RUN npm install
@@ -21,7 +21,7 @@ RUN pip install -r ./requirements.txt
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir /scripts/
+RUN mkdir ./scripts/ && mkdir ./assets/
 WORKDIR /home/sinwebapp/
 RUN mkdir ./authentication/ && mkdir ./core/ && \
     mkdir ./static/ && mkdir ./api/ && mkdir ./db/ && \
@@ -43,7 +43,8 @@ COPY /sinwebapp/db/ /home/sinwebapp/db/
 COPY /sinwebapp/files/ /home/sinwebapp/files/
 COPY /sinwebapp/tests/ /home/sinwebapp/tests/
 
-# START UP SCRIPT
+# START UP SCRIPT & ASSETS
+COPY /assets/ /home/assets/
 COPY /scripts/init-migrations.sh /home/scripts/init-migrations.sh
 COPY /scripts/init-app.sh /home/scripts/init-app.sh
 COPY /scripts/util/logging.sh /home/scripts/util/logging.sh
