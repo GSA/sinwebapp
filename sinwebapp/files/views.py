@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
-from files.s3_manager import upload, download
+from files.s3_manager import upload, download, list_for_sin, list_all
 from files.forms import UploadFileForm
 from core.settings import APP_ENV, BASE_DIR
 from debug import DebugLogger
@@ -64,6 +64,22 @@ def upload_file(request):
 def download_file(request):
     logger = DebugLogger("sinwebapp.files.views.upload_file").get_logger()
     logger.info('Retrieving File From S3...')
+
+@login_required
+def list_files(request):
+    logger = DebugLogger("sinwebapp.files.views.list_files").get_logger()
+    if request.method == 'GET':
+        if 'sin_number' in request.GET:
+            sin_number = request.GET.get('sin_number')
+            response = list_for_sin(sin_number)
+        else:
+            response = list_all()
+    else:
+        logger.info('Request Attempted To Access /file/list_files/ Without GET')
+        response = { 'message': 'something went wrong'}
+    
+    return JsonResponse(response, safe=False)
+
 
 @login_required
 def delete_file(request):
