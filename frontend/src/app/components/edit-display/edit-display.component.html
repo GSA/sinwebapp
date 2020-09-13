@@ -1,206 +1,189 @@
  <div class="panel-body"
         *ngIf="status_lookup.length > 0 || user_group.includes('submitter_group')" >
 
-    <!--SIN editor-->    
-    SIN #<br> 
-        <!--Current SIN-->
-    <label for="current-sin-number">Current SIN #: </label>
-    <span id="current-sin-number" class="right">{{this.edit_SIN.sin_number}}</span><br>
+        <!--SIN editor-->    
+        SIN #<br> 
         
-        <!--New SIN-->
-    <label for ="new-sin-number">New SIN #: </label>
-    <span id="new-sin-number" class="right"
-        *ngIf = "buffer_SIN.sin_number"> <mark>{{this.buffer_SIN.sin_number}}</mark></span><br>
-    <div id="sin-edit-input-group" class="input-group">
-        <span id="enter-new-sin-number" class="input-group-addon">Enter New SIN #</span>
-        <input id="input-sin-number-enabled" class="form-control" aria-describedby="enter-new-sin-number"
-                type="text"
-                placeholder="Enter New SIN # Here"
-                *ngIf="!applied_SIN" 
-                [(ngModel)]="buffer_SIN.sin_number">
-        <input id ="input-sin-number-disabled" class="form-control" aria-describedby="enter-new-sin-number"
-                type = "text" disabled
-                [value]="edit_SIN.sin_number"
-                *ngIf="applied_SIN" 
-                [(ngModel)]="buffer_SIN.sin_number">
-    </div><br>
-        <!--Input Error Alerts-->
-        <div id ="invalid-sin-number-error-message" class = "alert alert-danger" role = alert
-                *ngIf = "invalid_SIN">SIN Number is a required field. Please enter a number before saving.</div>
-
-
-        <!--SIN Options-->
-    <div id="sin-edit-btn-group" class ="btn-group right" role="group">
-        <button id="undo-sin-enabled" class="btn btn-danger btn-sm"
-                type="button" 
-                (click)="undoSIN()"
-                *ngIf="applied_SIN">Undo</button>
-        <button id="undo-sin-disabled" class="btn btn-danger btn-sm"
-                type="button" disabled
-                *ngIf="!applied_SIN">Undo</button>
-        <button id="apply-sin-enabled" class="btn btn-success btn-sm"
-                type="button" 
-                (click)="applySIN()"
-                *ngIf="!applied_SIN && buffer_SIN.sin_number">Apply</button>
-        <button id="apply-sin-disabled" class="btn btn-success btn-sm"
-                type="button" disabled
-                *ngIf="applied_SIN || !buffer_SIN.sin_number">Apply</button>
-    </div><br><br>
-
-     <!-- Title Editor -->
-     Title <br> 
-         <!--Current Title-->
-    <label for="current-title">Current Title: </label>
-    <span id="current-title" class="right">{{this.edit_SIN.sin_title}}</span><br>
-
-       <!--New Title-->
-    <label for ="new-title">New Title: </label>
-    <span id="new-title" class="right"
-        *ngIf = "buffer_SIN.sin_title"> <mark>{{this.buffer_SIN.sin_title}}</mark></span><br>
-    <div id="title-edit-input-group" class="input-group">
-        <span id="enter-new-title" class="input-group-addon">Enter Title</span>
-        <input id="input-title-enabled" class="form-control" aria-describedby="enter-new-title-enabled"
-                type="text"
-                placeholder="Enter New Title Here" 
-                *ngIf="!applied_Title" 
-                [(ngModel)]="buffer_SIN.sin_title">
-        <input id="input-title-disabled" class="form-control" aria-describedby="enter-new-title-disabled"
-                type="text" disabled
-                [value]="edit_SIN.sin_title"
-                *ngIf = "applied_Title" 
-                [(ngModel)]="buffer_SIN.sin_title">
-    </div><br>
-        <!--Input Error Alerts-->
-        <div id ="invalid-title-error-message" class = "alert alert-danger" role = alert
-                *ngIf = "invalid_Title">A title between 10 and 1000 characters is required. Please enter a title before saving.</div>
-
-
-        <!--Title Options-->
-    <div id="title-edit-btn-group" class ="btn-group right" role="group">
-        <button id="undo-title-enabled" class="btn btn-danger btn-sm"
-                type="button" 
-                (click)="undoTitle()"
-                *ngIf="applied_Title">Undo</button>
-        <button id="undo-title-disabled" class="btn btn-danger btn-sm"
-                type="button" disabled
-                *ngIf="!applied_Title">Undo</button>
-        <button id="apply-title-enabled" class="btn btn-success btn-sm"
-                type="button" 
-                (click)="applyTitle()"
-                *ngIf="!applied_Title && buffer_SIN.sin_title">Apply</button>
-        <button id="apply-title-disabled" class="btn btn-success btn-sm"
-                type="button" disabled
-                *ngIf="applied_Title || !buffer_SIN.sin_title" >Apply</button>
-    </div><br><br>
-
-    <!-- Description Editor -->
-    Description<br> 
-        <!--Current Description-->
-    <label for="current-describe">Current Description: </label>
-    <span id="current-describe" 
-            class="right">{{this.edit_SIN.sin_description}}</span><br>
-    
-        <!--New Description-->
-    <label for ="new-describe">New Description: </label>
-    <span id="new-describe" class="right"
-        *ngIf = "buffer_SIN.sin_description"> <mark>{{this.buffer_SIN.sin_description}}</mark></span><br>
-    <div id="describe-input-group" class="input-group">
-        <span id="enter-new-describe" class="input-group-addon">Enter Description</span>
-        <input id="input-describe-enabled" class="form-control" aria-describedby="enter-new-describe-enabled"
-                type="text"
-                placeholder="Enter New Description Here"
-                *ngIf = "!applied_Description" 
-                [(ngModel)]="buffer_SIN.sin_description">
-        <input id="input-describe-disbled" class="form-control" aria-describedby="enter-new-describe-disabled"
-                type = "text" disabled 
-                [value]="edit_SIN.sin_description"
-                *ngIf = "applied_Description" 
-                [(ngModel)]="buffer_SIN.sin_description">
-    </div><br>
-    <!--Input Error Alerts-->
-    <div id ="invalid-description-error-message" class = "alert alert-danger" role = alert
-        *ngIf = "invalid_Description">A description between 20 and 1000 characters is required. Please enter a description before saving.</div>
-
-        <!--Description Options-->
-    <div id="describe-edit-btn-group" class ="btn-group right" role="group">
-        <button id="undo-describe-enabled" class="btn btn-danger btn-sm"
-                type="button" 
-                (click)="undoDescription()"
-                *ngIf="applied_Description">Undo</button>
-        <button id="undo-describe-disabled" class="btn btn-danger btn-sm"
-                type="button" disabled
-                *ngIf="!applied_Description" >Undo</button>
-        <button id="apply-describe-enabled" class="btn btn-success btn-sm"
-                type="button" 
-                (click)="applyDescription()"
-                *ngIf="!applied_Description && buffer_SIN.sin_description">Apply</button>
-        <button id="apply-describe-disabled" class="btn btn-success btn-sm"
-                type="button" disabled 
-                *ngIf="applied_Description || !buffer_SIN.sin_description">Apply</button>
-    </div><br><br>
-
-    <!--Status Editor-->
-    <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group') || user_group.includes('admin_group')">
-        Status<br> 
-                <!--Current Status-->
-        <label for="current-status">Current Status:</label>
-        <span id="current-status" class="right">{{this.status_lookup[this.edit_SIN.status_id-1].name}}</span><br>
-
-                <!--New Status-->
-        <label for="new-status">New Status:</label>
-        <span id="new-status" class="right"
-                *ngIf ="buffer_SIN.status_id"><mark>{{this.status_lookup[this.buffer_SIN.status_id-1].name}}</mark></span><br>
-        <div id="status-edit-input-group" class="input-group">
-                <span id="select-new-status" class="input-group-addon"> Select New Status</span>
-                <select id ="input-status-enabled" class="form-control" aria-describedby="select-new-status"
-                        *ngIf = "!applied_Status"
-                        [(ngModel)] = "buffer_SIN.status_id">
-                <option *ngFor="let status of permission_status_lookup" 
-                        [value]="status.id">{{status.name}}</option>
-                </select>
-                <select id ="input-status-disabled" class="form-control" aria-describedby="select-new-status"
-                        disabled
-                        *ngIf="applied_Status">
-                <option *ngFor="let status of permission_status_lookup" 
-                        [value]="status.id">{{status.name}}</option>
-                </select>
+                <!--Current SIN-->
+        <label for="current-sin-number">Current SIN #: </label>
+        <span id="current-sin-number" class="right">{{this.edit_SIN.sin_number}}</span><br>
+        
+                <!--New SIN-->
+        <label for ="new-sin-number">New SIN #: </label>
+        <span id="new-sin-number" class="right"
+                *ngIf = "buffer_SIN.sin_number"> <mark>{{this.buffer_SIN.sin_number}}</mark></span><br>
+        <div id="sin-edit-input-group" class="input-group">
+                <span id="enter-new-sin-number" class="input-group-addon">Enter New SIN #</span>
+                <input id="input-sin-number" class="form-control" aria-describedby="enter-new-sin-number"
+                        type="text"
+                        placeholder="Enter New SIN # Here"
+                        [disabled]="applied_SIN" 
+                        [(ngModel)]="buffer_SIN.sin_number"
+                        #sin_number_input="ngModel">
         </div><br>
 
-                <!--Status Options-->
-        <div id="status-edit-btn-group" class ="btn-group right" role="group">
-                <button id="undo-status-enabled" class="btn btn-danger btn-sm"
+                <!-- SIN Number Input Error Alerts-->
+        <div id="sin-number-error-message" class="alert alert-danger" role="alert"
+                *ngIf="sin_number_input.invalid && (sin_number_input.dirty || sin_number_input.touched)">
+                <div id="sin-number-required-error-message"
+                        *ngIf="sin_number_input.errors.required">SIN Number is Required</div>
+        </div>
+
+
+                <!--SIN Options-->
+        <div id="sin-edit-btn-group" class ="btn-group right" role="group">
+                <button id="undo-sin" class="btn btn-danger btn-sm"
                         type="button" 
-                        (click)="undoStatus()"
-                        *ngIf="applied_Status">Undo</button>
-                <button id="undo-status-disabled" class="btn btn-danger btn-sm"
-                        type="button" disabled
-                        *ngIf="!applied_Status">Undo</button>    
-                <button id="apply-status-enabled" class="btn btn-success btn-sm"
+                        (click)="undoSIN()"
+                        [disabled]="!applied_SIN">Undo</button>
+                <button id="apply-sin" class="btn btn-success btn-sm"
                         type="button" 
-                        (click)="applyStatus()"
-                        *ngIf="!applied_Status && buffer_SIN.status_id">Apply</button>    
-                <button id="apply-status-disabled" class="btn btn-success btn-sm"
-                        type="button" disabled
-                        *ngIf="applied_Status || !buffer_SIN.status_id">Apply</button>
+                        (click)="applySIN()"
+                        [disabled]="applied_SIN || !buffer_SIN.sin_number">Apply</button>
         </div><br><br>
 
-    </div>
+        <!-- Title Editor -->
+        Title <br> 
+        
+                <!--Current Title-->
+        <label for="current-title">Current Title: </label>
+        <span id="current-title" class="right">{{this.edit_SIN.sin_title}}</span><br>
 
-    <!-- Save Editor -->
+                <!--New Title-->
+        <label for ="new-title">New Title: </label>
+        <span id="new-title" class="right"
+                *ngIf = "buffer_SIN.sin_title"> <mark>{{this.buffer_SIN.sin_title}}</mark></span><br>
+        <div id="title-edit-input-group" class="input-group">
+                <span id="enter-new-title" class="input-group-addon">Enter Title</span>
+                <input id="input-title" class="form-control" aria-describedby="enter-new-title"
+                        type="text"
+                        placeholder="Enter New Title Here" 
+                        [disabled]="applied_Title" 
+                        [(ngModel)]="buffer_SIN.sin_title"
+                        #title_input="ngModel">
+        </div><br>
+
+                <!-- SIN Title Input Error Alert -->
+        <div id="title-error-message" class="alert alert-danger" role="alert"
+                *ngIf="title_input.invalid && ( title_input.dirty || title_input.touched)">
+                <div id="title-required-error-message"
+                        *ngIf="title_input.errors.required">Title Is Required</div>
+                <div id="title-minlength-error-message" 
+                        *ngIf="title_input.errors.minlength">Title Must Be Atleast 10 Characters</div>
+                <div id="title-maxlength-error-message"
+                        *ngIf="title_input.errors.maxlength">Title Cannot Exceed 1000 Characters</div>
+        </div>
+
+                <!--Title Options-->
+        <div id="title-edit-btn-group" class ="btn-group right" role="group">
+                <button id="undo-title" class="btn btn-danger btn-sm"
+                        type="button" 
+                        (click)="undoTitle()"
+                        [disabled]="!applied_Title">Undo</button>
+       
+                <button id="apply-title" class="btn btn-success btn-sm"
+                        type="button" 
+                        (click)="applyTitle()"
+                        [disabled]="applied_Title || !buffer_SIN.sin_title">Apply</button>
+        </div><br><br>
+
+        <!-- Description Editor -->
+        Description<br> 
+        
+                <!--Current Description-->
+        <label for="current-describe">Current Description: </label>
+        <span id="current-describe" class="right">{{this.edit_SIN.sin_description}}</span><br>
+    
+                <!--New Description-->
+        <label for ="new-describe">New Description: </label>
+        <span id="new-describe" class="right"
+                *ngIf = "buffer_SIN.sin_description"> <mark>{{this.buffer_SIN.sin_description}}</mark></span><br>
+        <div id="describe-input-group" class="input-group">
+                <span id="enter-new-describe" class="input-group-addon">Enter Description</span>
+                <input id="describe-input" class="form-control" aria-describedby="enter-new-describe-enabled"
+                type="text"
+                placeholder="Enter New Description Here"
+                [disabled] = "applied_Description" 
+                [(ngModel)]="buffer_SIN.sin_description"
+                #describe_input="ngModel">
+        </div><br>
+
+                <!-- SIN Description Input Error Alert-->
+        <div id="describe-error-message" class="alert alert-danger" role="alert"
+                *ngIf="describe_input.invalid && ( describe_input.dirty || describe_input.touched)">
+                <div id="describe-required-error-message"
+                        *ngIf="describe_input.errors.required"> Description Is Required</div>
+                <div id="describe-minlength-error-message"
+                        *ngIf="describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
+                <div id="describe-maxlength-error-message"
+                        *ngIf="describe_input.errors.maxlength">Description Cannot Exceed 1000 Characters</div> 
+        </div>
+
+                <!--Description Options-->
+        <div id="describe-edit-btn-group" class ="btn-group right" role="group">
+                <button id="undo-describe" class="btn btn-danger btn-sm"
+                        type="button" 
+                        (click)="undoDescription()"
+                        [disabled]="!applied_Description">Undo</button>
+                <button id="apply-describe" class="btn btn-success btn-sm"
+                        type="button" 
+                        (click)="applyDescription()"
+                        [disabled]="applied_Description || !buffer_SIN.sin_description">Apply</button>
+        </div><br><br>
+
+        <!--Status Editor-->
+        <div *ngIf = "user_group.includes('reviewer_group') || user_group.includes('approver_group') || user_group.includes('admin_group')">
+                Status<br> 
+
+                        <!--Current Status-->
+                <label for="current-status">Current Status:</label>
+                <span id="current-status" class="right">{{this.status_lookup[this.edit_SIN.status_id-1].name}}</span><br>
+
+                        <!--New Status-->
+                <label for="new-status">New Status:</label>
+                <span id="new-status" class="right"
+                        *ngIf ="buffer_SIN.status_id"><mark>{{this.status_lookup[this.buffer_SIN.status_id-1].name}}</mark></span><br>
+                <div id="status-edit-input-group" class="input-group">
+                        <span id="select-new-status" class="input-group-addon"> Select New Status</span>
+                        <select id="input-status-enabled" class="form-control" aria-describedby="select-new-status"
+                                [disabled]="applied_Status"
+                                [(ngModel)]="buffer_SIN.status_id">
+                        <option *ngFor="let status of permission_status_lookup" 
+                                [value]="status.id">{{status.name}}</option>
+                        </select>
+                </div><br>
+
+                        <!--Status Options-->
+                <div id="status-edit-btn-group" class ="btn-group right" role="group">
+                        <button id="undo-status" class="btn btn-danger btn-sm"
+                                type="button" 
+                                (click)="undoStatus()"
+                                [disabled]="!applied_Status">Undo</button>   
+                        <button id="apply-status" class="btn btn-success btn-sm"
+                                type="button" 
+                                (click)="applyStatus()"
+                                [disabled]="applied_Status || !buffer_SIN.status_id">Apply</button>    
+                </div><br><br>
+
+        </div>
+
+        <!-- File Attachment -->
+
+        <!-- Save Error/Warning Message -->
         <div id="save-changes-msg" class="alert alert-warning" role="alert"
-                *ngIf = "(applied_SIN || applied_Title || applied_Description || applied_Status ) && (!invalid_SIN && !invalid_Title && !invalid_Description)">Please Save Your Changes</div>
+                *ngIf = "(applied_SIN || applied_Title || applied_Description || applied_Status ) && (!sin_number_input.invalid && !title_input.invalid && !describe_input.invalid)">
+                Please Save Your Changes</div>
         <div id="error-message" class="alert alert-danger" role="alert"
-                *ngIf="invalid_SIN || invalid_Title || invalid_Description">One or more of your field changes is invalid. Please validate changes before saving.</div>
-                <!--Input Buttons-->
+                *ngIf="sin_number_input.invalid || title_input.invalid || describe_input.invalid">
+                One or more of your field changes is invalid. Please validate changes before saving.</div>
+
+        <!-- Save Options -->
         <button id ="cancel-btn" class="btn btn-default btn-sm"
                 type="submit"
                 (click)="cancel()">Cancel</button>
-        <button id="save-btn-enabled" class="btn btn-default btn-sm"
+        <button id="save-btn" class="btn btn-default btn-sm"
                 type="submit"
                 (click)="saveAll()"
-                *ngIf="!invalid_SIN && !invalid_Title && !invalid_Description">Save</button>
-        <button id="save-btn-enabled" class="btn btn-default btn-sm"
-                type="submit" disabled
-                *ngIf="invalid_SIN || invalid_Title || invalid_Description">Save</button>
+                [disabled]="sin_number_input.invalid || title_input.invalid || describe_input.invalid">Save</button>
                 
 </div>

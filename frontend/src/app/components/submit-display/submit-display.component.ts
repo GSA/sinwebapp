@@ -64,6 +64,7 @@ import { FileService } from 'src/app/services/file.service';
   templateUrl: './submit-display.component.html'
 })
 export class SubmitDisplayComponent implements OnInit {
+  // TODO: Load in existing attachments to display for a given selected SIN
 
   private class_name = "SubmitDisplayComponent";
 
