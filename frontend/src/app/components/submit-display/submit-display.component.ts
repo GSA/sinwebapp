@@ -189,8 +189,8 @@ export class SubmitDisplayComponent implements OnInit {
       this.step_1_complete = false;
       this.step_2_complete = false;
       this.file_selected = false;
+      this.fileForm.reset()
     }
-
     else{ 
       if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
       else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
@@ -235,7 +235,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.step_2_complete = true;
     })
   }
-  
+
   public getSINFileList(sin: number){
     this.fileService.getFileListForSIN(sin).subscribe((attach) =>{
       this.attachments = attach;
