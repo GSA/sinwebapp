@@ -1,9 +1,9 @@
-<div *ngIf = "status_lookup.length > 0" class = "panel panel-default">
+<div *ngIf="status_lookup.length > 0" class="panel panel-default">
 
     <div class="panel-heading">SIN Submissions</div>
     
     <!--Status Mode Panel-->
-    <div id="sin-status-panel" class = "panel-body"
+    <div id="sin-status-panel" class="panel-body"
         *ngIf="!submit_mode && user_SINs">
         
         <!-- Submitter Input Alerts-->
@@ -239,18 +239,33 @@
 
         
         <!-- File Attachment -->
-        <!-- TODO: Load in existing attachments for a given sin and display them-->
+                <!-- Existing Attachments -->
+        <div *ngIf="attachments.length>0">
+                <p>Current Attachments</p>
+                <div id="attachment" class="well well-sm"
+                        *ngFor="let attach of attachments; let i = index"> #{{i+1}}: {{attach.filename}}
+                        <a id="download-attachment" class="btn btn-default right" 
+                                [href]="getDownloadURL(attach.filename.substring(0,attach.filename.length-4))">
+                                <span class="glyphicon glyphicon-download-alt right">Download</span>
+                        </a>
+                        <button id="delete-attachment" class="btn btn-default right">
+                                <span class="glyphicon glyphicon-trash right">Delete</span>
+                        </button>
+                </div><br>
+        </div>
+
+                <!-- New Attachment Form-->
         <form [formGroup]='fileForm' (ngSubmit)='submitFile()'>
-                <div id="exists-upload-group" class="form-group" >
+                <div id="exists-upload-group" class="form-group">
                         <label for="exists-upload">Select An Attachment</label>
                         <input id="exists-upload" name="file" class ="form-control right" 
                                 type="file" 
                                 (change)="selectFile($event)"
-                                [disabled]="!step_1_complete || step_2_complete || !submit_SIN.sin_number">
+                                [disabled]="!step_1_complete || step_2_complete || !submit_SIN.sin_number || attachments.length > 0">
                 </div>
                 <button id="exists-upload-submit-btn" class="btn btn-default right" 
                         type="submit" 
-                        [disabled]="!file_selected || step_2_complete">Upload Attachment</button>
+                        [disabled]="!file_selected || step_2_complete || attachments.length > 0">Upload Attachment</button>
                 <button id="exists-no-upload-submit-btn" class="btn btn-default right"
                         type="button"
                         (click)="bypassFileUpload()"

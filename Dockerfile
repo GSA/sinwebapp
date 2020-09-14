@@ -1,7 +1,7 @@
 # META DATA
 FROM python:3.7.7-slim-stretch
 LABEL application="CCDA : Core Contract Data Automation"
-LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"
+LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"]
 LABEL version="prototype-1.0.0"
 LABEL description="Internal GSA application for managing SIN data"
 

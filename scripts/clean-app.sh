@@ -15,7 +15,7 @@ else
         formatted_print '--> Cleaning \e[4m/static/\e[0m Directory' $SCRIPT_NAME
         cp $SCRIPT_DIR/../sinwebapp/static/favicon.ico $SCRIPT_DIR/../sinwebapp/favicon.ico
         rm -r $SCRIPT_DIR/../sinwebapp/static/
-        mkdir $SCRIPT_DIR/../.sinwebapp/static
+        mkdir $SCRIPT_DIR/../sinwebapp/static/
         cp $SCRIPT_DIR/.../sinwebapp/favicon.ico $SCRIPT_DIR/../sinwebapp/static/favicon.ico
     fi
 

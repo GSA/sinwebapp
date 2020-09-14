@@ -36,8 +36,9 @@
 - [AWS: Boto3 S3 Client Examples](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-examples.html)<br>
 - [AWS: Boto3 S3 Client API](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html)<br>
 ### Relevant Stack Discussions
-- [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Python: Extracting Extension From Filename In Python](https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python)<br>
+- [Python: Downloading A File From An S3 Bucket To User's Computer](https://stackoverflow.com/questions/43215889/downloading-a-file-from-an-s3-bucket-to-the-users-computer)<br>
+- [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Django: Creating JSON HttpResponse](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)<br>
 - [Django: Add User to Group Via Group Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)<br>
 - [Django: Output QuerySet as Json](https://stackoverflow.com/questions/15874233/output-django-queryset-as-json)<br>
@@ -45,8 +46,10 @@
 - [Django: Serializing Objects with Many-to-Many relations](https://stackoverflow.com/questions/34474893/django-serializer-manyrelatedmanager-object-at-xx-is-not-json-serializable)<br>
 - [Django: values_list() vs. values()](https://stackoverflow.com/questions/37205793/django-values-list-vs-values)<br>
 - [Django: Logout Not Working](https://stackoverflow.com/questions/2074980/django-logout-problem)
+- [Django: fcntl Substitute On Windows](https://stackoverflow.com/questions/1422368/fcntl-substitute-on-windows)<br>
 - [Angular: withCredentials Header, What Is It?](https://stackoverflow.com/questions/27406994/http-requests-withcredentials-what-is-this-and-why-using-it)<br>
 - [Angular: Service Not Sending XSRF Token Header With HTTP Request](https://stackoverflow.com/questions/50510998/angular-6-does-not-add-x-xsrf-token-header-to-http-request)<br>
 - [Angular: ContentType For Multipart Form Gets Reset to Application JSON](https://stackoverflow.com/questions/51228368/angular-5-content-type-multipart-form-data-gets-reset-to-application-json)<br>
 - [Javascript: Assignment By Value vs. By Reference](https://stackoverflow.com/questions/40133582/assign-value-not-reference-in-javascript)<br>
+- [JavaScript: Trim String](https://stackoverflow.com/questions/952924/javascript-chop-slice-trim-off-last-character-in-string)<br>
 - [Docker: Apt Repository is Not Signed](https://stackoverflow.com/questions/59139453/repository-is-not-signed-in-docker-build)<br>

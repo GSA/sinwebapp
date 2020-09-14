@@ -1,7 +1,7 @@
 import os
 
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import FileResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from files.s3_manager import upload, download, list_for_sin, list_all
@@ -10,6 +10,8 @@ from core.settings import APP_ENV, BASE_DIR
 from debug import DebugLogger
 
 LOCAL_SAVE_DIR=BASE_DIR+'/files/local_uploads/'
+THIS_DIRECTORY=os.path.dirname(os.path.abspath(__file__))
+
 
 @login_required
 def upload_file(request):
@@ -64,13 +66,50 @@ def upload_file(request):
 @login_required
 def download_file(request):
     logger = DebugLogger("sinwebapp.files.views.upload_file").get_logger()
-    logger.info('Downloading File')
+    logger.info('Downloading File From Environment')
+
+    if APP_ENV == 'container':
+        logger.info('Container Environment Detected')
+        logger.info('Retrieving File From %s%s','/sinwebapp_web_1_container', THIS_DIRECTORY)
+    elif APP_ENV == 'local':
+        logger.info('Local Environment Detected')
+        logger.info('Retrieving File From %s', THIS_DIRECTORY)
+    elif APP_ENV == 'cloud':
+        logger.info('Cloud Environment Detected')
+        logger.info('Retrieving File From S3')
+
+    if request.method == 'GET':
+        if 'sin_number' in request.GET:
+            sin_number = request.GET.get('sin_number')
+            if APP_ENV == 'cloud':
+                s3_file = download(sin_number)['Body']
+                response = FileResponse(s3_file, as_attachment=True)
+            else:
+                local_file_path = os.path.join(THIS_DIRECTORY,"local_uploads",f"{sin_number}.pdf")
+                response = FileResponse(open(local_file_path, 'rb'))
+        else:
+            logger.warn('No Query Parameter Provided')
+            response = { 'message': 'No Query Parameter Provided'}
+    else:
+        logger.warn('Request Attempted To Access /files/download/ Without GET')
+        response = { 'message': 'Request Attempted To Access /files/download/ Without GET'}
+
+    return response
 
 @login_required
 def list_files(request):
     logger = DebugLogger("sinwebapp.files.views.list_files").get_logger()
-    logger.info('Retrieving File List')
-    this_directory = os.path.dirname(os.path.abspath(__file__))
+    logger.info('Retrieving File List From Environment')
+
+    if APP_ENV == 'container':
+        logger.info('Container Environment Detected')
+        logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container', THIS_DIRECTORY)
+    elif APP_ENV == 'local':
+        logger.info('Local Environment Detected')
+        logger.info('Retrieving File List From %s', THIS_DIRECTORY)
+    elif APP_ENV == 'cloud':
+        logger.info('Cloud Environment Detected')
+        logger.info('Retrieving File List From S3')
 
     if request.method == 'GET':
         if 'sin_number' in request.GET:
@@ -78,32 +117,21 @@ def list_files(request):
             logger.info('Query Parameter Detected, Filtering List By Sin #: %s', sin_number)
 
             if APP_ENV == 'cloud':
-                logger.info('Cloud Environment Detected')
-                logger.info('Retrieving List From S3')
                 raw_list = list_for_sin(sin_number)
-                response = {}
+                response = []
                 index = 1
 
                 for item in raw_list:
-                    response.update(index, item)
+                    response.append({"index": index, "filename": item})
                     index+=1
             else:
-
-                if APP_ENV == 'container':
-                    logger.info('Container Environment Detected')
-                    logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container',this_directory)
-
-                elif APP_ENV == 'local':
-                    logger.info('Local Environment Detected')
-                    logger.info('Retrieving File List From %s', this_directory)
-
-                whole_file_list = os.listdir(os.path.join(this_directory,'local_uploads'))
-                response = {}
+                whole_file_list = os.listdir(os.path.join(THIS_DIRECTORY,'local_uploads'))
+                response = []
                 index = 1             
 
-                for f in whole_file_list:
-                    if sin_number in f:
-                        response.update(index, f)
+                for item in whole_file_list:
+                    if sin_number in item:
+                        response.append({"index": index, "filename": item})
                         index+=1
 
         else:
@@ -112,21 +140,22 @@ def list_files(request):
                 logger.info('Cloud Environment Detected')
                 logger.info('Retrieving List From S3')
                 raw_list= list_all()
-                response = {}
+                response = []
                 index = 1
                 for item in raw_list:
-                    pass 
+                    response.append({"index": index, "filename": item})
+                    index+=1
             else:
                 if APP_ENV == 'container':
                     logger.info('Container Environment Detected')
-                    logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container',this_directory)
+                    logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container',THIS_DIRECTORY)
                 elif APP_ENV == 'local':
                     logger.info('Local Environment Detected')
-                    logger.info('Retrieving File List From %s', this_directory)
+                    logger.info('Retrieving File List From %s', THIS_DIRECTORY)
 
-                response = os.listdir(os.path.join(this_directory,'local_uploads'))
+                response = os.listdir(os.path.join(THIS_DIRECTORY,'local_uploads'))
     else:
-        logger.info('Request Attempted To Access /file/list_files/ Without GET')
+        logger.info('Request Attempted To Access /files/list/ Without GET')
         response = { 'message': 'something went wrong'}
     
     return JsonResponse(response, safe=False)

@@ -7,6 +7,8 @@ import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 import { SinService } from 'src/app/services/sin.service';
 import { FileService } from 'src/app/services/file.service';
+import { Attachment } from 'src/app/models/attachment';
+import { ContextService } from 'src/app/services/context.service';
 
 // SubmitDisplayComponent
 // 
@@ -92,6 +94,7 @@ export class SubmitDisplayComponent implements OnInit {
   public user_SINs: SIN[] =[];
   public all_SINs: SIN[] =[]
   public status_lookup: Status[] = [];
+  public attachments : Attachment[] = [];
   public fileForm: FormGroup;
 
   @Input() public user: User;
@@ -102,6 +105,7 @@ export class SubmitDisplayComponent implements OnInit {
   @Output() public clear_event = new EventEmitter<SIN>();
 
   constructor(private formBuilder: FormBuilder,
+              private contextService: ContextService,
               private fileService: FileService,
               private sinService: SinService,
               private statusService: StatusService,
@@ -179,9 +183,12 @@ export class SubmitDisplayComponent implements OnInit {
   
   public switchModes(exists: boolean): void{
     this.exists = exists;
+
     if(this.exists){ this.loadAllSINs(); }
+
     this.logger.log('Switching Modes', `${this.class_name}.switchModes`);
     this.submit_mode = !this.submit_mode;
+
     if(!this.submit_mode){ 
       this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`);
       this.loadUserSINs();
@@ -189,6 +196,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.step_2_complete = false;
       this.file_selected = false;
     }
+
     else{ 
       if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
       else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
@@ -213,6 +221,7 @@ export class SubmitDisplayComponent implements OnInit {
   public selectExistingSIN(sin: SIN){
     this.logger.log(`Selecting Pre-existing SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
     this.existing_SIN = sin;
+    this.getSINFileList(sin.sin_number);
   }
 
   public selectFile(event){
@@ -231,10 +240,24 @@ export class SubmitDisplayComponent implements OnInit {
     })
   }
 
-  public bypassFileUpload(){ this.step_2_complete=true; }
-
   public submitFields(){ this.step_1_complete = true; }
 
+  public getSINFileList(sin: number){
+    this.fileService.getFileListForSIN(sin).subscribe((attach) =>{
+      this.attachments = attach;
+      this.logger.log(`File List Retrieved For SIN # ${sin}`, `${this.class_name}.getSINFileList`);
+      if(attach.length>0){
+        this.logger.log(`Attachment Exists For SIN #${sin}`,`${this.class_name}.getSINFileList`)
+        this.logger.log('Bypassing File Upload Step of SIN Submission', `${this.class_name}.getSINFileList`)
+        this.bypassFileUpload()
+      }
+    })
+  }
+
+  public bypassFileUpload(){ this.step_2_complete=true; }
+
   public editFields(){ this.step_1_complete = false; }
+
+  public getDownloadURL(sin: number){ return this.contextService.getFileDownloadUrl(sin); }
 
 }

@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LogService } from './log.service';
 import { ContextService } from './context.service';
+import { Attachment } from '../models/attachment';
 
 
 
@@ -28,6 +29,14 @@ export class FileService {
       tap( () => { this.logger.log( "Posting File Form", `${this.class_name}.uploadFiles`);}),
       catchError(this.handleError('uploadFile'))
     );
+  }
+
+  public getFileListForSIN(sin: number): Observable<Attachment[]>{
+    let attachments : Attachment[];
+    return this.http.get<Attachment[]>(this.context.getSINFileListUrl(sin).toString()).pipe(
+      tap( ()=> {  this.logger.log( `Retrieving File List For SIN # ${sin} `, `${this.class_name}.getFileListForSIN`);}),
+      catchError(this.handleError('getFileList', attachments))
+    )
   }
 
   public downloadFile(sin){

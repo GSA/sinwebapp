@@ -41,12 +41,13 @@ class DebugMiddleware:
                         print_key = key
                     self.logger.info('>>> Request Header: %s', print_key)
 
-            if len(str(request.headers['Cookie'])) > 20:
-                print_cookie = request.headers['Cookie'][:20]
-            else:
-                print_cookie = request.headers['Cookie']
-
-            self.logger.info('>>> Cookie Header: %s', print_cookie)
+            if hasattr(request.headers, 'Cookie'):
+                if len(str(request.headers['Cookie'])) > 20:
+                    print_cookie = request.headers['Cookie'][:20]
+                else:
+                    print_cookie = request.headers['Cookie']
+                self.logger.info('>>> Cookie Header: %s', print_cookie)
+                
             if 'X-CSRFToken' in request.headers:
                 self.logger.info('>>> X-CSRFTOKEN Header: %s', request.headers['X-CSRFTOKEN'][0:20]) 
 
