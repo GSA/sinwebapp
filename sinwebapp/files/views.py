@@ -1,5 +1,5 @@
 import os
-import mimetypes
+import magic 
 
 from django.shortcuts import render
 from django.http import FileResponse, JsonResponse
@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from files.s3_manager import upload, download, list_for_sin, list_all
 from files.forms import UploadFileForm
-from core.settings import APP_ENV, BASE_DIR
+from core.settings import APP_ENV, BASE_DIR, ALLOWED_MIMETYPES
 from debug import DebugLogger
 
 LOCAL_SAVE_DIR=os.path.join(BASE_DIR,'files','local_uploads')
@@ -15,53 +15,65 @@ LOCAL_SAVE_DIR=os.path.join(BASE_DIR,'files','local_uploads')
 @login_required
 def upload_file(request):
     logger = DebugLogger("sinwebapp.files.views.upload_file").get_logger()
-    logger.info('Posting File Form')
-    logger.info('Mimetype Guess: %s', mimetypes.guess_extension(request.FILES['file']))
-    
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        logger.info()
+    logger.info('Attempting To Post File Form')
 
+    if request.method == 'POST':
         logger.info('Validating Form')
+        form = UploadFileForm(request.POST, request.FILES)
+        
         if form.is_valid():
             logger.info('Form Validated')
+            logger.info('Verifying MIME Type')
+            mime_type = magic.from_buffer(request.FILES['file'].read(), mime=True)
+            logger.info('Form MIME Type: %s', mime_type)
 
-            if APP_ENV == "cloud":
-                logger.info('Uploading File To S3 Storage Bucket')
-                upload_check = upload(request.FILES['file'], request.POST['sin_number'])
-                if upload_check:
-                    logger.info('File Uploaded')
-                    response = { 'message': 'File Uploaded To S3' }
+            if mime_type in ALLOWED_MIMETYPES:
+                logger.info('MIME Type Validated')
+                if APP_ENV == "cloud":
+                    logger.info('Uploading File To S3 Storage Bucket')
+                    upload_check = upload(request.FILES['file'], request.POST['sin_number'])
+                    if upload_check:
+                        logger.info('File Uploaded')
+                        response = { 'message': 'File Uploaded To S3' }
+                    else:
+                        logger.warn('Error Uploading File')
+                        response = { 'message': 'Error Uploading File To S3' }
+
+                # end { if APP_ENV == 'cloud }
                 else:
-                    logger.warn('Error Uploading File')
-                    response = { 'message': 'Error Uploading File To S3' }
+                    if APP_ENV == "container":
+                        logger.info('Saving File To Container File System')
+                    elif APP_ENV == "local":
+                        logger.info('Saving File To Local File System')
 
+                    local_upload = request.FILES['file']
+                    sin = str(request.POST['sin_number'])
+                    save_file=os.path.join(LOCAL_SAVE_DIR,f"{sin}.pdf")
+                    with open(save_file,'wb+') as destination:
+                        for chunk in local_upload.chunks():
+                            destination.write(chunk)
+
+                    if APP_ENV == "container":
+                        logger.info('File Uploaded To Container File System At /sinwebapp_1_container%s', save_file)
+                        response = { 'message' : f"File Uploaded To Container File System At /sinwebapp_1_container{save_file}" }
+                    elif APP_ENV == "local":
+                        logger.info('File Uploaded To Local File System At %s', save_file)
+                        response = { 'message' : f"File Uploaded To Local File System At {save_file}" }
+
+            # end { if mime_type in ALLOWED_MIMETYPE } 
             else:
-                if APP_ENV == "container":
-                    logger.info('Saving File To Container File System')
-                elif APP_ENV == "local":
-                    logger.info('Saving File To Local File System')
+                logger.warn('Invalid MIME Type')
+                response = { 'message': 'Invalid MIME Type; Only "application/pdf" types Are Permitted'}
 
-                local_upload = request.FILES['file']
-                sin = str(request.POST['sin_number'])
-                save_file=os.path.join(LOCAL_SAVE_DIR,f"{sin}.pdf")
-                with open(save_file,'wb+') as destination:
-                    for chunk in local_upload.chunks():
-                        destination.write(chunk)
-
-                if APP_ENV == "container":
-                    logger.info('File Uploaded To Container File System At /sinwebapp_1_container%s', save_file)
-                    response = { 'message' : f"File Uploaded To Container File System At /sinwebapp_1_container{save_file}" }
-                elif APP_ENV == "local":
-                    logger.info('File Uploaded To Local File System At %s', save_file)
-                    response = { 'message' : f"File Uploaded To Local File System At {save_file}" }
-
+        # end { if form.is_valid() }
         else:
             logger.warn('Error Validating Form')
             response = { 'message' : 'Error Validating Form' }
+    # end { if request.method == 'POST' }
     else:
         logger.warn("Request Attempted To Access /file/upload/ Without POST")
         response = { 'message': 'Upload Files Through POST method' }
+
     return JsonResponse(response, safe=False)
 
 @login_required

@@ -17,3 +17,4 @@ cg-django-uaa==2.0.0
 
 # S3 Dependencies
 boto3==1.14.58
+python-magic==0.4.18

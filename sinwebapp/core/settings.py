@@ -153,4 +153,4 @@ STATICFILES_DIR = [ ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # S3 File Upload Configuration
-ALLOWED_FILE_TYPES=['pdf']
+ALLOWED_MIMETYPES=['application/pdf']

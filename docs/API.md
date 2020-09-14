@@ -1,5 +1,5 @@
 ### Documentation Navigation
-[<< Development](DEVELOPMENT.md) | [^ ReadMe ^](../README.md) | [Appendix >>](APPENDIX.md)
+[<< Frontend](FRONTEND.md) | [^ ReadMe ^](../README.md) | [Appendix >>](APPENDIX.md)
 
 # Routes & Endpoints
 
@@ -145,6 +145,9 @@ will return a JSON containing the ID's status name and description in the follow
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >}
+
+
+<h1>TODO: add FILES endpoints</h1>
 
 ## Third Party Endpoints
 - <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>
