@@ -9,9 +9,7 @@ from files.forms import UploadFileForm
 from core.settings import APP_ENV, BASE_DIR
 from debug import DebugLogger
 
-LOCAL_SAVE_DIR=BASE_DIR+'/files/local_uploads/'
-THIS_DIRECTORY=os.path.dirname(os.path.abspath(__file__))
-
+LOCAL_SAVE_DIR=os.path.join(BASE_DIR,'files','local_uploads')
 
 @login_required
 def upload_file(request):
@@ -43,7 +41,7 @@ def upload_file(request):
 
                 local_upload = request.FILES['file']
                 sin = str(request.POST['sin_number'])
-                save_file= LOCAL_SAVE_DIR + sin + '.pdf'
+                save_file=os.path.join(LOCAL_SAVE_DIR,f"{sin}.pdf")
                 with open(save_file,'wb+') as destination:
                     for chunk in local_upload.chunks():
                         destination.write(chunk)
@@ -70,10 +68,10 @@ def download_file(request):
 
     if APP_ENV == 'container':
         logger.info('Container Environment Detected')
-        logger.info('Retrieving File From %s%s','/sinwebapp_web_1_container', THIS_DIRECTORY)
+        logger.info('Retrieving File From %s%s','/sinwebapp_web_1_container', LOCAL_SAVE_DIR)
     elif APP_ENV == 'local':
         logger.info('Local Environment Detected')
-        logger.info('Retrieving File From %s', THIS_DIRECTORY)
+        logger.info('Retrieving File From %s', LOCAL_SAVE_DIR)
     elif APP_ENV == 'cloud':
         logger.info('Cloud Environment Detected')
         logger.info('Retrieving File From S3')
@@ -85,7 +83,7 @@ def download_file(request):
                 s3_file = download(sin_number)['Body']
                 response = FileResponse(s3_file, as_attachment=True)
             else:
-                local_file_path = os.path.join(THIS_DIRECTORY,"local_uploads",f"{sin_number}.pdf")
+                local_file_path = os.path.join(LOCAL_SAVE_DIR,f"{sin_number}.pdf")
                 response = FileResponse(open(local_file_path, 'rb'))
         else:
             logger.warn('No Query Parameter Provided')
@@ -103,10 +101,10 @@ def list_files(request):
 
     if APP_ENV == 'container':
         logger.info('Container Environment Detected')
-        logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container', THIS_DIRECTORY)
+        logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container', LOCAL_SAVE_DIR)
     elif APP_ENV == 'local':
         logger.info('Local Environment Detected')
-        logger.info('Retrieving File List From %s', THIS_DIRECTORY)
+        logger.info('Retrieving File List From %s', LOCAL_SAVE_DIR)
     elif APP_ENV == 'cloud':
         logger.info('Cloud Environment Detected')
         logger.info('Retrieving File List From S3')
@@ -125,7 +123,7 @@ def list_files(request):
                     response.append({"index": index, "filename": item})
                     index+=1
             else:
-                whole_file_list = os.listdir(os.path.join(THIS_DIRECTORY,'local_uploads'))
+                whole_file_list = os.listdir(LOCAL_SAVE_DIR)
                 response = []
                 index = 1             
 
@@ -148,12 +146,12 @@ def list_files(request):
             else:
                 if APP_ENV == 'container':
                     logger.info('Container Environment Detected')
-                    logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container',THIS_DIRECTORY)
+                    logger.info('Retrieving File List From %s%s','/sinwebapp_web_1_container', LOCAL_SAVE_DIR)
                 elif APP_ENV == 'local':
                     logger.info('Local Environment Detected')
-                    logger.info('Retrieving File List From %s', THIS_DIRECTORY)
+                    logger.info('Retrieving File List From %s', LOCAL_SAVE_DIR)
 
-                response = os.listdir(os.path.join(THIS_DIRECTORY,'local_uploads'))
+                response = os.listdir(LOCAL_SAVE_DIR)
     else:
         logger.info('Request Attempted To Access /files/list/ Without GET')
         response = { 'message': 'something went wrong'}
