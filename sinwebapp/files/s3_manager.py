@@ -61,7 +61,7 @@ def upload(file_name, object_name):
 # exist within S3.
 def download(object_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.download").get_logger()
-    logger.info('Downloading Attachment for SIN # %s From S3 Bucket "%s": %s', object_name, aws_creds["bucket"])
+    logger.info('Downloading Attachment for SIN # %s From S3 Bucket "%s"', object_name, aws_creds["bucket"])
 
     s3_client = get_s3_client()
     try:
