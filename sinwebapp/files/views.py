@@ -120,7 +120,7 @@ def list_files(request):
                 index = 1
 
                 for item in raw_list:
-                    response.append({"index": index, "filename": item})
+                    response.append({"index": index, "filename": f"{item['Key']}.pdf"})
                     index+=1
             else:
                 whole_file_list = os.listdir(LOCAL_SAVE_DIR)
