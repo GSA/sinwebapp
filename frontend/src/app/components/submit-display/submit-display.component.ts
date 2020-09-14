@@ -189,7 +189,9 @@ export class SubmitDisplayComponent implements OnInit {
       this.step_1_complete = false;
       this.step_2_complete = false;
       this.file_selected = false;
-      this.fileForm.reset()
+      this.fileForm.get('sin_number').setValue(null);
+      this.fileForm.get('file').setValue(null);
+      this.attachments = []
     }
     else{ 
       if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
