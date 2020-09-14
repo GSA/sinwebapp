@@ -64,7 +64,7 @@ def download(object_name):
 
     s3_client = get_s3_client()
     try:
-        return s3_client.get_object(Bucket=aws_creds["bucket"], key=object_name)  
+        return s3_client.get_object(Bucket=aws_creds["bucket"], Key=object_name)  
     except ClientError as e:
         logger.warn('Error Occured Downloading Attachment For SIN # %s From S3 Bucket "%s": %s', object_name, aws_creds["bucket"], e)
         return None
