@@ -115,13 +115,9 @@ export class SubmitDisplayComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.logger.log(`step_1_complete: ${this.step_1_complete}`, `${this.class_name}.ngOnInit`)
     this.logger.log('Initializing', `${this.class_name}.ngOnInit`)
     this.logger.log('Building FormGroup for FileForm', `${this.class_name}.ngOnInit`)
-    this.fileForm = this.formBuilder.group({
-      sin_number: [''],
-      file: ['']
-    })
+    this.fileForm = this.formBuilder.group({ sin_number: [''], file: [''] })
     this.loadUserSINs();
     this.statusService.getStatuses().subscribe( (statuses) => {
       this.status_lookup = statuses;
@@ -132,7 +128,7 @@ export class SubmitDisplayComponent implements OnInit {
     if(changes.selectable !== undefined){ this.loadUserSINs(); }
     if(changes.clear_switch !== undefined) { 
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
-              sin_description: null, sin_title: null };
+                            sin_description: null, sin_title: null };
     }
   }
 
@@ -177,9 +173,7 @@ export class SubmitDisplayComponent implements OnInit {
     };
   }
 
-  public clearMessage(): void {
-    this.submitted = false;
-  }
+  public clearMessage(): void { this.submitted = false; }
   
   public switchModes(exists: boolean): void{
     this.exists = exists;
@@ -224,6 +218,8 @@ export class SubmitDisplayComponent implements OnInit {
     this.getSINFileList(sin.sin_number);
   }
 
+  public submitFields(){ this.step_1_complete = true; }
+
   public selectFile(event){
     if(event.target.files.length > 0 ){
       const userFile = event.target.files[0];
@@ -239,9 +235,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.step_2_complete = true;
     })
   }
-
-  public submitFields(){ this.step_1_complete = true; }
-
+  
   public getSINFileList(sin: number){
     this.fileService.getFileListForSIN(sin).subscribe((attach) =>{
       this.attachments = attach;
