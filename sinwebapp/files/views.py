@@ -1,4 +1,5 @@
 import os
+import mimetypes
 
 from django.shortcuts import render
 from django.http import FileResponse, JsonResponse
@@ -15,10 +16,12 @@ LOCAL_SAVE_DIR=os.path.join(BASE_DIR,'files','local_uploads')
 def upload_file(request):
     logger = DebugLogger("sinwebapp.files.views.upload_file").get_logger()
     logger.info('Posting File Form')
-
+    logger.info('Mimetype Guess: %s', mimetypes.guess_extension(request.FILES['file']))
+    
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
-        
+        logger.info()
+
         logger.info('Validating Form')
         if form.is_valid():
             logger.info('Form Validated')
@@ -81,7 +84,7 @@ def download_file(request):
             sin_number = request.GET.get('sin_number')
             if APP_ENV == 'cloud':
                 s3_file = download(sin_number)['Body']
-                response = FileResponse(s3_file, as_attachment=True)
+                response = FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf")
                 response['Content-Type'] = 'application/pdf'
             else:
                 local_file_path = os.path.join(LOCAL_SAVE_DIR,f"{sin_number}.pdf")

@@ -38,6 +38,7 @@
 ### Relevant Stack Discussions
 - [Python: Extracting Extension From Filename In Python](https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python)<br>
 - [Python: Downloading A File From An S3 Bucket To User's Computer](https://stackoverflow.com/questions/43215889/downloading-a-file-from-an-s3-bucket-to-the-users-computer)<br>
+- [Python: Check File Type of Binary File](https://stackoverflow.com/questions/898669/how-can-i-detect-if-a-file-is-binary-non-text-in-python)
 - [Django: Add Auth Groups Programmatically](https://stackoverflow.com/questions/25024795/django-1-7-where-to-put-the-code-to-add-groups-programmatically/25803284#25803284)<br>
 - [Django: Creating JSON HttpResponse](https://stackoverflow.com/questions/2428092/creating-a-json-response-using-django-and-python)<br>
 - [Django: Add User to Group Via Group Admin](https://stackoverflow.com/questions/39485067/django-add-user-to-group-via-django-admin/39648244)<br>

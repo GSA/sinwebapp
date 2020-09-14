@@ -16,10 +16,11 @@ import logging
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_ENV = os.getenv('ENVIRONMENT')
-SECRET_KEY = 'thisismyriflethisismygun'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
+# Environment Specific Configuration
 if APP_ENV == 'cloud':
-    DEBUG = True
+    DEBUG = False
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 else:
@@ -38,6 +39,10 @@ else:
         'port': os.getenv('POSTGRES_PORT')
     }
 
+# General Application Configuration
+ROOT_URLCONF = 'core.urls'
+
+WSGI_APPLICATION = 'core.wsgi.application'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -78,8 +83,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'core.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -95,8 +98,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database Configuration Settings
 DATABASES = {
@@ -150,3 +151,6 @@ else:
 STATIC_URL = '/static/'
 STATICFILES_DIR = [ ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# S3 File Upload Configuration
+ALLOWED_FILE_TYPES=['pdf']
