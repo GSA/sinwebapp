@@ -96,8 +96,8 @@ def download_file(request):
             sin_number = request.GET.get('sin_number')
             if APP_ENV == 'cloud':
                 s3_file = download(sin_number)['Body']
-                response = FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf")
-                response['Content-Type'] = 'application/pdf'
+                response = FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf", contenttype="application/pdf")
+                response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
             else:
                 local_file_path = os.path.join(LOCAL_SAVE_DIR,f"{sin_number}.pdf")
                 response = FileResponse(open(local_file_path, 'rb'))

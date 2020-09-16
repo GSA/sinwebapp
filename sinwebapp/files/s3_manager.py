@@ -20,6 +20,7 @@ def get_s3_session():
     return boto3.session.Session(aws_access_key_id=aws_creds['access_key_id'],
                                 aws_secret_access_key=aws_creds['secret_access_key'],
                                 region_name=aws_creds['region'])
+                                
 # Returns True if 'bucket_name' is created successfully. Returns False if 'bucket_name' 
 # creation fails
 def create_bucket(bucket_name, region=None):
