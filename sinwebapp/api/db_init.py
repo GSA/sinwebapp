@@ -1,4 +1,4 @@
-import csv, os
+import csv, os, sys
 from debug import DebugLogger
 from random import randint
 from django.contrib.auth.models import User
@@ -75,41 +75,28 @@ def populate_sins(app, schema_editor):
             logger.info('Processing SinData Table Entry # %s', sin['id'])
         this_raw_sin = SinData.objects.get(id=sin['id'])
         try:
-            if sin['sin_number']:
+            # Hard Code Data Limit To 21 for POC
+            if sin['sin_number'] and sin['title'] and sin['sin_description'] and count<21:
                 try:
-                    if sin['sin_title']:
-                        try:
-                            if sin['sin_description']:
-                                Sin.objects.get_or_create(user=super_user, status=expired_status, sin_map=this_raw_sin,
-                                                            sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
-                                                            sin_description=sin['sin_description'])
-                                if count%modulo == 0:
-                                    logger.info('SinDate Table Entry # %s Validated', sin['id'])
-                                    logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
-                            else:
-                                if count%modulo == 0:
-                                    logger.info('Null "sin_description" Field For Entry %s', sin['id'])
-                                    logger.warn('Preventing Insertion Into Sin Table')
-                        except NameError:
-                            if count%modulo == 0:
-                                logger.info('Undefined "sin_description" field for entry # %s', sin['id'])
-                                logger.warn('Preventing Insertion Into Sin Table')
-                    else:
-                        if count%modulo == 0:
-                            logger.info('Null "sin_title" Field For Entry %s', sin['id'])
-                            logger.warn('Preventing Insertion Into Sin Table')
-                except NameError:
+            
+                    Sin.objects.get_or_create(user=super_user, status=expired_status, sin_map=this_raw_sin,
+                                                sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
+                                                sin_description=sin['sin_description'])
                     if count%modulo == 0:
-                        logger.info('Undefined "sin_title" field for entry # %s', sin['id'])
-                        logger.warn('Preventing Insertion Into Sin Table')
-
+                        logger.info('SinData Table Entry # %s Validated', sin['id'])
+                        logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
+                    
+                count+=1
             else:
-                if count%modulo == 0:
-                    logger.info('Null "sin_number" Field For Entry %s', sin['id'])
-                    logger.warn('Preventing Insertion Into Sin Table')
-        except NameError:
-            if count%modulo == 0:
-                logger.info('Undefined "sin_number" field for entry # %s', sin['id'])
+                logger.info('Null Field For Entry #%s (sin_number, sin_title, description): (%s, %s, %s)', 
+                            sin['id'], sin['sin_number'], sin['sin_title'],['sin_description'])
                 logger.warn('Preventing Insertion Into Sin Table')
-        count+=1
+        except:
+            e = sys.exc_info()[0]
+            f = sys.exc_info()[1]
+            g = sys.exc_info()[2]
+            logger.warn('Error Occured For Entry #%s (sin_number, sin_title, description): (%s, %s, %s)', 
+                            sin['id'], sin['sin_number'], sin['sin_title'],['sin_description'])
+            logger.error("Error Occurred Proccessing SIN Data: %s, \n :%s \n :%s \n", e, f, g)
+            logger.warn('Preventing Insertion Into SIN Table')
 
