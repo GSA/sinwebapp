@@ -1,5 +1,7 @@
 *.venv
 *.pyc
+/env/container.env
+/env/local.env
 sinwebapp/static/*
 sinwebapp/util/*
 sinwebapp/init-app.sh

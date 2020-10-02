@@ -39,20 +39,29 @@ def init_sindata(app, schema_editor):
         modulo = randint(70, 120)
         logger.info("Randomizing Debug Output Because Why Not")
         for row in reader:
-            state_flag = True if row[5] == 'Y' else False
-            set_flag = True if row[6] == 'Y' else False
-            t_flag = True if row[9] == 'Y' else False
-            o_flag = True if row[10] == 'Y' else False
-            end = row[4] if 'NULL' not in row[4] else None
-            created = SinData.objects.get_or_create(
-                sin_number=row[0], sin_title=row[1], sin_description=row[2], 
-                begin_date=row[3], end_date=end, state_and_local=state_flag,
-                set_aside=set_flag, service_comm_code=row[7], 
-                tdr_flag=t_flag, olm_flag=o_flag, max_order_limit=row[11]
-            )
-            count+=1
-            if count%modulo == 0:
-                logger.info(" INSERTION # %s : (sin_number, sin_description) = (%s, %s) ", count, row[0], row[4][0:50])
+            try:
+                state_flag = True if row[5] == 'Y' else False
+                set_flag = True if row[6] == 'Y' else False
+                t_flag = True if row[9] == 'Y' else False
+                o_flag = True if row[10] == 'Y' else False
+                end = row[4] if 'NULL' not in row[4] else None
+                created = SinData.objects.get_or_create(
+                    sin_number=row[0], sin_title=row[1], sin_description=row[2], 
+                    begin_date=row[3], end_date=end, state_and_local=state_flag,
+                    set_aside=set_flag, service_comm_code=row[7], 
+                    tdr_flag=t_flag, olm_flag=o_flag, max_order_limit=row[11]
+                )
+                count+=1
+                if count%modulo == 0:
+                    logger.info(" INSERTION # %s : (sin_number, sin_description) = (%s, %s) ", count, row[0], row[4][0:50])
+            except:
+                e = sys.exc_info()[0]
+                f = sys.exc_info()[1]
+                g = sys.exc_info()[2]
+                logger.warn('Error Occured For (sin_number, sin_title, description): (%s, %s, %s)', 
+                                row[0], row[1], row[2])
+                logger.error("Error Occurred Proccessing SINData: %s, \n :%s \n :%s \n", e, f, g)
+                logger.warn('Preventing Insertion Into SINData Table')
 
 def populate_sins(app, schema_editor):
     logger = DebugLogger("api.db_init.populate_sins").get_logger()
@@ -97,6 +106,6 @@ def populate_sins(app, schema_editor):
             g = sys.exc_info()[2]
             logger.warn('Error Occured For Entry #%s (sin_number, sin_title, description): (%s, %s, %s)', 
                             sin['id'], sin['sin_number'], sin['sin_title'],['sin_description'])
-            logger.error("Error Occurred Proccessing SIN Data: %s, \n :%s \n :%s \n", e, f, g)
+            logger.error("Error Occurred Proccessing SIN: %s, \n :%s \n :%s \n", e, f, g)
             logger.warn('Preventing Insertion Into SIN Table')
 

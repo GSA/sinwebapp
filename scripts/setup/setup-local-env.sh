@@ -5,6 +5,22 @@ source "$SCRIPT_DIR/../util/logging.sh"
 
 apt-get update -y
 
+if [ ! -f "$SCRIPT_DIR/../../env/local.env" ]
+then
+    formatted_print "Setting Up Local Environment File" $SCRIPT_NAME
+    cp $SCRIPT_DIR/../../env/.sample.env $SCRIPT_DIR/../../env/local.env
+else
+    formatted_print "Local Environment File Detected" $SCRIPT_NAME
+fi
+
+if [ ! -f "$SCRIPT_DIR/../../env/container.env" ]
+then
+    formatted_print "Setting Up Container Environment File" $SCRIPT_NAME
+    cp $SCRIPT_DIR/../../env/.sample.env $SCRIPT_DIR/../../env/container.env
+else
+    formatted_print "Container Environment File Detected"
+fi
+
 if ! command -v python &> /dev/null
 then
     formatted_print "Installing Python..." $SCRIPT_NAME
@@ -42,6 +58,8 @@ npm install
 cd $SCRIPT_DIR/../../sinwebapp/
 formatted_print "--> Installing Python Dependencies" $SCRIPT_NAME
 pip install -r requirements.txt
+
+# SET UP ENVIRONMENT FILES
 
 formatted_print "--> Changing File Mode For Scripts" $SCRIPT_NAME
 for f in $SCRIPT_DIR/../*
