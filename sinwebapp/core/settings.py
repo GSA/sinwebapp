@@ -18,11 +18,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_ENV = os.getenv('ENVIRONMENT')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+# Application Configuration 
+PRODUCTION_URL="sinweb.app.cloud.gov"
+
 # Environment Specific Configuration
 if APP_ENV == 'cloud':
     DEBUG = False
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
+    # Separating email setting assignments for eventual integration with AWS SES Services
+        # i.e. local and container will contain using simple gmail, but cloud environment
+        # will soon have a different email service to ensure adept scaling of application 
+        # services
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST='smtp.gmail.com'
+    EMAIL_USE_TLS=True
+    EMAIL_PORT=587
+    EMAIL_HOST_USER='ccda.dxsolutionsid@gmail.com'
+    EMAIL_HOST_PASSWORD='Autumn2020'
 else:
     DEBUG = True
     aws_creds={
@@ -38,6 +51,12 @@ else:
         'password': os.getenv('POSTGRES_PASSWORD'),
         'port': os.getenv('POSTGRES_PORT')
     }
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST='smtp.gmail.com'
+    EMAIL_USE_TLS=True
+    EMAIL_PORT=587
+    EMAIL_HOST_USER='ccda.dxsolutionsid@gmail.com'
+    EMAIL_HOST_PASSWORD='Autumn2020'
 
 # General Application Configuration
 ROOT_URLCONF = 'core.urls'

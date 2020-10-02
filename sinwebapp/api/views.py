@@ -8,12 +8,13 @@ from django.views.decorators.csrf import csrf_exempt
 from api.models import Sin, Status
 from api.models import STATUS_STATES, SIN_FIELDS
 from authentication.db_init import GROUPS
+from api.email_manager import notify_reviewer, notify_approver, confirm_submitter, approve_submitter
 
 from debug import DebugLogger
 
 # GET: /api/user
 # 
-# Description: retrieves user associated with request
+# Description: retrieves user associated with incoming request
 def user_info(request):
     logger = DebugLogger("sinwebapp.api.views.user_info").get_logger()
     logger.info('Retrieving User Info...')
@@ -69,8 +70,8 @@ def user_info_filtered(request):
 
 # GET: /api/sinUser?user_id=123
 #
-# Description: Retrieved information about a given user based on
-# the provided id.
+# Description: Retrieves information about a given user based on the provided id.
+# TODO: This method/endpoint is potentially redundant.
 @login_required
 def sin_user_info(request):
     logger = DebugLogger("sinwebapp.api.views.sin_user_info").get_logger()
@@ -97,6 +98,20 @@ def sin_user_info(request):
 
     return JsonResponse(retrieved_user, safe=False)
 
+# POST: /api/sinUpdate
+# { body:{
+#   'sin_id': id
+#   'sin_number': 'number'
+#   'user_id': new id,
+#   'status_id': new id
+#   'sin_description': 'new description' 
+#   'sin_title': 'new title'
+#   }
+# }
+# 
+# This POST method will override any SIN with new fields supplied in the body parameters.
+# This endpoint is used to process submitted SINs as they are reviewed and approved through
+# the SIN workflow.
 @login_required
 def sin_info_update(request):
     logger = DebugLogger("sinwebapp.api.views.sin_info_update").get_logger()
@@ -117,8 +132,16 @@ def sin_info_update(request):
         sin_number = body[SIN_FIELDS[2]]
         user_id = body[SIN_FIELDS[3]]
         status_id = body[SIN_FIELDS[4]]
-        sin_description = body[SIN_FIELDS[5]]
-        sin_title = body[SIN_FIELDS[6]]
+        new_description = body[SIN_FIELDS[5]]
+        new_title = body[SIN_FIELDS[6]]
+
+         # create test reviewer
+            # TODO: replace with field to be added to SIN: reviewer [User]
+        test_reviewer = User.objects.get(username="test_reviewer")
+        test_approver = User.objects.get(username="test_approver")
+        logger.info('Pulling Hard-coded Test Reviewer Profile: %s', test_reviewer.email)
+        logger.info('Pulling Hard-coded Test Approver Profile: %s', test_approver.email)
+
 
         try:
             new_status = Status.objects.get(id=status_id)
@@ -127,17 +150,43 @@ def sin_info_update(request):
                 new_user = User.objects.get(id=user_id)
                 logger.info('User Found')
                 try:
-                    new_sin = Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user,
-                                    sin_title=sin_title, sin_description=sin_description)
-                    logger.info('SIN Found')   
+
+                    new_sin=Sin(id=sin_id, sin_number=sin_number, status=new_status, user=new_user,
+                                    sin_title=new_title, sin_description=new_description)
+                    logger.info('SIN Updated')   
                     new_sin.save()
+                    
+                    logger.info("Generating Email Notification For %s Status Change Request", new_status.name)
+                    if new_status.id == STATUS_STATES["submitted"]:
+                        logger.info('Notifying (reviewer, submitter) = (%s, %s)', test_reviewer.email, new_sin.user.email)
+                        notify_reviewer(new_sin, test_reviewer)
+                        confirm_submitter(new_sin, test_reviewer)
+                    elif new_status.id == STATUS_STATES["reviewed"]:
+                        logger.info('Notifying (reviewer, submitter) = (%s, %s)', test_reviewer.email, new_sin.user.email)
+                        notify_reviewer(new_sin, test_reviewer)
+                        confirm_submitter(new_sin, test_reviewer)
+                        pass
+                    elif new_status.id == STATUS_STATES["change"]:
+                        # TODO
+                        pass
+                    elif new_status.id == STATUS_STATES["approved"]:
+                        logger.info('Notifying (approver, submitter) = (%s, %s)', test_approver.email, new_sin.user.email)
+                        notify_approver(new_sin, test_approver)
+                        approve_submitter(new_sin, test_approver)
+                    elif new_status.id == STATUS_STATES["denied"]:
+                        # TODO
+                        pass
+                    elif new_status.id == STATUS_STATES["expired"]:
+                        # TODO
+                        pass
+
                     response={
                         SIN_FIELDS[1]: sin_id,
                         SIN_FIELDS[2]: sin_number,
                         SIN_FIELDS[3]: new_status.id,
                         SIN_FIELDS[4]: new_user.id,
-                        SIN_FIELDS[5]: sin_description,
-                        SIN_FIELDS[6]: sin_title
+                        SIN_FIELDS[5]: new_description,
+                        SIN_FIELDS[6]: new_title
                     }
                 except Sin.DoesNotExist:
                     response = { 'message': 'SIN Does Not Exist'}
@@ -155,14 +204,40 @@ def sin_info_update(request):
 
     return JsonResponse(response, safe=False)
 
-# GET: /api/sin?id=123456 { body: empty }
-# POST: /api/sin { body: new SIN }
-# 
-# Description: retrieves information for a specific SIN number or posts a new SIN
-# Post should be of form:
-# { 
-#   'sin_number': 123456
+# GET: /api/sin?id=123456
+#      /api/sin?user_email=something@gsa.gov
+#      /api/sin?user_id=123
+#      /api/sin?status_id=1
+# POST: /api/sin 
+# { body: { 
+#   'sin_number': 123456,
+#   'sin_title': 'title', 
+#   'sin_description': 'description'
+#   }
 # }
+# 
+# Description: retrieves information for a specific SIN number for GET requests or 
+# posts a new SIN for POST requests. 
+#
+# GET REQUESTS
+#
+# GET requests can search existing SINs be any field that exists on the SIN model
+# by using that field as a parameter in the query string. The available fields to
+# search by are: id, user_email, status_id
+#
+# POST REQUESTS
+# 
+# If the SIN being posted already exists, the POST method will attempt to update 
+# an existing SIN, if its status does not prohibit it. SINs with a status of a 
+# SUBMITTED, REVIEWED, APPROVED, CHANGE or DENIED will not allow updates. SINS with
+# a status of EXPIRED can be overwritten and reused.
+#
+# In other words, POST requests that use this endpoint will only be able submit new 
+# SINS, which includes old SINS that are expired and no longer in use. If you need
+# to update an existing SIN with a new status or info, use the endpoint /api/updateSin.
+# 
+# This endpoint should only be used by submitters to submit new SINs. All reviewers
+# and approvers should direct their request through the /api/updateSin endpoint.
 @login_required
 def sin_info(request):
     
@@ -187,8 +262,12 @@ def sin_info(request):
         sin_number = body['sin_number']
         sin_title = body['sin_title']
         sin_description = body['sin_description']
-
         logger.info('SIN # Posting: %s', sin_number)
+
+        # create test reviewer
+            # TODO: replace with field to be added to SIN: reviewer [User]
+        test_reviewer = User.objects.get(username="test_reviewer")
+        logger.info('Pulling Hard-coded Test Reviewer Profile: %s', test_reviewer.email)
 
         # create submitted status
         new_status = Status.objects.get(id=1)
@@ -199,7 +278,7 @@ def sin_info(request):
         try: 
             sin = Sin.objects.get(sin_number=sin_number)
             logger.info('SIN # Exists!')
-            if sin.status in [1,2,3]:
+            if sin.status.id in [1,2,3,4]:
                 # STATUS STATES:  
                 # 1 = submitted, 2 = reviewed, 3 = change
                 # 4 = approved, 5 = denied, 6 = expired
@@ -209,6 +288,9 @@ def sin_info(request):
             else:
                 sin.update(user=request.user, status=new_status)
                 logger.info('Existing SIN # Updated.')
+                logger.info('Notifying (reviewer, submitter) = (%s, %s)', test_reviewer.email, sin.user.email)
+                notify_reviewer(sin, test_reviewer)
+                confirm_submitter(sin, test_reviewer)
                 return JsonResponse(sin, safe=False)
         
         # post new sin
@@ -217,6 +299,9 @@ def sin_info(request):
                                         sin_title=sin_title, sin_description=sin_description)
             sin.save()
             logger.info('New SIN # Posted')
+            logger.info('Notifying (reviewer, submitter) = (%s, %s)', test_reviewer.email, sin.user.email)
+            notify_reviewer(sin, test_reviewer)
+            confirm_submitter(sin, test_reviewer)
             raw_sin = {
                 'id': sin.id,
                 'sin_number': sin.sin_number,
@@ -271,18 +356,18 @@ def sin_info(request):
                 retrieved_sin = {'message': 'User Does Not Exist'}
                 logger.warning('User Not Found!')
 
-        elif 'status' in request.GET:
-            user_status = request.GET.get('status') 
-            logger.info('Using Status Query Parameter: %s', user_status)
+        elif 'status_id' in request.GET:
+            status_id = request.GET.get('status_id') 
+            logger.info('Using Status Query Parameter: %s', status_id)
             try:  
-                search_status = Status.objects.get(id=user_status)
+                search_status = Status.objects.get(id=status_id)
                 logger.info('Status Found!')
                 retrieved_sin = list(Sin.objects.filter(status=search_status).values()) 
             except User.DoesNotExist:
                 retrieved_sin = { 'message': 'Status Does Not Exist' }
                 logger.warning('Status Not Found!')
         else:
-            retrieved_sin ={ 'message': 'Input Error' }
+            retrieved_sin ={ 'message': 'No Query Parameters Provided' }
             logger.info('No Query Parameters Provided')
 
         return JsonResponse(retrieved_sin, safe=False)
@@ -317,7 +402,7 @@ def status_info(request):
     logger.info('Retrieving Status Info')
 
     if 'id' in request.GET:
-        status_id=request.GET.get('status_id')
+        status_id=request.GET.get('id')
         logger.info('Using Status Id Query Parameter: %s', status_id)
         try:
             raw_status = Status.objects.get(id=status_id)

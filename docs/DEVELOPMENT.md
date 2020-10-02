@@ -95,7 +95,33 @@ will build the frontnend application, push it to the cloud, remove the generated
 
 > bash ./scripts/cf-push.sh dispose trail build
 
-## 4. Miscellanous
+## 4. How To Add Modules To The Django Backend
+
+When adding functionality to the Django backend, be sure to modularize your new features. This will ensure the application stays organized and reduces the technical clutter that can accumulate doing things willy-nilly. To do this, use the <b>django-admin</b> (or <b>python manage.py</b>) command to create a new module (or "app", in Django speak), wire that module into the application through the <i>core</i> module and then ensure your new app is included in the Dockerfile.
+
+### A. Django:
+
+1. <b>Use Django Admin to Create New App</b><br>
+
+In the /sinwebapp/ directory, execute the following command
+
+> python manage.py startapp APP_NAME_GOES_HERE
+
+This will add a new directory and initialize a python module within said directory. Program your functionality into this module.
+
+2. <b>Wire New Module Into Application Through <i>core</i> Module.</b><br>
+
+Ensure the new app's config file is included in the <i>core/settings.py</i> <b>INSTALLED_APPS</b> setting. If adding to the API, ensure the route to the new app's endpoints is included in the <i>core/urls.py</i> file. 
+
+### B. Dockerfile:
+
+First, make sure the new directory also gets created in the Docker Image by adding to the <i>mkdir</i> bash commands within the section of the Dockerfile labeled <b>CREATE PROJECT DIRECTORY STRUCTURE</b>.
+
+Next, underneath the section of the Dockerfile labeled <b>BUILD BACKEND<b>, ensure the local application gets copied into its corresponding spot in the Docker image, i.e., add the following line,
+
+> COPY /sinwebapp/NEW_APP/ /home/sinwebapp/NEW_APP/
+
+## 5. Miscellanous
 
 ### A. Scripts
 

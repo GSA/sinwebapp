@@ -70,6 +70,17 @@ def init_default_users(app, schema_editor):
         reviewer_group.user_set.add(reviewer)
         reviewer.save()
 
+
+    test_reviewer = User.objects.create_user(username="test_reviewer", email="theodros.desta@gsa.gov", password="root")
+    reviewer_group = Group.objects.get(name=GROUPS['reviewer'])
+    reviewer_group.user_set.add(test_reviewer)
+    test_reviewer.save()
+
+    test_approver= User.objects.create_user(username="test_approver", email="tina.burns@gsa.gov", password="root")
+    approver_group = Group.objects.get(name=GROUPS['approver'])
+    approver_group.user_set.add(test_approver)
+    test_approver.save()
+
     logger.info("Creating Super-User Using Environment Variables")
     super_name = os.getenv('DJANGO_SUPERUSER_USERNAME')
     super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
