@@ -1,8 +1,12 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='init-migrations.sh'
+SCRIPT_NAME="\e[4minit-migrations\e[0m"
 nl=$'\n'
 SCRIPT_DES="This script will scrub the existing migrations from the application,${nl}\
-    and then create fresh migrations to ensure the model is up to date.
+    and then create fresh migrations to ensure the model is up to date. Ensure \e[3mlocal.env\e[0m${nl}\
+     file is loaded if executing this script locally. In other words, before running this ${nl}\
+    on your local computer, configure your \e[3mlocal.env\e[0m file and then execute \
+    ${nl}${nl}           source \e[3m$SCRIPT_DIR/init-env.sh\e[0m ${nl}${nl}\
+    which will activate the \e[3mlocal.env\e[0m file. 
 ${nl} 
    EXAMPLE USAGE${nl}\
        bash init-migrations.sh local ${nl}${nl}\
@@ -22,26 +26,18 @@ else
     else
         formatted_print "--> Initializing Django Migrations" $SCRIPT_NAME
 
-        # LOAD IN ENVIRONMENT VARIABLES
-        if [ "$1" == "local" ]
-        then
-            formatted_print '--> Reading Environment Variables' $SCRIPT_NAME
-            if [ -f "$SCRIPT_DIR/../env/local.env" ]
-            then
-                formatted_print '--> Importing Environment Variables' $SCRIPT_NAME
-                set -o allexport
-                source $SCRIPT_DIR/../env/local.env
-                set +o allexport
-                echo $SECRET_KEY
-                echo $AWS_BUCKET_NAME
-            fi
-        fi
-
         # NAVIGATE TO FOLDER CONTAINING MANAGE.PY
         if [ "$1" == "local" ] || [ "$1" == "container" ]
         then
             APP_DIR="$SCRIPT_DIR/../sinwebapp"
+        else 
+            # executing from cloud environment
+            APP_DIR=$SCIRPT_DIR
         fi
+
+        formatted_print "--> Navigating To Project Root" $SCRIPT_NAME
+        cd $APP_DIR
+        formatted_print "Project Root: $(pwd)" $SCRIPT_NAME
 
         # CACHE CUSTOM MIGRATIONS IN /DB/ FOLDER
         formatted_print '--> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
@@ -68,7 +64,7 @@ else
             formatted_print '--> Cleaning \e[4m/api/migrations/\e[0m Directory' $SCRIPT_NAME
             rm -r $APP_DIR/api/migrations/
         fi
-        if [ -d "$APP_DIR/authenication/migrations/" ]
+        if [ -d "$APP_DIR/authentication/migrations/" ]
         then
             formatted_print '--> Cleaning \e[4m/authenication/migrations/\e[0m Directory' $SCRIPT_NAME
             rm -r $APP_DIR/authentication/migrations/
@@ -76,7 +72,6 @@ else
 
         # CREATE FRESH MIGRAITONS
         formatted_print "--> Creating New Model Migrations"
-        cd $APP_DIR
         python manage.py makemigrations api --name init
         python manage.py makemigrations authentication --name init
         python manage.py makemigrations
@@ -85,14 +80,9 @@ else
         if [ ! -d "$APP_DIR/api/migrations/" ]
         then
             formatted_print '--> No \e[4m/api/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
-            mkdir -p "$APP_DIR/authentication/migrations/"
-            touch "$APP_DIR/authentication/migrations/__init__.py"
+            mkdir -p "$APP_DIR/api/migrations/"
+            touch "$APP_DIR/api/migrations/__init__.py"
         fi
-
-        formatted_print '--> Copying Custom Data Migrations Back Into Application' $SCRIPT_NAME
-        cp -R "$APP_DIR/db/0002_api_data.py" "$APP_DIR/api/migrations/0002_api_data.py"
-        cp -R "$APP_DIR/db/0003_api_validation.py" "$APP_DIR/api/migrations/0003_api_validation.py"
-
         if [ ! -d "$APP_DIR/authentication/migrations/" ]
         then
             formatted_print '--> No \e[4m/authentication/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
@@ -100,6 +90,9 @@ else
             touch "$APP_DIR/authentication/migrations/__init__.py"
         fi
 
+        formatted_print '--> Copying Custom Data Migrations Back Into Application' $SCRIPT_NAME
+        cp -R "$APP_DIR/db/0002_api_data.py" "$APP_DIR/api/migrations/0002_api_data.py"
+        cp -R "$APP_DIR/db/0003_api_validation.py" "$APP_DIR/api/migrations/0003_api_validation.py"
         cp -R "$APP_DIR/db/0002_authentication_data.py" "$APP_DIR/authentication/migrations/0002_authentication_data.py"
     fi
 fi

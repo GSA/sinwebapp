@@ -1,6 +1,6 @@
 ### ARGUMENTS
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='init-app.sh'
+SCRIPT_NAME='init-app'
 nl=$'\n'
 SCRIPT_DES="This script will perform environment-specific configuration and ${nl}\
    initialization based on the provided argument. After setting up the ${nl}\
@@ -25,13 +25,8 @@ else
     if [ "$1" == "local" ]
     then
         # set environment variables
-        formatted_print '--> Setting Environment Variables' $SCRIPT_NAME
-        if [ -f "$SCRIPT_DIR/../env/local.env" ]
-        then
-            set -o allexport
-            source $SCRIPT_DIR/../env/local.env
-            set +o allexport
-        fi
+        formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
+        bash $SCRIPT_DIR/init-env.sh
 
         formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-scripts.sh
@@ -45,24 +40,21 @@ else
         formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
-        formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
-        bash $SCRIPT_DIR/init-migrations.sh $1
-
     elif [ "$1" == "container" ]
     then
         formatted_print '--> Navigating to Project Root' $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
-
-        formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
-        bash $SCRIPT_DIR/init-migrations.sh $1
 
     elif [ "$1" == "cloud" ]
     then
         formatted_print "--> Clearing Sessions" $SCRIPT_NAME
         # python manage.py clearsessions
         # python ./files/s3_manager.py create_bucket
+
     fi
 
+    formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+    bash $SCRIPT_DIR/init-migrations.sh $1
 
     formatted_print '--> Migrating Django Database Files' $SCRIPT_NAME
     python manage.py migrate

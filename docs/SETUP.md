@@ -37,6 +37,12 @@ This will install dependencies and build the application properly before pushing
 
 Before you build the application, you will need to ensure <b>postgres</b> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure and customize your database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
+Make sure you activate your <i>local.env</i> file before running any commands through the <b>django-admin</b>. Source the <i>init-env.sh</i> script to get started, i.e.
+
+> source PROJECT_ROOT/scripts/init-env.sh
+
+This will load in neccessary environment variables that will configure Django's connection to the database, email server, etc. Open the <i>local.env</i> for more documentation on all the configuration options.
+
 To build the application from source, first create a virtual Python environment in the project's root folder
 
 > python -m venv .venv
@@ -53,7 +59,7 @@ Next, you will need to build the frontend and deploy it onto the server. You cou
 
 > bash init-app.sh local
 
-The environment file in <i>/env/local.env</i> defines the local environment configuration. It is loaded during the <i>init-app.sh</i> script if an argument of "local" is provided.
+The environment file in <i>/env/local.env</i> defines the local environment configuration. It is loaded during the <i>init-app.sh</i> script if an argument of "local" is provided, in case you forgot to source the <i>/scripts/init-env.sh</i> script to set the environment variables.
 
 ## Container Environment
 
@@ -70,6 +76,8 @@ Likewise, the <i>local.env</i> sets this variable for local deployments.
 You will also find two other environment variables in the <i>container.env</i> file, <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b>. The <b>UAA_CLIENT_ID</b> and <b>UAA_CLIENT_SECRET</b> do not matter for local or docker deployments; they are only there to maintain minimal differences in the codebase for cloud and docker deployments. In other words, they make life easier. If you are curious about their function, see the [cg-django-uaa documentation](https://cg-django-uaa.readthedocs.io/en/latest/quickstart.html).
 
 You will also need to set the superuser for the program; this user will be able to add and delete users from the database, assign users to groups, etc, through the Django admin screen. The environment variables <b>DJANGO_SUPERUSER_USERNAME</b> and <b>DJANGO_SUPERUSER_EMAIL</b> set the credentials for this user. 
+
+There are environment variables in this file for AWS S3 services and email server connections as well. Read the .env file for more documentation on each variable and its purpose.
 
 2. From project's root directory, run 
 
