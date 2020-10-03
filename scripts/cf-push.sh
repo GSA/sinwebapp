@@ -55,6 +55,7 @@ else
     do
         if [ "$input" == "clean" ]
         then
+            formatted_print '--> Cleaning CCDA Application' $SCRIPT_NAME
             formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/clean-app.sh
         fi
@@ -65,6 +66,11 @@ else
     do
         if [ "$input" == "build" ]
         then 
+            formatted_print '--> Building CCDA Application' $SCRIPT_NAME
+
+            formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+            bash $SCRIPT_DIR/init-migrations.sh local
+
             formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/build-frontend.sh
         fi

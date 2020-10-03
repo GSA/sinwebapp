@@ -17,9 +17,13 @@ SCRIPT_NAME='aws-functions.sh'
 nl=$'\n'
 source "$SCRIPT_DIR/../util/logging.sh"
 
+
+formatted_print "--> Please Ensure AWS_BUCKET_NAME is Configured In $SCRIPT_DIR/../../env.local.env" $SCRIPT_NAME
+formatted_print "--> Re-execute 'source $SCRIPT_DIR/aws-functions.sh' Once Properly Configured" $SCRIPT_NAME
+
 if [ -f "$SCRIPT_DIR/../../env/local.env" ]
 then
-    formatted_print '--> Reading Environment Variables' $SCRIPT_NAME
+    formatted_print '--> Reading Local Environment Variables' $SCRIPT_NAME
     set -o allexport
     source $SCRIPT_DIR/../../env/local.env
     set +o allexport

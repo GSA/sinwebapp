@@ -12,11 +12,14 @@ then
 else
     if [ -d "$SCRIPT_DIR/../sinwebapp/static/" ]
     then
-        formatted_print '--> Cleaning \e[4m/static/\e[0m Directory' $SCRIPT_NAME
+        formatted_print '--> Caching \e[4m/static/favicon.ico\e[0m Directory' $SCRIPT_NAME
         cp $SCRIPT_DIR/../sinwebapp/static/favicon.ico $SCRIPT_DIR/../sinwebapp/favicon.ico
+        formatted_print '--> Cleaning \e[4m/static/\e[0m Directory' $SCRIPT_NAME
         rm -r $SCRIPT_DIR/../sinwebapp/static/
+        formatted_print '--> Restoring \e[4m/static/favicon.ico\e[0m Directory' $SCRIPT_NAME
         mkdir $SCRIPT_DIR/../sinwebapp/static/
-        cp $SCRIPT_DIR/.../sinwebapp/favicon.ico $SCRIPT_DIR/../sinwebapp/static/favicon.ico
+        cp $SCRIPT_DIR/../sinwebapp/favicon.ico $SCRIPT_DIR/../sinwebapp/static/favicon.ico
+        rm $SCRIPT_DIR/../sinwebapp/favicon.ico
     fi
 
     if [ -d "$SCRIPT_DIR/../frontend/node_modules/" ]
