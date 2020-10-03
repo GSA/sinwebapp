@@ -8,8 +8,9 @@ submitter_confirmation_subject="Core Contract Data Automation: Change Request Co
 submitter_approval_subject="Core Contract Data Automation: Change Request Approved"
 submitter_denied_subject="Core Contract Data Automation: Change Request Denied"
 reviewer_notify_subject="Core Contract Data Automation: Change Request Received - Review Pending"
-approver_notify_subject=""
+approver_notify_subject="Core Contract Data Automation: Change Request Received - Approval Pending"
 
+    # TODO: Read email subjects and bodies in from file
 submitter_confirmation_body="This email confirms that your {CHANGE_REQUEST_TYPE} was submitted for {SIN}.\n \n "+\
 "Request made on: {DATE}\n SIN: {SIN}\n Submitter: {SUBMITTED_NAME}\n Submitter email: {SUBMITTER_EMAIL}\n "+\
 "Reviewer: {REVIEWER_EMAIL}\n \n This email confirms a change has been submitted and is not confirmation "+\
@@ -20,12 +21,16 @@ submitter_approval_body="This email confirms that your {CHANGE_REQUEST_TYPE} was
 "Submitter email: {SUBMITTER_EMAIL} \n Reviewer: {APPROVAL_EMAIL} \n \n If you have any questions regarding "+\
 "this request, please contact us."
 submitter_denied_body=""
-reviewer_confirmation_body="A {CHANGE_REQUEST_TYPE} was submitted for {SIN}. You are receiving this notification because"+\
+reviewer_notify_body="A {CHANGE_REQUEST_TYPE} was submitted for {SIN}. You are receiving this notification because"+\
 "you were listed as the reviewer for the following {CHANGE_REQUEST_TYPE}. \n \n Please review the change request and"+\
 "approve / deny the request through the Core Contract Data Automation Application. {LINK_TO_APP} \n \n If you have "+\
 "any questions regarding this request or believe you received this notification in error, please contact us. \n \n \n "+\
 " Submitter: {SUBMITTED_NAME} \n  Submitter email: {SUBMITTER_EMAIL} \n Request made on: {DATE} \n"
-approver_notify_body=""
+approver_notify_body="A {CHANGE_REQUEST_TYPE} was submitted for {SIN}. You are receiving this notification because"+\
+"you were listed as the reviewer for the following {CHANGE_REQUEST_TYPE}. \n \n Please review the change request and"+\
+"approve / deny the request through the Core Contract Data Automation Application. {LINK_TO_APP} \n \n If you have "+\
+"any questions regarding this request or believe you received this notification in error, please contact us. \n \n \n "+\
+" Submitter: {SUBMITTED_NAME} \n  Submitter email: {SUBMITTER_EMAIL} \n Request made on: {DATE} \n"
 
     # TODO: replace second argument with new field on SIN: reviewer [user]
 def confirm_submitter(sin, reviewer):
@@ -78,13 +83,13 @@ def approve_submitter(sin, approver):
 def deny_submitter(sin, reviewer):
     pass
 
-    # TODO: replace second argument with new field on SIN: reviewer [use
+    # TODO: replace second argument with new field on SIN: reviewer [user]
 def notify_reviewer(sin, reviewer):
     logger = DebugLogger("sinwebapp.api.email_manager.notify_reviewer").get_logger()
 
     logger.info('Confirming SIN # %s Submission Status %s For: %s To Reviewer: %s', 
                     sin.sin_number, sin.status.name, sin.user.email, reviewer.email )
-    message_body=reviewer_confirmation_body.format(CHANGE_REQUEST_TYPE=sin.status.name, SIN=sin.sin_number, DATE=datetime.now(),
+    message_body=reviewer_notify_body.format(CHANGE_REQUEST_TYPE=sin.status.name, SIN=sin.sin_number, DATE=datetime.now(),
                                                 REVIEWER_EMAIL=reviewer.email, SUBMITTED_NAME=sin.user.username,
                                                 SUBMITTER_EMAIL=sin.user.email, LINK_TO_APP=settings.PRODUCTION_URL)
     logger.info('Email Body: %s', message_body)
@@ -101,5 +106,25 @@ def notify_reviewer(sin, reviewer):
         logger.error("Error Occurred Sending Mail: %s, \n :%s \n :%s \n", e, f, g)
         return False
 
+    # TODO: replace second argument with new field on SIN: approver [user]
 def notify_approver(sin, approver):
-    pass
+    logger = DebugLogger("sinwebapp.api.email_manager.notify_approver").get_logger()
+
+    logger.info('Confirming SIN # %s Submission Status %s For: %s To Approver: %s', 
+                    sin.sin_number, sin.status.name, sin.user.email, approver.email )
+    message_body=approver_notify_body.format(CHANGE_REQUEST_TYPE=sin.status.name, SIN=sin.sin_number, DATE=datetime.now(),
+                                                    SUBMITTED_NAME=sin.user.username, SUBMITTER_EMAIL=sin.user.email, 
+                                                    LINK_TO_APP=settings.PRODUCTION_URL)
+    logger.info('Email Body: %s', message_body)
+    
+    try:
+        send_mail(subject=approver_notify_subject, message=message_body,
+                    from_email=settings.EMAIL_HOST_USER, recipient_list=[approver.email])
+        logger.info("Mail Sent!")
+        return True
+    except:
+        e = sys.exc_info()[0]
+        f = sys.exc_info()[1]
+        g = sys.exc_info()[2]
+        logger.error("Error Occurred Sending Mail: %s, \n :%s \n :%s \n", e, f, g)
+        return False

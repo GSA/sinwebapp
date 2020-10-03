@@ -8,6 +8,7 @@ apt-get update -y
 if [ ! -f "$SCRIPT_DIR/../../env/local.env" ]
 then
     formatted_print "Setting Up Local Environment File" $SCRIPT_NAME
+    formatted_print "Adjust $SCRIPT_DIR/../../env/local.env Variables For Local Deployments. \n See file for more documentation" $SCRIPT_NAME
     cp $SCRIPT_DIR/../../env/.sample.env $SCRIPT_DIR/../../env/local.env
 else
     formatted_print "Local Environment File Detected" $SCRIPT_NAME
@@ -16,6 +17,7 @@ fi
 if [ ! -f "$SCRIPT_DIR/../../env/container.env" ]
 then
     formatted_print "Setting Up Container Environment File" $SCRIPT_NAME
+    formatted_print "Adjust $SCRIPT_DIR/../../env/container.env Variables For Docker Deployments. \n See file for more documentation" $SCRIPT_NAME
     cp $SCRIPT_DIR/../../env/.sample.env $SCRIPT_DIR/../../env/container.env
 else
     formatted_print "Container Environment File Detected"
@@ -48,7 +50,7 @@ fi
 if ! command -v ng &> /dev/null
 then
     formatted_print "--> Installing Angular CLI" $SCRIPT_NAME
-    npm install -g @angular/cli@8.2.0
+    npm install -g @angular/cli@latest
 fi
 
 cd $SCRIPT_DIR/../../frontend/

@@ -216,14 +216,14 @@ def sin_info_update(request):
 #   }
 # }
 # 
-# Description: retrieves information for a specific SIN number for GET requests or 
-# posts a new SIN for POST requests. 
+# Description: retrieves information for a specific SIN number or list of SIN numbers 
+# for GET requests or posts a new SIN for POST requests. 
 #
 # GET REQUESTS
 #
 # GET requests can search existing SINs be any field that exists on the SIN model
 # by using that field as a parameter in the query string. The available fields to
-# search by are: id, user_email, status_id
+# search by are: sin_number, user_email, status_id
 #
 # POST REQUESTS
 # 
@@ -238,12 +238,16 @@ def sin_info_update(request):
 # 
 # This endpoint should only be used by submitters to submit new SINs. All reviewers
 # and approvers should direct their request through the /api/updateSin endpoint.
+#
+# TODO: Separate POST and GET Authentication. Remove login_required Annotation and
+#       manually check for authentication, so that the GET requests can be publicly
+#       available and POST requests must be authenticated.
 @login_required
 def sin_info(request):
     
     logger = DebugLogger("sinwebapp.api.views.sin_info").get_logger()
 
-    # Posting new SIN to database or modifying inactive existing SIN
+    # POST REQUEST: Posting new SIN to database or modifying inactive SIN
     if request.method == "POST":
         logger.info('Posting New SIN')
 
@@ -253,7 +257,8 @@ def sin_info(request):
         else:
             logger.warning('No User Associated With Incoming Request')
             return JsonResponse({ 'error': 'No User Signed In.' })
- 
+
+        # TODO: if request.user.is_authenticated():
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         # TODO 1: use SIN_FIELDS array to verify body contains all parameters
@@ -312,12 +317,12 @@ def sin_info(request):
             }
             return JsonResponse(raw_sin, safe=False)
             
-    # retrieving information on a specific SIN
+    # GET REQUEST: retrieving information on a specific SIN, or list of SINs.
     if request.method == "GET":
         logger.info('Retrieving SIN Info')
 
-        if 'id' in request.GET:
-            sin=request.GET.get('id')
+        if 'sin_number' in request.GET:
+            sin=request.GET.get('sin_number')
             logger.info('Using ID Query Parameter: %s', sin)
             try:
                 raw_sin = Sin.objects.get(sin_number=sin)

@@ -45,7 +45,7 @@ The superuser of the database is controlled by environment variabless, DJANGO_SU
 
 ### C. App Structure
 
-The <b>django</b> backend application is broken into several component apps: <i>api</i>, <i>authentication</i> and <i>core</i>. The <i>core</i> app sets up the basic framework necessary for a django app to function. While the application utilizes the external library <i>cg-django-uaa</i> for most of its authentication and authorization, the <i>authentication</i> app is responsible for some application specific customization. The <i>api</i> app provides endpoints that exposeS the database to user queries.  
+The <b>django</b> backend application is broken into several component apps: <i>api</i>, <i>authentication</i> and <i>core</i>. The <i>core</i> app sets up the basic framework necessary for a django app to function. While the application utilizes the external library <i>cg-django-uaa</i> for most of its authentication and authorization, the <i>authentication</i> app is responsible for some application specific customization. The <i>api</i> app provides endpoints that exposes the database to user queries. The <i>files</i> app provides endpoints that require the user to be authenticated so they can upload and download pdf files from and to the S3 Service provided by cloud.gov.
 
 ## 3.  Building and Pushing
 

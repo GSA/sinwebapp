@@ -30,8 +30,10 @@ def upload_file(request):
             if mime_type in ALLOWED_MIMETYPES:
                 logger.info('MIME Type Validated')
                 if APP_ENV == "cloud":
-                    logger.info('Uploading File To S3 Storage Bucket')
-                    upload_check = upload(request.FILES['file'], request.POST['sin_number'])
+                    sin = str(request.POST['sin_number'])
+                    file_name=f'{sin}.pdf'
+                    logger.info('Uploading File: %s To S3 Storage Bucket', file_name)
+                    upload_check = upload(request.FILES['file'], file_name)
                     if upload_check:
                         logger.info('File Uploaded')
                         response = { 'message': 'File Uploaded To S3' }
