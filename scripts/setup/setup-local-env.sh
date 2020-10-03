@@ -20,7 +20,7 @@ then
     formatted_print "Adjust $SCRIPT_DIR/../../env/container.env Variables For Docker Deployments. \n See file for more documentation" $SCRIPT_NAME
     cp $SCRIPT_DIR/../../env/.sample.env $SCRIPT_DIR/../../env/container.env
 else
-    formatted_print "Container Environment File Detected"
+    formatted_print "Container Environment File Detected" $SCRIPT_NAME
 fi
 
 if ! command -v python &> /dev/null
@@ -61,11 +61,17 @@ cd $SCRIPT_DIR/../../sinwebapp/
 formatted_print "--> Installing Python Dependencies" $SCRIPT_NAME
 pip install -r requirements.txt
 
-# SET UP ENVIRONMENT FILES
+formatted_print "--> Activating Local Environment Variables"
+if [ -f "$SCRIPT_DIR/../../env/local.env" ]
+then
+    set -o allexport
+    source $SCRIPT_DIR/../../env/local.env
+    set +o allexport
+fi
 
 formatted_print "--> Changing File Mode For Scripts" $SCRIPT_NAME
 for f in $SCRIPT_DIR/../*
 do
-    formatted_print "Making $f executable..." $SCRIPT_NAME
+    formatted_print "Making $f executable" $SCRIPT_NAME
     chmod +x $f
 done
