@@ -106,6 +106,8 @@ Note: the <i>build-container.sh</i> script will automatically prune running cont
 
 ## CloudFoundry Environment
 
+TODO: Update to include S3 Service Creation and Other Environment Variable Configurations
+
 This section gives a brief overview on how to setup the environment for this application on the cloud.gov implementation of CloudFoundry. The BASH script in <i>/scripts/setup/setup-cloud-env.sh</i> will take care of all of the steps given below, provided you are logged into the the <i>cf cli</i> and have targetted the correct organization and space. For documentation's sake, the contents of this script are described:
 
 1. Stage the app without starting it
