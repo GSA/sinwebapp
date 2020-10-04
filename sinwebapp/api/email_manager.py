@@ -70,7 +70,7 @@ def approve_submitter(sin, approver):
     logger.info('Email Body: %s', message_body)
     try:
         send_mail(subject=submitter_approval_subject, message=message_body,
-                    from_email=settings.EMAIL_HOST_USER, recipient_list=[approver.email])
+                    from_email=settings.EMAIL_HOST_USER, recipient_list=[sin.user.email])
         logger.info('Mail Sent!')
         return True
     except:

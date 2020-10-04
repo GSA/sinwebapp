@@ -10,7 +10,7 @@
     ## 1: $ ./scripts/setup/setup-frontenv.sh local
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='setup-frontend-env.sh'
+SCRIPT_NAME='\e[4msetup-frontend-env\e[0m'
 source "$SCRIPT_DIR/../util/logging.sh"
 
 formatted_print '--> Initializing Frontend Environment' $SCRIPT_NAME

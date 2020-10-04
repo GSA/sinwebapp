@@ -2,6 +2,7 @@
 *.pyc
 /env/container.env
 /env/local.env
+/env/cloud.env
 sinwebapp/static/*
 sinwebapp/util/*
 sinwebapp/init-app.sh

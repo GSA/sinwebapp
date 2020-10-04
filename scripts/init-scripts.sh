@@ -1,5 +1,5 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='init-scripts.sh'
+SCRIPT_NAME='\e[4minit-scripts\e[0m'
 nl=$'\n'
 SCRIPT_DES="This script is used during initialization to copy over necessary scripts ${nl}\
    into the backend application before the application server starts."

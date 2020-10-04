@@ -1,5 +1,5 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='build-frontend.sh'
+SCRIPT_NAME='\e[4mbuild-frontend\e[0m'
 nl=$'\n'
 SCRIPT_DES="This script will install the frontend dependencies and then \
 build the Angular application.${nl}   The output for the build is controlled \

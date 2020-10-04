@@ -2,7 +2,7 @@ from django.contrib.auth.models import Group, User, Permission
 from django.contrib.contenttypes.models import ContentType
 from core import settings
 from debug import DebugLogger
-import os
+import os, sys
 
 GROUPS = {
     'submitter':'submitter_group', 'reviewer': 'reviewer_group', 
@@ -70,25 +70,40 @@ def init_default_users(app, schema_editor):
         reviewer_group.user_set.add(reviewer)
         reviewer.save()
 
+    logger.info("Creating Test Reviewer")
+    try:
+        test_reviewer = User.objects.create_user(username="test_reviewer", email="theodros.desta@gsa.gov", password="root")
+        reviewer_group = Group.objects.get(name=GROUPS['reviewer'])
+        reviewer_group.user_set.add(test_reviewer)
+        test_reviewer.save()
+    except: 
+        e = sys.exc_info()[0]
+        f = sys.exc_info()[1]
+        g = sys.exc_info()[2]
+        logger.error("Error Occurred Creating Test Reviewer : %s, \n :%s \n :%s \n", e, f, g)
 
-    test_reviewer = User.objects.create_user(username="test_reviewer", email="theodros.desta@gsa.gov", password="root")
-    reviewer_group = Group.objects.get(name=GROUPS['reviewer'])
-    reviewer_group.user_set.add(test_reviewer)
-    test_reviewer.save()
-
-    test_approver= User.objects.create_user(username="test_approver", email="tina.burns@gsa.gov", password="root")
-    approver_group = Group.objects.get(name=GROUPS['approver'])
-    approver_group.user_set.add(test_approver)
-    test_approver.save()
+    logger.info("Creating Test Approver")
+    try:
+        test_approver= User.objects.create_user(username="test_approver", email="tina.burns@gsa.gov", password="root")
+        approver_group = Group.objects.get(name=GROUPS['approver'])
+        approver_group.user_set.add(test_approver)
+        test_approver.save()
+    except:
+        e = sys.exc_info()[0]
+        f = sys.exc_info()[1]
+        g = sys.exc_info()[2]
+        logger.error("Error Occurred Creating Test Approver: %s, \n :%s \n :%s \n", e, f, g)
 
     logger.info("Creating Super-User Using Environment Variables")
-    super_name = os.getenv('DJANGO_SUPERUSER_USERNAME')
-    super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
-    super_pass = os.getenv('DJANGO_SUPERUSER_PASSWORD')
     try:
-        super_user = User.objects.create_superuser(username=super_name, email=super_email, password=super_pass)
+        super_user = User.objects.create_superuser(username=os.getenv('DJANGO_SUPERUSER_USERNAME'), 
+                                                    email=os.getenv('DJANGO_SUPERUSER_EMAIL'), 
+                                                    password=os.getenv('DJANGO_SUPERUSER_PASSWORD'))
         admin_group = Group.objects.get(name=GROUPS['admin'])
         admin_group.user_set.add(super_user)
         super_user.save()
     except:
-        logger.info('Super User Exists')
+        e = sys.exc_info()[0]
+        f = sys.exc_info()[1]
+        g = sys.exc_info()[2]
+        logger.error("Error Occurred Creating Super User: %s, \n :%s \n :%s \n", e, f, g)

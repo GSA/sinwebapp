@@ -34,7 +34,7 @@ class DebugLogger():
         self.logger.info('> Database Name: %s', config.db_creds['db_name'])
         self.logger.info('> Database Username: %s', config.db_creds['username'])
         self.logger.info("-------------------------------------------------")
-        self.logger.info("> AWS S3 Configuration")
+        self.logger.info("# AWS S3 Configuration")
         self.logger.info('> AWS Bucket Name: %s', config.aws_creds['bucket'])
         self.logger.info('> AWS Region: %s', config.aws_creds['region'])
         self.logger.info("-------------------------------------------------")

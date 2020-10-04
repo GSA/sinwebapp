@@ -1,6 +1,4 @@
-- upload file on edit-display
-- need endpoints to download all files from s3
-    - don't want to download if you don't have to
-- need icon on list for attachements?
-- use [disabled] bind in edit-display component for validations
-- load in existing attachments into submit-display and edit-display for a given SIN
+- remember ccda is on discovery cf org, space now!
+- create CircleCi credentials on discovery cf organization, space
+- change credentials within CircleCi environment
+- reconfigure AWS cli for new cloud.gov service credentials

@@ -1,5 +1,5 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME="setup-local-env.sh"
+SCRIPT_NAME="\e[4msetup-local-env\e[0m"
 source "$SCRIPT_DIR/../util/logging.sh"
 
 

@@ -6,7 +6,8 @@ SCRIPT_DES="This script will scrub the existing migrations from the application,
      file is loaded if executing this script locally. In other words, before running this ${nl}\
     on your local computer, configure your \e[3mlocal.env\e[0m file and then execute \
     ${nl}${nl}           source \e[3m$SCRIPT_DIR/init-env.sh\e[0m ${nl}${nl}\
-    which will activate the \e[3mlocal.env\e[0m file. 
+    which will activate the \e[3mlocal.env\e[0m file.${nl}\
+         This script will leave the terminal within the $SCRIPT_DIR/../sinwebapp/
 ${nl} 
    EXAMPLE USAGE${nl}\
        bash init-migrations.sh local ${nl}${nl}\
@@ -32,12 +33,12 @@ else
             APP_DIR="$SCRIPT_DIR/../sinwebapp"
         else 
             # executing from cloud environment
-            APP_DIR=$SCIRPT_DIR
+            APP_DIR=$SCRIPT_DIR
         fi
 
         formatted_print "--> Navigating To Project Root" $SCRIPT_NAME
         cd $APP_DIR
-        formatted_print "Project Root: $(pwd)" $SCRIPT_NAME
+        formatted_print "--> Project Root: $(pwd)" $SCRIPT_NAME
 
         # CACHE CUSTOM MIGRATIONS IN /DB/ FOLDER
         formatted_print '--> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from api.models import Status, Sin, SinData, STATUS_STATES
 from core.settings import BASE_DIR
 
+DB_LIMIT=21
+
 def init_status(apps, schema_editor):
     logger = DebugLogger("api.db_init.init_status").get_logger()
     logger.info('Initializing Status Types')
@@ -67,8 +69,14 @@ def populate_sins(app, schema_editor):
     logger = DebugLogger("api.db_init.populate_sins").get_logger()
     logger.info("Populating Sin Table With Raw SinData")
 
-    super_email = os.getenv('DJANGO_SUPERUSER_EMAIL')
-    super_user = User.objects.get(email=super_email)
+    logger.info('Retrieving Super User With Email: %s', os.getenv('DJANGO_SUPERUSER_EMAIL'))
+    try:
+        super_user = User.objects.get(email=os.getenv('DJANGO_SUPERUSER_EMAIL'))
+    except:
+        e = sys.exc_info()[0]
+        f = sys.exc_info()[1]
+        g = sys.exc_info()[2]
+        logger.error("Error Occurred Retrieving Super User: %s, \n :%s \n :%s \n", e, f, g)
 
     expired_status = Status.objects.get(id=STATUS_STATES['expired'])
 
@@ -76,30 +84,25 @@ def populate_sins(app, schema_editor):
 
     logger.info("Randomizing Debug Output Because Why Not")
     count = 1
-    modulo = randint(70,120)
+    modulo = randint(10,DB_LIMIT)
     for sin in raw_data:
-        # clean and parse data
-        # remove trailing spaces
-        if count%modulo == 0:
-            logger.info('Processing SinData Table Entry # %s', sin['id'])
+        # TODO: clean and parse data
+        # TODO: remove trailing spaces
+
         this_raw_sin = SinData.objects.get(id=sin['id'])
         try:
             # Hard Code Data Limit To 21 for POC
-            if sin['sin_number'] and sin['title'] and sin['sin_description'] and count<21:
-                try:
-            
-                    Sin.objects.get_or_create(user=super_user, status=expired_status, sin_map=this_raw_sin,
-                                                sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
-                                                sin_description=sin['sin_description'])
-                    if count%modulo == 0:
-                        logger.info('SinData Table Entry # %s Validated', sin['id'])
-                        logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
-                    
-                count+=1
-            else:
-                logger.info('Null Field For Entry #%s (sin_number, sin_title, description): (%s, %s, %s)', 
-                            sin['id'], sin['sin_number'], sin['sin_title'],['sin_description'])
-                logger.warn('Preventing Insertion Into Sin Table')
+            if sin['sin_number'] and sin['sin_title'] and count<DB_LIMIT:
+                if count%modulo == 0:
+                    logger.info('Processing SinData Table Entry # %s', sin['id'])
+
+                Sin.objects.get_or_create(user=super_user, status=expired_status, sin_map=this_raw_sin,
+                                            sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
+                                            sin_description=sin['sin_description'])
+                if count%modulo == 0:
+                    logger.info('SinData Table Entry # %s Validated', sin['id'])
+                    logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
+    
         except:
             e = sys.exc_info()[0]
             f = sys.exc_info()[1]
@@ -108,4 +111,5 @@ def populate_sins(app, schema_editor):
                             sin['id'], sin['sin_number'], sin['sin_title'],['sin_description'])
             logger.error("Error Occurred Proccessing SIN: %s, \n :%s \n :%s \n", e, f, g)
             logger.warn('Preventing Insertion Into SIN Table')
+        count+=1
 

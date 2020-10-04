@@ -15,11 +15,12 @@ import os, json
 import logging
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-APP_ENV = os.getenv('ENVIRONMENT')
-SECRET_KEY = os.getenv('SECRET_KEY')
+APP_ENV = os.environ.setdefault('ENVIRONMENT','local')
+SECRET_KEY = os.environ.setdefault('SECRET_KEY', 'xxxx')
 
 # Application Configuration 
-PRODUCTION_URL="sinweb.app.cloud.gov"
+PRODUCTION_URL="ccda.app.cloud.gov"
+
 # Email Configuration
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST=os.getenv('EMAIL_HOST')

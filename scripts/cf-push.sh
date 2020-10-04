@@ -31,12 +31,18 @@
     ## 3: $ ./scripts.push-to-cf.sh clean build dispose reset
     
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='cf-push.sh'
+SCRIPT_NAME='\e[4mcf-push\e[0m'
+# TODO: Put app_name in environment variables?
+APP_NAME='ccda'
 nl=$'\n'
 SCRIPT_DES="This script pushes the application to the cloud. ${nl}${nl}   
    EXAMPLE USAGE${nl}\
        bash cf-push clean build ${nl}${nl}\
    ARGUMENTS - OPTIONAL${nl}\
+${nl}       fresh - tear down existing services on the cloud, and rebuild the cloud${nl}\
+                    environment from scratch. This option will delete the database ${nl}\
+                    instance and destroy any application data. Be careful using this ${nl}\
+                    option.
 ${nl}       clean - removes build artifacts before rebuilding frontend.\
 ${nl}       build - installs frontend dependencies and build frontend \
 ${nl}       dispose - deletes build artifacts after succesful push.\
@@ -51,6 +57,19 @@ else
     formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
 
+    formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
+    source $SCRIPT_DIR/init-env.sh
+
+    # separate loops so execution order is always: fresh -> clean -> build
+    for input in $@;
+    do
+        if [ "$input" == "fresh" ]
+        then
+            formatted_print '--> Setting Up CCDA Application Cloud Environment' $SCRIPT_NAME
+            formatted_print '--> Invoking \e[3msetup-cloud-env.sh\e[0m Script' $SCRIPT_NAME
+            bash $SCRIPT_DIR/setup/setup-cloud-env.sh $APP_NAME rebuild
+        fi
+    done
     for input in $@;
     do
         if [ "$input" == "clean" ]
@@ -60,8 +79,6 @@ else
             bash $SCRIPT_DIR/clean-app.sh
         fi
     done
-    # separate loops so clean is always executed first, even if arguments 
-    # are out of order
     for input in $@;
     do
         if [ "$input" == "build" ]

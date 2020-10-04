@@ -2,7 +2,7 @@
 # Clears the /sinwebapp/static/ and /frontend/node_modules/ directories.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='clean-app.sh'
+SCRIPT_NAME='\e[4mclean-app\e[0m'
 SCRIPT_DES="This script scrubs the application of all build artifacts"
 source "$SCRIPT_DIR/util/logging.sh"
 

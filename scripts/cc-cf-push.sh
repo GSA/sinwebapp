@@ -10,10 +10,10 @@
 # TODO: verify number of arguments, else exit
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='cc-cf-push.sh'
+SCRIPT_NAME='\e[4mcc-cf-push\e[0m'
 nl=$'\n'
 SCRIPT_DES="This script should only be invoked within the CircleCI pipeline environment. \
-This script is invoked after${nl}   the application has been built on the pipeline and is \
+This script is used after${nl}   the application has been built on the pipeline and is \
 ready for deployment. This script will push the${nl}   pipeline build on the cloud using \
 dummy account credentials provided by a service account within cloud.gov."
 source "$SCRIPT_DIR/util/logging.sh"
