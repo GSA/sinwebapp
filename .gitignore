@@ -6,5 +6,6 @@
 sinwebapp/static/*
 sinwebapp/util/*
 sinwebapp/init-app.sh
+sinwebapp/init-migration.sh
 frontend/node_modules/*
 sinwebapp/files/local_uploads/*

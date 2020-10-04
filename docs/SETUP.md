@@ -35,9 +35,9 @@ This will install dependencies and build the application properly before pushing
 - [NodeJs](https://nodejs.org/en/download/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-Before you build the application, you will need to ensure <b>postgres</b> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i> to configure and customize your database connection. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
+Before you build the application, you will need to ensure <b>postgres</b> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit the .<i>.env</i> file to configure your database connection, which in turn gets feed into <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i>. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
-Make sure you activate your <i>local.env</i> file before running any commands through the <b>django-admin</b>. Source the <i>init-env.sh</i> script to get started, i.e.
+Make sure you activate your <i>local.env</i> file before running any commands through the <b>django-admin</b>. Make sure you have copied the <i>.sample.env</i> and adjusted the variable values. Source the <i>init-env.sh</i> script to get started, i.e.
 
 > source PROJECT_ROOT/scripts/init-env.sh
 
@@ -55,7 +55,7 @@ Navigate to the <i>/sinwebapp/</i> project directory and install the project req
 
 > pip install -r requirements.txt
 
-Next, you will need to build the frontend and deploy it onto the server. You could do this manually, but all the necessary commands have been packaged in a script. Navigate to the <i>/scripts/</i> directory and locate the <i>init-app.sh</i> BASH script. This script will install all of the frontend dependencies and build the frontend project and output it in the <i>/sinwebapp/static/</i> directory so the project can be statically served. It will then start the app's server. This script is also used when orchestrating the application through containers or on the cloud, so provide it an argument of "local", or in other words, execute the following command,
+Next, you will need to build the frontend and deploy it onto the server. You could do this manually, but all the necessary commands have been packaged in a script. Navigate to the <i>/scripts/</i> directory and locate the <i>init-app.sh</i> BASH script. This script will install all of the frontend dependencies and build the frontend project, in addition to ensuring all migrations are up-to-date, and finally output all the artifacts into the <i>/sinwebapp/static/</i> directory so the project can be statically served. It will then start the app's server. This script is also used when orchestrating the application through containers or on the cloud, so provide it an argument of "local", or in other words, execute the following command,
 
 > bash init-app.sh local
 
