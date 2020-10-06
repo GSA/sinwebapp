@@ -184,6 +184,7 @@ export class SubmitDisplayComponent implements OnInit {
     this.submit_mode = !this.submit_mode;
 
     if(!this.submit_mode){ 
+      // Initializing Status Mode
       this.logger.log('Status Mode Activated', `${this.class_name}.switchModes`);
       this.loadUserSINs();
       this.step_1_complete = false;
@@ -194,6 +195,7 @@ export class SubmitDisplayComponent implements OnInit {
       this.attachments = []
     }
     else{ 
+      // Initializing Submission Mode
       if(this.exists){ this.logger.log('Submission Mode for Existing SINS Activated', `${this.class_name}.switchModes`);  }
       else {this.logger.log('Submission Mode for New SINs Activated', `${this.class_name}.switchModes`);  }
       this.submitted = false;
@@ -206,21 +208,28 @@ export class SubmitDisplayComponent implements OnInit {
     }
   }
 
+  // process selection_events for parent component
   public selectSIN(sin: SIN){
-    this.logger.log(`Selecting SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`);
+    this.logger.log(`Selecting selected_SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`);
     this.submitted = false;
     this.selected_SIN = sin;
     this.logger.log(`Emitting Selection Event`, `${this.class_name}.selectSIN`);
     this.selection_event.emit(sin);
   }
 
+  // processes user clicks when in Submit Existing Mode
   public selectExistingSIN(sin: SIN){
-    this.logger.log(`Selecting Pre-existing SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
+    this.logger.log(`Selecting existing_SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
     this.existing_SIN = sin;
     this.getSINFileList(sin.sin_number);
   }
 
-  public submitFields(){ this.step_1_complete = true; }
+  // used switch step 1 to complete
+  public submitFields(){ 
+    this.logger.log(`Submit_SIN Processed: ${this.submit_SIN.sin_number}, ${this.submit_SIN.sin_title}`,
+                     `${this.class_name}.submitFields`)
+    this.step_1_complete = true; 
+  }
 
   public selectFile(event){
     if(event.target.files.length > 0 ){

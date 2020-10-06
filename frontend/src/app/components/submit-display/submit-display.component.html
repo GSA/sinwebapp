@@ -46,7 +46,8 @@
 
         <!--No Steps Complete Warning Message -->
         <div id="step-1-new-warning-msg" class="alert alert-warning" role="alert"
-                *ngIf="!step_1_complete && !step_2_complete && (!submit_SIN.sin_number || !submit_SIN.sin_title || !submit_SIN.sin_description)">
+                *ngIf="!step_1_complete && !step_2_complete && 
+                        (!submit_SIN.sin_number || !submit_SIN.sin_title || !submit_SIN.sin_description)">
                 Please Fill Out And Save The Following Fields</div>
 
         <!--SIN Number-->
@@ -170,9 +171,10 @@
                 <select id="exists_sin_number_input" name="exists_sin_number_input" class="form-control right"
                         required 
                         [disabled]="step_1_complete"
-                        [(ngModel)]="submit_SIN.sin_number" 
+                        [(ngModel)]="submit_SIN.sin_number"
+                        (change)="selectExistingSIN($event.target.value)" 
                         #exists_sin_number_input="ngModel">
-                        <option [value]="sin.sin_number" (click)="selectExistingSIN(sin)"
+                        <option [value]="sin"
                                 *ngFor="let sin of all_SINs"> {{sin.sin_number}} </option>
                 </select><br>
         </div><br>
@@ -227,10 +229,6 @@
                         *ngIf="exists_describe_input.errors.maxlength">Description Cannot Exceed 2000 Characters</div> 
         </div>
 
-         <!--Step 1 Complete Warning Message -->
-         <div id="step-1-warning-msg" class="alert alert-warning" role="alert"
-                *ngIf="step_1_complete && !step_2_complete">Please Upload An Attachment Or Select No Attachment</div>
-
         <!--Save Fields-->
         <button id="step-1-submit-exists-btn-enabled" class="btn btn-default btn-sm right"
                 type="submit" 
@@ -239,7 +237,10 @@
                                 exists_describe_input.invalid || step_1_complete">
                 Save Fields</button><br><br>
 
-        
+        <!--Step 1 Complete Warning Message -->
+        <div id="step-1-warning-msg" class="alert alert-warning" role="alert"
+        *ngIf="step_1_complete && !step_2_complete">Please Upload An Attachment Or Select No Attachment</div>
+
         <!-- File Attachment -->
                 <!-- Existing Attachments -->
         <div *ngIf="attachments.length>0">

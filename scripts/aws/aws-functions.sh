@@ -34,7 +34,7 @@ clean_bucket(){
 }
 
 sync_bucket_to_folder(){
-    aws s3 sync s3://$AWS_BUCKET_NAME $SCRIPT_DIR/sync/ --recursive
+    aws s3 sync s3://$AWS_BUCKET_NAME $SCRIPT_DIR/sync/
 }
 
 sync_folder_to_bucket(){

@@ -171,10 +171,13 @@
 
         <!-- Save Error/Warning Message -->
         <div id="save-changes-msg" class="alert alert-warning" role="alert"
-                *ngIf = "(applied_SIN || applied_Title || applied_Description || applied_Status ) && (!sin_number_input.invalid && !title_input.invalid && !describe_input.invalid)">
+                *ngIf = "(applied_SIN || applied_Title || applied_Description || applied_Status ) && 
+                        (!sin_number_input.invalid && !title_input.invalid && !describe_input.invalid)">
                 Please Save Your Changes</div>
         <div id="error-message" class="alert alert-danger" role="alert"
-                *ngIf="sin_number_input.invalid || title_input.invalid || describe_input.invalid">
+                *ngIf="(sin_number_input.invalid && (sin_number_input.dirty || sin_number_input.touched)) 
+                        || (title_input.invalid && ( title_input.dirty || title_input.touched))
+                        || (describe_input.invalid && (describe_input.dirty || describe_input.touched))">
                 One or more of your field changes is invalid. Please validate changes before saving.</div>
 
         <!-- Save Options -->
@@ -184,6 +187,8 @@
         <button id="save-btn" class="btn btn-default btn-sm"
                 type="submit"
                 (click)="saveAll()"
-                [disabled]="sin_number_input.invalid || title_input.invalid || describe_input.invalid">Save</button>
+                [disabled]="(sin_number_input.invalid && (sin_number_input.dirty || sin_number_input.touched)) 
+                        || (title_input.invalid && ( title_input.dirty || title_input.touched))
+                        || (describe_input.invalid && (describe_input.dirty || describe_input.touched))">Save</button>
                 
 </div>

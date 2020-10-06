@@ -27,10 +27,10 @@ else
         formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
         source $SCRIPT_DIR/init-env.sh
         
-        formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAM
+        formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
 
-        formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script'
+        formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/build-frontend.sh
 
         formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME

@@ -74,16 +74,24 @@ else
         cf delete-service "$1-s3" -f
     fi
 
-    formatted_print '--> Creating S3 Service' $SCRIPT_NAME
-    cf create-service s3 basic "$1-s3"
-
     formatted_print '--> Creating SQL Service' $SCRIPT_NAME
     cf create-service aws-rds medium-psql "$1-sql"
+
+    formatted_print '--> Creating S3 Service' $SCRIPT_NAME
+    cf create-service s3 basic "$1-s3"
 
     formatted_print '--> Creating OAuth Client Service' $SCRIPT_NAME
     cf create-service cloud-gov-identity-provider oauth-client "$1-oauth"
     #  cf create-service-key $1-oauth $1-key -c '{"redirect_uri": ["https://$1.app.cloud.gov/auth","https://$1.app.cloud.gov/logout"]}'
     cf create-service-key "$1-oauth" "$1-key" -c "$OAUTH_SERVICE_ARG"
+
+    formatted_print '--> Creating \e[3mcloud.gov\e[0m Service Account Credentials'
+    cf create-service cloud-gov-service-account space-deployer "$1-account"
+    cf create-service-key "$1-account" "$1-key"
+    formatted_print '--> Please Configure CircleCi Pipeline With The Following Service Credentials.'
+    formatted_print '--> Store (username, password) => (CF_DEV_USERNAME, CF_DEV_PASSWORD) In CircleCi Environment'
+    cf service-key "$1-account" "$1-key"
+
 
     # wait for services to be created. Takes a bit. 
     while [[ "$(cf service $1-sql)" == *"create in progress"* ]]

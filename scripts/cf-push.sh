@@ -59,6 +59,8 @@ else
 
     formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
     source $SCRIPT_DIR/init-env.sh
+        # reset SCRIPT_NAME since 'source' overrides with 'init-env' local variable.
+    SCRIPT_NAME='\e[4mcf-push\e[0m'
 
     # separate loops so execution order is always: fresh -> clean -> build
     for input in $@;
@@ -109,7 +111,7 @@ else
         elif [ "$input" == "trail" ]
         then
             formatted_print '--> Trailing CF Logs' $SCRIPT_NAME
-            cf logs sinweb
+            cf logs ccda
         elif [ "$input" == "reset" ]
         then
             formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
