@@ -32,7 +32,7 @@ def upload_file(request):
                 if APP_ENV == "cloud":
                     sin = str(request.POST['sin_number'])
                     file_name=f'{sin}.pdf'
-                    logger.info('Uploading File: %s To S3 Storage Bucket', file_name)
+                    logger.info('Uploading File: "%s" To S3 Storage Bucket', file_name)
                     upload_check = upload(request.FILES['file'], file_name)
                     if upload_check:
                         logger.info('File Uploaded')
