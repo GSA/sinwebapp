@@ -53,6 +53,7 @@ def upload(file_name, object_name):
     # TODO: check if object_name already exists in bucket, if so, append -# identifier to it
     try:
         response = s3_client.upload_file(file_name=file_name, bucket=aws_creds["bucket"], object_name=str(object_name))
+        logger.info('S3 Response to boto3.upload_file',response)
         return True
     except ClientError as e:
         logger.warn('Error Occured Uploading File %s To S3 Bucket: "%s"', file_name, aws_creds["bucket"], e)
