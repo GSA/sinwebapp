@@ -55,7 +55,7 @@ def init_sindata(app, schema_editor):
                 )
                 count+=1
                 if count%modulo == 0:
-                    logger.info(" INSERTION # %s : (sin_number, sin_description) = (%s, %s) ", count, row[0], row[4][0:50])
+                    logger.info(" INSERTION # %s : (sin_number, sin_title) = (%s, %s) ", count, row[0], row[1][0:50])
             except:
                 e = sys.exc_info()[0]
                 f = sys.exc_info()[1]
@@ -100,8 +100,8 @@ def populate_sins(app, schema_editor):
                                             sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
                                             sin_description=sin['sin_description'])
                 if count%modulo == 0:
-                    logger.info('SinData Table Entry # %s Validated', sin['id'])
-                    logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
+                    logger.info('SinData Table Entry # %s Validated', sin['sin_number'])
+                    logger.info('Passing SinData Table Entry # %s To Sin Table', sin['sin_number'])
     
         except:
             e = sys.exc_info()[0]

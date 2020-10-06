@@ -14,11 +14,12 @@ import { ContextService } from 'src/app/services/context.service';
 // 
 //  Implemented Hierarchy : App -> UserDisplay -> SubmitDisplay
 //  
-//  SubmitDisplayComponent is a child of the UserDisplayComponent. It 
-//  receives information through input and passes information back to 
-//  the parent through events the parent registers to listen to.
+//  SubmitDisplayComponent is a child of the UserDisplayComponent. It receives information 
+//  through input and passes information back to the parent through events the parent registers
+//  to listen to. Within UserDisplay Component, this component is only exposed to users with
+//  'submitter' group privileges. 
 //
-//  Description
+//  DESCRIPTION
 //    
 //  This component allows an authenticated user with valid group permissions
 //  to submit a new SIN submission or edit an existing SIN submission. This 
@@ -26,7 +27,25 @@ import { ContextService } from 'src/app/services/context.service';
 //  Once it is done with the user, it will emit an event signalling to the parent 
 //  component what type of transaction has occured. See Output Events for more information.
 //
-//  HTML Attribute Input: [user], [selectable], [save_message], [clear_switch]
+//  COMPONENT LIFE-CYCLE
+// 
+//  The component life-cycle is broken into two parts: Status Mode and Edit Mode/
+//  Status Mode occurs when the user is viewing their personal SIN submissions.
+//  From this state, the user can choose to submit a new SIN or edit an existing
+//  SIN. Either choice will send the component to the next state in its life-cycle:
+//  Submit Mode. Submit Mode will recieve an input of either 'exists = true' or 
+//  'exists=false', depending on if the user opted to created a new SIN submission, i.e.,
+//  'exists=false', or if the user opted to edit an existing SIN submission, i.e.
+//  'exists=true'. 
+//
+//  This flag determines whether or not the component needs to load in all of
+//  the SIN data provided by the backend, or can go straight to the submission
+//  stage. It will also determine if the component needs to load attachments.
+//  If editing an existing SIN, all previously uploaded attachments will be
+//  loaded for the user to download and edit.  
+//
+//  HTML ATTRIBUTE INPUT 
+//    [user], [selectable], [save_message], [clear_switch]
 //  
 //  As input, this component requires the user authenticated with the current 
 //  session, a boolean flag that determines whether or not the SINS displayed
@@ -47,7 +66,7 @@ import { ContextService } from 'src/app/services/context.service';
 //    will create an HTML component binded to the Angular component defined in this
 //    this class. 
 //
-//  Output Events
+//  OUTPUT EVENTS
 //
 //   This component emits two types of events: selection_events and clear_events. 
 //   selection_events occur when the user clicks on one of the SINs in the displayed
@@ -85,15 +104,22 @@ export class SubmitDisplayComponent implements OnInit {
   public step_2_complete: boolean = false;
 
 
+    // used in Submit Mode to hold the validated SIN to be submitted.
   public submit_SIN : SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                sin_description: null, sin_title: null };
+    // used in Status Mode to hold the user selected SIN to be displayed by parent component.
   public selected_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                 sin_description: null, sin_title: null };
+    // used in Submit Existing Mode to hold the SIN the user has selected to edit.
   public existing_SIN: SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                                 sin_description: null, sin_title: null };
+    // list of all SINs associated with a user
   public user_SINs: SIN[] =[];
+    // list of all publicly viewable SINs
   public all_SINs: SIN[] =[]
+    // status dictionary
   public status_lookup: Status[] = [];
+    // used to hold attachments during Submit Mode
   public attachments : Attachment[] = [];
   public fileForm: FormGroup;
 
@@ -129,7 +155,9 @@ export class SubmitDisplayComponent implements OnInit {
     if(changes.clear_switch !== undefined) { 
       this.selected_SIN = { id: null, sin_number: null, user_id: null, status_id: null,
                             sin_description: null, sin_title: null };
-    }
+    };
+    console.log('did something in NgOnChanges')
+    console.log(`changes: ${changes}`)
   }
 
   public loadAllSINs(){
@@ -208,7 +236,7 @@ export class SubmitDisplayComponent implements OnInit {
     }
   }
 
-  // process selection_events for parent component
+  // process selection_events for parent component, only used in Status Mode
   public selectSIN(sin: SIN){
     this.logger.log(`Selecting selected_SIN: # ${sin.sin_number}`, `${this.class_name}.selectSIN`);
     this.submitted = false;
@@ -217,14 +245,14 @@ export class SubmitDisplayComponent implements OnInit {
     this.selection_event.emit(sin);
   }
 
-  // processes user clicks when in Submit Existing Mode
+  // processes user clicks when in Submit Existing Mode, only used in Edit Existing Mode
   public selectExistingSIN(sin: SIN){
     this.logger.log(`Selecting existing_SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
     this.existing_SIN = sin;
     this.getSINFileList(sin.sin_number);
   }
 
-  // used switch step 1 to complete
+  // used to set step 1 to complete
   public submitFields(){ 
     this.logger.log(`Submit_SIN Processed: ${this.submit_SIN.sin_number}, ${this.submit_SIN.sin_title}`,
                      `${this.class_name}.submitFields`)

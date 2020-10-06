@@ -172,10 +172,10 @@
                         required 
                         [disabled]="step_1_complete"
                         [(ngModel)]="submit_SIN.sin_number"
-                        (change)="selectExistingSIN($event.target.value)" 
                         #exists_sin_number_input="ngModel">
-                        <option [value]="sin"
-                                *ngFor="let sin of all_SINs"> {{sin.sin_number}} </option>
+                        <option [value]="sin.sin_number"
+                                *ngFor="let sin of all_SINs"
+                                (click)="selectExistingSIN(sin)"> {{sin.sin_number}} </option>
                 </select><br>
         </div><br>
                 <!-- SIN Number Input Error Alert-->

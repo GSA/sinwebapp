@@ -9,8 +9,7 @@ LABEL description="Internal GSA application for managing SIN data"
 RUN apt-get update -y && apt-get install -y curl wait-for-it
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
-    # changed this to test it out
-RUN npm install -g @angular/cli@latest
+RUN npm install -g @angular/cli@10.1.1
 WORKDIR /home/
 RUN mkdir ./sinwebapp/ && mkdir ./frontend/
 COPY /frontend/package.json /home/frontend/package.json
