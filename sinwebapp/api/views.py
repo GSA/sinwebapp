@@ -29,10 +29,12 @@ def user_info(request):
                 'email': request.user.email,
                'groups': group_list
         } 
+        return JsonResponse(response, safe=False)
     else:
         response = { 'message': "No User Signed In" }
+        return JsonResponse(response, status=403, safe=False)
 
-    return JsonResponse(response, safe=False)
+
 
 # GET: /api/users?ids=1&ids=2&ids=3
 #
@@ -59,14 +61,17 @@ def user_info_filtered(request):
                         'groups': group_list
                     })
                 logger.info('Users Found!')
+            return JsonResponse(retrieved_users, safe=False)
+
         except User.DoesNotExist:
             retrieved_users = { 'message' : 'Users Do No Exist'}
             logger.info('Users Not Found!')
+            return JsonResponse(retrieved_users, safe=False)
+
     else:
         retrieved_users = { 'message': 'Input Error' }
         logger.info('No Query Parameters Provided')
-
-    return JsonResponse(retrieved_users, safe=False)
+        return JsonResponse(retrieved_users, status=400, safe=False)
 
 # GET: /api/sinUser?user_id=123
 #
@@ -89,14 +94,17 @@ def sin_user_info(request):
                 'email': raw_user.email,
                 'groups': group_list
             }
+            return JsonResponse(retrieved_user, safe=False)
+
         except User.DoesNotExist:
             retrieved_user = { 'message': 'User Does Not Exist' }
             logger.warning('User Not Found!')
+            return JsonResponse(retrieved_user, status=404, safe=False)
+
     else:
         retrieved_user = { 'message': 'Input Error' }
         logger.info('No Query Parameters Provided')
-
-    return JsonResponse(retrieved_user, safe=False)
+        return JsonResponse(retrieved_user, status=400, safe=False)
 
 # POST: /api/sinUpdate
 # { body:{
@@ -188,21 +196,28 @@ def sin_info_update(request):
                         SIN_FIELDS[5]: new_description,
                         SIN_FIELDS[6]: new_title
                     }
+                    return JsonResponse(response, safe=False)
+
                 except Sin.DoesNotExist:
                     response = { 'message': 'SIN Does Not Exist'}
-                    logger.info('SIN Not Found')    
+                    logger.info('SIN Not Found')  
+                    return JsonResponse(response, status=404, safe=False)
+  
             except User.DoesNotExist:
                 response = { 'message': 'User Does Not Exist'}
                 logger.info('User Not Found')
+                return JsonResponse(response, status=400, safe=False)
+
         except Status.DoesNotExist:
             response = { 'message' : 'Status Does Not Exist'}
             logger.info('Status Not Found')
+            return JsonResponse(response, status=404, safe=False)
     
     else:
         response = { 'message' : 'Body Parameter Parsing Error'}
         logger.info('Error Parsing Parameters in Request Body')
+        return JsonResponse(response, status=400, safe=False)
 
-    return JsonResponse(response, safe=False)
 
 # GET: /api/sin?id=123456
 #      /api/sin?user_email=something@gsa.gov
@@ -256,7 +271,7 @@ def sin_info(request):
             logger.info('User Posting: %s', email)
         else:
             logger.warning('No User Associated With Incoming Request')
-            return JsonResponse({ 'error': 'No User Signed In.' })
+            return JsonResponse({ 'message': 'No User Signed In.' }, status=403)
 
         # TODO: if request.user.is_authenticated():
         body_unicode = request.body.decode('utf-8')
@@ -288,7 +303,7 @@ def sin_info(request):
                 # 1 = submitted, 2 = reviewed, 3 = change
                 # 4 = approved, 5 = denied, 6 = expired
                 logger.warning('Existing SIN Cannot Be Modified')
-                return JsonResponse({ 'error': 'Existing SIN # Still In Process.' })
+                return JsonResponse({ 'Message': 'Existing SIN # Still In Process.' }, status=403)
                 
             else:
                 sin.update(user=request.user, status=new_status)
@@ -335,9 +350,12 @@ def sin_info(request):
                     'sin_description': raw_sin.sin_description
                 }
                 logger.info('SIN Found!')
+                return JsonResponse(retrieved_sin, safe=False)
+
             except Sin.DoesNotExist:
                 retrieved_sin = { 'message': 'SIN Does Not Exist' }
                 logger.warning('SIN Not Found!')
+                return JsonResponse(retrieved_sin, status=404, safe=False)
 
         elif 'user_email' in request.GET:
             user_email = request.GET.get('user_email')
@@ -346,9 +364,13 @@ def sin_info(request):
                 search_user = User.objects.get(email=user_email)
                 logger.info('User Found!')
                 retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+                return JsonResponse(retrieved_sin, safe=False)
+
             except User.DoesNotExist:
                 retrieved_sin = { 'message': 'User Does Not Exist'}
                 logger.warning('User Not Found!')
+                return JsonResponse(retrieved_sin, status=404, safe=False)
+
 
         elif 'user_id' in request.GET:
             user_id = request.GET.get('user_id')
@@ -357,25 +379,34 @@ def sin_info(request):
                 search_user = User.objects.get(id=user_id)
                 logger.info('User Found!')
                 retrieved_sin = list(Sin.objects.filter(user=search_user).values())
+                return JsonResponse(retrieved_sin, safe=False)
+
             except User.DoesNotExist:
                 retrieved_sin = {'message': 'User Does Not Exist'}
                 logger.warning('User Not Found!')
+                return JsonResponse(retrieved_sin, status=404, safe=False)
+
 
         elif 'status_id' in request.GET:
             status_id = request.GET.get('status_id') 
             logger.info('Using Status Query Parameter: %s', status_id)
+
             try:  
                 search_status = Status.objects.get(id=status_id)
                 logger.info('Status Found!')
                 retrieved_sin = list(Sin.objects.filter(status=search_status).values()) 
+                return JsonResponse(retrieved_sin, safe=False)
+
             except User.DoesNotExist:
                 retrieved_sin = { 'message': 'Status Does Not Exist' }
                 logger.warning('Status Not Found!')
+                return JsonResponse(retrieved_sin, status=404, safe=False)
+
         else:
             retrieved_sin ={ 'message': 'No Query Parameters Provided' }
             logger.info('No Query Parameters Provided')
+            return JsonResponse(retrieved_sin, status=400, safe=False)
 
-        return JsonResponse(retrieved_sin, safe=False)
 
 # GET: /api/sins
 #
@@ -390,13 +421,17 @@ def sin_info_all(request):
         if len(retrieved_sins) == 0:
             retrieved_sins = { 'message': '0 SINs found' }
             logger.info('0 SINs Found!')
+            return JsonResponse(retrieved_sins, status=404, safe=False)
+
         else:
             logger.info('SINs Found!')
+            return JsonResponse(retrieved_sins, safe=False)
+
     except Sin.DoesNotExist:
         retrieved_sins = { 'message': 'SINs Do Not Exist' }
         logger.info('SINs Not Found!')
+        return JsonResponse(retrieved_sins, status=404, safe=False)
 
-    return JsonResponse(retrieved_sins, safe=False)
 
 # GET: /api/status?id=1
 # 
@@ -417,14 +452,17 @@ def status_info(request):
                 'description': raw_status.description,
             }
             logger.info('Status Found!')
+            return JsonResponse(retrieved_status, safe=False)
+
         except Status.DoesNotExist:
             retrieved_status = { 'message': 'Status Does Not Exist' }
             logger.info('Status Not Found!')
+            return JsonResponse(retrieved_status, status=404, safe=False)
+
     else:
         retrieved_status = { 'message': 'Input Error' }
         logger.info('Parameter Not Provided')
-
-    return JsonResponse(retrieved_status, safe=False)
+        return JsonResponse(retrieved_status, status=400, safe=False)
 
 # GET: /api/statuses
 #
@@ -440,24 +478,32 @@ def user_status_info(request):
         if GROUPS['submitter'] in group_list:
             retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted']]).values())
             logger.info('Status Found!')
+            return JsonResponse(retrieved_statuses, safe=False)
+
         elif GROUPS['reviewer'] in group_list:
             retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted'],
                                                                     STATUS_STATES['reviewed'],
                                                                     STATUS_STATES['change']]).values())
             logger.info('Statuses Found!')
+            return JsonResponse(retrieved_statuses, safe=False)
+
         elif GROUPS['approver'] in group_list or GROUPS['admin'] in group_list:
             retrieved_statuses = list(Status.objects.values())
             logger.info('Statuses Found!')
+            return JsonResponse(retrieved_statuses, safe=False)
+
         else:
             retreived_statuses = { 'message' : 'User Does Not Have Any Permissions'}
             logger.info('User Has No Permissions!')
+            return JsonResponse(retrieved_statuses, status=403, safe=False)
+
 
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}
         logger.info('Statuses Not Found!')
-        
-    return JsonResponse(retrieved_statuses, safe=False)
+        return JsonResponse(retrieved_statuses, status=404, safe=False)
 
+        
 @login_required
 def status_info_all(request):
     logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
@@ -469,10 +515,12 @@ def status_info_all(request):
         if len(retrieved_statuses)==0:
             retrieved_statues = { 'message' : '0 Statuses Found' }
             logger.info('0 Statuses Found!')
+            return JsonResponse(retrieved_statuses, status=404, safe=False)
         else:
             logger.info('Statuses Found!')
+            return JsonResponse(retrieved_statuses, safe=False)
+
     except Status.DoesNotExist:
         retrieved_statuses = {'message': 'Statuses Do Not Exist'}
         logger.info('Statuses Not Found!')
-        
-    return JsonResponse(retrieved_statuses, safe=False)
+        return JsonResponse(retrieved_statuses, status=404, safe=False)
