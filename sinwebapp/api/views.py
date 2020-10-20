@@ -478,23 +478,29 @@ def sin_info_all(request):
 
     logger.info('Verifying Request Method')
 
-    logger.info('Retrieving All SIN Info...')
+    if verify_method(request, ["GET"]):
+        logger.info('Retrieving All SIN Info...')
 
-    try:
-        retrieved_sins = list(Sin.objects.values())
-        if len(retrieved_sins) == 0:
-            retrieved_sins = { 'message': '0 SINs found' }
-            logger.info('0 SINs Found!')
+        try:
+            retrieved_sins = list(Sin.objects.values())
+            if len(retrieved_sins) == 0:
+                retrieved_sins = { 'message': '0 SINs found' }
+                logger.info('0 SINs Found!')
+                return JsonResponse(retrieved_sins, status=404, safe=False)
+
+            else:
+                logger.info('SINs Found!')
+                return JsonResponse(retrieved_sins, safe=False)
+
+        except Sin.DoesNotExist:
+            retrieved_sins = { 'message': 'SINs Do Not Exist' }
+            logger.info('SINs Not Found!')
             return JsonResponse(retrieved_sins, status=404, safe=False)
+    else:
 
-        else:
-            logger.info('SINs Found!')
-            return JsonResponse(retrieved_sins, safe=False)
-
-    except Sin.DoesNotExist:
-        retrieved_sins = { 'message': 'SINs Do Not Exist' }
-        logger.info('SINs Not Found!')
-        return JsonResponse(retrieved_sins, status=404, safe=False)
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)
 
 
 # GET: /api/status?id=1
@@ -503,30 +509,42 @@ def sin_info_all(request):
 @login_required
 def status_info(request):
     logger = DebugLogger("sinwebapp.api.views.status_info").get_logger()
-    logger.info('Retrieving Status Info')
 
-    if 'id' in request.GET:
-        status_id=request.GET.get('id')
-        logger.info('Using Status Id Query Parameter: %s', status_id)
-        try:
-            raw_status = Status.objects.get(id=status_id)
-            retrieved_status = {
-                'id': raw_status.id,
-                'name' : raw_status.name,
-                'description': raw_status.description,
-            }
-            logger.info('Status Found!')
-            return JsonResponse(retrieved_status, safe=False)
+    logger.info('Verifying Request Method')
 
-        except Status.DoesNotExist:
-            retrieved_status = { 'message': 'Status Does Not Exist' }
-            logger.info('Status Not Found!')
-            return JsonResponse(retrieved_status, status=404, safe=False)
+    if verify_method(request, ["GET"]):
+
+        logger.info('Request Method Verified')
+        logger.info('Retrieving Status Info')
+
+        if 'id' in request.GET:
+            status_id=request.GET.get('id')
+            logger.info('Using Status Id Query Parameter: %s', status_id)
+            try:
+                raw_status = Status.objects.get(id=status_id)
+                retrieved_status = {
+                    'id': raw_status.id,
+                    'name' : raw_status.name,
+                    'description': raw_status.description,
+                }
+                logger.info('Status Found!')
+                return JsonResponse(retrieved_status, safe=False)
+
+            except Status.DoesNotExist:
+                retrieved_status = { 'message': 'Status Does Not Exist' }
+                logger.info('Status Not Found!')
+                return JsonResponse(retrieved_status, status=404, safe=False)
+
+        else:
+            retrieved_status = { 'message': 'Input Error' }
+            logger.info('Parameter Not Provided')
+            return JsonResponse(retrieved_status, status=400, safe=False)
 
     else:
-        retrieved_status = { 'message': 'Input Error' }
-        logger.info('Parameter Not Provided')
-        return JsonResponse(retrieved_status, status=400, safe=False)
+
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)
 
 # GET: /api/statuses
 #
@@ -535,56 +553,77 @@ def status_info(request):
 @login_required
 def user_status_info(request):
     logger = DebugLogger('sinwebapp.api.views.user_status_info').get_logger()
-    logger.info('Retrieving All Statuses')
 
-    try:
-        group_list = request.user.groups.values_list('name', flat=True)
-        if GROUPS['submitter'] in group_list:
-            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted']]).values())
-            logger.info('Status Found!')
-            return JsonResponse(retrieved_statuses, safe=False)
+    logger.info('Verifying Request Method')
 
-        elif GROUPS['reviewer'] in group_list:
-            retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted'],
-                                                                    STATUS_STATES['reviewed'],
-                                                                    STATUS_STATES['change']]).values())
-            logger.info('Statuses Found!')
-            return JsonResponse(retrieved_statuses, safe=False)
+    if verify_method(request, ["GET"]):
+        logger.info('Request Method Verified')
+        logger.info('Retrieving All Statuses')
 
-        elif GROUPS['approver'] in group_list or GROUPS['admin'] in group_list:
-            retrieved_statuses = list(Status.objects.values())
-            logger.info('Statuses Found!')
-            return JsonResponse(retrieved_statuses, safe=False)
+        try:
+            group_list = request.user.groups.values_list('name', flat=True)
+            if GROUPS['submitter'] in group_list:
+                retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted']]).values())
+                logger.info('Status Found!')
+                return JsonResponse(retrieved_statuses, safe=False)
 
-        else:
-            retreived_statuses = { 'message' : 'User Does Not Have Any Permissions'}
-            logger.info('User Has No Permissions!')
-            return JsonResponse(retrieved_statuses, status=403, safe=False)
+            elif GROUPS['reviewer'] in group_list:
+                retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted'],
+                                                                        STATUS_STATES['reviewed'],
+                                                                        STATUS_STATES['change']]).values())
+                logger.info('Statuses Found!')
+                return JsonResponse(retrieved_statuses, safe=False)
+
+            elif GROUPS['approver'] in group_list or GROUPS['admin'] in group_list:
+                retrieved_statuses = list(Status.objects.values())
+                logger.info('Statuses Found!')
+                return JsonResponse(retrieved_statuses, safe=False)
+
+            else:
+                retreived_statuses = { 'message' : 'User Does Not Have Any Permissions'}
+                logger.info('User Has No Permissions!')
+                return JsonResponse(retrieved_statuses, status=403, safe=False)
 
 
-    except Status.DoesNotExist:
-        retrieved_statuses = {'message': 'Statuses Do Not Exist'}
-        logger.info('Statuses Not Found!')
-        return JsonResponse(retrieved_statuses, status=404, safe=False)
+        except Status.DoesNotExist:
+            retrieved_statuses = {'message': 'Statuses Do Not Exist'}
+            logger.info('Statuses Not Found!')
+            return JsonResponse(retrieved_statuses, status=404, safe=False)
+
+    else:
+
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)
 
         
 @login_required
 def status_info_all(request):
     logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
-    logger.info('Retrieving All Statuses')
 
-    try:
-        group_list = request.user.groups.values_list('name', flat=True)
-        retrieved_statuses = list(Status.objects.values())
-        if len(retrieved_statuses)==0:
-            retrieved_statues = { 'message' : '0 Statuses Found' }
-            logger.info('0 Statuses Found!')
+    logger.info('Verifying Request Method')
+
+    if verify_method(request, ["GET"]):
+
+        logger.info('Retrieving All Statuses')
+
+        try:
+            group_list = request.user.groups.values_list('name', flat=True)
+            retrieved_statuses = list(Status.objects.values())
+            if len(retrieved_statuses)==0:
+                retrieved_statues = { 'message' : '0 Statuses Found' }
+                logger.info('0 Statuses Found!')
+                return JsonResponse(retrieved_statuses, status=404, safe=False)
+            else:
+                logger.info('Statuses Found!')
+                return JsonResponse(retrieved_statuses, safe=False)
+
+        except Status.DoesNotExist:
+            retrieved_statuses = {'message': 'Statuses Do Not Exist'}
+            logger.info('Statuses Not Found!')
             return JsonResponse(retrieved_statuses, status=404, safe=False)
-        else:
-            logger.info('Statuses Found!')
-            return JsonResponse(retrieved_statuses, safe=False)
-
-    except Status.DoesNotExist:
-        retrieved_statuses = {'message': 'Statuses Do Not Exist'}
-        logger.info('Statuses Not Found!')
-        return JsonResponse(retrieved_statuses, status=404, safe=False)
+    
+    else: 
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)
