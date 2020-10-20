@@ -48,6 +48,7 @@
 - [Django: values_list() vs. values()](https://stackoverflow.com/questions/37205793/django-values-list-vs-values)<br>
 - [Django: Logout Not Working](https://stackoverflow.com/questions/2074980/django-logout-problem)
 - [Django: fcntl Substitute On Windows](https://stackoverflow.com/questions/1422368/fcntl-substitute-on-windows)<br>
+- [Django: JSONResponse Status Codes](https://stackoverflow.com/questions/35059916/how-to-change-status-of-jsonrespons)
 - [Angular: withCredentials Header, What Is It?](https://stackoverflow.com/questions/27406994/http-requests-withcredentials-what-is-this-and-why-using-it)<br>
 - [Angular: Service Not Sending XSRF Token Header With HTTP Request](https://stackoverflow.com/questions/50510998/angular-6-does-not-add-x-xsrf-token-header-to-http-request)<br>
 - [Angular: ContentType For Multipart Form Gets Reset to Application JSON](https://stackoverflow.com/questions/51228368/angular-5-content-type-multipart-form-data-gets-reset-to-application-json)<br>

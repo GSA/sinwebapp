@@ -1,4 +1,0 @@
-- remember ccda is on discovery cf org, space now!
-- create CircleCi credentials on discovery cf organization, space
-- change credentials within CircleCi environment
-- reconfigure AWS cli for new cloud.gov service credentials
