@@ -1,5 +1,6 @@
 import os
 import magic 
+import copy
 
 from django.shortcuts import render
 from django.http import FileResponse, JsonResponse
@@ -22,28 +23,38 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         
         if form.is_valid():
+
             logger.info('Form Validated')
             logger.info('Verifying MIME Type')
-            mime_type = magic.from_buffer(request.FILES['file'].read(), mime=True)
+                # request.FILES['file'].read() clears file buffer, so that
+                # subsequent calls to file object are empty; therefore, copy it 
+                # into another object for mimetype validation.
+            check_file = copy.copy(request.FILES['file'])
+            mime_type = magic.from_buffer(check_file.read(), mime=True)
             logger.info('Form MIME Type: %s', mime_type)
 
             if mime_type in ALLOWED_MIMETYPES:
                 logger.info('MIME Type Validated')
                 if APP_ENV == "cloud":
+
                     sin = str(request.POST['sin_number'])
                     file_name=f'{sin}.pdf'
                     logger.info('Uploading File: "%s" To S3 Storage Bucket', file_name)
                     upload_check = upload(request.FILES['file'], file_name)
+
                     if upload_check:
                         logger.info('File Uploaded')
                         response = { 'message': 'File Uploaded To S3' }
+
                     else:
                         logger.warn('Error Uploading File')
                         response = { 'message': 'Error Uploading File To S3' }
 
                 else:
+
                     if APP_ENV == "container":
                         logger.info('Saving File To Container File System')
+
                     elif APP_ENV == "local":
                         logger.info('Saving File To Local File System')
 
@@ -57,6 +68,7 @@ def upload_file(request):
                     if APP_ENV == "container":
                         logger.info('File Uploaded To Container File System At /sinwebapp_1_container%s', save_file)
                         response = { 'message' : f"File Uploaded To Container File System At /sinwebapp_1_container{save_file}" }
+
                     elif APP_ENV == "local":
                         logger.info('File Uploaded To Local File System At %s', save_file)
                         response = { 'message' : f"File Uploaded To Local File System At {save_file}" }
