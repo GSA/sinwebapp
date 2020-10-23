@@ -15,6 +15,8 @@ then
 else
     formatted_print '>> Initializing Local Environment' $SCRIPT_NAME
     source $SCRIPT_DIR/init-env.sh
+    formatted_print ">> Python Version: ${PYTHON_VERSION}" $SCRIPT_NAME
+    formatted_print ">> Angular Version: ${ANGULAR_VERSION}" $SCRIPT_NAME
 
     formatted_print '>> Removing Running Containers' $SCRIPT_NAME
     docker-compose down

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms'
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { LogService } from './log.service';
 import { ContextService } from './context.service';
 import { Attachment } from '../models/attachment';
 
+const file_header = new HttpHeaders({'Content-Type':'application/pdf; charset=utf-8'});
 
 
 @Injectable({
@@ -25,13 +26,16 @@ export class FileService {
     formData.append('file', form.get('file').value)
     formData.append('sin_number', form.get('sin_number').value)
 
-    return this.http.post<FormData>(this.context.getFileUploadUrl().toString(), formData).pipe( 
+    const file_header = new HttpHeaders({'Content-Type':'application/pdf; charset=utf-8'});
+    let options = { headers: file_header }
+
+    return this.http.post<FormData>(this.context.getFileUploadUrl().toString(), formData, options).pipe( 
       tap( () => { this.logger.log( "Posting File Form", `${this.class_name}.uploadFiles`);}),
       catchError(this.handleError('uploadFile'))
     );
   }
 
-  public getFileListForSIN(sin: number): Observable<Attachment[]>{
+  public getFileListForSIN(sin: string): Observable<Attachment[]>{
     let attachments : Attachment[];
     return this.http.get<Attachment[]>(this.context.getSINFileListUrl(sin).toString()).pipe(
       tap( ()=> {  this.logger.log( `Retrieving File List For SIN # ${sin} `, `${this.class_name}.getFileListForSIN`);}),

@@ -37,23 +37,26 @@ APP_NAME='ccda'
 nl=$'\n'
 SCRIPT_DES="This script pushes the application to the cloud. ${nl}${nl}   
    EXAMPLE USAGE${nl}\
-       bash cf-push clean build ${nl}${nl}\
+       bash ./cf-push.sh clean build ${nl}${nl}\
    ARGUMENTS - OPTIONAL${nl}\
 ${nl}       fresh - tear down existing services on the cloud, and rebuild the cloud${nl}\
                     environment from scratch. This option will delete the database ${nl}\
                     instance and destroy any application data. Be careful using this ${nl}\
                     option.
 ${nl}       clean - removes build artifacts before rebuilding frontend.\
+${nl}       fresh - tear down existing cloud environment and rebuild it before pushing.\
 ${nl}       build - installs frontend dependencies and build frontend \
 ${nl}       dispose - deletes build artifacts after succesful push.\
 ${nl}       reset - reconfigures frontend for local deployment after successful push\
-${nl}       trail - trail CloudFoundry applications logs after successful push"
+${nl}       trail - trail CloudFoundry application logs after successful push"
 source "$SCRIPT_DIR/util/logging.sh"
 
 if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]
 then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
+    formatted_print '>> Configuring CCDA Application For Cloud Deployment' $SCRIPT_NAME
+    
     formatted_print '>> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
 

@@ -4,8 +4,8 @@ services:
         build: 
             context: ./
             args:
-                ANGULAR_VERSION: "${ANGULAR_VERSION}"
-                PYTHON_VERSION: "${PYTHON_VERSION}"
+                ANGULAR_VERSION: 10.1.1
+                PYTHON_VERSION: 3.7.7
         ports: 
             - "8000:8000"
         links:

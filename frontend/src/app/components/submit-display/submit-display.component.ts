@@ -276,7 +276,7 @@ export class SubmitDisplayComponent implements OnInit {
     })
   }
 
-  public getSINFileList(sin: number){
+  public getSINFileList(sin: string){
     this.fileService.getFileListForSIN(sin).subscribe((attach) =>{
       this.attachments = attach;
       this.logger.log(`File List Retrieved For SIN # ${sin}`, `${this.class_name}.getSINFileList`);
@@ -292,6 +292,6 @@ export class SubmitDisplayComponent implements OnInit {
 
   public editFields(){ this.step_1_complete = false; }
 
-  public getDownloadURL(sin: number){ return this.contextService.getFileDownloadUrl(sin); }
+  public getDownloadURL(sin: string){ return this.contextService.getFileDownloadUrl(sin); }
 
 }

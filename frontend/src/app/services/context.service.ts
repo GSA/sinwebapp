@@ -75,7 +75,7 @@ export class ContextService {
     return `${Context.FILE_UPLOAD_ENDPOINT}/`
   }
 
-  public getFileDownloadUrl(sin: number): string{
+  public getFileDownloadUrl(sin: string): string{
     return `${Context.FILE_DOWNLOAD_ENDPOINT}?${Context.FILE_DOWNLOAD_PARAM_SIN}=${sin}`
   }
 
@@ -83,7 +83,7 @@ export class ContextService {
     return `${Context.FILE_LIST_ENDPOINT}`
   }
 
-  public getSINFileListUrl(sin: number): string{
+  public getSINFileListUrl(sin: string): string{
     return `${Context.FILE_LIST_ENDPOINT}?${Context.FILE_LIST_PARAM_SIN}=${sin}`
   }
 }

@@ -41,7 +41,6 @@ def upload_file(request):
                         logger.warn('Error Uploading File')
                         response = { 'message': 'Error Uploading File To S3' }
 
-                # end { if APP_ENV == 'cloud }
                 else:
                     if APP_ENV == "container":
                         logger.info('Saving File To Container File System')

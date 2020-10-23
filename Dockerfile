@@ -1,22 +1,13 @@
-# ARGUMENTS
-## docker-compose will automatically provide the arguments specified in the
-## docker-composer.yml. If building the image manually, make sure to pass
-## in the appropriate values of these arguments via
-##
-##      docker build --build-arg ANGULAR_VERSION=10.1.1. --build-arg PYTHON_VERSION=3.7.7
-
-ARG ANGULAR_VERSION
-ARG PYTHON_VERSION
-
 # META DATA
 ## TODO: replace version with ARG
 ## provide env var as ARGS in build-container.sh
 
-FROM python:${PYTHON_VERSION}-slim-stretch
+FROM python:3.7.7-slim-stretch
 LABEL application="CCDA : Core Contract Data Automation"
 LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"]
 LABEL version="prototype-1.0.0"
 LABEL description="Internal GSA application for managing SIN data"
+RUN echo "py: ${PYTHON_VERSION}, ang: ${ANGULAR_VERSION}"
 
 ## DEPENDENCIES
 RUN apt-get update -y && apt-get install -y curl wait-for-it
@@ -24,7 +15,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 ## TODO: replace version with ARG
 ## provider env var as ARGS in build-container.sh
-RUN npm install -g @angular/cli@${ANGULAR_VERSION}
+RUN npm install -g @angular/cli@10.1.1
 WORKDIR /home/
 RUN mkdir ./sinwebapp/ && mkdir ./frontend/
 COPY /frontend/package.json /home/frontend/package.json

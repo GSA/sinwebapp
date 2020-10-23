@@ -122,7 +122,7 @@
                 *ngIf="step_1_complete && !step_2_complete">Please Upload An Attachment Or Select No Attachment</div>
         
         <!-- File Attachment -->
-        <form [formGroup]='fileForm' (ngSubmit)='submitFile()'>
+        <form [formGroup]='fileForm' (ngSubmit)='submitFile()' enctype="multipart/form-data">
                 <div id="new-file-upload-group" class="form-group" >
                         <label for="new-upload">Select An Attachment</label>
                         <input id="new-upload" name="file" class ="form-control right" 
@@ -190,7 +190,7 @@
                 <span id="exists-title" class="input-group-addon">Enter Title: </span>
                 <input id="exists_title_input" name="exists_title_input" class="form-control right"
                         type="text" required minlength="10" maxlength="1000"
-                        [value]="existing_SIN.sin_title"
+                        [placeholder]="existing_SIN.sin_title"
                         [disabled]="step_1_complete || !submit_SIN.sin_number"
                         [(ngModel)]="submit_SIN.sin_title" 
                         #exists_title_input="ngModel">
@@ -213,7 +213,7 @@
                 <span class="input-group-addon" id="new-describe">Enter Description: </span>
                 <input id="exists_describe_input" name="exists_describe_input" class="form-control right"
                         type="text" required minlength="20" maxlength="2000" 
-                        [value]="existing_SIN.sin_description"
+                        [placeholder]="existing_SIN.sin_description"
                         [disabled]="step_1_complete || !submit_SIN.sin_number"
                         [(ngModel)]="submit_SIN.sin_description" 
                         #exists_describe_input="ngModel">   
