@@ -29,7 +29,7 @@ export class FileService {
     const file_header = new HttpHeaders({'Content-Type':'application/pdf; charset=utf-8'});
     let options = { headers: file_header }
 
-    return this.http.post<FormData>(this.context.getFileUploadUrl().toString(), formData, options).pipe( 
+    return this.http.post<FormData>(this.context.getFileUploadUrl().toString(), formData).pipe( 
       tap( () => { this.logger.log( "Posting File Form", `${this.class_name}.uploadFiles`);}),
       catchError(this.handleError('uploadFile'))
     );
