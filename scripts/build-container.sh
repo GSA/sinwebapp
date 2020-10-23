@@ -14,7 +14,7 @@ then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
     formatted_print '>> Initializing Local Environment' $SCRIPT_NAME
-    bash $SCRIPT_DIR/init-env.sh
+    source $SCRIPT_DIR/init-env.sh
 
     formatted_print '>> Removing Running Containers' $SCRIPT_NAME
     docker-compose down
