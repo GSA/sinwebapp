@@ -1,7 +1,11 @@
 version: "3.8"
 services:
     web:
-        build: ./
+        build: 
+            context: ./
+            args:
+                - ANGULAR_VERSION: ${ANGULAR_VERSION}
+                - PYTHON_VERSION: ${PYTHON_VERSION} 
         ports: 
             - "8000:8000"
         links:
@@ -10,9 +14,6 @@ services:
             - "database"
         env_file:
             - ./env/container.env
-        args:
-            - ANGULAR_VERSION: ${ANGULAR_VERSION}
-            - PYTHON_VERSION: ${PYTHON_VERSION} 
         command: ["wait-for-it", "database:5432", "--","bash","./init-app.sh","container"]
     database:
         image: "postgres:latest"
