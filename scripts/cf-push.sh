@@ -54,10 +54,10 @@ if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" ==
 then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
-    formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
+    formatted_print '>> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
 
-    formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
+    formatted_print '>> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
     source $SCRIPT_DIR/init-env.sh
         # reset SCRIPT_NAME since 'source' overrides with 'init-env' local variable.
     SCRIPT_NAME='\e[4mcf-push\e[0m'
@@ -67,8 +67,8 @@ else
     do
         if [ "$input" == "fresh" ]
         then
-            formatted_print '--> Setting Up CCDA Application Cloud Environment' $SCRIPT_NAME
-            formatted_print '--> Invoking \e[3msetup-cloud-env.sh\e[0m Script' $SCRIPT_NAME
+            formatted_print '>> Setting Up CCDA Application Cloud Environment' $SCRIPT_NAME
+            formatted_print '>> Invoking \e[3msetup-cloud-env.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/setup/setup-cloud-env.sh $APP_NAME rebuild
         fi
     done
@@ -76,8 +76,8 @@ else
     do
         if [ "$input" == "clean" ]
         then
-            formatted_print '--> Cleaning CCDA Application' $SCRIPT_NAME
-            formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
+            formatted_print '>> Cleaning CCDA Application' $SCRIPT_NAME
+            formatted_print '>> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/clean-app.sh
         fi
     done
@@ -85,20 +85,20 @@ else
     do
         if [ "$input" == "build" ]
         then 
-            formatted_print '--> Building CCDA Application' $SCRIPT_NAME
+            formatted_print '>> Building CCDA Application' $SCRIPT_NAME
 
-            formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+            formatted_print '>> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/init-migrations.sh local
 
-            formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
+            formatted_print '>> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/build-frontend.sh
         fi
     done
 
-    formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
+    formatted_print '>> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/init-scripts.sh
 
-    formatted_print '--> Pushing To The Cloud' $SCRIPT_NAME
+    formatted_print '>> Pushing To The Cloud' $SCRIPT_NAME
     cd $SCRIPT_DIR/..
     cf push
 
@@ -106,15 +106,15 @@ else
     do
         if [ "$input" == "dispose" ]
         then
-            formatted_print '--> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
+            formatted_print '>> Invoking \e[3mclean-app.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/clean-app.sh
         elif [ "$input" == "trail" ]
         then
-            formatted_print '--> Trailing CF Logs' $SCRIPT_NAME
+            formatted_print '>> Trailing CF Logs' $SCRIPT_NAME
             cf logs ccda
         elif [ "$input" == "reset" ]
         then
-            formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
+            formatted_print '>> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
             bash $SCRIPT_DIR/setup-frontend-env.sh local
         fi
     done

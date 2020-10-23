@@ -26,6 +26,10 @@ def init_status(apps, schema_editor):
                                              description="SIN form has been denied.")
     expired = Status.objects.get_or_create(id = 6, name=key_list[val_list.index(6)],
                                              description="SIN form has expired.")
+    terminating = Status.objects.get_or_create(id = 7, name=key_list[val_list.index(7)],
+                                             description="SIN form has been submitted for termination")
+    terminated = Status.objects.get_or_create(id=8, name=key_list[val_list.index(8)],
+                                             description="SIN from has been terminated")
 
 def init_sindata(app, schema_editor):
     logger = DebugLogger("api.db_init.init_sindata").get_logger()
@@ -111,5 +115,6 @@ def populate_sins(app, schema_editor):
                             sin['id'], sin['sin_number'], sin['sin_title'],['sin_description'])
             logger.error("Error Occurred Proccessing SIN: %s, \n :%s \n :%s \n", e, f, g)
             logger.warn('Preventing Insertion Into SIN Table')
+            
         count+=1
 

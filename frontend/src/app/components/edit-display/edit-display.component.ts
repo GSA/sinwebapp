@@ -79,7 +79,7 @@ export class EditDisplayComponent implements OnInit {
 
   private loadComponentData(){
     this.edit_SIN = Object.assign(this.edit_SIN, this.input_SIN);
-    this.undo_SIN = Object.assign(this.undo_SIN, this.edit_SIN)
+    this.undo_SIN = Object.assign(this.undo_SIN, this.input_SIN)
     // TODO: Possibly want to initialize buffer_SIN = input_SIN to 
     // get rid of validation errors. i.e., the form needs input so 
     // it is valid.

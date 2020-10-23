@@ -49,19 +49,19 @@ fi
 
 if ! command -v ng &> /dev/null
 then
-    formatted_print "--> Installing Angular CLI" $SCRIPT_NAME
+    formatted_print ">> Installing Angular CLI" $SCRIPT_NAME
     npm install -g @angular/cli@latest
 fi
 
 cd $SCRIPT_DIR/../../frontend/
-formatted_print "--> Installing Angular Dependencies" $SCRIPT_NAME
+formatted_print ">> Installing Angular Dependencies" $SCRIPT_NAME
 npm install
 
 cd $SCRIPT_DIR/../../sinwebapp/
-formatted_print "--> Installing Python Dependencies" $SCRIPT_NAME
+formatted_print ">> Installing Python Dependencies" $SCRIPT_NAME
 pip install -r requirements.txt
 
-formatted_print "--> Activating Local Environment Variables"
+formatted_print ">> Activating Local Environment Variables"
 if [ -f "$SCRIPT_DIR/../../env/local.env" ]
 then
     set -o allexport
@@ -69,7 +69,7 @@ then
     set +o allexport
 fi
 
-formatted_print "--> Changing File Mode For Scripts" $SCRIPT_NAME
+formatted_print ">> Changing File Mode For Scripts" $SCRIPT_NAME
 for f in $SCRIPT_DIR/../*
 do
     formatted_print "Making $f executable" $SCRIPT_NAME

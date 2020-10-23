@@ -16,7 +16,7 @@
                 <span id="enter-new-sin-number" class="input-group-addon">Enter New SIN #</span>
                 <input id="input-sin-number" class="form-control" aria-describedby="enter-new-sin-number"
                         type="text"
-                        placeholder="Enter New SIN # Here"
+                        [placeholder]="undo_SIN.sin_number"
                         [disabled]="applied_SIN" 
                         [(ngModel)]="buffer_SIN.sin_number"
                         #sin_number_input="ngModel">
@@ -57,7 +57,7 @@
                 <span id="enter-new-title" class="input-group-addon">Enter Title</span>
                 <input id="input-title" class="form-control" aria-describedby="enter-new-title"
                         type="text" required minlength="10" maxlength="1000"
-                        placeholder="Enter New Title Here" 
+                        [placeholder]="undo_SIN.sin_title" 
                         [disabled]="applied_Title" 
                         [(ngModel)]="buffer_SIN.sin_title"
                         #title_input="ngModel">
@@ -102,7 +102,7 @@
                 <span id="enter-new-describe" class="input-group-addon">Enter Description</span>
                 <input id="describe-input" class="form-control" aria-describedby="enter-new-describe-enabled"
                 type="text" required minlength="20" maxlength="2000"
-                placeholder="Enter New Description Here"
+                [placeholder]="undo_SIN.sin_description"
                 [disabled] = "applied_Description" 
                 [(ngModel)]="buffer_SIN.sin_description"
                 #describe_input="ngModel">
@@ -112,7 +112,7 @@
         <div id="describe-error-message" class="alert alert-danger" role="alert"
                 *ngIf="describe_input.invalid && ( describe_input.dirty || describe_input.touched)">
                 <div id="describe-required-error-message"
-                        *ngIf="describe_input.errors.required"> Description Is Required</div>
+                        *ngIf="describe_input.errors.required">Description Is Required</div>
                 <div id="describe-minlength-error-message"
                         *ngIf="describe_input.errors.minlength">Description Must Be Atleast 20 Characters</div>
                 <div id="describe-maxlength-error-message"
@@ -168,6 +168,7 @@
         </div>
 
         <!-- File Attachment -->
+                <!-- !!! TODO !!! -->
 
         <!-- Save Error/Warning Message -->
         <div id="save-changes-msg" class="alert alert-warning" role="alert"

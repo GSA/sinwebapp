@@ -54,17 +54,17 @@ else
     OAUTH_SERVICE_ARG="{\"redirect_uri\": [\"https://$1.app.cloud.gov/$LOGIN_REDIRECT\",\"https://$1.app.cloud.gov/$LOGOUT_REDIRECT\"]}"
 
     cd $SCRIPT_DIR/../..
-    formatted_print "--> OAUTH_SERVICE_ARG: $OAUTH_SERVICE_ARG" $SCRIPT_NAME
+    formatted_print ">> OAUTH_SERVICE_ARG: $OAUTH_SERVICE_ARG" $SCRIPT_NAME
 
-    formatted_print '--> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
+    formatted_print '>> Invoking \e[3minit-scripts.sh\e[0m Script' $SCRIPT_NAME
     bash $SCRIPT_DIR/../init-scripts.sh
 
-    formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
+    formatted_print '>> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
     source $SCRIPT_DIR/../init-env.sh
 
     if [ "$2" == "rebuild" ]
     then
-        formatted_print '--> Clearing Existing Services' $SCRIPT_NAME
+        formatted_print '>> Clearing Existing Services' $SCRIPT_NAME
         cf delete-service-key "$1-oauth" "$1-key" -f
         cf unbind-service $1 "$1-oauth"
         cf unbind-service $1 "$1-s3"
@@ -74,40 +74,40 @@ else
         cf delete-service "$1-s3" -f
     fi
 
-    formatted_print '--> Creating SQL Service' $SCRIPT_NAME
+    formatted_print '>> Creating SQL Service' $SCRIPT_NAME
     cf create-service aws-rds medium-psql "$1-sql"
 
-    formatted_print '--> Creating S3 Service' $SCRIPT_NAME
+    formatted_print '>> Creating S3 Service' $SCRIPT_NAME
     cf create-service s3 basic "$1-s3"
 
-    formatted_print '--> Creating OAuth Client Service' $SCRIPT_NAME
+    formatted_print '>> Creating OAuth Client Service' $SCRIPT_NAME
     cf create-service cloud-gov-identity-provider oauth-client "$1-oauth"
     #  cf create-service-key $1-oauth $1-key -c '{"redirect_uri": ["https://$1.app.cloud.gov/auth","https://$1.app.cloud.gov/logout"]}'
     cf create-service-key "$1-oauth" "$1-key" -c "$OAUTH_SERVICE_ARG"
 
-    formatted_print '--> Creating \e[3mcloud.gov\e[0m Service Account Credentials'
+    formatted_print '>> Creating \e[3mcloud.gov\e[0m Service Account Credentials'
     cf create-service cloud-gov-service-account space-deployer "$1-account"
     cf create-service-key "$1-account" "$1-key"
-    formatted_print '--> Please Configure CircleCi Pipeline With The Following Service Credentials.'
-    formatted_print '--> Store (username, password) => (CF_DEV_USERNAME, CF_DEV_PASSWORD) In CircleCi Environment'
+    formatted_print '>> Please Configure CircleCi Pipeline With The Following Service Credentials.'
+    formatted_print '>> Store (username, password) => (CF_DEV_USERNAME, CF_DEV_PASSWORD) In CircleCi Environment'
     cf service-key "$1-account" "$1-key"
 
 
     # wait for services to be created. Takes a bit. 
     while [[ "$(cf service $1-sql)" == *"create in progress"* ]]
     do  
-        formatted_print '--> Waiting On SQL Service Creation' $SCRIPT_NAME
-        formatted_print '--> SQL Service Status:' $SCRIPT_NAME
+        formatted_print '>> Waiting On SQL Service Creation' $SCRIPT_NAME
+        formatted_print '>> SQL Service Status:' $SCRIPT_NAME
         cf service "$1-sql"
         sleep 15s
     done 
         # Probably a better way to do this. Research 
         # processes and how to watch them!
 
-    formatted_print '--> Pushing App To Cloud With \e[3m--no-start\e[0m Flag' $SCRIPT_NAME
+    formatted_print '>> Pushing App To Cloud With \e[3m--no-start\e[0m Flag' $SCRIPT_NAME
     cf push --no-start
 
-    formatted_print '--> Binding OAuth Client To App' $SCRIPT_NAME
+    formatted_print '>> Binding OAuth Client To App' $SCRIPT_NAME
     # cf bind-service "$1" "$1-oauth" -c '{"redirect_uri": ["https://$1.app.cloud.gov/auth","https://$1.app.cloud.gov/logout"]}'
     cf bind-service $1 "$1-oauth" -c "$OAUTH_SERVICE_ARG"
 
@@ -116,12 +116,12 @@ else
     CLIENT_ID=$(echo "{$filtered_key" | python -c 'import json,sys;print(json.load(sys.stdin)["client_id"])')
     CLIENT_SECRET=$(echo "{$filtered_key" | python -c 'import json,sys;print(json.load(sys.stdin)["client_secret"])')
 
-    formatted_print "--> DJANGO SECRET KEY = $SECRET_KEY" $SCRIPT_NAME
-    formatted_print "--> (CLIENT_ID, CLIENT_SECRET) = ($CLIENT_ID, $CLIENT_SECRET)" $SCRIPT_NAME
-    formatted_print "--> (DJANGO_SUPERUSER_*) = (USERNAME=$DJANGO_SUPERUSER_USERNAME, EMAIL=$DJANGO_SUPERUSER_EMAIL" $SCRIPT_NAME
-    formatted_print "--> (EMAIL_HOST, EMAIL_HOST_USER) = ($EMAIL_HOST, $EMAIL_HOST_USER)" $SCRIPT_NAME
+    formatted_print ">> DJANGO SECRET KEY = $SECRET_KEY" $SCRIPT_NAME
+    formatted_print ">> (CLIENT_ID, CLIENT_SECRET) = ($CLIENT_ID, $CLIENT_SECRET)" $SCRIPT_NAME
+    formatted_print ">> (DJANGO_SUPERUSER_*) = (USERNAME=$DJANGO_SUPERUSER_USERNAME, EMAIL=$DJANGO_SUPERUSER_EMAIL" $SCRIPT_NAME
+    formatted_print ">> (EMAIL_HOST, EMAIL_HOST_USER) = ($EMAIL_HOST, $EMAIL_HOST_USER)" $SCRIPT_NAME
 
-    formatted_print "--> Setting Environment Variables On Cloud To Printed Values" $SCRIPT_NAME
+    formatted_print ">> Setting Environment Variables On Cloud To Printed Values" $SCRIPT_NAME
     cf set-env $1 SECRET_KEY $SECRET_KEY
     cf set-env $1 UAA_CLIENT_ID $CLIENT_ID
     cf set-env $1 UAA_CLIENT_SECRET $CLIENT_SECRET
@@ -132,5 +132,5 @@ else
     cf set-env $1 EMAIL_HOST_USER $EMAIL_HOST_USER
     cf set-env $1 EMAIL_HOST_PASSWORD $EMAIL_HOST_PASSWORD
 
-    formatted_print '--> Environment built on the Cloud. Use \e[3mcf-push.sh\e[0m to push application onto the Cloud.'
+    formatted_print '>> Environment built on the Cloud. Use \e[3mcf-push.sh\e[0m to push application onto the Cloud.'
 fi

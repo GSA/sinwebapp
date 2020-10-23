@@ -25,7 +25,7 @@ else
     then
         formatted_print "ERROR: No Argument Provided" $SCRIPT_NAME
     else
-        formatted_print "--> Initializing Django Migrations" $SCRIPT_NAME
+        formatted_print ">> Initializing Django Migrations" $SCRIPT_NAME
 
         # NAVIGATE TO FOLDER CONTAINING MANAGE.PY
         if [ "$1" == "local" ] || [ "$1" == "container" ]
@@ -36,43 +36,43 @@ else
             APP_DIR=$SCRIPT_DIR
         fi
 
-        formatted_print "--> Navigating To Project Root" $SCRIPT_NAME
+        formatted_print ">> Navigating To Project Root" $SCRIPT_NAME
         cd $APP_DIR
-        formatted_print "--> Project Root: $(pwd)" $SCRIPT_NAME
+        formatted_print ">> Project Root: $(pwd)" $SCRIPT_NAME
 
         # CACHE CUSTOM MIGRATIONS IN /DB/ FOLDER
-        formatted_print '--> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
+        formatted_print '>> Copying Custom Data Migrations Into \e[4m/db/\e[0m Directory Before Scrubbing The Application' $SCRIPT_NAME
         if [ -f "$APP_DIR/api/migrations/0002_api_data.py" ]
         then
-            formatted_print '--> Caching 0002_api_data.py' $SCRIPT_NAME
+            formatted_print '>> Caching 0002_api_data.py' $SCRIPT_NAME
             cp -R "$APP_DIR/api/migrations/0002_api_data.py" "$APP_DIR/db/0002_api_data.py"
         fi
         if [ -f "$APP_DIR/api/migrations/0003_api_validation.py" ]
         then
-            formatted_print '--> Caching 0003_api_validation.py' $SCRIPT_NAME
+            formatted_print '>> Caching 0003_api_validation.py' $SCRIPT_NAME
             cp -R "$APP_DIR/api/migrations/0003_api_validation.py" "$APP_DIR/db/0003_api_validation.py"
         fi
         if [ -f "$APP_DIR/authentication/migrations/0002_authentication_data.py" ]
         then
-            formatted_print '--> Caching 0002_authentication_data.py' $SCRIPT_NAME
+            formatted_print '>> Caching 0002_authentication_data.py' $SCRIPT_NAME
             cp -R "$APP_DIR/authentication/migrations/0002_authentication_data.py" "$APP_DIR/db/0002_authentication_data.py"
         fi
         
         # CLEAN MIGRATIONS
-        formatted_print "--> Cleaning Migrations In All \e[4m$APP_DIR/\e[0m Modules" $SCRIPT_NAME
+        formatted_print ">> Cleaning Migrations In All \e[4m$APP_DIR/\e[0m Modules" $SCRIPT_NAME
         if [ -d "$APP_DIR/api/migrations/" ]
         then
-            formatted_print '--> Cleaning \e[4m/api/migrations/\e[0m Directory' $SCRIPT_NAME
+            formatted_print '>> Cleaning \e[4m/api/migrations/\e[0m Directory' $SCRIPT_NAME
             rm -r $APP_DIR/api/migrations/
         fi
         if [ -d "$APP_DIR/authentication/migrations/" ]
         then
-            formatted_print '--> Cleaning \e[4m/authenication/migrations/\e[0m Directory' $SCRIPT_NAME
+            formatted_print '>> Cleaning \e[4m/authenication/migrations/\e[0m Directory' $SCRIPT_NAME
             rm -r $APP_DIR/authentication/migrations/
         fi
 
         # CREATE FRESH MIGRAITONS
-        formatted_print "--> Creating New Model Migrations"
+        formatted_print ">> Creating New Model Migrations"
         python manage.py makemigrations api --name init
         python manage.py makemigrations authentication --name init
         python manage.py makemigrations
@@ -80,18 +80,18 @@ else
         # COPY CUSTOM MIGRATIONS BACK INTO APPLICAITON
         if [ ! -d "$APP_DIR/api/migrations/" ]
         then
-            formatted_print '--> No \e[4m/api/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
+            formatted_print '>> No \e[4m/api/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
             mkdir -p "$APP_DIR/api/migrations/"
             touch "$APP_DIR/api/migrations/__init__.py"
         fi
         if [ ! -d "$APP_DIR/authentication/migrations/" ]
         then
-            formatted_print '--> No \e[4m/authentication/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
+            formatted_print '>> No \e[4m/authentication/migrations/\e[0m Directory Detected, Creating New Directory' $SCRIPT_NAME
             mkdir -p "$APP_DIR/authentication/migrations/"
             touch "$APP_DIR/authentication/migrations/__init__.py"
         fi
 
-        formatted_print '--> Copying Custom Data Migrations Back Into Application' $SCRIPT_NAME
+        formatted_print '>> Copying Custom Data Migrations Back Into Application' $SCRIPT_NAME
         cp -R "$APP_DIR/db/0002_api_data.py" "$APP_DIR/api/migrations/0002_api_data.py"
         cp -R "$APP_DIR/db/0003_api_validation.py" "$APP_DIR/api/migrations/0003_api_validation.py"
         cp -R "$APP_DIR/db/0002_authentication_data.py" "$APP_DIR/authentication/migrations/0002_authentication_data.py"

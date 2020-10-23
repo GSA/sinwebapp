@@ -28,21 +28,21 @@ else
     if [ "$1" == "dev" ]
     then
         cf auth $CF_DEV_USERNAME $CF_DEV_PASSWORD
-        formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_DEV_SPACE)" $SCRIPT_NAME
+        formatted_print ">> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_DEV_SPACE)" $SCRIPT_NAME
         cf target -o $CF_ORGANIZATION -s $CF_DEV_SPACE
     elif [ "$1" == "prod" ]
     then
         cf auth $CF_PROD_USERNAME $CF_PROD_PASSWORD
-        formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_PROD_SPACE)" $SCRIPT_NAME
+        formatted_print ">> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_PROD_SPACE)" $SCRIPT_NAME
         cf target -o $CF_ORGANIZATION -s $CF_PROD_SPACE
     elif [ "$1" == "staging" ]
     then
         cf auth $CF_STAGING_USERNAME $CF_STAGING_PASSWORD
-        formatted_print "--> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_STAGING_SPACE)" $SCRIPT_NAME
+        formatted_print ">> Targetting (Org, Space) = ($CF_ORGANIZATION, $CF_STAGING_SPACE)" $SCRIPT_NAME
         cf target -o $CF_ORGANIZATION -s $CF_STAGING_SPACE
     fi
 
-    formatted_print '--> Pushing To CloudFoundry' $SCRIPT_NAME
+    formatted_print '>> Pushing To CloudFoundry' $SCRIPT_NAME
     cf push
 fi
 

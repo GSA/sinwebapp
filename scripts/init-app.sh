@@ -20,64 +20,64 @@ if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" ==
 then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
-    formatted_print "--> $1 Environment Detected" $SCRIPT_NAME
+    formatted_print ">> $1 Environment Detected" $SCRIPT_NAME
 
     if [ "$1" == "local" ]
     then
-        formatted_print '--> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
+        formatted_print '>> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
         source $SCRIPT_DIR/init-env.sh
         
-        formatted_print '--> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
+        formatted_print '>> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
 
-        formatted_print '--> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
+        formatted_print '>> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/build-frontend.sh
 
-        formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+        formatted_print '>> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-migrations.sh $1
        
-        formatted_print "--> Navigating To Project Root: $(pwd)" $SCRIPT_NAME
+        formatted_print ">> Navigating To Project Root: $(pwd)" $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
     elif [ "$1" == "container" ]
     then
-        formatted_print '--> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
+        formatted_print '>> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-migrations.sh $1
         
-        formatted_print "--> Navigating To Project Root: $(pwd)" $SCRIPT_NAME
+        formatted_print ">> Navigating To Project Root: $(pwd)" $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
     elif [ "$1" == "cloud" ]
     then
-        formatted_print "--> Cloud Specific Pre-App Configuration Goes Here" $SCRIPT_NAME
+        formatted_print ">> Cloud Specific Pre-App Configuration Goes Here" $SCRIPT_NAME
         # python manage.py clearsessions
         # python ./files/s3_manager.py create_bucket
 
     fi
 
-    formatted_print '--> Migrating Django Database Files' $SCRIPT_NAME
+    formatted_print '>> Migrating Django Database Files' $SCRIPT_NAME
     python manage.py migrate
 
-    formatted_print '--> Printing Configuration' $SCRIPT_NAME
+    formatted_print '>> Printing Configuration' $SCRIPT_NAME
     python debug.py
 
     if [ "$1" == "container" ]
     then 
-        formatted_print '--> Collecting Static Files' $SCRIPT_NAME
+        formatted_print '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
-        formatted_print '--> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
+        formatted_print '>> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
         gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3
     elif [ "$1" == "local" ]
     then
-        formatted_print '--> Collecting Static Files' $SCRIPT_NAME
+        formatted_print '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
-        formatted_print '--> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration' $SCRIPT_NAME
+        formatted_print '>> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration' $SCRIPT_NAME
         gunicorn core.wsgi:application --workers 3
     elif [ "$1" == "cloud" ]
     then
-        # formatted_print '--> Testing Email Service' $SCRIPT_NAME
+        # formatted_print '>> Testing Email Service' $SCRIPT_NAME
         # python ./tests/email_test.py
-        formatted_print '--> Deploying Gunicorn Server Onto The Cloud' $SCRIPT_NAME
+        formatted_print '>> Deploying Gunicorn Server Onto The Cloud' $SCRIPT_NAME
         gunicorn core.wsgi:application 
     fi
 fi
