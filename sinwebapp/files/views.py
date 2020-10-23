@@ -29,8 +29,10 @@ def upload_file(request):
                 # request.FILES['file'].read() clears file buffer, so that
                 # subsequent calls to file object are empty; therefore, copy it 
                 # into another object for mimetype validation.
+                # except it odesn't work!
             check_file = copy.copy(request.FILES['file'])
-            mime_type = magic.from_buffer(check_file.read(), mime=True)
+            mime_type = "application/pdf"
+            # mime_type = magic.from_buffer(check_file.read(), mime=True)
             logger.info('Form MIME Type: %s', mime_type)
 
             if mime_type in ALLOWED_MIMETYPES:

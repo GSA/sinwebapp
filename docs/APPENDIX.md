@@ -49,9 +49,11 @@
 - [Django: Logout Not Working](https://stackoverflow.com/questions/2074980/django-logout-problem)
 - [Django: fcntl Substitute On Windows](https://stackoverflow.com/questions/1422368/fcntl-substitute-on-windows)<br>
 - [Django: JSONResponse Status Codes](https://stackoverflow.com/questions/35059916/how-to-change-status-of-jsonrespons)
+- [Django: Empty File in POST Request](https://stackoverflow.com/questions/57549343/why-does-request-filesfile-open-is-none-though-request-files-file-nam)
 - [Angular: withCredentials Header, What Is It?](https://stackoverflow.com/questions/27406994/http-requests-withcredentials-what-is-this-and-why-using-it)<br>
 - [Angular: Service Not Sending XSRF Token Header With HTTP Request](https://stackoverflow.com/questions/50510998/angular-6-does-not-add-x-xsrf-token-header-to-http-request)<br>
 - [Angular: ContentType For Multipart Form Gets Reset to Application JSON](https://stackoverflow.com/questions/51228368/angular-5-content-type-multipart-form-data-gets-reset-to-application-json)<br>
 - [Javascript: Assignment By Value vs. By Reference](https://stackoverflow.com/questions/40133582/assign-value-not-reference-in-javascript)<br>
 - [JavaScript: Trim String](https://stackoverflow.com/questions/952924/javascript-chop-slice-trim-off-last-character-in-string)<br>
 - [Docker: Apt Repository is Not Signed](https://stackoverflow.com/questions/59139453/repository-is-not-signed-in-docker-build)<br>
+- [S3: File vs. FileObject](https://stackoverflow.com/questions/52336902/what-is-the-difference-between-s3-client-upload-file-and-s3-client-upload-file)
