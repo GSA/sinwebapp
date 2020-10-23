@@ -5,9 +5,11 @@ import datetime
 # For formatting purposes.
 STATUS_FIELDS = ['id', 'name', 'description']
 # Used for verfying request GET query parameters and POST body parameters
-SIN_FIELDS={ 1: 'id', 2: 'sin_number', 3: 'user_id', 4: 'status_id', 5: "sin_description", 6:"sin_title" }
+SIN_FIELDS={ 1: 'id', 2: 'sin_number', 3: 'user_id', 4: 'status_id', 
+                5: "sin_description", 6:"sin_title" }
 # Dictionary for querying Status model by ID via API
-STATUS_STATES = { 'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 'denied': 5, 'expired': 6 }
+STATUS_STATES = { 'submitted': 1, 'reviewed': 2, 'change': 3, 'approved': 4, 
+                    'denied': 5, 'expired': 6, 'terminating':7, 'terminated': 8 }
 
 
 class Status(models.Model):

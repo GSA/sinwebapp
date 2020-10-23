@@ -10,5 +10,7 @@ export const STATUS_STATE = {
     change: 3,
     approved: 4,
     denied: 5,
-    expired: 6
+    expired: 6,
+    terminating: 7,
+    terminated: 8
 }

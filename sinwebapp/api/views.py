@@ -563,7 +563,8 @@ def user_status_info(request):
         try:
             group_list = request.user.groups.values_list('name', flat=True)
             if GROUPS['submitter'] in group_list:
-                retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted']]).values())
+                retrieved_statuses = list(Status.objects.filter(id__in=[STATUS_STATES['submitted'],
+                                                                        STATUS_STATES['terminating']]).values())
                 logger.info('Status Found!')
                 return JsonResponse(retrieved_statuses, safe=False)
 
