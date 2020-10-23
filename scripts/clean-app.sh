@@ -1,5 +1,7 @@
 # DESCRIPTION
-# Clears the /sinwebapp/static/ and /frontend/node_modules/ directories.
+# Clears the /sinwebapp/static/ and /frontend/node_modules/ directories, in addition
+# clearing various clutter that accumulates during development and is not required
+# for production.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='\e[4mclean-app\e[0m'
@@ -12,11 +14,11 @@ then
 else
     if [ -d "$SCRIPT_DIR/../sinwebapp/static/" ]
     then
-        formatted_print '>> Caching \e[4m/static/favicon.ico\e[0m Directory' $SCRIPT_NAME
+        formatted_print '>> Caching \e[4m/static/favicon.ico\e[0m' $SCRIPT_NAME
         cp $SCRIPT_DIR/../sinwebapp/static/favicon.ico $SCRIPT_DIR/../sinwebapp/favicon.ico
         formatted_print '>> Cleaning \e[4m/static/\e[0m Directory' $SCRIPT_NAME
         rm -r $SCRIPT_DIR/../sinwebapp/static/
-        formatted_print '>> Restoring \e[4m/static/favicon.ico\e[0m Directory' $SCRIPT_NAME
+        formatted_print '>> Restoring \e[4m/static/favicon.ico\e[0m' $SCRIPT_NAME
         mkdir $SCRIPT_DIR/../sinwebapp/static/
         cp $SCRIPT_DIR/../sinwebapp/favicon.ico $SCRIPT_DIR/../sinwebapp/static/favicon.ico
         rm $SCRIPT_DIR/../sinwebapp/favicon.ico
