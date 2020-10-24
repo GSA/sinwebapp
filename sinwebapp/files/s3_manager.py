@@ -43,16 +43,16 @@ def create_bucket(bucket_name, region=None):
         logger.warn('Error Occured Creating S3 Bucket: %s', e)
         return False
 
-# Returns True is 'file_name' is uploaded successfully. Returns False if 'file_name' upload 
+# Returns True is 'file' is uploaded successfully. Returns False if 'file' upload 
 # fails.
-def upload(file, object_name):
+def upload(file, file_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.upload").get_logger()
-    logger.info('Uploading File "%s" To S3 Bucket "%s" With Key "%s"', file, aws_creds["bucket"], object_name)
+    logger.info('Uploading File "%s" To S3 Bucket "%s" With Key "%s"', file, aws_creds["bucket"], file_name)
 
     s3_client = get_s3_client()
     # TODO: check if object_name already exists in bucket, if so, append -# identifier to it
     try:
-        s3_client.upload_fileobj(Fileobj=file, Bucket=aws_creds["bucket"], Key=str(object_name))
+        s3_client.upload_fileobj(Fileobj=file, Bucket=aws_creds["bucket"], Key=str(file_name))
         return True
     except ClientError as e:
         logger.warn('Error Occured Uploading File %s To S3 Bucket: "%s"', file, aws_creds["bucket"], e)
