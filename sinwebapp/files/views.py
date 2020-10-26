@@ -122,7 +122,7 @@ def download_file(request):
                 logger.info('here i am: %s', s3_file)
                 logger.info('heres my body: %s', s3_file['Body'])
                 try:
-                    response = FileResponse(s3_file['Body'], as_attachment=True, filename=f"{sin_number}.pdf", contenttype="application/pdf")
+                    response = FileResponse(s3_file['Body'], as_attachment=True, filename=f"{sin_number}.pdf")
                 except:
                     e = sys.exc_info()[0]
                     f = sys.exc_info()[1]
