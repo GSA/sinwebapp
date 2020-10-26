@@ -288,6 +288,10 @@ export class SubmitDisplayComponent implements OnInit {
     })
   }
 
+  public test(msg: string){
+    console.log(msg);
+  }
+
   public bypassFileUpload(){ this.step_2_complete=true; }
 
   public editFields(){ this.step_1_complete = false; }
