@@ -119,9 +119,9 @@ def download_file(request):
             if APP_ENV == 'cloud':
                 # todo: download multiple files for a given sin
                 s3_file = download(f'{sin_number}.pdf')
-                logger.info('here i am: %s', s3_file)
+                logger.info('here i am: %s', s3_file)['Body']
                 response = FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf", contenttype="application/pdf")
-                response['Content-Disposition'] = f"attachment; filename={sin_number}.pdf"
+                logger.info('here i am again: %s', response)
             else:
                 local_file_path = os.path.join(LOCAL_SAVE_DIR,f"{sin_number}.pdf")
                 response = FileResponse(open(local_file_path, 'rb'))
