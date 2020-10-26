@@ -118,7 +118,8 @@ def download_file(request):
             sin_number = request.GET.get('sin_number')
             if APP_ENV == 'cloud':
                 # todo: download multiple files for a given sin
-                s3_file = download(f'{sin_number}.pdf')['Body']
+                s3_file = download(f'{sin_number}.pdf')
+                logger.info('here i am: %s', s3_file)
                 response = FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf", contenttype="application/pdf")
                 response['Content-Disposition'] = f"attachment; filename={sin_number}.pdf"
             else:
