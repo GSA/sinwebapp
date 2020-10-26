@@ -174,8 +174,8 @@
                         [(ngModel)]="submit_SIN.sin_number"
                         (ngModelChange)="selectExistingSIN(exists_sin_number_input.value)"
                         #exists_sin_number_input="ngModel">
-                        <option [value]="{{ sin | json }}"
-                                *ngFor="let sin of all_SINs"> {{sin.sin_number}} </option>
+                        <option *ngFor="let sin of all_SINs"
+                                [value]="{{ sin | json }}"> {{sin.sin_number}} </option>
                 </select><br>
         </div><br>
                 <!-- SIN Number Input Error Alert-->
