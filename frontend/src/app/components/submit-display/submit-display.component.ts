@@ -246,7 +246,8 @@ export class SubmitDisplayComponent implements OnInit {
   }
 
   // processes user clicks when in Submit Existing Mode, only used in Edit Existing Mode
-  public selectExistingSIN(sin: SIN){
+  public selectExistingSIN(selection: string){
+    let sin = JSON.parse(selection);
     this.logger.log(`Selecting existing_SIN to Edit: # ${sin.sin_number}`, `${this.class_name}.selectExistingSIN`);
     this.existing_SIN = { id: sin.id, sin_number: sin.sin_number, user_id: sin.user_id, status_id: sin.status_id,
                           sin_description: sin.sin_description, sin_title: sin.sin_title };
