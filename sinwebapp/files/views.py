@@ -118,27 +118,20 @@ def download_file(request):
             sin_number = request.GET.get('sin_number')
             if APP_ENV == 'cloud':
                 # todo: download multiple files for a given sin
-                s3_file = download(f'{sin_number}.pdf')
-                logger.info('here i am: %s', s3_file)
-                logger.info('heres my body: %s', s3_file['Body'])
-                try:
-                    response = FileResponse(s3_file['Body'], as_attachment=True, filename=f"{sin_number}.pdf")
-                except:
-                    e = sys.exc_info()[0]
-                    f = sys.exc_info()[1]
-                    g = sys.exc_info()[2]
-                    logger.info('ya done fucked up: %s %s %s', e, f, g)
-                
-                logger.info('here i am again: %s', response)
+                s3_file = download(f'{sin_number}.pdf')['Body']
+                return FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf")
+                    
             else:
                 local_file_path = os.path.join(LOCAL_SAVE_DIR,f"{sin_number}.pdf")
-                response = FileResponse(open(local_file_path, 'rb'))
+                return FileResponse(open(local_file_path, 'rb'))
         else:
             logger.warn('No Query Parameter Provided')
             response = { 'message': 'No Query Parameter Provided'}
+            return JsonResponse(response, status=400, safe=False)
     else:
         logger.warn('Request Attempted To Access /files/download/ Without GET')
         response = { 'message': 'Request Attempted To Access /files/download/ Without GET'}
+        return JsonResponse(response, status=405, safe=False)
 
     return response
 
@@ -170,6 +163,8 @@ def list_files(request):
                 for item in raw_list:
                     response.append({"index": index, "filename": f"{item['Key']}"})
                     index+=1
+
+                return JsonResponse(response, safe=False)
             else:
                 whole_file_list = os.listdir(LOCAL_SAVE_DIR)
                 response = []
@@ -179,6 +174,8 @@ def list_files(request):
                     if sin_number in item:
                         response.append({"index": index, "filename": item})
                         index+=1
+                
+                return JsonResponse(response, safe=False)
 
         else:
             logger.info('No Query Parameters Detected, Listing All Files')
@@ -191,6 +188,8 @@ def list_files(request):
                 for item in raw_list:
                     response.append({"index": index, "filename": item})
                     index+=1
+                return JsonResponse(response, safe=False)
+
             else:
                 if APP_ENV == 'container':
                     logger.info('Container Environment Detected')
@@ -200,11 +199,12 @@ def list_files(request):
                     logger.info('Retrieving File List From %s', LOCAL_SAVE_DIR)
 
                 response = os.listdir(LOCAL_SAVE_DIR)
+                return JsonResponse(response, safe=False)
+
     else:
         logger.info('Request Attempted To Access /files/list/ Without GET')
-        response = { 'message': 'something went wrong'}
-    
-    return JsonResponse(response, safe=False)
+        response = { 'message': 'Request Attempted To Access /files/list/ Without GET'}
+        return JsonResponse(response, status=405, safe=False)
 
 @login_required
 def delete_file(request):

@@ -66,9 +66,7 @@ def download(object_name):
 
     s3_client = get_s3_client()
     try:
-        logger.info('trying')
         response = s3_client.get_object(Bucket=aws_creds["bucket"], Key=object_name)
-        logger.info('did it')
         return response 
     except:
         e = sys.exc_info()[0]
