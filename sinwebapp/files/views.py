@@ -1,4 +1,4 @@
-import os
+import os, sys
 import magic 
 import copy
 
@@ -120,7 +120,15 @@ def download_file(request):
                 # todo: download multiple files for a given sin
                 s3_file = download(f'{sin_number}.pdf')
                 logger.info('here i am: %s', s3_file)
-                response = FileResponse(s3_file['Body'], as_attachment=True, filename=f"{sin_number}.pdf", contenttype="application/pdf")
+                logger.info('heres my body: %s', s3_file['Body'])
+                try:
+                    response = FileResponse(s3_file['Body'], as_attachment=True, filename=f"{sin_number}.pdf", contenttype="application/pdf")
+                except:
+                    e = sys.exc_info()[0]
+                    f = sys.exc_info()[1]
+                    g = sys.exc_info()[2]
+                    logger.info('ya done fucked up: %s %s %s', e, f, g)
+                
                 logger.info('here i am again: %s', response)
             else:
                 local_file_path = os.path.join(LOCAL_SAVE_DIR,f"{sin_number}.pdf")

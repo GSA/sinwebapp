@@ -71,11 +71,10 @@ def download(object_name):
         logger.info('did it')
         return response 
     except:
-        logger.info('failed it')
         e = sys.exc_info()[0]
         f = sys.exc_info()[1]
         g = sys.exc_info()[2]
-        logger.warn('Error Occured Downloading Attachment For SIN # %s From S3 Bucket %s: %s', object_name, aws_creds["bucket"], e)
+        logger.warn('Error Occured Downloading Attachment For SIN # %s From S3 Bucket %s: %s', object_name, aws_creds["bucket"])
         logger.warn('Error: %s %s %s', e, f, g)
         return None
 
