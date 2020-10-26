@@ -172,6 +172,8 @@
                         required 
                         [disabled]="step_1_complete"
                         [(ngModel)]="submit_SIN.sin_number"
+                        (change) ="console.log('change: didsomething');"
+                        (ngModelChange)="console.log('ngChange: didsomethingelse'"
                         #exists_sin_number_input="ngModel">
                         <option [value]="sin.sin_number"
                                 *ngFor="let sin of all_SINs"
