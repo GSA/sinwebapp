@@ -1,4 +1,4 @@
-import boto3
+import boto3, sys
 from botocore.exceptions import ClientError
 
 from core.settings import aws_creds
@@ -26,7 +26,7 @@ def get_s3_session():
 def create_bucket(bucket_name, region=None):
     logger = DebugLogger("sinwebapp.files.s3_manager.create_bucket").get_logger()
     debug_region = "No Region" if region is None else region
-    logger.info('Initialzing S3 Bucket "%s" In Region: %s', bucket_name, debug_region)
+    logger.info('Initialzing S3 Bucket %s In Region: %s', bucket_name, debug_region)
 
     try:
         if region is None:
@@ -47,7 +47,7 @@ def create_bucket(bucket_name, region=None):
 # fails.
 def upload(file, file_name):
     logger = DebugLogger("sinwebapp.files.s3_manager.upload").get_logger()
-    logger.info('Uploading File "%s" To S3 Bucket "%s" With Key "%s"', file, aws_creds["bucket"], file_name)
+    logger.info('Uploading File %s To S3 Bucket %s With Key %s', file, aws_creds["bucket"], file_name)
 
     s3_client = get_s3_client()
     # TODO: check if object_name already exists in bucket, if so, append -# identifier to it
@@ -55,7 +55,7 @@ def upload(file, file_name):
         s3_client.upload_fileobj(Fileobj=file, Bucket=aws_creds["bucket"], Key=str(file_name))
         return True
     except ClientError as e:
-        logger.warn('Error Occured Uploading File %s To S3 Bucket: "%s"', file, aws_creds["bucket"], e)
+        logger.warn('Error Occured Uploading File %s To S3 Bucket: %s', file, aws_creds["bucket"], e)
         return False
 
 # Returns download if 'file_name' is found within S3. Returns None if 'file_name' doesn't 
@@ -66,10 +66,17 @@ def download(object_name):
 
     s3_client = get_s3_client()
     try:
+        logger.info('trying')
         response = s3_client.get_object(Bucket=aws_creds["bucket"], Key=object_name)
+        logger.info('did it')
         return response 
-    except Exception as e:
-        logger.warn('Error Occured Downloading Attachment For SIN # %s From S3 Bucket "%s": %s', object_name, aws_creds["bucket"], e)
+    except:
+        logger.info('failed it')
+        e = sys.exc_info()[0]
+        f = sys.exc_info()[1]
+        g = sys.exc_info()[2]
+        logger.warn('Error Occured Downloading Attachment For SIN # %s From S3 Bucket %s: %s', object_name, aws_creds["bucket"], e)
+        logger.warn('Error: %s %s %s', e, f, g)
         return None
 
 # Returns True if 'file_name' is successfully deleted from S3.
