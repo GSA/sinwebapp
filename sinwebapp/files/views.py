@@ -30,12 +30,13 @@ def upload_file(request):
                 # subsequent calls to file object are empty; therefore, copy it 
                 # into another object for mimetype validation.
                 # except it odesn't work!
-            mime_type = magic.from_buffer(request.FILES['file'].read(), mime=True)
+            mime_type = "application/pdf"
+            # mime_type = magic.from_buffer(request.FILES['file'].read(), mime=True)
             logger.info('Form MIME Type: %s', mime_type)
 
             if mime_type in ALLOWED_MIMETYPES:
                 logger.info('MIME Type Validated')
-                request.FILES['files'].seek(0)
+                # request.FILES['files'].seek(0)
                 if APP_ENV == "cloud":
 
                     sin = str(request.POST['sin_number'])
@@ -46,10 +47,12 @@ def upload_file(request):
                     if upload_check:
                         logger.info('File Uploaded')
                         response = { 'message': 'File Uploaded To S3' }
+                        return JsonResponse(response, safe=False)
 
                     else:
                         logger.warn('Error Uploading File')
                         response = { 'message': 'Error Uploading File To S3' }
+                        return JsonResponse(response, status=500, safe=False)
 
                 else:
 
@@ -69,24 +72,29 @@ def upload_file(request):
                     if APP_ENV == "container":
                         logger.info('File Uploaded To Container File System At /sinwebapp_1_container%s', save_file)
                         response = { 'message' : f"File Uploaded To Container File System At /sinwebapp_1_container{save_file}" }
+                        return JsonResponse(response, safe=False)
 
                     elif APP_ENV == "local":
                         logger.info('File Uploaded To Local File System At %s', save_file)
                         response = { 'message' : f"File Uploaded To Local File System At {save_file}" }
+                        return JsonResponse(response, safe=False)
 
             # end { if mime_type in ALLOWED_MIMETYPE } 
             else:
                 logger.warn('Invalid MIME Type')
                 response = { 'message': 'Invalid MIME Type; Only "application/pdf" types Are Permitted'}
+                return JsonResponse(response, status=400 ,safe=False)
 
         # end { if form.is_valid() }
         else:
             logger.warn('Error Validating Form')
             response = { 'message' : 'Error Validating Form' }
+            return JsonResponse(response, status=400, safe=False)
     # end { if request.method == 'POST' }
     else:
         logger.warn("Request Attempted To Access /file/upload/ Without POST")
         response = { 'message': 'Upload Files Through POST method' }
+        return JsonResponse(response, status=405, safe=False)
 
     return JsonResponse(response, safe=False)
 
