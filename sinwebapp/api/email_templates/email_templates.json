@@ -1,0 +1,30 @@
+{
+    "approver_notify":{
+        "subject":"Core Contract Data Automation: Change Request Received - Approval Pending",
+        "body":"A {CHANGE_REQUEST_TYPE} was submitted for {SIN}. You are receiving this notification because you were listed as the reviewer for the following {CHANGE_REQUEST_TYPE}. \n \n Please review the change request and approve / deny the request through the Core Contract Data Automation Application. {LINK_TO_APP} \n \n If you have any questions regarding this request or believe you received this notification in error, please contact us. \n \n \n Submitter: {SUBMITTED_NAME} \n  Submitter email: {SUBMITTER_EMAIL} \n Request made on: {DATE} \n"
+    },
+    "approver_terminate":{
+        "subject":"",
+        "body":""
+    },
+    "reviewer_notify":{
+        "subject":"Core Contract Data Automation: Change Request Received - Review Pending",
+        "body": "A {CHANGE_REQUEST_TYPE} request was submitted for {SIN}. You are receiving this notification because you were listed as the reviewer for the following {CHANGE_REQUEST_TYPE}. \n \n Please review the change request and approve / deny the request through the Core Contract Data Automation Application. {LINK_TO_APP} \n \n If you have any questions regarding this request or believe you received this notification in error, please contact us. \n \n \n  Submitter: {SUBMITTED_NAME} \n  Submitter email: {SUBMITTER_EMAIL} \n Request made on: {DATE} \n"
+    },
+    "submitter_approve":{
+        "subject":"Core Contract Data Automation: Change Request Approved",
+        "body":"This email confirms that your {CHANGE_REQUEST_TYPE} was reviewed and approved for {SIN}. \n \n Request made on: {DATE} \n Approval Date: {APPROVAL_DATE} \n SIN: {SIN} \n Submitter: {SUBMITTED_NAME} \n Submitter email: {SUBMITTER_EMAIL} \n Reviewer: {APPROVAL_EMAIL} \n \n If you have any questions regarding this request, please contact us."
+    },
+    "submitter_confirm":{
+        "subject":"Core Contract Data Automation: Change Request Confirmation",
+        "body":"This email confirms that your {CHANGE_REQUEST_TYPE} request was submitted for {SIN}.\n \n Request made on: {DATE}\n SIN: {SIN}\n Submitter: {SUBMITTED_NAME}\n Submitter email: {SUBMITTER_EMAIL}\n Reviewer: {REVIEWER_EMAIL}\n \n This email confirms a change has been submitted and is not confirmation that your change has been successfully processed and approved. A notification will be sent once the change request has been reviewed.\n \n If you have any questions regarding this request, please contact us."
+    },
+    "submitter_deny":{
+        "subject":"Core Contract Data Automation: Change Request Denied",
+        "body":""
+    },
+    "submitter_terminate":{
+        "subject":"",
+        "body":""
+    }
+}
