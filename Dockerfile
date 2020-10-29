@@ -2,6 +2,8 @@
 ## TODO: replace version with ARG
 ## provide env var as ARGS in build-container.sh
 
+ARG PYTHON_VERSION
+ARG ANGULAR_VERSION
 FROM python:3.7.7-slim-stretch
 LABEL application="CCDA : Core Contract Data Automation"
 LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"]

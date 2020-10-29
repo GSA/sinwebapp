@@ -6,7 +6,7 @@ from core import settings
 import os, sys, json
 
 def get_template():
-    template_file = os.path.join(settings.BASE_DIR, 'email_templates',"email_templates.json")
+    template_file = os.path.join(settings.BASE_DIR, 'api', 'email_templates',"email_templates.json")
     with open(template_file) as f:
         template = json.load(f)
     return template
@@ -62,6 +62,12 @@ def approve_submitter(sin, approver):
         return False
 
 def deny_submitter(sin, reviewer):
+    pass
+
+def terminate_submitter(sin, approver):
+    pass
+
+def terminate_approver(sin, approver):
     pass
 
     # TODO: replace second argument with new field on SIN: reviewer [user]
