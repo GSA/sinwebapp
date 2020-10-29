@@ -39,9 +39,9 @@ def search(request):
                 return JsonResponse(response, safe=False)
 
             except Sin.DoesNotExist:
-                retrieved_sin = { 'message': 'SIN Does Not Exist' }
+                response = { 'message': 'SIN Does Not Exist' }
                 logger.warning('SIN Not Found!')
-                return JsonResponse(retrieved_sin, status=404, safe=False)
+                return JsonResponse(response, status=404, safe=False)
 
         elif 'user_email' in request.GET:
             user_email = request.GET.get('user_email')
@@ -57,12 +57,12 @@ def search(request):
                     'metadata': metadata,
                     'records' : retrieved_sin
                 }
-                return JsonResponse(retrieved_sin, safe=False)
+                return JsonResponse(response, safe=False)
 
             except User.DoesNotExist:
-                retrieved_sin = { 'message': 'User Does Not Exist'}
+                response = { 'message': 'User Does Not Exist'}
                 logger.warning('User Not Found!')
-                return JsonResponse(retrieved_sin, status=404, safe=False)
+                return JsonResponse(response, status=404, safe=False)
 
 
         elif 'user_id' in request.GET:
@@ -79,12 +79,12 @@ def search(request):
                     'metadata': metadata,
                     'records' : retrieved_sin
                 }
-                return JsonResponse(retrieved_sin, safe=False)
+                return JsonResponse(response, safe=False)
 
             except User.DoesNotExist:
-                retrieved_sin = {'message': 'User Does Not Exist'}
+                response = {'message': 'User Does Not Exist'}
                 logger.warning('User Not Found!')
-                return JsonResponse(retrieved_sin, status=404, safe=False)
+                return JsonResponse(response, status=404, safe=False)
 
 
         elif 'status_id' in request.GET:
@@ -102,7 +102,7 @@ def search(request):
                     'metadata': metadata,
                     'records' : retrieved_sin
                 } 
-                return JsonResponse(retrieved_sin, safe=False)
+                return JsonResponse(response, safe=False)
 
             except User.DoesNotExist:
                 retrieved_sin = { 'message': 'Status Does Not Exist' }
@@ -138,14 +138,14 @@ def sins(request):
                 'records': retrieved_sins
             }
             logger.info('SINs Found!')
-            return JsonResponse(retrieved_sins, safe=False)
+            return JsonResponse(response, safe=False)
 
         except Sin.DoesNotExist:
-            retrieved_sins = { 'message': 'SINs Not Found' }
+            response = { 'message': 'SINs Not Found' }
             logger.info('SINs Not Found!')
-            return JsonResponse(retrieved_sins, status=404, safe=False)
-    else:
+            return JsonResponse(response, status=404, safe=False)
 
+    else:
         logger.info('Request Method Rejected')
         response = { 'message' : "Method Not Allowed" }
         return JsonResponse(response, status=405, safe=False)
@@ -160,15 +160,12 @@ def status(request):
         logger.info('Retrieving All Statuses')
 
         try:
-            group_list = request.user.groups.values_list('name', flat=True)
             retrieved_statuses = list(Status.objects.values())
-            if len(retrieved_statuses)==0:
-                retrieved_statues = { 'message' : '0 Statuses Found' }
-                logger.info('0 Statuses Found!')
-                return JsonResponse(retrieved_statuses, status=404, safe=False)
-            else:
-                logger.info('Statuses Found!')
-                return JsonResponse(retrieved_statuses, safe=False)
+            metadata = {
+                'count': len(retrieved_statuses)
+            }
+            logger.info('Statuses Found!')
+            return JsonResponse(retrieved_statuses, safe=False)
 
         except Status.DoesNotExist:
             retrieved_statuses = {'message': 'Statuses Do Not Exist'}
