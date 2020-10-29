@@ -1,11 +1,7 @@
 from django.http import JsonResponse
 from django.contrib.auth.models import Group, User
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 
 from api.models import Sin, Status
-from api.models import STATUS_STATES, SIN_FIELDS
-from authentication.db_init import GROUPS
 from debug import DebugLogger
 
 
@@ -33,7 +29,7 @@ def search(request):
                     'sin_description': raw_sin.sin_description
                 }
                 metadata = {
-                    'count': 0
+                    'count': 1
                 }
                 response = {
                     'metadata': metadata,
@@ -55,7 +51,7 @@ def search(request):
                 logger.info('User Found!')
                 retrieved_sin = list(Sin.objects.filter(user=search_user).values())
                 metadata = {
-                    'count': 0
+                    'count': len(retrieved_sin)
                 }
                 response = {
                     'metadata': metadata,
@@ -77,7 +73,7 @@ def search(request):
                 logger.info('User Found!')
                 retrieved_sin = list(Sin.objects.filter(user=search_user).values())
                 metadata = {
-                    'count': 0
+                    'count': len(retrieved_sin)
                 }
                 response = {
                     'metadata': metadata,
@@ -100,7 +96,7 @@ def search(request):
                 logger.info('Status Found!')
                 retrieved_sin = list(Sin.objects.filter(status=search_status).values())
                 metadata = {
-                    'count': 0
+                    'count': len(retrieved_sin)
                 }
                 response = {
                     'metadata': metadata,
@@ -125,4 +121,61 @@ def search(request):
         return JsonResponse(response, status=405, safe=False)
 
 def sins(request):
-    pass
+    logger = DebugLogger("sinwebapp.api.views.sins_info_all").get_logger()
+    logger.info('Verifying Request Method')
+
+    if request.method == "GET":
+        logger.info('Request Method Verified')
+        logger.info('Retrieving All SIN Info')
+
+        try:
+            retrieved_sins = list(Sin.objects.values())
+            metadata = {
+                    'count': len(retrieved_sins)
+            }
+            response = {
+                'metadata': metadata,
+                'records': retrieved_sins
+            }
+            logger.info('SINs Found!')
+            return JsonResponse(retrieved_sins, safe=False)
+
+        except Sin.DoesNotExist:
+            retrieved_sins = { 'message': 'SINs Not Found' }
+            logger.info('SINs Not Found!')
+            return JsonResponse(retrieved_sins, status=404, safe=False)
+    else:
+
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)
+
+def status(request):
+    logger = DebugLogger('sinwebapp.api.views_public.status').get_logger()
+    logger.info('Verifying Request Method')
+
+    if request.method == "GET":
+
+        logger.info('Request Method Verified')
+        logger.info('Retrieving All Statuses')
+
+        try:
+            group_list = request.user.groups.values_list('name', flat=True)
+            retrieved_statuses = list(Status.objects.values())
+            if len(retrieved_statuses)==0:
+                retrieved_statues = { 'message' : '0 Statuses Found' }
+                logger.info('0 Statuses Found!')
+                return JsonResponse(retrieved_statuses, status=404, safe=False)
+            else:
+                logger.info('Statuses Found!')
+                return JsonResponse(retrieved_statuses, safe=False)
+
+        except Status.DoesNotExist:
+            retrieved_statuses = {'message': 'Statuses Do Not Exist'}
+            logger.info('Statuses Not Found!')
+            return JsonResponse(retrieved_statuses, status=404, safe=False)
+    
+    else: 
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)

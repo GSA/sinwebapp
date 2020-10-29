@@ -479,7 +479,8 @@ def sin_info_all(request):
     logger.info('Verifying Request Method')
 
     if verify_method(request, ["GET"]):
-        logger.info('Retrieving All SIN Info...')
+        logger.info('Request Method Verified')
+        logger.info('Retrieving All SIN Info')
 
         try:
             retrieved_sins = list(Sin.objects.values())
@@ -601,20 +602,22 @@ def user_status_info(request):
 @login_required
 def status_info_all(request):
     logger = DebugLogger('sinwebapp.api.views.status_info_all').get_logger()
-
     logger.info('Verifying Request Method')
 
     if verify_method(request, ["GET"]):
 
+        logger.info('Request Method Verified')
         logger.info('Retrieving All Statuses')
 
         try:
             group_list = request.user.groups.values_list('name', flat=True)
             retrieved_statuses = list(Status.objects.values())
+
             if len(retrieved_statuses)==0:
                 retrieved_statues = { 'message' : '0 Statuses Found' }
                 logger.info('0 Statuses Found!')
                 return JsonResponse(retrieved_statuses, status=404, safe=False)
+                
             else:
                 logger.info('Statuses Found!')
                 return JsonResponse(retrieved_statuses, safe=False)
