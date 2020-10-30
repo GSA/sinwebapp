@@ -110,6 +110,15 @@ TEMPLATES = [
     },
 ]
 
+# Public REST Framework Configuration 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 # Database Configuration Settings
 DATABASES = {
     'default': {
@@ -165,3 +174,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # S3 File Upload Configuration
 ALLOWED_MIMETYPES=['application/pdf']
+
