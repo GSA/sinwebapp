@@ -1,39 +1,14 @@
 from django.urls import path, include
 from api import views_private
 from api import views_public
-from rest_framework import routers, serializers, viewsets
-from api.models import Sin, Status
+from api.serializers import SinViewSet, StatusViewSet
+from rest_framework import routers
 
 app_name = 'api'
 
-# REST Framework Serializers and Viewsets 
-
-class SinSerializer(serializers.HyperlinkedModelSerializer):
-    status = serializers.StringRelatedField(many=False)
-    user = serializers.StringRelatedField(many=False)
-
-    class Meta:
-        model = Sin 
-        fields = ['sin_number', 'sin_title', 'sin_description', 'status', 'user']
-
-class SinViewSet(viewsets.ModelViewSet):
-    queryset = Sin.objects.all()
-    serializer_class = SinSerializer
-
-class StatusSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Status
-        fields = ['name','description']
-
-class StatusViewSet(viewsets.ModelViewSet):
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-
-# URL Routing
-
 router = routers.DefaultRouter()
 router.register(r'sins', SinViewSet)
-router.register(r'statuses', StatusViewSet)
+router.register(r'status', StatusViewSet)
 
 urlpatterns= [
     # application endpoints
