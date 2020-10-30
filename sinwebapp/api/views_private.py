@@ -29,9 +29,7 @@ def user_info(request):
     if verify_method(request, ["GET"]):
 
         logger.info('Request Method Verified')
-        logger.info('Retrieving User Info')
         logger.info('Request Email: %s', request.user.email)
-        logger.info('Request User Groups: %s', request.user.groups)
 
         if hasattr(request.user, 'email') and hasattr(request.user, 'groups'):
 
@@ -43,6 +41,7 @@ def user_info(request):
             } 
             return JsonResponse(response, safe=False)
         else:
+            logger.info('No User Signed In')
             response = { 'message': "No User Signed In" }
             return JsonResponse(response, status=403, safe=False)
     else:

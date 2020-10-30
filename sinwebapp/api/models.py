@@ -16,6 +16,9 @@ class Status(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=200)
 
+    def __str__(self):
+        return '{}'.format(self.name)
+
 class SinData(models.Model):
     sin_number = models.CharField(max_length=1000)
     sin_title = models.CharField(max_length=1000, null=True)
@@ -31,6 +34,9 @@ class SinData(models.Model):
     olm_flag = models.BooleanField()
     max_order_limit = models.IntegerField()
 
+    def __str__(self):
+        return '{}: {}'.format(self.sin_number, self.sin_title)
+
 class Sin(models.Model):
     sin_map = models.ForeignKey(SinData, on_delete=models.PROTECT, null= True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -38,6 +44,9 @@ class Sin(models.Model):
     sin_number = models.CharField(max_length=1000)
     sin_title = models.CharField(max_length=1000, null=True)
     sin_description = models.CharField(max_length=1000, null=True)
+
+    def __str__(self):
+        return '{}: {}'.format(self.sin_number, self.sin_title)
 
 class Audit_Log(models.Model):
     sin = models.ForeignKey(Sin, on_delete=models.CASCADE)
