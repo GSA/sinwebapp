@@ -46,6 +46,7 @@ class SinParamViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(sin_number=sin_number)
         
         if status is not None:
+            search_status = Status.objects.get(name=status)
             queryset = queryset.filter(status=status)
 
         return queryset
