@@ -26,9 +26,9 @@ class SinParamViewSet(viewsets.ModelViewSet):
         queryset = Sin.objects.all()
         sin_number = self.request.query_params.get('sin_number', None)
         user_email = self.request.query_params.get('user_email', None)
-        user_id = self.request.query_param.get('user_id', None)
-        status_id = self.request.query_param.get('status_id', None)
-        status = self.request.query_param.get('status',None)
+        user_id = self.request.query_params.get('user_id', None)
+        status_id = self.request.query_params.get('status_id', None)
+        status = self.request.query_params.get('status',None)
 
         if user_id is not None:
             search_user = User.objects.get(id=user_id)
@@ -37,7 +37,7 @@ class SinParamViewSet(viewsets.ModelViewSet):
         if user_email is not None:
             search_user = User.objects.get(email=user_email)
             queryset = queryset.filter(user=search_user)
-       
+        
         if status_id is not None:
             search_status = Status.objects.get(id=status_id)
             queryset = queryset.filter(status=search_status)

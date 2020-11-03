@@ -115,8 +115,8 @@
 541612HC,"541612HC Agency Human Capital Strategy, Policy and Operations                   ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
 541612LOB,541612LOB   Human Resources Line of Business (HRLOB)                            ,NULL,2020-07-01,NULL,N,N,P,R799,N,N,1000000
 541612LR,541612LR Labor Relations                                                        ,NULL,2019-10-01,NULL,N,N,S,R418,N,N,1000000
-541612OPM,541612OPM Private Shared Service Center for Core HR Services                    ,NULL,2019-10-01,6/30/2020,N,N,S,R799,N,N,1000000
-541612PSSC,541612PSSC Private Shared Service Center for HR Services                        ,NULL,2019-10-01,6/30/2020,N,N,S,R799,N,N,1000000
+541612OPM,541612OPM Private Shared Service Center for Core HR Services                    ,NULL,2019-10-01,2020-06-30,N,N,S,R799,N,N,1000000
+541612PSSC,541612PSSC Private Shared Service Center for HR Services                        ,NULL,2019-10-01,2020-06-30,N,N,S,R799,N,N,1000000
 561EEO,561EEO EEO Services                                                             ,NULL,2019-10-01,NULL,N,N,S,R499,N,N,1000000
 56131,56131 Talent Acquisition                                                        ,NULL,2019-10-01,NULL,N,N,S,R431,N,N,1000000
 611430TD,611430TD Talent Development                                                     ,NULL,2019-10-01,NULL,N,N,B,R408,N,N,1000000
@@ -166,9 +166,9 @@
 333997,333997 Scales and Balances                                                      ,NULL,2019-10-01,NULL,N,N,C,6670,N,N,400000
 54151ECOM,54151ECOM Electronic Commerce and Subscription Services                         ,NULL,2019-10-01,NULL,Y,N,C,D304,N,N,500000
 33411,33411 Purchasing of New Electronic Equipment                                    ,NULL,2019-10-01,NULL,Y,N,C,7010,Y,N,500000
-33411REF,33411REF Purchase of Used or Refurbished Equipment                              ,NULL,2019-10-01,9/30/2020,Y,N,C,7010,N,N,500000
+33411REF,33411REF Purchase of Used or Refurbished Equipment                              ,NULL,2019-10-01,2020-09-30,Y,N,C,7010,N,N,500000
 532420L,532420L Leasing of New Electronic Equipment                                     ,NULL,2019-10-01,NULL,Y,N,S,W070,N,N,500000
-532420R,532420R Daily/Short Term Rental of IT Equipment                                 ,NULL,2019-10-01,9/30/2020,Y,N,S,W070,N,N,500000
+532420R,532420R Daily/Short Term Rental of IT Equipment                                 ,NULL,2019-10-01,2020-09-30,Y,N,S,W070,N,N,500000
 811212,811212 Computer and Office Machine Repair and Maintenance                       ,NULL,2019-10-01,NULL,Y,N,S,J070,N,N,500000
 54151HACS,54151HACS Highly Adaptive Cybersecurity Services (HACS)                         ,NULL,2019-10-01,NULL,Y,N,S,D310,N,N,500000
 54151HEAL,54151HEAL Health Information Technology Services                                ,NULL,2019-10-01,NULL,Y,N,S,D399,N,N,500000

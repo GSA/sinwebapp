@@ -66,8 +66,14 @@ def init_sindata(app, schema_editor):
                 g = sys.exc_info()[2]
                 logger.warn('Error Occured For (sin_number, sin_title, description): (%s, %s, %s)', 
                                 row[0], row[1], row[2])
-                logger.error("Error Occurred Proccessing SINData: %s, \n :%s \n :%s \n", e, f, g)
+                logger.error("Error Occurred Proccessing SINData: \n %s, \n :%s \n :%s \n", e, f, g)
                 logger.warn('Preventing Insertion Into SINData Table')
+                logger.info('Spreadsheet Row That Caused Error Given Below')
+                logger.info('row[0] = %s row[1], %s row[2], %s row [3] %s', row[0], row[1], row[2], row[3])
+                logger.info('row[4] = %s row[5], %s row[6], %s row [7] %s', row[4], row[5], row[6], row[7])
+                logger.info('row[8] = %s row[9], %s row[10], %s row [11] %s', row[8], row[9], row[10], row[11])
+
+
 
 def populate_sins(app, schema_editor):
     logger = DebugLogger("api.db_init.populate_sins").get_logger()
@@ -80,7 +86,7 @@ def populate_sins(app, schema_editor):
         e = sys.exc_info()[0]
         f = sys.exc_info()[1]
         g = sys.exc_info()[2]
-        logger.error("Error Occurred Retrieving Super User: %s, \n :%s \n :%s \n", e, f, g)
+        logger.error("Error Occurred Retrieving Super User: \n %s, \n :%s \n :%s \n", e, f, g)
 
     expired_status = Status.objects.get(id=STATUS_STATES['expired'])
 
@@ -104,8 +110,8 @@ def populate_sins(app, schema_editor):
                                             sin_number=sin['sin_number'], sin_title=sin['sin_title'], 
                                             sin_description=sin['sin_description'])
                 if count%modulo == 0:
-                    logger.info('SinData Table Entry # %s Validated', sin['sin_number'])
-                    logger.info('Passing SinData Table Entry # %s To Sin Table', sin['sin_number'])
+                    logger.info('SinData Table Entry # %s Validated', sin['id'])
+                    logger.info('Passing SinData Table Entry # %s To Sin Table', sin['id'])
     
         except:
             e = sys.exc_info()[0]
