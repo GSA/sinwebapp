@@ -1,323 +1,323 @@
 ﻿SIN,Title,Description,BeginDate,EndDate,StateAndLocal,SetAside,ServiceCommCode,PSC,TDRFlag,OLMFlag,MaxOrderLimit
-334290OS,"334290OS Overseas (International) Audio/Visual Products                         ",NULL,2019-10-01,NULL,N,N,C,5820,Y,N,250000
-334310,"334310 Professional Audio/Video Products                                        ",NULL,2019-10-01,NULL,N,N,B,3610,Y,N,250000
-334511T,"334511T Telecommunications Equipment                                            ",NULL,2019-10-01,NULL,N,N,B,5820,Y,N,1000000
-541990AV,"541990AV Professional Audio/Video Services                                      ",NULL,2019-10-01,NULL,N,N,S,R499,Y,N,250000
-518210DC,"518210DC Document Conversion Services                                           ",NULL,2019-10-01,NULL,N,N,B,R799,N,N,1000000
-541611LIT,"541611LIT Litigation Support Services                                           ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
-561439,"561439 Document Production On-site and Off-site Services                        ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
-561990,"561990 Document Destruction Services                                            ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
-561499M,"561499M Mail Management, Systems, Processing Equipment and Related Solutions    ",NULL,2019-10-01,NULL,N,N,S,R604,N,N,1000000
-811212R,"811212R Repair of Government-Owned Equipment (for equipment NOT under Maintenance Service Agreement)                                                            ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-811212SA,"811212SA Maintenance Service Agreement For Office Equipment                     ",NULL,2019-10-01,NULL,N,N,B,J099,N,N,350000
-511130,"511130 Books and Pamphlets                                                      ",NULL,2019-10-01,NULL,N,N,B,7610,N,N,1000000
-5191M,"5191M Entertainment, News and Library Media                                     ",NULL,2019-10-01,NULL,N,N,B,7690,N,N,1000000
-511120,"511120 Periodicals, Subscriptions, Online Book Selling and Lending Library Services                                                                             ",NULL,2019-10-01,NULL,N,N,B,7630,N,N,1000000
-561410,"561410 Editorial, Publishing, and Library Media Services                        ",NULL,2019-10-01,NULL,N,N,S,R499,N,N,1000000
-541611O,"541611O Office Management Needs Assessment and Analysis Services                ",NULL,2019-10-01,NULL,N,N,B,R799,N,N,1000000
-541614OR,"541614OR Office Relocation and Reconfiguration                                  ",NULL,2019-10-01,NULL,N,N,B,N071,N,N,500000
-561110,"561110   Office Administrative Services                                         ",NULL,2020-07-01,NULL,N,N,S,R699,N,N,1000000
-561320SBSA,"561320SBSA Temporary Staffing (SBSA)                                            ",NULL,2019-10-01,NULL,N,Y,S,R699,N,N,250000
-561499N,"561499N Network Connectivity Support Services                                   ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
-333318,"333318 Dictating and Transcribing Machines and Systems                          ",NULL,2019-10-01,NULL,N,N,B,T016,N,N,350000
-333318SBSA,"333318SBSA Office Security Equipment and IT Products (Small Business Set Aside) ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-339940,"339940 Office Products                                                          ",NULL,2019-10-01,NULL,N,N,C,3610,Y,N,250000
-339940OS4,"339940OS4 OS4 Office Products and Supplies                                      ",NULL,2019-10-01,NULL,N,N,C,7510,Y,N,250000
-339940OVER,"339940OVER OS4 Overseas Office Products and Supplies                            ",NULL,2019-10-01,NULL,N,N,C,7510,Y,N,250000
-339940SVC,"339940SVC  Office Supply Support Services                                       ",NULL,2020-01-01,NULL,N,N,B,7510,Y,N,250000
-325992,"325992 Micro-photographic Film, Paper, Chemical Preparation and Equipment       ",NULL,2019-10-01,NULL,N,N,C,6750,N,N,250000
-333244,"333244 Post Copying/Finishing Equipment and Supplies                            ",NULL,2019-10-01,NULL,N,N,C,3610,N,N,350000
-333249,"333249 3D Printing Solutions and Additive Manufacturing Solutions               ",NULL,2019-10-01,NULL,N,N,B,3611,N,N,750000
-333316C,"333316C Copiers and Digital Duplicating Equipment                               ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-333316CPC,"333316CPC Cost-per-Copy Plan for Copiers (to include Analog, Digital, Multifunctional and Engineer Copiers)                                                     ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-333316F,"333316F Flat Rate Monthly Fee for Copiers (to include Analog, Digital, Multifunctional and Engineer Copiers)                                                    ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-333316M,"333316M Multi-Media Readers, Reader-Printers and Systems                        ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-333316OS,"333316OS Overseas Copiers and Supplies                                          ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-333316P,"333316P Photographic Supplies                                                   ",NULL,2019-10-01,NULL,N,N,C,6720,N,N,250000
-532420C,"532420C Copier Rental Solutions                                                 ",NULL,2019-10-01,NULL,N,N,B,3610,N,N,350000
-532420LC,"532420LC Operating Lease Plan For Copiers                                       ",NULL,2019-10-01,NULL,N,N,B,W074,N,N,350000
-532420LT,"532420LT LTOP & Operating Lease Plan for all Non-Copier Office Machinery        ",NULL,2019-10-01,NULL,N,N,B,W074,N,N,350000
-532420LTOP,"532420LTOP Lease to Ownership Plans (LTOP) Copier                               ",NULL,2019-10-01,NULL,N,N,B,W074,N,N,350000
-541611MPS,"541611MPS Managed Print Services                                                ",NULL,2019-10-01,NULL,N,N,S,3610,N,N,1000000
-493110RM,"493110RM Physical Records Management Services                                   ",NULL,2019-10-01,NULL,N,N,B,R616,N,N,1000000
-518210ERM,"518210ERM Electronics Records Management Solutions                              ",NULL,2019-10-01,NULL,N,N,B,R617,N,N,1000000
-561210FAC,"561210FAC  Facilities Maintenance and Management                                ",NULL,2019-10-01,NULL,N,N,B,R799,Y,N,1000000
-238320,"238320 Surface Preparation                                                      ",NULL,2019-10-01,NULL,N,N,B,R499,Y,N,1000000
-541690E,"541690E  Energy Services                                                        ",NULL,2019-10-01,NULL,N,N,S,R404,Y,N,1000000
-561210FS,"561210FS Facilities Support Services                                            ",NULL,2019-10-01,NULL,N,N,B,R799,N,N,1000000
-561730,"561730 Grounds Maintenance                                                      ",NULL,2019-10-01,NULL,N,N,B,S208,Y,N,1000000
-334512,"334512 Total Solution Support Products for Facilities Management Systems        ",NULL,2019-10-01,NULL,Y,N,B,6350,N,N,250000
-541513,"541513 Smart Buildings Systems Integration                                      ",NULL,2019-10-01,NULL,N,N,B,J035,Y,N,1000000
-561210SB,"561210SB Smart Buildings Systems Integrator                                     ",NULL,2019-10-01,NULL,Y,N,B,J035,N,N,1000000
-811310MR,"811310MR Machine and Equipment Maintenance Repair                               ",NULL,2019-10-01,NULL,N,N,B,7310,Y,N,1000000
-322291,"322291 Restroom Products                                                        ",NULL,2019-10-01,NULL,N,N,C,8540,Y,N,250000
-326199,"326199 Waste and Recycling Containers and Receptacles - Outdoor and Indoor Use  ",NULL,2019-10-01,NULL,N,N,C,7240,Y,N,250000
-332321,"332321 Doors, Windows, Skylights, Panels, and Shutters                          ",NULL,2019-10-01,NULL,N,N,C,5640,N,N,250000
-333318F,"333318F Floor Care Cleaning and Equipment                                       ",NULL,2019-10-01,NULL,N,N,C,7910,Y,N,250000
-339113G,"339113G Gloves                                                                  ",NULL,2019-10-01,NULL,N,N,C,8465,Y,N,250000
-339994,"339994 Hand Floor Cleaning Equipment                                            ",NULL,2019-10-01,NULL,N,N,C,7920,Y,N,250000
-311423,"311423 Non Perishable foods                                                     ",NULL,2019-10-01,NULL,N,N,C,7220,Y,N,300000
-332215T,"332215T Cooking Utensils                                                        ",NULL,2019-10-01,NULL,N,N,C,7340,Y,N,300000
-333241,"333241 Food Preparation Equipment                                               ",NULL,2019-10-01,NULL,N,N,C,7320,Y,N,300000
-333415REM,"333415REM Refrigeration Equipment                                               ",NULL,2019-10-01,NULL,N,N,C,4110,Y,N,300000
-335220,"335220 Sanitation and Warewashing Equipment                                     ",NULL,2019-10-01,NULL,N,N,C,3910,Y,N,300000
-336999,"336999 Food Center Concepts                                                     ",NULL,2019-10-01,NULL,N,N,C,7310,Y,N,300000
-238160,"238160 Roofing Products and Services Solutions                                  ",NULL,2019-10-01,NULL,N,N,B,5650,N,N,250000
-321991,"321991 Mobile Homes, Travel Trailers                                            ",NULL,2019-10-01,NULL,N,N,B,2330,N,N,500000
-332311,"332311 Above Ground Storage Tanks/Systems                                       ",NULL,2019-10-01,NULL,N,N,C,5430,N,N,300000
-332311P,"332311P Pre-Engineered and Prefabricated Buildings and Structures for Storage Solutions                                                                         ",NULL,2019-10-01,NULL,N,N,C,5410,N,N,250000
-332312,"332312 Temporary and Permanent Structures                                       ",NULL,2019-10-01,NULL,N,N,C,5420,N,N,250000
-532490P,"532490P Lease/Rental of Pre-Engineered/Prefabricated Buildings and Structures   ",NULL,2019-10-01,NULL,N,N,B,5410,N,N,300000
-314110,"314110 Carpet Flooring                                                          ",NULL,2019-10-01,NULL,N,N,B,S214,Y,N,500000
-314110SBSA,"314110SBSA Carpet Flooring (SBSA)                                               ",NULL,2019-10-01,NULL,N,Y,B,S214,Y,N,500000
-321918,"321918 Commercial Flooring                                                      ",NULL,2019-10-01,NULL,N,N,B,7220,Y,N,500000
-321918PF,"321918PF Portable Flooring Solutions                                            ",NULL,2019-10-01,NULL,N,N,B,5520,N,N,250000
-541614CF,"541614CF Comprehensive Furniture Management Services                            ",NULL,2019-10-01,NULL,N,N,S,N071,N,N,250000
-337127CSB,"337127CSB Chair, Convalescent (SBSA)                                            ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,500000
-339113H,"339113H Healthcare Furniture                                                    ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,500000
-3FURNISH,"3FURNISH Commercial Office Furnishings (SBSA)                                   ",NULL,2019-10-01,NULL,N,Y,C,7290,Y,N,250000
-337121H,"337121H Household, Dormitory & Quarters Furniture                               ",NULL,2019-10-01,NULL,N,N,C,7105,N,N,1000000
-337122SBSA,"337122SBSA Household, Dormitory & Quarters Furniture (SBSA)                     ",NULL,2019-10-01,NULL,N,Y,C,7105,N,N,1000000
-332439MLB,"332439MLB Mail Lock Boxes                                                       ",NULL,2019-10-01,NULL,N,N,C,5140,N,N,250000
-33712,"33712 Complete Daycare, Preschool and Classroom Solutions                       ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,250000
-337122OSB,"337122OSB Park, Recreational & Outdoor Furniture (SBSA)                         ",NULL,2019-10-01,NULL,N,Y,C,5450,N,N,500000
-337127,"337127 Institutional Furniture                                                  ",NULL,2019-10-01,NULL,N,N,C,7195,N,N,250000
-337127CFSB,"337127CFSB Cafeteria and Food Service Furniture (SBSA)                          ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-337127CISB,"337127CISB Correctional Institution Furniture (SBSA)                            ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-337127INT,"337127INT International Furniture Products                                      ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,250000
-337127LFSB,"337127LFSB Library Furniture (SBSA)                                             ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-337127TLSB,"337127TLSB Tables and Lecterns (SBSA)                                           ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-33721RSB,"33721RSB Remanufactured Furniture (SBSA)                                        ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-33721SBSA,"33721SBSA Storage (SBSA)                                                        ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-33721T,"33721T Training Room, Auditorium and Theater Furniture                          ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,250000
-337215MSB,"337215MSB Mail Sorting and Distribution Furniture (SBSA)                        ",NULL,2019-10-01,NULL,N,Y,C,7110,N,N,250000
-337215SBSA,"337215SBSA Wall Units and Displays SBSA                                         ",NULL,2019-10-01,NULL,N,Y,C,7105,N,N,250000
-532289,"532289 Furniture Rental and Leasing                                             ",NULL,2019-10-01,NULL,N,N,B,7105,N,N,250000
-33721,"33721 Office Furniture                                                          ",NULL,2019-10-01,NULL,N,N,C,7125,N,N,250000
-337121P,"337121P Packaged Household Dormitory and Quarters Furniture                     ",NULL,2019-10-01,NULL,N,N,B,7105,N,N,5000000
-337127P,"337127P International Packaged Furniture                                        ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,5000000
-33721P,"33721P Packaged Office Furniture                                                ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,5000000
-339113P,"339113P Packaged Healthcare Furniture                                           ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,5000000
-339950,"339950 Signs                                                                    ",NULL,2019-10-01,NULL,N,N,C,9905,N,N,250000
-339920PARK,"339920PARK Park and Playground Equipment                                        ",NULL,2019-10-01,NULL,N,N,C,7830,N,N,500000
-339920S,"339920S Sporting Goods Equipment and Supplies                                   ",NULL,2019-10-01,NULL,N,N,C,7810,N,N,250000
-339930,"339930 Doll, Toy and Game Manufacturing                                         ",NULL,2019-10-01,NULL,N,N,C,7820,N,N,250000
-713940,"713940 Fitness Center Management Services                                       ",NULL,2019-10-01,NULL,N,N,S,M1FB,N,N,500000
-713940PACK,"713940PACK Packaged Fitness Center                                              ",NULL,2019-10-01,NULL,N,N,B,7810,N,N,500000
-812990,"812990 Personal Trainer and Aerobic/Cardio Class Leader/Instructor              ",NULL,2019-10-01,NULL,N,N,B,R497,N,N,500000
-561611,"561611 HR Support: Pre Employment Background Investigations                     ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
-541214HR,"541214HR Compensation and Benefits                                              ",NULL,2019-10-01,NULL,N,N,S,R710,N,N,1000000
-524292,"524292 Separation and Retirement                                                ",NULL,2019-10-01,NULL,N,N,S,R431,N,N,1000000
-54161,"54161 Agency Human Capital Evaluation                                           ",NULL,2019-10-01,NULL,N,N,B,R408,N,N,1000000
-541611W,"541611W Workforce Analytics and Employee Records                                ",NULL,2019-10-01,NULL,N,N,S,R431,N,N,1000000
-541612EPM,"541612EPM Employee Performance Management                                       ",NULL,2019-10-01,NULL,N,N,S,R710,N,N,1000000
-541612ER,"541612ER Employee Relations                                                     ",NULL,2019-10-01,NULL,N,N,S,R418,N,N,1000000
-541612HC,"541612HC Agency Human Capital Strategy, Policy and Operations                   ",NULL,2019-10-01,NULL,N,N,S,R799,N,N,1000000
-541612LOB,"541612LOB   Human Resources Line of Business (HRLOB)                            ",NULL,2020-07-01,NULL,N,N,P,R799,N,N,1000000
-541612LR,"541612LR Labor Relations                                                        ",NULL,2019-10-01,NULL,N,N,S,R418,N,N,1000000
-541612OPM,"541612OPM Private Shared Service Center for Core HR Services                    ",NULL,2019-10-01,2020-06-30,N,N,S,R799,N,N,1000000
-541612PSSC,"541612PSSC Private Shared Service Center for HR Services                        ",NULL,2019-10-01,2020-06-30,N,N,S,R799,N,N,1000000
-561EEO,"561EEO EEO Services                                                             ",NULL,2019-10-01,NULL,N,N,S,R499,N,N,1000000
-56131,"56131 Talent Acquisition                                                        ",NULL,2019-10-01,NULL,N,N,S,R431,N,N,1000000
-611430TD,"611430TD Talent Development                                                     ",NULL,2019-10-01,NULL,N,N,B,R408,N,N,1000000
-624SS,"624SS Social Services, Professional Counseling and Veterans' Readjustment and Behavioral Health Services                                                        ",NULL,2019-10-01,NULL,N,N,B,R799,N,N,1000000
-325611,"325611 Cleaning Products                                                        ",NULL,2019-10-01,NULL,N,N,C,7930,Y,N,250000
-325612,"325612 Disinfectants, Sterilants and Deodorizers                                ",NULL,2019-10-01,NULL,N,N,C,7930,Y,N,250000
-326220,"326220 Hoses, Valves, Fittings, Nozzles, Couplings and Related Accessories      ",NULL,2019-10-01,NULL,Y,N,C,4210,N,N,250000
-339999S,"339999S Safety Zone Products                                                    ",NULL,2019-10-01,NULL,N,N,C,4240,N,N,250000
-333914,"333914 Fuel Management Systems                                                  ",NULL,2019-10-01,NULL,N,N,C,4930,N,N,250000
-332510,"332510 Hardware Manufacturing (Hardware Store, Home Improvement Center, or MRO - Services)                                                                      ",NULL,2019-10-01,NULL,N,N,B,5340,Y,N,750000
-332510C,"332510C Hardware Store, Home Improvement Center, Industrial or General Supply Store, or Industrial Maintenance Repair and Operations (MRO) Distributor - Catalog",NULL,2019-10-01,NULL,N,N,C,5120,Y,N,750000
-333TOOL,"333TOOL Tools (Powered and Non-Powered), Tool Kits, Tool Boxes and Accessories  ",NULL,2019-10-01,NULL,N,N,C,5110,Y,N,275000
-333112,"333112 Lawn and Garden Equipment, Machinery, Implements, Tools, Products and Accessories                                                                        ",NULL,2019-10-01,NULL,N,N,B,3750,Y,N,250000
-332510S,"332510S Hardware Store, Home Improvement Center, Industrial or General Supply Store, or Industrial Maintenance Repair and Operations (MRO) Distributor - Store Front                                                                            ",NULL,2019-10-01,NULL,N,N,B,5120,Y,N,750000
-532310,"532310 Rental and Leasing of Hardware Store Products                            ",NULL,2019-10-01,NULL,N,N,B,W099,Y,N,250000
-314120,"314120 Lodging and Hospitality Supplies and Services                            ",NULL,2019-10-01,NULL,N,N,B,7230,Y,N,300000
-321920,"321920 Pallets, Plastic and Wood                                                ",NULL,2019-10-01,NULL,N,N,C,3210,N,N,250000
-324110,"324110 Propane                                                                  ",NULL,2019-10-01,NULL,N,N,C,6830,Y,N,500000
-324191,"324191 Commercial Coatings, Removers, Adhesives, Sealants and Lubricants, Petroleum and Waxes                                                                   ",NULL,2019-10-01,NULL,N,N,C,8010,Y,N,250000
-325320,"325320  Pest and Animal Control Products & Services                             ",NULL,2019-10-01,NULL,N,N,B,6840,Y,N,250000
-325998,"325998 Chemical Additives                                                       ",NULL,2019-10-01,NULL,N,N,C,6850,Y,N,250000
-325998W,"325998W Water Treatment Products and Systems                                    ",NULL,2019-10-01,NULL,N,N,C,4630,Y,N,300000
-327910,"327910 Abrasives and Blasters                                                   ",NULL,2019-10-01,NULL,N,N,C,5345,N,N,250000
-331315A,"331315A Aluminum Sheets                                                         ",NULL,2019-10-01,NULL,N,N,C,8135,N,N,250000
-332913,"332913 Plumbing Products and Bathroom Fixture Solutions                         ",NULL,2019-10-01,NULL,N,N,C,4510,N,N,250000
-332999BMS,"332999BMS Building Materials and Services                                       ",NULL,2019-10-01,NULL,N,N,C,5680,N,N,250000
-332999P,"332999P Spill Containment Units, Containment Pallets, Non-Wooden Pallets        ",NULL,2019-10-01,NULL,N,N,C,3990,N,N,250000
-3331SBSA,"3331SBSA Clearing Equipment (SBSA)                                              ",NULL,2019-10-01,NULL,N,Y,C,2320,N,N,250000
-333120,"333120 Street Repair and Cleaning Equipment and Attachments                     ",NULL,2019-10-01,NULL,N,N,C,3825,N,N,250000
-333414,"333414 Water Heaters                                                            ",NULL,2019-10-01,NULL,N,N,C,4510,N,N,250000
-333415HVAC,"333415HVAC Heating, Ventilation, and Air Conditioning (HVAC)                    ",NULL,2019-10-01,NULL,N,N,C,4130,N,N,250000
-333912,"333912 Air Compressors and Pressure Cleaners                                    ",NULL,2019-10-01,NULL,N,N,C,4310,N,N,250000
-333922,"333922 Warehouse Equipment Supplies                                             ",NULL,2019-10-01,NULL,N,N,C,3960,N,N,250000
-333923S,"333923S Scaffolding, Work, and Service Platforms                                ",NULL,2019-10-01,NULL,N,N,C,5440,N,N,300000
-33512,"33512 Energy-Efficient Lighting and Sustainable Energy Solutions                ",NULL,2019-10-01,NULL,N,N,C,6210,N,N,250000
-335220D,"335220D Domestic Appliances                                                     ",NULL,2019-10-01,NULL,N,N,C,4120,Y,N,250000
-335220E,"335220E Export Appliances                                                       ",NULL,2019-10-01,NULL,N,N,C,4120,Y,N,250000
-335911,"335911 Batteries                                                                ",NULL,2019-10-01,NULL,N,N,C,6350,N,N,250000
-335999,"335999 Power Distribution and Solar Energy Solutions.                           ",NULL,2019-10-01,NULL,N,N,C,6260,N,N,250000
-532412,"532412 Leased Equipment and Accessories                                         ",NULL,2019-10-01,NULL,N,N,B,W038,N,N,250000
-333921,"333921 Vehicle Material Handling Equipment                                      ",NULL,2019-10-01,NULL,N,N,C,4910,N,N,250000
-333923,"333923 Vehicular Cranes and Attachments                                         ",NULL,2019-10-01,NULL,N,N,C,3810,N,N,250000
-333924,"333924 Utility Trucks and Tractors                                              ",NULL,2019-10-01,NULL,N,N,C,3930,N,N,2000000
-811310,"811310 Maintenance and Repair Shop Equipment                                    ",NULL,2019-10-01,NULL,N,N,B,4940,N,N,250000
-3PACK,"3PACK Packaging Materials                                                       ",NULL,2019-10-01,NULL,N,N,C,8105,N,N,250000
-322220,"322220 Performance-Oriented Packaging (POP), plastic over pack, and hazardous material packaging                                                                ",NULL,2019-10-01,NULL,N,N,B,8135,N,N,250000
-333997,"333997 Scales and Balances                                                      ",NULL,2019-10-01,NULL,N,N,C,6670,N,N,400000
-54151ECOM,"54151ECOM Electronic Commerce and Subscription Services                         ",NULL,2019-10-01,NULL,Y,N,C,D304,N,N,500000
-33411,"33411 Purchasing of New Electronic Equipment                                    ",NULL,2019-10-01,NULL,Y,N,C,7010,Y,N,500000
-33411REF,"33411REF Purchase of Used or Refurbished Equipment                              ",NULL,2019-10-01,2020-09-30,Y,N,C,7010,N,N,500000
-532420L,"532420L Leasing of New Electronic Equipment                                     ",NULL,2019-10-01,NULL,Y,N,S,W070,N,N,500000
-532420R,"532420R Daily/Short Term Rental of IT Equipment                                 ",NULL,2019-10-01,2020-09-30,Y,N,S,W070,N,N,500000
-811212,"811212 Computer and Office Machine Repair and Maintenance                       ",NULL,2019-10-01,NULL,Y,N,S,J070,N,N,500000
-54151HACS,"54151HACS Highly Adaptive Cybersecurity Services (HACS)                         ",NULL,2019-10-01,NULL,Y,N,S,D310,N,N,500000
-54151HEAL,"54151HEAL Health Information Technology Services                                ",NULL,2019-10-01,NULL,Y,N,S,D399,N,N,500000
-54151S,"54151S Information Technology Professional Services                             ",NULL,2019-10-01,NULL,Y,N,S,D399,N,N,500000
-511210,"511210 Software Licenses                                                        ",NULL,2019-10-01,NULL,Y,N,C,7030,Y,N,500000
-54151,"54151 Software Maintenance Services                                             ",NULL,2019-10-01,NULL,Y,N,B,J070,Y,N,500000
-518210C,"518210C Cloud and Cloud-Related IT Professional Services                        ",NULL,2019-10-01,NULL,Y,N,B,D305,N,N,500000
-541370GEO,"541370GEO Earth Observation Solutions                                           ",NULL,2019-10-01,NULL,Y,N,B,D399,N,N,1000000
-541519CDM,"541519CDM Continuous Diagnostics and Mitigation (CDM) Tools                     ",NULL,2019-10-01,NULL,Y,N,C,D399,N,N,500000
-541519ICAM,"541519ICAM Identity, Credentialing and Access Management (ICAM)                 ",NULL,2019-10-01,NULL,Y,N,B,D399,N,N,1000000
-541519PIV,"541519PIV Homeland Security Presidential Directive 12 Product and Service Components                                                                            ",NULL,2019-10-01,NULL,Y,N,B,D399,N,N,1000000
-541519PKI,"541519PKI Public Key Infrastructure (PKI) Shared Service Providers (PKI SSP) Program                                                                            ",NULL,2019-10-01,NULL,Y,N,S,D399,N,N,1000000
-561422,"561422 Automated Contact Center Solutions (ACCS)                                ",NULL,2019-10-01,NULL,Y,N,B,D399,N,N,500000
-611420,"611420 Information Technology Training                                          ",NULL,2019-10-01,NULL,Y,N,B,U012,N,N,250000
-517312,"517312 Wireless Mobility Solutions -                                            ",NULL,2019-10-01,NULL,Y,N,B,D304,N,N,500000
-517410,"517410 Commercial Satellite Communications Solutions (COMSATCOM)                ",NULL,2019-10-01,NULL,Y,N,B,D304,Y,N,500000
-339999ASB,"339999ASB Awards (SBSA)                                                         ",NULL,2019-10-01,NULL,N,Y,C,8455,N,N,250000
-339999F,"339999F Flags, Banners, Pennants, and Related Products                          ",NULL,2019-10-01,NULL,N,N,C,9905,N,N,250000
-339992,"339992 Sounds of Music                                                          ",NULL,2019-10-01,NULL,N,N,C,7710,N,N,250000
-335210,"335210 Personal Care Items                                                      ",NULL,2019-10-01,NULL,N,N,C,7290,Y,N,300000
-3152,"3152 Clothing                                                                   ",NULL,2019-10-01,NULL,Y,N,C,8415,N,N,250000
-315210,"315210 Uniforms                                                                 ",NULL,2019-10-01,NULL,N,N,C,8415,Y,N,250000
-316210,"316210 Footwear                                                                 ",NULL,2019-10-01,NULL,Y,N,C,8430,N,N,250000
-339113PA,"339113PA Protective Apparel                                                     ",NULL,2019-10-01,NULL,Y,N,C,8470,N,N,250000
-ANCILLARY,"ANCILLARY Ancillary Supplies and Services                                       ",NULL,2019-10-01,NULL,Y,N,B,0000,N,N,250000
-ANCRA,"ANCRA Ancillary Repair and Alterations                                          ",NULL,2019-10-01,NULL,N,N,S,Z2AA,N,N,250000
-NEW,"NEW Introduction of New Supplies and Services                                   ",NULL,2019-10-01,NULL,Y,N,B,0000,N,N,250000
-OLM,"OLM Order-Level Materials (OLM)                                                 ",NULL,2019-10-01,NULL,Y,N,B,0000,N,Y,250000
-238910,"238910 Installation and Site Preparation Services                               ",NULL,2019-10-01,NULL,Y,N,S,N099,N,N,250000
-4PL,": Fourth-Party Logistics (4PL) Supplies and Services                            ",NULL,2020-06-01,NULL,N,N,B,5340,Y,N,750000
-541611,"541611 Management and Financial Consulting, Acquisition and Grants Management Support, and Business Program and Project Management Services                     ",NULL,2019-10-01,NULL,N,N,S,R408,N,N,1000000
-561450,"561450 Business Information Services (BIS)                                      ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541620,"541620 Environmental Consulting Services                                        ",NULL,2019-10-01,NULL,N,N,S,F999,N,N,1000000
-562112,"562112 Hazardous Waste Disposal Services                                        ",NULL,2019-10-01,NULL,N,N,S,F999,N,N,1000000
-562910REM,"562910REM Environmental Remediation Services                                    ",NULL,2019-10-01,NULL,N,N,S,F999,N,N,1000000
-522310,"522310  Financial Advising, Loan Servicing and Asset Management Services        ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-531210,"531210 Financial Asset Resolution Services                                      ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541211,"541211 Auditing Services                                                        ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541214,"541214 Payroll Services                                                         ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541219,"541219 Budget and Financial Management Services                                 ",NULL,2019-10-01,NULL,N,N,S,R703,N,N,1000000
-561440,"561440 Debt Collection Services                                                 ",NULL,2019-10-01,NULL,N,N,S,R705,N,N,1000000
-541990IPS,"541990IPS Data Breach Response and Identity Protection                          ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541990RISK,"541990RISK Risk Assessment and Mitigation Services                              ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541930,"541930 Translation and Interpretation Services                                  ",NULL,2019-10-01,NULL,N,N,S,3610,N,N,350000
-611630,"611630 Linguistic Training and Education                                        ",NULL,2019-10-01,NULL,N,N,B,R608,N,N,1000000
-541110,"541110 Professional Legal Services                                              ",NULL,2019-10-01,NULL,N,N,S,R704,N,N,1000000
-541614,"541614 Deployment, Distribution and Transportation Logistics Services:          ",NULL,2019-10-01,NULL,N,N,S,R706,N,N,1000000
-541614SVC,"541614SVC Supply and Value Chain Management                                     ",NULL,2019-10-01,NULL,N,N,S,V122,N,N,1000000
-323111SBSA,"323111SBSA Photographic Services and Solutions                                  ",NULL,2019-10-01,NULL,N,Y,C,6720,N,N,250000
-512110,"512110 Video/Film Production                                                    ",NULL,2019-10-01,NULL,N,N,B,T006,N,N,1000000
-541430,"541430 Graphic Design Services                                                  ",NULL,2019-10-01,NULL,N,N,S,R499,N,N,1000000
-541511,"541511 Web Based Marketing                                                      ",NULL,2019-10-01,NULL,N,N,S,D304,N,N,1000000
-541613,"541613 Marketing Consulting Services                                            ",NULL,2019-10-01,NULL,N,N,S,R701,N,N,1000000
-541810,"541810 Advertising Services                                                     ",NULL,2019-10-01,NULL,N,N,S,R701,N,N,1000000
-541810ODC,"541810ODC Other Direct Costs for Marketing and Public Relations Services        ",NULL,2019-10-01,NULL,N,N,S,R701,N,N,1000000
-541820,"541820 Public Relations Services                                                ",NULL,2019-10-01,NULL,N,N,S,R708,N,N,1000000
-541850,"541850 Exhibit Design and Advertising Services                                  ",NULL,2019-10-01,NULL,N,N,S,Y1PB,N,N,1000000
-541910,"541910 Marketing Research and Analysis                                          ",NULL,2019-10-01,NULL,N,N,S,R422,N,N,1000000
-541922,"541922 Commercial Photography Services                                          ",NULL,2019-10-01,NULL,N,N,S,T010,N,N,250000
-561920,"561920 Conference, Meeting, Event and Trade Show Planning Services              ",NULL,2019-10-01,NULL,N,N,S,R499,N,N,1000000
-541330ENG,"541330ENG Engineering Services                                                  ",NULL,2019-10-01,NULL,N,N,S,R425,Y,N,1000000
-541370GIS,"541370GIS Geographic Information Systems (GIS) Services                         ",NULL,2019-10-01,NULL,N,N,S,F999,N,N,1000000
-541420,"541420 Engineering System Design and Integration Services                       ",NULL,2019-10-01,NULL,N,N,S,R425,Y,N,1000000
-541690,"541690 Integrated Logistics Support                                             ",NULL,2019-10-01,NULL,N,N,S,R425,Y,N,1000000
-541715,"541715 Engineering Research and Development and Strategic Planning              ",NULL,2019-10-01,NULL,N,N,S,R425,Y,N,1000000
-333318TDTM,"333318TDTM Off-the-Shelf Training Devices and Training Materials                ",NULL,2019-10-01,NULL,N,N,C,6910,N,N,1000000
+334290OS,334290OS Overseas (International) Audio/Visual Products                         ,NULL,10/1/2019,NULL,N,N,C,5820,Y,N,250000
+334310,334310 Professional Audio/Video Products                                        ,NULL,10/1/2019,NULL,N,N,B,3610,Y,N,250000
+334511T,334511T Telecommunications Equipment                                            ,NULL,10/1/2019,NULL,N,N,B,5820,Y,N,1000000
+541990AV,541990AV Professional Audio/Video Services                                      ,NULL,10/1/2019,NULL,N,N,S,R499,Y,N,250000
+518210DC,518210DC Document Conversion Services                                           ,NULL,10/1/2019,NULL,N,N,B,R799,N,N,1000000
+541611LIT,541611LIT Litigation Support Services                                           ,NULL,10/1/2019,NULL,N,N,S,R799,N,N,1000000
+561439,561439 Document Production On-site and Off-site Services                        ,NULL,10/1/2019,NULL,N,N,S,R799,N,N,1000000
+561990,561990 Document Destruction Services                                            ,NULL,10/1/2019,NULL,N,N,S,R799,N,N,1000000
+561499M,"561499M Mail Management, Systems, Processing Equipment and Related Solutions    ",NULL,10/1/2019,NULL,N,N,S,R604,N,N,1000000
+811212R,811212R Repair of Government-Owned Equipment (for equipment NOT under Maintenance Service Agreement)                                                            ,NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+811212SA,811212SA Maintenance Service Agreement For Office Equipment                     ,NULL,10/1/2019,NULL,N,N,B,J099,N,N,350000
+511130,511130 Books and Pamphlets                                                      ,NULL,10/1/2019,NULL,N,N,B,7610,N,N,1000000
+5191M,"5191M Entertainment, News and Library Media                                     ",NULL,10/1/2019,NULL,N,N,B,7690,N,N,1000000
+511120,"511120 Periodicals, Subscriptions, Online Book Selling and Lending Library Services                                                                             ",NULL,10/1/2019,NULL,N,N,B,7630,N,N,1000000
+561410,"561410 Editorial, Publishing, and Library Media Services                        ",NULL,10/1/2019,NULL,N,N,S,R499,N,N,1000000
+541611O,541611O Office Management Needs Assessment and Analysis Services                ,NULL,10/1/2019,NULL,N,N,B,R799,N,N,1000000
+541614OR,541614OR Office Relocation and Reconfiguration                                  ,NULL,10/1/2019,NULL,N,N,B,N071,N,N,500000
+561110,561110   Office Administrative Services                                         ,NULL,7/1/2020,NULL,N,N,S,R699,N,N,1000000
+561320SBSA,561320SBSA Temporary Staffing (SBSA)                                            ,NULL,10/1/2019,NULL,N,Y,S,R699,N,N,250000
+561499N,561499N Network Connectivity Support Services                                   ,NULL,10/1/2019,NULL,N,N,S,R799,N,N,1000000
+333318,333318 Dictating and Transcribing Machines and Systems                          ,NULL,10/1/2019,NULL,N,N,B,T016,N,N,350000
+333318SBSA,333318SBSA Office Security Equipment and IT Products (Small Business Set Aside) ,NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+339940,339940 Office Products                                                          ,NULL,10/1/2019,NULL,N,N,C,3610,Y,N,250000
+339940OS4,339940OS4 OS4 Office Products and Supplies                                      ,NULL,10/1/2019,NULL,N,N,C,7510,Y,N,250000
+339940OVER,339940OVER OS4 Overseas Office Products and Supplies                            ,NULL,10/1/2019,NULL,N,N,C,7510,Y,N,250000
+339940SVC,339940SVC  Office Supply Support Services                                       ,NULL,1/1/2020,NULL,N,N,B,7510,Y,N,250000
+325992,"325992 Micro-photographic Film, Paper, Chemical Preparation and Equipment       ",NULL,10/1/2019,NULL,N,N,C,6750,N,N,250000
+333244,333244 Post Copying/Finishing Equipment and Supplies                            ,NULL,10/1/2019,NULL,N,N,C,3610,N,N,350000
+333249,333249 3D Printing Solutions and Additive Manufacturing Solutions               ,NULL,10/1/2019,NULL,N,N,B,3611,N,N,750000
+333316C,333316C Copiers and Digital Duplicating Equipment                               ,NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+333316CPC,"333316CPC Cost-per-Copy Plan for Copiers (to include Analog, Digital, Multifunctional and Engineer Copiers)                                                     ",NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+333316F,"333316F Flat Rate Monthly Fee for Copiers (to include Analog, Digital, Multifunctional and Engineer Copiers)                                                    ",NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+333316M,"333316M Multi-Media Readers, Reader-Printers and Systems                        ",NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+333316OS,333316OS Overseas Copiers and Supplies                                          ,NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+333316P,333316P Photographic Supplies                                                   ,NULL,10/1/2019,NULL,N,N,C,6720,N,N,250000
+532420C,532420C Copier Rental Solutions                                                 ,NULL,10/1/2019,NULL,N,N,B,3610,N,N,350000
+532420LC,532420LC Operating Lease Plan For Copiers                                       ,NULL,10/1/2019,NULL,N,N,B,W074,N,N,350000
+532420LT,532420LT LTOP & Operating Lease Plan for all Non-Copier Office Machinery        ,NULL,10/1/2019,NULL,N,N,B,W074,N,N,350000
+532420LTOP,532420LTOP Lease to Ownership Plans (LTOP) Copier                               ,NULL,10/1/2019,NULL,N,N,B,W074,N,N,350000
+541611MPS,541611MPS Managed Print Services                                                ,NULL,10/1/2019,NULL,N,N,S,3610,N,N,1000000
+493110RM,493110RM Physical Records Management Services                                   ,NULL,10/1/2019,NULL,N,N,B,R616,N,N,1000000
+518210ERM,518210ERM Electronics Records Management Solutions                              ,NULL,10/1/2019,NULL,N,N,B,R617,N,N,1000000
+561210FAC,561210FAC  Facilities Maintenance and Management                                ,NULL,10/1/2019,NULL,N,N,B,R799,Y,N,1000000
+238320,238320 Surface Preparation                                                      ,NULL,10/1/2019,NULL,N,N,B,R499,Y,N,1000000
+541690E,541690E  Energy Services                                                        ,NULL,10/1/2019,NULL,N,N,S,R404,Y,N,1000000
+561210FS,561210FS Facilities Support Services                                            ,NULL,10/1/2019,NULL,N,N,B,R799,N,N,1000000
+561730,561730 Grounds Maintenance                                                      ,NULL,10/1/2019,NULL,N,N,B,S208,Y,N,1000000
+334512,334512 Total Solution Support Products for Facilities Management Systems        ,NULL,10/1/2019,NULL,Y,N,B,6350,N,N,250000
+541513,541513 Smart Buildings Systems Integration                                      ,NULL,10/1/2019,NULL,N,N,B,J035,Y,N,1000000
+561210SB,561210SB Smart Buildings Systems Integrator                                     ,NULL,10/1/2019,NULL,Y,N,B,J035,N,N,1000000
+811310MR,811310MR Machine and Equipment Maintenance Repair                               ,NULL,10/1/2019,NULL,N,N,B,7310,Y,N,1000000
+322291,322291 Restroom Products                                                        ,NULL,10/1/2019,NULL,N,N,C,8540,Y,N,250000
+326199,326199 Waste and Recycling Containers and Receptacles - Outdoor and Indoor Use  ,NULL,10/1/2019,NULL,N,N,C,7240,Y,N,250000
+332321,"332321 Doors, Windows, Skylights, Panels, and Shutters                          ",NULL,10/1/2019,NULL,N,N,C,5640,N,N,250000
+333318F,333318F Floor Care Cleaning and Equipment                                       ,NULL,10/1/2019,NULL,N,N,C,7910,Y,N,250000
+339113G,339113G Gloves                                                                  ,NULL,10/1/2019,NULL,N,N,C,8465,Y,N,250000
+339994,339994 Hand Floor Cleaning Equipment                                            ,NULL,10/1/2019,NULL,N,N,C,7920,Y,N,250000
+311423,311423 Non Perishable foods                                                     ,NULL,10/1/2019,NULL,N,N,C,7220,Y,N,300000
+332215T,332215T Cooking Utensils                                                        ,NULL,10/1/2019,NULL,N,N,C,7340,Y,N,300000
+333241,333241 Food Preparation Equipment                                               ,NULL,10/1/2019,NULL,N,N,C,7320,Y,N,300000
+333415REM,333415REM Refrigeration Equipment                                               ,NULL,10/1/2019,NULL,N,N,C,4110,Y,N,300000
+335220,335220 Sanitation and Warewashing Equipment                                     ,NULL,10/1/2019,NULL,N,N,C,3910,Y,N,300000
+336999,336999 Food Center Concepts                                                     ,NULL,10/1/2019,NULL,N,N,C,7310,Y,N,300000
+238160,238160 Roofing Products and Services Solutions                                  ,NULL,10/1/2019,NULL,N,N,B,5650,N,N,250000
+321991,"321991 Mobile Homes, Travel Trailers                                            ",NULL,10/1/2019,NULL,N,N,B,2330,N,N,500000
+332311,332311 Above Ground Storage Tanks/Systems                                       ,NULL,10/1/2019,NULL,N,N,C,5430,N,N,300000
+332311P,332311P Pre-Engineered and Prefabricated Buildings and Structures for Storage Solutions                                                                         ,NULL,10/1/2019,NULL,N,N,C,5410,N,N,250000
+332312,332312 Temporary and Permanent Structures                                       ,NULL,10/1/2019,NULL,N,N,C,5420,N,N,250000
+532490P,532490P Lease/Rental of Pre-Engineered/Prefabricated Buildings and Structures   ,NULL,10/1/2019,NULL,N,N,B,5410,N,N,300000
+314110,314110 Carpet Flooring                                                          ,NULL,10/1/2019,NULL,N,N,B,S214,Y,N,500000
+314110SBSA,314110SBSA Carpet Flooring (SBSA)                                               ,NULL,10/1/2019,NULL,N,Y,B,S214,Y,N,500000
+321918,321918 Commercial Flooring                                                      ,NULL,10/1/2019,NULL,N,N,B,7220,Y,N,500000
+321918PF,321918PF Portable Flooring Solutions                                            ,NULL,10/1/2019,NULL,N,N,B,5520,N,N,250000
+541614CF,541614CF Comprehensive Furniture Management Services                            ,NULL,10/1/2019,NULL,N,N,S,N071,N,N,250000
+337127CSB,"337127CSB Chair, Convalescent (SBSA)                                            ",NULL,10/1/2019,NULL,N,Y,C,7110,N,N,500000
+339113H,339113H Healthcare Furniture                                                    ,NULL,10/1/2019,NULL,N,N,C,7110,N,N,500000
+3FURNISH,3FURNISH Commercial Office Furnishings (SBSA)                                   ,NULL,10/1/2019,NULL,N,Y,C,7290,Y,N,250000
+337121H,"337121H Household, Dormitory & Quarters Furniture                               ",NULL,10/1/2019,NULL,N,N,C,7105,N,N,1000000
+337122SBSA,"337122SBSA Household, Dormitory & Quarters Furniture (SBSA)                     ",NULL,10/1/2019,NULL,N,Y,C,7105,N,N,1000000
+332439MLB,332439MLB Mail Lock Boxes                                                       ,NULL,10/1/2019,NULL,N,N,C,5140,N,N,250000
+33712,"33712 Complete Daycare, Preschool and Classroom Solutions                       ",NULL,10/1/2019,NULL,N,N,C,7110,N,N,250000
+337122OSB,"337122OSB Park, Recreational & Outdoor Furniture (SBSA)                         ",NULL,10/1/2019,NULL,N,Y,C,5450,N,N,500000
+337127,337127 Institutional Furniture                                                  ,NULL,10/1/2019,NULL,N,N,C,7195,N,N,250000
+337127CFSB,337127CFSB Cafeteria and Food Service Furniture (SBSA)                          ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+337127CISB,337127CISB Correctional Institution Furniture (SBSA)                            ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+337127INT,337127INT International Furniture Products                                      ,NULL,10/1/2019,NULL,N,N,C,7110,N,N,250000
+337127LFSB,337127LFSB Library Furniture (SBSA)                                             ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+337127TLSB,337127TLSB Tables and Lecterns (SBSA)                                           ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+33721RSB,33721RSB Remanufactured Furniture (SBSA)                                        ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+33721SBSA,33721SBSA Storage (SBSA)                                                        ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+33721T,"33721T Training Room, Auditorium and Theater Furniture                          ",NULL,10/1/2019,NULL,N,N,C,7110,N,N,250000
+337215MSB,337215MSB Mail Sorting and Distribution Furniture (SBSA)                        ,NULL,10/1/2019,NULL,N,Y,C,7110,N,N,250000
+337215SBSA,337215SBSA Wall Units and Displays SBSA                                         ,NULL,10/1/2019,NULL,N,Y,C,7105,N,N,250000
+532289,532289 Furniture Rental and Leasing                                             ,NULL,10/1/2019,NULL,N,N,B,7105,N,N,250000
+33721,33721 Office Furniture                                                          ,NULL,10/1/2019,NULL,N,N,C,7125,N,N,250000
+337121P,337121P Packaged Household Dormitory and Quarters Furniture                     ,NULL,10/1/2019,NULL,N,N,B,7105,N,N,5000000
+337127P,337127P International Packaged Furniture                                        ,NULL,10/1/2019,NULL,N,N,C,7110,N,N,5000000
+33721P,33721P Packaged Office Furniture                                                ,NULL,10/1/2019,NULL,N,N,C,7110,N,N,5000000
+339113P,339113P Packaged Healthcare Furniture                                           ,NULL,10/1/2019,NULL,N,N,C,7110,N,N,5000000
+339950,339950 Signs                                                                    ,NULL,10/1/2019,NULL,N,N,C,9905,N,N,250000
+339920PARK,339920PARK Park and Playground Equipment                                        ,NULL,10/1/2019,NULL,N,N,C,7830,N,N,500000
+339920S,339920S Sporting Goods Equipment and Supplies                                   ,NULL,10/1/2019,NULL,N,N,C,7810,N,N,250000
+339930,"339930 Doll, Toy and Game Manufacturing                                         ",NULL,10/1/2019,NULL,N,N,C,7820,N,N,250000
+713940,713940 Fitness Center Management Services                                       ,NULL,10/1/2019,NULL,N,N,S,M1FB,N,N,500000
+713940PACK,713940PACK Packaged Fitness Center                                              ,NULL,10/1/2019,NULL,N,N,B,7810,N,N,500000
+812990,812990 Personal Trainer and Aerobic/Cardio Class Leader/Instructor              ,NULL,10/1/2019,NULL,N,N,B,R497,N,N,500000
+561611,561611 HR Support: Pre Employment Background Investigations                     ,NULL,10/1/2019,NULL,N,N,S,R799,N,N,1000000
+541214HR,541214HR Compensation and Benefits                                              ,NULL,10/1/2019,NULL,N,N,S,R710,N,N,1000000
+524292,524292 Separation and Retirement                                                ,NULL,10/1/2019,NULL,N,N,S,R431,N,N,1000000
+54161,54161 Agency Human Capital Evaluation                                           ,NULL,10/1/2019,NULL,N,N,B,R408,N,N,1000000
+541611W,541611W Workforce Analytics and Employee Records                                ,NULL,10/1/2019,NULL,N,N,S,R431,N,N,1000000
+541612EPM,541612EPM Employee Performance Management                                       ,NULL,10/1/2019,NULL,N,N,S,R710,N,N,1000000
+541612ER,541612ER Employee Relations                                                     ,NULL,10/1/2019,NULL,N,N,S,R418,N,N,1000000
+541612HC,"541612HC Agency Human Capital Strategy, Policy and Operations                   ",NULL,10/1/2019,NULL,N,N,S,R799,N,N,1000000
+541612LOB,541612LOB   Human Resources Line of Business (HRLOB)                            ,NULL,7/1/2020,NULL,N,N,P,R799,N,N,1000000
+541612LR,541612LR Labor Relations                                                        ,NULL,10/1/2019,NULL,N,N,S,R418,N,N,1000000
+541612OPM,541612OPM Private Shared Service Center for Core HR Services                    ,NULL,10/1/2019,6/30/2020,N,N,S,R799,N,N,1000000
+541612PSSC,541612PSSC Private Shared Service Center for HR Services                        ,NULL,10/1/2019,6/30/2020,N,N,S,R799,N,N,1000000
+561EEO,561EEO EEO Services                                                             ,NULL,10/1/2019,NULL,N,N,S,R499,N,N,1000000
+56131,56131 Talent Acquisition                                                        ,NULL,10/1/2019,NULL,N,N,S,R431,N,N,1000000
+611430TD,611430TD Talent Development                                                     ,NULL,10/1/2019,NULL,N,N,B,R408,N,N,1000000
+624SS,"624SS Social Services, Professional Counseling and Veterans' Readjustment and Behavioral Health Services                                                        ",NULL,10/1/2019,NULL,N,N,B,R799,N,N,1000000
+325611,325611 Cleaning Products                                                        ,NULL,10/1/2019,NULL,N,N,C,7930,Y,N,250000
+325612,"325612 Disinfectants, Sterilants and Deodorizers                                ",NULL,10/1/2019,NULL,N,N,C,7930,Y,N,250000
+326220,"326220 Hoses, Valves, Fittings, Nozzles, Couplings and Related Accessories      ",NULL,10/1/2019,NULL,Y,N,C,4210,N,N,250000
+339999S,339999S Safety Zone Products                                                    ,NULL,10/1/2019,NULL,N,N,C,4240,N,N,250000
+333914,333914 Fuel Management Systems                                                  ,NULL,10/1/2019,NULL,N,N,C,4930,N,N,250000
+332510,"332510 Hardware Manufacturing (Hardware Store, Home Improvement Center, or MRO - Services)                                                                      ",NULL,10/1/2019,NULL,N,N,B,5340,Y,N,750000
+332510C,"332510C Hardware Store, Home Improvement Center, Industrial or General Supply Store, or Industrial Maintenance Repair and Operations (MRO) Distributor - Catalog",NULL,10/1/2019,NULL,N,N,C,5120,Y,N,750000
+333TOOL,"333TOOL Tools (Powered and Non-Powered), Tool Kits, Tool Boxes and Accessories  ",NULL,10/1/2019,NULL,N,N,C,5110,Y,N,275000
+333112,"333112 Lawn and Garden Equipment, Machinery, Implements, Tools, Products and Accessories                                                                        ",NULL,10/1/2019,NULL,N,N,B,3750,Y,N,250000
+332510S,"332510S Hardware Store, Home Improvement Center, Industrial or General Supply Store, or Industrial Maintenance Repair and Operations (MRO) Distributor - Store Front                                                                            ",NULL,10/1/2019,NULL,N,N,B,5120,Y,N,750000
+532310,532310 Rental and Leasing of Hardware Store Products                            ,NULL,10/1/2019,NULL,N,N,B,W099,Y,N,250000
+314120,314120 Lodging and Hospitality Supplies and Services                            ,NULL,10/1/2019,NULL,N,N,B,7230,Y,N,300000
+321920,"321920 Pallets, Plastic and Wood                                                ",NULL,10/1/2019,NULL,N,N,C,3210,N,N,250000
+324110,324110 Propane                                                                  ,NULL,10/1/2019,NULL,N,N,C,6830,Y,N,500000
+324191,"324191 Commercial Coatings, Removers, Adhesives, Sealants and Lubricants, Petroleum and Waxes                                                                   ",NULL,10/1/2019,NULL,N,N,C,8010,Y,N,250000
+325320,325320  Pest and Animal Control Products & Services                             ,NULL,10/1/2019,NULL,N,N,B,6840,Y,N,250000
+325998,325998 Chemical Additives                                                       ,NULL,10/1/2019,NULL,N,N,C,6850,Y,N,250000
+325998W,325998W Water Treatment Products and Systems                                    ,NULL,10/1/2019,NULL,N,N,C,4630,Y,N,300000
+327910,327910 Abrasives and Blasters                                                   ,NULL,10/1/2019,NULL,N,N,C,5345,N,N,250000
+331315A,331315A Aluminum Sheets                                                         ,NULL,10/1/2019,NULL,N,N,C,8135,N,N,250000
+332913,332913 Plumbing Products and Bathroom Fixture Solutions                         ,NULL,10/1/2019,NULL,N,N,C,4510,N,N,250000
+332999BMS,332999BMS Building Materials and Services                                       ,NULL,10/1/2019,NULL,N,N,C,5680,N,N,250000
+332999P,"332999P Spill Containment Units, Containment Pallets, Non-Wooden Pallets        ",NULL,10/1/2019,NULL,N,N,C,3990,N,N,250000
+3331SBSA,3331SBSA Clearing Equipment (SBSA)                                              ,NULL,10/1/2019,NULL,N,Y,C,2320,N,N,250000
+333120,333120 Street Repair and Cleaning Equipment and Attachments                     ,NULL,10/1/2019,NULL,N,N,C,3825,N,N,250000
+333414,333414 Water Heaters                                                            ,NULL,10/1/2019,NULL,N,N,C,4510,N,N,250000
+333415HVAC,"333415HVAC Heating, Ventilation, and Air Conditioning (HVAC)                    ",NULL,10/1/2019,NULL,N,N,C,4130,N,N,250000
+333912,333912 Air Compressors and Pressure Cleaners                                    ,NULL,10/1/2019,NULL,N,N,C,4310,N,N,250000
+333922,333922 Warehouse Equipment Supplies                                             ,NULL,10/1/2019,NULL,N,N,C,3960,N,N,250000
+333923S,"333923S Scaffolding, Work, and Service Platforms                                ",NULL,10/1/2019,NULL,N,N,C,5440,N,N,300000
+33512,33512 Energy-Efficient Lighting and Sustainable Energy Solutions                ,NULL,10/1/2019,NULL,N,N,C,6210,N,N,250000
+335220D,335220D Domestic Appliances                                                     ,NULL,10/1/2019,NULL,N,N,C,4120,Y,N,250000
+335220E,335220E Export Appliances                                                       ,NULL,10/1/2019,NULL,N,N,C,4120,Y,N,250000
+335911,335911 Batteries                                                                ,NULL,10/1/2019,NULL,N,N,C,6350,N,N,250000
+335999,335999 Power Distribution and Solar Energy Solutions.                           ,NULL,10/1/2019,NULL,N,N,C,6260,N,N,250000
+532412,532412 Leased Equipment and Accessories                                         ,NULL,10/1/2019,NULL,N,N,B,W038,N,N,250000
+333921,333921 Vehicle Material Handling Equipment                                      ,NULL,10/1/2019,NULL,N,N,C,4910,N,N,250000
+333923,333923 Vehicular Cranes and Attachments                                         ,NULL,10/1/2019,NULL,N,N,C,3810,N,N,250000
+333924,333924 Utility Trucks and Tractors                                              ,NULL,10/1/2019,NULL,N,N,C,3930,N,N,2000000
+811310,811310 Maintenance and Repair Shop Equipment                                    ,NULL,10/1/2019,NULL,N,N,B,4940,N,N,250000
+3PACK,3PACK Packaging Materials                                                       ,NULL,10/1/2019,NULL,N,N,C,8105,N,N,250000
+322220,"322220 Performance-Oriented Packaging (POP), plastic over pack, and hazardous material packaging                                                                ",NULL,10/1/2019,NULL,N,N,B,8135,N,N,250000
+333997,333997 Scales and Balances                                                      ,NULL,10/1/2019,NULL,N,N,C,6670,N,N,400000
+54151ECOM,54151ECOM Electronic Commerce and Subscription Services                         ,NULL,10/1/2019,NULL,Y,N,C,D304,N,N,500000
+33411,33411 Purchasing of New Electronic Equipment                                    ,NULL,10/1/2019,NULL,Y,N,C,7010,Y,N,500000
+33411REF,33411REF Purchase of Used or Refurbished Equipment                              ,NULL,10/1/2019,9/30/2020,Y,N,C,7010,N,N,500000
+532420L,532420L Leasing of New Electronic Equipment                                     ,NULL,10/1/2019,NULL,Y,N,S,W070,N,N,500000
+532420R,532420R Daily/Short Term Rental of IT Equipment                                 ,NULL,10/1/2019,9/30/2020,Y,N,S,W070,N,N,500000
+811212,811212 Computer and Office Machine Repair and Maintenance                       ,NULL,10/1/2019,NULL,Y,N,S,J070,N,N,500000
+54151HACS,54151HACS Highly Adaptive Cybersecurity Services (HACS)                         ,NULL,10/1/2019,NULL,Y,N,S,D310,N,N,500000
+54151HEAL,54151HEAL Health Information Technology Services                                ,NULL,10/1/2019,NULL,Y,N,S,D399,N,N,500000
+54151S,54151S Information Technology Professional Services                             ,NULL,10/1/2019,NULL,Y,N,S,D399,N,N,500000
+511210,511210 Software Licenses                                                        ,NULL,10/1/2019,NULL,Y,N,C,7030,Y,N,500000
+54151,54151 Software Maintenance Services                                             ,NULL,10/1/2019,NULL,Y,N,B,J070,Y,N,500000
+518210C,518210C Cloud and Cloud-Related IT Professional Services                        ,NULL,10/1/2019,NULL,Y,N,B,D305,N,N,500000
+541370GEO,541370GEO Earth Observation Solutions                                           ,NULL,10/1/2019,NULL,Y,N,B,D399,N,N,1000000
+541519CDM,541519CDM Continuous Diagnostics and Mitigation (CDM) Tools                     ,NULL,10/1/2019,NULL,Y,N,C,D399,N,N,500000
+541519ICAM,"541519ICAM Identity, Credentialing and Access Management (ICAM)                 ",NULL,10/1/2019,NULL,Y,N,B,D399,N,N,1000000
+541519PIV,541519PIV Homeland Security Presidential Directive 12 Product and Service Components                                                                            ,NULL,10/1/2019,NULL,Y,N,B,D399,N,N,1000000
+541519PKI,541519PKI Public Key Infrastructure (PKI) Shared Service Providers (PKI SSP) Program                                                                            ,NULL,10/1/2019,NULL,Y,N,S,D399,N,N,1000000
+561422,561422 Automated Contact Center Solutions (ACCS)                                ,NULL,10/1/2019,NULL,Y,N,B,D399,N,N,500000
+611420,611420 Information Technology Training                                          ,NULL,10/1/2019,NULL,Y,N,B,U012,N,N,250000
+517312,517312 Wireless Mobility Solutions -                                            ,NULL,10/1/2019,NULL,Y,N,B,D304,N,N,500000
+517410,517410 Commercial Satellite Communications Solutions (COMSATCOM)                ,NULL,10/1/2019,NULL,Y,N,B,D304,Y,N,500000
+339999ASB,339999ASB Awards (SBSA)                                                         ,NULL,10/1/2019,NULL,N,Y,C,8455,N,N,250000
+339999F,"339999F Flags, Banners, Pennants, and Related Products                          ",NULL,10/1/2019,NULL,N,N,C,9905,N,N,250000
+339992,339992 Sounds of Music                                                          ,NULL,10/1/2019,NULL,N,N,C,7710,N,N,250000
+335210,335210 Personal Care Items                                                      ,NULL,10/1/2019,NULL,N,N,C,7290,Y,N,300000
+3152,3152 Clothing                                                                   ,NULL,10/1/2019,NULL,Y,N,C,8415,N,N,250000
+315210,315210 Uniforms                                                                 ,NULL,10/1/2019,NULL,N,N,C,8415,Y,N,250000
+316210,316210 Footwear                                                                 ,NULL,10/1/2019,NULL,Y,N,C,8430,N,N,250000
+339113PA,339113PA Protective Apparel                                                     ,NULL,10/1/2019,NULL,Y,N,C,8470,N,N,250000
+ANCILLARY,ANCILLARY Ancillary Supplies and Services                                       ,NULL,10/1/2019,NULL,Y,N,B,0,N,N,250000
+ANCRA,ANCRA Ancillary Repair and Alterations                                          ,NULL,10/1/2019,NULL,N,N,S,Z2AA,N,N,250000
+NEW,NEW Introduction of New Supplies and Services                                   ,NULL,10/1/2019,NULL,Y,N,B,0,N,N,250000
+OLM,OLM Order-Level Materials (OLM)                                                 ,NULL,10/1/2019,NULL,Y,N,B,0,N,Y,250000
+238910,238910 Installation and Site Preparation Services                               ,NULL,10/1/2019,NULL,Y,N,S,N099,N,N,250000
+4PL,: Fourth-Party Logistics (4PL) Supplies and Services                            ,NULL,6/1/2020,NULL,N,N,B,5340,Y,N,750000
+541611,"541611 Management and Financial Consulting, Acquisition and Grants Management Support, and Business Program and Project Management Services                     ",NULL,10/1/2019,NULL,N,N,S,R408,N,N,1000000
+561450,561450 Business Information Services (BIS)                                      ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541620,541620 Environmental Consulting Services                                        ,NULL,10/1/2019,NULL,N,N,S,F999,N,N,1000000
+562112,562112 Hazardous Waste Disposal Services                                        ,NULL,10/1/2019,NULL,N,N,S,F999,N,N,1000000
+562910REM,562910REM Environmental Remediation Services                                    ,NULL,10/1/2019,NULL,N,N,S,F999,N,N,1000000
+522310,"522310  Financial Advising, Loan Servicing and Asset Management Services        ",NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+531210,531210 Financial Asset Resolution Services                                      ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541211,541211 Auditing Services                                                        ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541214,541214 Payroll Services                                                         ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541219,541219 Budget and Financial Management Services                                 ,NULL,10/1/2019,NULL,N,N,S,R703,N,N,1000000
+561440,561440 Debt Collection Services                                                 ,NULL,10/1/2019,NULL,N,N,S,R705,N,N,1000000
+541990IPS,541990IPS Data Breach Response and Identity Protection                          ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541990RISK,541990RISK Risk Assessment and Mitigation Services                              ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541930,541930 Translation and Interpretation Services                                  ,NULL,10/1/2019,NULL,N,N,S,3610,N,N,350000
+611630,611630 Linguistic Training and Education                                        ,NULL,10/1/2019,NULL,N,N,B,R608,N,N,1000000
+541110,541110 Professional Legal Services                                              ,NULL,10/1/2019,NULL,N,N,S,R704,N,N,1000000
+541614,"541614 Deployment, Distribution and Transportation Logistics Services:          ",NULL,10/1/2019,NULL,N,N,S,R706,N,N,1000000
+541614SVC,541614SVC Supply and Value Chain Management                                     ,NULL,10/1/2019,NULL,N,N,S,V122,N,N,1000000
+323111SBSA,323111SBSA Photographic Services and Solutions                                  ,NULL,10/1/2019,NULL,N,Y,C,6720,N,N,250000
+512110,512110 Video/Film Production                                                    ,NULL,10/1/2019,NULL,N,N,B,T006,N,N,1000000
+541430,541430 Graphic Design Services                                                  ,NULL,10/1/2019,NULL,N,N,S,R499,N,N,1000000
+541511,541511 Web Based Marketing                                                      ,NULL,10/1/2019,NULL,N,N,S,D304,N,N,1000000
+541613,541613 Marketing Consulting Services                                            ,NULL,10/1/2019,NULL,N,N,S,R701,N,N,1000000
+541810,541810 Advertising Services                                                     ,NULL,10/1/2019,NULL,N,N,S,R701,N,N,1000000
+541810ODC,541810ODC Other Direct Costs for Marketing and Public Relations Services        ,NULL,10/1/2019,NULL,N,N,S,R701,N,N,1000000
+541820,541820 Public Relations Services                                                ,NULL,10/1/2019,NULL,N,N,S,R708,N,N,1000000
+541850,541850 Exhibit Design and Advertising Services                                  ,NULL,10/1/2019,NULL,N,N,S,Y1PB,N,N,1000000
+541910,541910 Marketing Research and Analysis                                          ,NULL,10/1/2019,NULL,N,N,S,R422,N,N,1000000
+541922,541922 Commercial Photography Services                                          ,NULL,10/1/2019,NULL,N,N,S,T010,N,N,250000
+561920,"561920 Conference, Meeting, Event and Trade Show Planning Services              ",NULL,10/1/2019,NULL,N,N,S,R499,N,N,1000000
+541330ENG,541330ENG Engineering Services                                                  ,NULL,10/1/2019,NULL,N,N,S,R425,Y,N,1000000
+541370GIS,541370GIS Geographic Information Systems (GIS) Services                         ,NULL,10/1/2019,NULL,N,N,S,F999,N,N,1000000
+541420,541420 Engineering System Design and Integration Services                       ,NULL,10/1/2019,NULL,N,N,S,R425,Y,N,1000000
+541690,541690 Integrated Logistics Support                                             ,NULL,10/1/2019,NULL,N,N,S,R425,Y,N,1000000
+541715,541715 Engineering Research and Development and Strategic Planning              ,NULL,10/1/2019,NULL,N,N,S,R425,Y,N,1000000
+333318TDTM,333318TDTM Off-the-Shelf Training Devices and Training Materials                ,NULL,10/1/2019,NULL,N,N,C,6910,N,N,1000000
 611TRAINAW,"611TRAINAW Defense Acquisition Workforce Improvement Act (DAWIA) and Federal Acquisition Certification in Contracting (FAC-C) Professional 
-Development Training for Acquisition Workforce Personnel                                           ",NULL,2019-10-01,NULL,N,N,S,R410,N,N,1000000
-611430,"611430 Professional and Management Development Training                         ",NULL,2019-10-01,NULL,N,N,B,R704,N,N,1000000
-611512,"611512 Flight Training                                                          ",NULL,2019-10-01,NULL,N,N,S,U006,N,N,1000000
-611710,"611710 Educational Support Services                                             ",NULL,2019-10-01,NULL,N,N,B,U099,N,N,1000000
-333999,"333999 Animal Caging Equipment                                                  ",NULL,2019-10-01,NULL,N,N,C,6640,N,N,400000
-333314,"333314 Microscopes                                                              ",NULL,2019-10-01,NULL,N,N,C,6650,N,N,400000
-333415,"333415 Laboratory Refrigerators And Freezers                                    ",NULL,2019-10-01,NULL,N,N,C,6640,N,N,400000
-334513,"334513 Water, Air, Soil and Seismic Measuring                                   ",NULL,2019-10-01,NULL,N,N,C,6655,N,N,250000
-334515,"334515 Diagnostic, Measuring and Testing Equipment                              ",NULL,2019-10-01,NULL,N,N,C,4910,N,N,250000
-334516,"334516 Analytical Instruments                                                   ",NULL,2019-10-01,NULL,Y,N,B,6630,N,N,250000
-334519ENV,"334519ENV Environmental Measuring Instruments                                   ",NULL,2019-10-01,NULL,N,N,C,6660,N,N,250000
-339113LAB,"339113LAB Laboratory Equipment and Products                                     ",NULL,2019-10-01,NULL,N,N,C,6640,N,N,400000
-532490L,"532490L Laboratory Maintenance, Repair, Leasing and Warranties                  ",NULL,2019-10-01,NULL,N,N,B,J059,N,N,250000
-339112,"339112 Breathing Air Equipment and Related Items                                ",NULL,2019-10-01,NULL,Y,N,C,8405,N,N,250000
-339113R,"339113R Medical/Rescue and Patient Transportation Products                      ",NULL,2019-10-01,NULL,Y,N,C,6515,N,N,250000
-532490ESA,"532490ESA Equipment Service Agreements                                          ",NULL,2019-10-01,NULL,N,N,B,J059,N,N,300000
-541990TAD,"541990TAD Technical/Application Development Support (TADS)                      ",NULL,2019-10-01,NULL,N,N,B,R499,N,N,300000
-611430TTS,"611430TTS Technical Training And Support (TTS)                                  ",NULL,2019-10-01,NULL,N,N,B,R499,N,N,250000
-334511,"334511 Search, Detection, Navigation, Guidance, Aeronautical and Nautical Systems and Instruments                                                               ",NULL,2019-10-01,NULL,Y,N,B,6610,N,N,250000
-541380,"541380 Testing Laboratory Services                                              ",NULL,2019-10-01,NULL,N,N,B,R499,Y,N,250000
-561621H,"561621H Harbor/Waterfront Security Products and Services and Professional Marine Security Services                                                              ",NULL,2019-10-01,NULL,Y,N,S,1940,N,N,300000
-3FIRE,"3FIRE Fire Management Equipment                                                 ",NULL,2019-10-01,NULL,Y,N,C,4210,N,N,250000
-332216,"332216 Law Enforcement, Firefighting and Rescue Tools, Equipment and Accessories",NULL,2019-10-01,NULL,Y,N,C,5120,N,N,250000
-332312F,"332312F Flood Control                                                           ",NULL,2019-10-01,NULL,Y,N,B,4210,N,N,250000
-332994,"332994 Burning Equipment                                                        ",NULL,2019-10-01,NULL,Y,N,C,1095,N,N,250000
-332999,"332999 Law Enforcement Personal Equipment                                       ",NULL,2019-10-01,NULL,Y,N,C,8465,N,N,250000
-332999S,"332999S Safes, Vault Systems, and Security Products                             ",NULL,2019-10-01,NULL,N,N,C,7110,N,N,250000
-333314NV,"333314NV Night Vision Equipment                                                 ",NULL,2019-10-01,NULL,Y,N,C,5855,N,N,250000
-334220,"334220 Surveillance Systems, Wearable Body Cameras, and Vehicular Video         ",NULL,2019-10-01,NULL,Y,N,B,5820,N,N,250000
-334519,"334519 Bomb and Hazardous Material Disposal; Metal and Bomb Detection           ",NULL,2019-10-01,NULL,Y,N,C,3690,N,N,250000
-336320,"336320 Vehicle Signal and Restraint System                                      ",NULL,2019-10-01,NULL,Y,N,C,6350,N,N,250000
-336413,"336413 Aircraft Armoring and Helicopter Equipment                               ",NULL,2019-10-01,NULL,Y,N,C,2540,N,N,250000
-336992,"336992 Non-Tactical Armored Vehicles and Vehicle Armoring Services              ",NULL,2019-10-01,NULL,Y,N,C,2540,N,N,850000
-337215,"337215 Firearm Care                                                             ",NULL,2019-10-01,NULL,Y,N,C,7125,N,N,250000
-339920,"339920 Target Systems/Target Range Accessories                                  ",NULL,2019-10-01,NULL,Y,N,C,6920,N,N,250000
-812910,"812910 Canine Training, Handling, and Caging Products and Services              ",NULL,2019-10-01,NULL,Y,N,B,8465,N,N,250000
-334118,"334118 Personal & Document Identification Systems                               ",NULL,2019-10-01,NULL,N,N,C,7050,N,N,350000
-541330L,"541330L Security System Integration, Design, Management, and Life Cycle Support ",NULL,2019-10-01,NULL,Y,N,B,R408,N,N,250000
-541330SEC,"541330SEC Security System Integration, Design, Management, and Life Cycle Support                                                                               ",NULL,2019-10-01,NULL,Y,N,B,R408,N,N,250000
-541990L,"541990L Professional Law Enforcement Services                                   ",NULL,2019-10-01,NULL,Y,N,B,R425,N,N,250000
-561612,"561612 Protective Service Occupations                                           ",NULL,2019-10-01,NULL,Y,N,S,S206,N,N,250000
-611430ST,"611430ST Security Training                                                      ",NULL,2019-10-01,NULL,Y,N,B,4230,N,N,1000000
-334290,"334290 Security and Detection Systems                                           ",NULL,2019-10-01,NULL,Y,N,B,6350,N,N,250000
-334290L,"334290L Physical Access Control Systems (PACS) - Legacy SIN                     ",NULL,2019-10-01,NULL,Y,N,B,6350,N,N,250000
-334290PACS,"334290PACS Physical Access Control Systems (PACS) - FIPS 201                    ",NULL,2019-10-01,NULL,Y,N,B,6350,N,N,250000
-325412,"325412 Criminal Investigative Equipment and Supplies                            ",NULL,2019-10-01,NULL,Y,N,C,6550,N,N,250000
-339999E,"339999E Evidence Collection and Investigative Equipment and Supplies            ",NULL,2019-10-01,NULL,Y,N,C,7520,N,N,250000
-81111,"81111 Automotive Maintenance, Repair and Body Services                          ",NULL,2019-10-01,NULL,N,N,B,J023,N,N,250000
-811122,"811122 Automotive Windshield and Paint Repair                                   ",NULL,2019-10-01,NULL,N,N,B,J023,N,N,250000
-326211,"326211 Tires - New                                                              ",NULL,2019-10-01,NULL,N,N,C,2610,N,N,250000
-326212,"326212 Tires - Retreaded                                                        ",NULL,2019-10-01,NULL,N,N,C,2610,N,N,250000
-333318T,"333318T Wheel & Tire Equipment                                                  ",NULL,2019-10-01,NULL,N,N,C,4910,N,N,250000
-3361,"3361 Law Enforcement and Fire Fighting Vehicles and Attachments                 ",NULL,2019-10-01,NULL,N,N,C,4240,N,N,2000000
-3361E,"3361E Electric and Autonomous Vehicles and Accessories                          ",NULL,2019-10-01,NULL,N,N,C,2310,N,N,2000000
-3361V,"3361V Vocational Vehicles                                                       ",NULL,2019-10-01,NULL,N,N,C,2540,N,N,2000000
-33611,"33611 Purchase or Lease of Gas or Electric Low Speed Vehicles                   ",NULL,2019-10-01,NULL,N,N,B,W023,N,N,250000
-336211,"336211 Tank Trucks                                                              ",NULL,2019-10-01,NULL,N,N,B,2320,N,N,5000000
-336211V,"336211V Vocational Bodies and Attachments                                       ",NULL,2019-10-01,NULL,N,N,C,2320,N,N,250000
-336212,"336212 Trailers and Attachments                                                 ",NULL,2019-10-01,NULL,N,N,C,2330,N,N,1000000
-3363,"3363 Upfitting of Government-owned Emergency Response Vehicles to Provide Turn-key Solutions                                                                    ",NULL,2019-10-01,NULL,N,N,B,N042,N,N,2000000
+Development Training for Acquisition Workforce Personnel                                           ",NULL,10/1/2019,NULL,N,N,S,R410,N,N,1000000
+611430,611430 Professional and Management Development Training                         ,NULL,10/1/2019,NULL,N,N,B,R704,N,N,1000000
+611512,611512 Flight Training                                                          ,NULL,10/1/2019,NULL,N,N,S,U006,N,N,1000000
+611710,611710 Educational Support Services                                             ,NULL,10/1/2019,NULL,N,N,B,U099,N,N,1000000
+333999,333999 Animal Caging Equipment                                                  ,NULL,10/1/2019,NULL,N,N,C,6640,N,N,400000
+333314,333314 Microscopes                                                              ,NULL,10/1/2019,NULL,N,N,C,6650,N,N,400000
+333415,333415 Laboratory Refrigerators And Freezers                                    ,NULL,10/1/2019,NULL,N,N,C,6640,N,N,400000
+334513,"334513 Water, Air, Soil and Seismic Measuring                                   ",NULL,10/1/2019,NULL,N,N,C,6655,N,N,250000
+334515,"334515 Diagnostic, Measuring and Testing Equipment                              ",NULL,10/1/2019,NULL,N,N,C,4910,N,N,250000
+334516,334516 Analytical Instruments                                                   ,NULL,10/1/2019,NULL,Y,N,B,6630,N,N,250000
+334519ENV,334519ENV Environmental Measuring Instruments                                   ,NULL,10/1/2019,NULL,N,N,C,6660,N,N,250000
+339113LAB,339113LAB Laboratory Equipment and Products                                     ,NULL,10/1/2019,NULL,N,N,C,6640,N,N,400000
+532490L,"532490L Laboratory Maintenance, Repair, Leasing and Warranties                  ",NULL,10/1/2019,NULL,N,N,B,J059,N,N,250000
+339112,339112 Breathing Air Equipment and Related Items                                ,NULL,10/1/2019,NULL,Y,N,C,8405,N,N,250000
+339113R,339113R Medical/Rescue and Patient Transportation Products                      ,NULL,10/1/2019,NULL,Y,N,C,6515,N,N,250000
+532490ESA,532490ESA Equipment Service Agreements                                          ,NULL,10/1/2019,NULL,N,N,B,J059,N,N,300000
+541990TAD,541990TAD Technical/Application Development Support (TADS)                      ,NULL,10/1/2019,NULL,N,N,B,R499,N,N,300000
+611430TTS,611430TTS Technical Training And Support (TTS)                                  ,NULL,10/1/2019,NULL,N,N,B,R499,N,N,250000
+334511,"334511 Search, Detection, Navigation, Guidance, Aeronautical and Nautical Systems and Instruments                                                               ",NULL,10/1/2019,NULL,Y,N,B,6610,N,N,250000
+541380,541380 Testing Laboratory Services                                              ,NULL,10/1/2019,NULL,N,N,B,R499,Y,N,250000
+561621H,561621H Harbor/Waterfront Security Products and Services and Professional Marine Security Services                                                              ,NULL,10/1/2019,NULL,Y,N,S,1940,N,N,300000
+3FIRE,3FIRE Fire Management Equipment                                                 ,NULL,10/1/2019,NULL,Y,N,C,4210,N,N,250000
+332216,"332216 Law Enforcement, Firefighting and Rescue Tools, Equipment and Accessories",NULL,10/1/2019,NULL,Y,N,C,5120,N,N,250000
+332312F,332312F Flood Control                                                           ,NULL,10/1/2019,NULL,Y,N,B,4210,N,N,250000
+332994,332994 Burning Equipment                                                        ,NULL,10/1/2019,NULL,Y,N,C,1095,N,N,250000
+332999,332999 Law Enforcement Personal Equipment                                       ,NULL,10/1/2019,NULL,Y,N,C,8465,N,N,250000
+332999S,"332999S Safes, Vault Systems, and Security Products                             ",NULL,10/1/2019,NULL,N,N,C,7110,N,N,250000
+333314NV,333314NV Night Vision Equipment                                                 ,NULL,10/1/2019,NULL,Y,N,C,5855,N,N,250000
+334220,"334220 Surveillance Systems, Wearable Body Cameras, and Vehicular Video         ",NULL,10/1/2019,NULL,Y,N,B,5820,N,N,250000
+334519,334519 Bomb and Hazardous Material Disposal; Metal and Bomb Detection           ,NULL,10/1/2019,NULL,Y,N,C,3690,N,N,250000
+336320,336320 Vehicle Signal and Restraint System                                      ,NULL,10/1/2019,NULL,Y,N,C,6350,N,N,250000
+336413,336413 Aircraft Armoring and Helicopter Equipment                               ,NULL,10/1/2019,NULL,Y,N,C,2540,N,N,250000
+336992,336992 Non-Tactical Armored Vehicles and Vehicle Armoring Services              ,NULL,10/1/2019,NULL,Y,N,C,2540,N,N,850000
+337215,337215 Firearm Care                                                             ,NULL,10/1/2019,NULL,Y,N,C,7125,N,N,250000
+339920,339920 Target Systems/Target Range Accessories                                  ,NULL,10/1/2019,NULL,Y,N,C,6920,N,N,250000
+812910,"812910 Canine Training, Handling, and Caging Products and Services              ",NULL,10/1/2019,NULL,Y,N,B,8465,N,N,250000
+334118,334118 Personal & Document Identification Systems                               ,NULL,10/1/2019,NULL,N,N,C,7050,N,N,350000
+541330L,"541330L Security System Integration, Design, Management, and Life Cycle Support ",NULL,10/1/2019,NULL,Y,N,B,R408,N,N,250000
+541330SEC,"541330SEC Security System Integration, Design, Management, and Life Cycle Support                                                                               ",NULL,10/1/2019,NULL,Y,N,B,R408,N,N,250000
+541990L,541990L Professional Law Enforcement Services                                   ,NULL,10/1/2019,NULL,Y,N,B,R425,N,N,250000
+561612,561612 Protective Service Occupations                                           ,NULL,10/1/2019,NULL,Y,N,S,S206,N,N,250000
+611430ST,611430ST Security Training                                                      ,NULL,10/1/2019,NULL,Y,N,B,4230,N,N,1000000
+334290,334290 Security and Detection Systems                                           ,NULL,10/1/2019,NULL,Y,N,B,6350,N,N,250000
+334290L,334290L Physical Access Control Systems (PACS) - Legacy SIN                     ,NULL,10/1/2019,NULL,Y,N,B,6350,N,N,250000
+334290PACS,334290PACS Physical Access Control Systems (PACS) - FIPS 201                    ,NULL,10/1/2019,NULL,Y,N,B,6350,N,N,250000
+325412,325412 Criminal Investigative Equipment and Supplies                            ,NULL,10/1/2019,NULL,Y,N,C,6550,N,N,250000
+339999E,339999E Evidence Collection and Investigative Equipment and Supplies            ,NULL,10/1/2019,NULL,Y,N,C,7520,N,N,250000
+81111,"81111 Automotive Maintenance, Repair and Body Services                          ",NULL,10/1/2019,NULL,N,N,B,J023,N,N,250000
+811122,811122 Automotive Windshield and Paint Repair                                   ,NULL,10/1/2019,NULL,N,N,B,J023,N,N,250000
+326211,326211 Tires - New                                                              ,NULL,10/1/2019,NULL,N,N,C,2610,N,N,250000
+326212,326212 Tires - Retreaded                                                        ,NULL,10/1/2019,NULL,N,N,C,2610,N,N,250000
+333318T,333318T Wheel & Tire Equipment                                                  ,NULL,10/1/2019,NULL,N,N,C,4910,N,N,250000
+3361,3361 Law Enforcement and Fire Fighting Vehicles and Attachments                 ,NULL,10/1/2019,NULL,N,N,C,4240,N,N,2000000
+3361E,3361E Electric and Autonomous Vehicles and Accessories                          ,NULL,10/1/2019,NULL,N,N,C,2310,N,N,2000000
+3361V,3361V Vocational Vehicles                                                       ,NULL,10/1/2019,NULL,N,N,C,2540,N,N,2000000
+33611,33611 Purchase or Lease of Gas or Electric Low Speed Vehicles                   ,NULL,10/1/2019,NULL,N,N,B,W023,N,N,250000
+336211,336211 Tank Trucks                                                              ,NULL,10/1/2019,NULL,N,N,B,2320,N,N,5000000
+336211V,336211V Vocational Bodies and Attachments                                       ,NULL,10/1/2019,NULL,N,N,C,2320,N,N,250000
+336212,336212 Trailers and Attachments                                                 ,NULL,10/1/2019,NULL,N,N,C,2330,N,N,1000000
+3363,3363 Upfitting of Government-owned Emergency Response Vehicles to Provide Turn-key Solutions                                                                    ,NULL,10/1/2019,NULL,N,N,B,N042,N,N,2000000
 3363P," 3363P Spare Components and Vehicle Accessories
-                               ",NULL,2019-10-01,NULL,N,N,C,2590,N,N,250000
-336350,"336350 Remanufactured Automotive Components                                     ",NULL,2019-10-01,NULL,N,N,C,2520,N,N,250000
-336611,"336611 Marine Craft Repairing                                                   ",NULL,2019-10-01,NULL,Y,N,B,2805,N,N,350000
-336612,"336612 Marine Craft                                                             ",NULL,2019-10-01,NULL,Y,N,B,1940,N,N,250000
-336612R,"336612R Recreational Watercraft                                                 ",NULL,2019-10-01,NULL,N,N,B,1990,N,N,500000
-336991,"336991 Wheel and Track Vehicles                                                 ",NULL,2019-10-01,NULL,Y,N,B,2340,N,N,250000
-488190,"488190 Aircraft Components, Maintenance, Repair Services, Extended Warranties, And Maintenance Agreements                                                       ",NULL,2019-10-01,NULL,N,N,B,J059,N,N,300000
-532112,"532112 Leasing of Passenger Cars, SUVs, Vans, and Light Trucks                  ",NULL,2019-10-01,NULL,N,N,B,W023,N,N,1000000
-532120,"532120 Leased Heavy Duty Vehicles                                               ",NULL,2019-10-01,NULL,N,N,B,W042,N,N,250000
-492110,"492110  Package Delivery and Freight Trucking                                   ",NULL,2019-10-01,NULL,N,N,B,V111,N,N,1000000
-492210SB,"492210SB Local Courier Delivery Services (SBSA)                                 ",NULL,2019-10-01,NULL,N,Y,B,V112,N,N,1000000
-332439,"332439 Shipping, Cargo, Freight, and Storage Containers                         ",NULL,2019-10-01,NULL,N,N,C,8145,N,N,250000
-334419,"334419 Unique Identification (UID) / Radio Frequency Identification (RFID       ",NULL,2019-10-01,NULL,N,N,B,5985,N,N,250000
-561910,"561910 Packaging Services                                                       ",NULL,2019-10-01,NULL,N,N,S,8135,N,N,250000
-481211B,"481211B Air Charter Services - Brokers                                          ",NULL,2019-10-01,NULL,N,N,S,V221,N,N,1000000
-481211O,"481211O Air Charter Services - Owner Operated                                   ",NULL,2019-10-01,NULL,N,N,S,V221,N,N,1000000
-485,"485 Ground Transportation                                                       ",NULL,2019-10-01,NULL,N,N,B,V122,N,N,1000000
-532111,"532111 Automotive equipment rental and leasing, Rental Supplemental Vehicle Program (RSVP)                                                                      ",NULL,2019-10-01,NULL,N,N,B,V122,N,N,1000000
-531,"531 Employee Relocation Solution                                                ",NULL,2019-10-01,NULL,N,N,B,V301,N,N,1000000
-541511T,"541511T Employee Relocation Management Software                                 ",NULL,2019-10-01,NULL,N,N,B,V301,N,N,1000000
-531110,"531110 Long Term Lodging                                                        ",NULL,2019-10-01,NULL,N,N,B,V231,N,N,1000000
-561599L,"561599L Lodging Negotiations and Management Services                            ",NULL,2019-10-01,NULL,N,N,S,V999,N,N,1000000
-561510,"561510 Travel Agent Services                                                    ",NULL,2019-10-01,NULL,N,N,S,V302,N,N,1000000
-561599,"561599 Travel Consulting Services                                               ",NULL,2019-10-01,NULL,N,N,S,V999,N,N,1000000
+                               ",NULL,10/1/2019,NULL,N,N,C,2590,N,N,250000
+336350,336350 Remanufactured Automotive Components                                     ,NULL,10/1/2019,NULL,N,N,C,2520,N,N,250000
+336611,336611 Marine Craft Repairing                                                   ,NULL,10/1/2019,NULL,Y,N,B,2805,N,N,350000
+336612,336612 Marine Craft                                                             ,NULL,10/1/2019,NULL,Y,N,B,1940,N,N,250000
+336612R,336612R Recreational Watercraft                                                 ,NULL,10/1/2019,NULL,N,N,B,1990,N,N,500000
+336991,336991 Wheel and Track Vehicles                                                 ,NULL,10/1/2019,NULL,Y,N,B,2340,N,N,250000
+488190,"488190 Aircraft Components, Maintenance, Repair Services, Extended Warranties, And Maintenance Agreements                                                       ",NULL,10/1/2019,NULL,N,N,B,J059,N,N,300000
+532112,"532112 Leasing of Passenger Cars, SUVs, Vans, and Light Trucks                  ",NULL,10/1/2019,NULL,N,N,B,W023,N,N,1000000
+532120,532120 Leased Heavy Duty Vehicles                                               ,NULL,10/1/2019,NULL,N,N,B,W042,N,N,250000
+492110,492110  Package Delivery and Freight Trucking                                   ,NULL,10/1/2019,NULL,N,N,B,V111,N,N,1000000
+492210SB,492210SB Local Courier Delivery Services (SBSA)                                 ,NULL,10/1/2019,NULL,N,Y,B,V112,N,N,1000000
+332439,"332439 Shipping, Cargo, Freight, and Storage Containers                         ",NULL,10/1/2019,NULL,N,N,C,8145,N,N,250000
+334419,334419 Unique Identification (UID) / Radio Frequency Identification (RFID       ,NULL,10/1/2019,NULL,N,N,B,5985,N,N,250000
+561910,561910 Packaging Services                                                       ,NULL,10/1/2019,NULL,N,N,S,8135,N,N,250000
+481211B,481211B Air Charter Services - Brokers                                          ,NULL,10/1/2019,NULL,N,N,S,V221,N,N,1000000
+481211O,481211O Air Charter Services - Owner Operated                                   ,NULL,10/1/2019,NULL,N,N,S,V221,N,N,1000000
+485,485 Ground Transportation                                                       ,NULL,10/1/2019,NULL,N,N,B,V122,N,N,1000000
+532111,"532111 Automotive equipment rental and leasing, Rental Supplemental Vehicle Program (RSVP)                                                                      ",NULL,10/1/2019,NULL,N,N,B,V122,N,N,1000000
+531,531 Employee Relocation Solution                                                ,NULL,10/1/2019,NULL,N,N,B,V301,N,N,1000000
+541511T,541511T Employee Relocation Management Software                                 ,NULL,10/1/2019,NULL,N,N,B,V301,N,N,1000000
+531110,531110 Long Term Lodging                                                        ,NULL,10/1/2019,NULL,N,N,B,V231,N,N,1000000
+561599L,561599L Lodging Negotiations and Management Services                            ,NULL,10/1/2019,NULL,N,N,S,V999,N,N,1000000
+561510,561510 Travel Agent Services                                                    ,NULL,10/1/2019,NULL,N,N,S,V302,N,N,1000000
+561599,561599 Travel Consulting Services                                               ,NULL,10/1/2019,NULL,N,N,S,V999,N,N,1000000

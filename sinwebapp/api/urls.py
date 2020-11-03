@@ -26,5 +26,7 @@ urlpatterns= [
     path('v1/sins', views_public.sins),
     path('v1/status', views_public.status),
     # rest framework endpoints
+        # TODO: django-rest-framework (drf) will replace manually implemented public endpoints,
+        # since drf can be integrated easily with swagger and produce OpenAPI docs.
     path('v2/', include(router.urls))
 ]
