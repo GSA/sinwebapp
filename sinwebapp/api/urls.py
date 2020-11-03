@@ -1,5 +1,5 @@
 from django.urls import path, include
-from api import views_private
+from api import views_private, views_public
 from api.serializers import SinViewSet, SinParamViewSet, StatusViewSet
 from rest_framework import routers
 
@@ -22,5 +22,8 @@ urlpatterns= [
     path('userStatuses/', views_private.user_status_info),
     path('statuses/', views_private.status_info_all),
     # public endpoints
-    path('v1/', include(router.urls))
+    path('v1/', include(router.urls)),
+    path('v2/search', views_public.search),
+    path('v2/sins', views_public.sins),
+    path('v2/status', views_public.status)
 ]
