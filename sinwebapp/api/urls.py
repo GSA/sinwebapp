@@ -1,7 +1,7 @@
 from django.urls import path, include
 from api import views_private
 from api import views_public
-from api.serializers import SinViewSet, StatusViewSet
+from api.serializers import SinViewSet, SinParamViewSet, StatusViewSet
 from rest_framework import routers
 
 app_name = 'api'
@@ -9,6 +9,7 @@ app_name = 'api'
 router = routers.DefaultRouter()
 router.register(r'sins', SinViewSet)
 router.register(r'status', StatusViewSet)
+router.register(r'search', SinParamViewSet, basename='SIN')
 
 urlpatterns= [
     # application endpoints

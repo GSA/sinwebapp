@@ -19,11 +19,11 @@ class SinViewSet(viewsets.ModelViewSet):
     queryset = Sin.objects.all()
     serializer_class = SinSerializer
 
-class SinParamViewset(viewset.ModelViewSet):
+class SinParamViewSet(viewsets.ModelViewSet):
     serializer_class = SinSerializer
 
-    def get_queryset(self):
-        param_queryset = Sin.objects.all()
+    def get_queryset(self): 
+        queryset = Sin.objects.all()
         sin_number = self.request.query_params.get('sin_number', None)
         user_email = self.request.query_params.get('user_email', None)
         user_id = self.request.query_param.get('user_id', None)
@@ -32,23 +32,23 @@ class SinParamViewset(viewset.ModelViewSet):
 
         if user_id is not None:
             search_user = User.objects.get(id=user_id)
-            param_queryset = param_queryset.filter(user=search_user)
+            queryset = queryset.filter(user=search_user)
 
         if user_email is not None:
             search_user = User.objects.get(email=user_email)
-            param_queryset = param_queryset.filter(user=search_user)
+            queryset = queryset.filter(user=search_user)
        
         if status_id is not None:
             search_status = Status.objects.get(id=status_id)
-            param_queryset = param_queryset.filter(status=search_status)
+            queryset = queryset.filter(status=search_status)
     
         if sin_number is not None:
-            param_queryset = param_queryset.filter(sin_number=sin_number)
+            queryset = queryset.filter(sin_number=sin_number)
         
         if status is not None:
-            param_queryset = param_queryset.filter(status=status)
+            queryset = queryset.filter(status=status)
 
-        return param_queryset
+        return queryset
 
 
 
