@@ -12,19 +12,17 @@ class SinViewSet(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            # Might need to change this not to transform all the data
-            data = {i['id']: i for i in serializer.data}
-            return self.get_paginated_response(data)
-
         serializer = self.get_serializer(queryset, many=True)
-        data = {i['id']: i for i in serializer.data}
 
-        # TODO: append data to {metadata, results} dictionary
-        return Response(data)
+        index = 1
+        data = {}
+        for i in serializer.data:
+            data[index] = i
+            index += 1
+
+        metadata = { 'count': len(data) }
+        results = { 'metadata': metadata, 'results': data }
+        return Response(results)
 
 class SinParamViewSet(generics.ListAPIView):
     serializer_class = SinSerializer
@@ -60,17 +58,17 @@ class SinParamViewSet(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            data = {i['id']: i for i in serializer.data}
-            return self.get_paginated_response(data)
-
-        # TODO: append data to {metadata, results} dictionary
         serializer = self.get_serializer(queryset, many=True)
-        data = {i['id']: i for i in serializer.data}
-        return Response(data)
+
+        index = 1
+        data = {}
+        for i in serializer.data:
+            data[index] = i
+            index += 1
+
+        metadata = { 'count': len(data) }
+        results = { 'metadata': metadata, 'results': data }
+        return Response(results)
 
 class StatusViewSet(generics.ListAPIView):
     queryset = Status.objects.all()
@@ -78,14 +76,14 @@ class StatusViewSet(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            data = {i['sin_number']: i for i in serializer.data}
-            return self.get_paginated_response(data)
-
-        # TODO: append data to {metadata, results} dictionary
         serializer = self.get_serializer(queryset, many=True)
-        data = {i['sin_number']: i for i in serializer.data}
-        return Response(data)
+
+        index = 1
+        data = {}
+        for i in serializer.data:
+            data[index] = i
+            index += 1
+
+        metadata = { 'count': len(data) }
+        results = { 'metadata': metadata, 'results': data }
+        return Response(results)
