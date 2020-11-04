@@ -19,15 +19,19 @@ class DebugLogger():
     def get_logger(self):
         return self.logger
         
-    def log_settings(self):
+    def log_config(self):
         self.logger.info("-------------------------------------------------")
         self.logger.info('SETTINGS.PY Configuration')
         self.logger.info("-------------------------------------------------")
-        self.logger.info("# Main Configuration")
+        self.logger.info("# Application Configuration")
+        self.logger.info('> Production Url: %s', config.PRODUCTION_URL)
+        self.logger.info('> Maintainer: %s', config.MAINTAINER)
+        self.logger.info('> Version: %s', config.VERSION)
+        self.logger.info("-------------------------------------------------")
+        self.logger.info("# Environment Configuration")
         self.logger.info("> Directory Location : %s", config.BASE_DIR)
         self.logger.info('> Debug : %s', config.DEBUG)
         self.logger.info('> Enviroment: %s', config.APP_ENV)
-        self.logger.info('> Production Url: %s', config.PRODUCTION_URL)
         self.logger.info("-------------------------------------------------")
         self.logger.info("# Database Configuration")
         self.logger.info('> Database Host: %s', config.db_creds['host'])
@@ -55,4 +59,4 @@ class DebugLogger():
 
 if __name__ == "__main__":
     logger = DebugLogger("debug.py")
-    logger.log_settings()
+    logger.log_config()

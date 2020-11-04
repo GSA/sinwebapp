@@ -2,21 +2,18 @@
 ## TODO: replace version with ARG
 ## provide env var as ARGS in build-container.sh
 
-ARG PYTHON_VERSION
-ARG ANGULAR_VERSION
 FROM python:3.7.7-slim-stretch
 LABEL application="CCDA : Core Contract Data Automation"
 LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"]
 LABEL version="prototype-1.0.0"
 LABEL description="Internal GSA application for managing SIN data"
-RUN echo "py: ${PYTHON_VERSION}, ang: ${ANGULAR_VERSION}"
 
 ## DEPENDENCIES
 RUN apt-get update -y && apt-get install -y curl wait-for-it
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
-## TODO: replace version with ARG
-## provider env var as ARGS in build-container.sh
+    ## TODO: replace version with ARG
+    ## NOTE: provider env var as ARGS in build-container.sh
 RUN npm install -g @angular/cli@10.1.1
 WORKDIR /home/
 RUN mkdir ./sinwebapp/ && mkdir ./frontend/
@@ -26,6 +23,7 @@ RUN npm install
 WORKDIR /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
+COPY /sinwebapp/metadata.json /home/sinwebapp/metadata.json
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/

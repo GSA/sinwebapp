@@ -19,7 +19,14 @@ APP_ENV = os.environ.setdefault('ENVIRONMENT','local')
 SECRET_KEY = os.environ.setdefault('SECRET_KEY', 'xxxx')
 
 # Application Configuration 
-PRODUCTION_URL="ccda.app.cloud.gov"
+
+meta_file = os.path.join(BASE_DIR, 'metadata.json')
+with open(meta_file) as f:
+    metadata = json.load(f)
+
+PRODUCTION_URL=metadata['production_url']
+VERSION=metadata['version']
+MAINTAINER=metadata['maintainer']
 
 # Email Configuration
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
