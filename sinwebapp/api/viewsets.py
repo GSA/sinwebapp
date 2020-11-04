@@ -75,7 +75,7 @@ class StatusViewSet(generics.ListAPIView):
     serializer_class = StatusSerializer
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
 
         index = 1
