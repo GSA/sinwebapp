@@ -8,17 +8,19 @@
         <a class="navbar-brand">Menu</a>
       </div> 
 
+      <!--User Nav-->
       <ul class="nav navbar-nav">
-        <li id="admin-link" class="btn btn-default btn-sm navbar-btn" role="button"
+        <li id="admin-link" class="btn btn-default btn-xs navbar-btn" role="button"
           *ngIf="user.groups.includes('admin_group')"><a href="/admin">Admin</a></li>
-        <li id="swagger-link" class="btn btn-default btn-sm navbar-btn" role="button">
+        <li id="swagger-link" class="btn btn-default btn-xs navbar-btn" role="button">s
           <a href="/api/v1/swagger">Swagger API Docs</a></li>
-        <li id="redoc-link" class="btn btn-default btn-sm navbar-btn" role="button">
+        <li id="redoc-link" class="btn btn-default btn-xs navbar-btn" role="button">
           <a href="/api/v1/redoc">Redoc API Docs</a></li>
       </ul>
+      <!--Admin Role Nav-->
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="user.groups.includes('admin_group')" class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" 
+          <button class="btn btn-primary btn-xs dropdown-toggle" 
               type="button" data-toggle="dropdown">Select A Role<span class="caret"></span></button>
           <ul id="admin-role-switcher" class="dropdown-menu">
               <li><a (click)="switchRole(true)">Submitter</a></li>
