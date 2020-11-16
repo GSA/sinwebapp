@@ -7,9 +7,9 @@ import { UserService } from '../../services/user.service'
 import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 
-// ReviewDisplayComponent
+// UserDisplayComponent
 // 
-//  Implemented Hierarchy : App -> UserDisplay
+//  Implemented Hierarchy : App -> UserDisplayComponent
 //  
 //  UserDisplayComponent is a child of the AppComponent.
 //
