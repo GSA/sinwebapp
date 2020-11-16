@@ -7,34 +7,7 @@ import { UserService } from '../../services/user.service'
 import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 
-// UserDisplayComponent
-// 
-//  Implemented Hierarchy : App -> UserDisplayComponent
-//  
-//  UserDisplayComponent is a child of the AppComponent.
-//
-//  Description
-//  
-//  The UserDisplayComponent is the central hub of the UI application.
-//  All other components plug into it, receive information from it and
-//  and pass information back to it. The UserDisplayComponent controls
-//  the flow of the application.
-//
-//  Think of the UserDisplayComponent as a grid with three slots. In the
-//  the first slot a panel has been inserted containing information about 
-//  the currently logged in user. In the second slot is a panel containing 
-//  group specific displays, i.e. displays formatted for submitters, 
-//  reviewers or approvers. This second slot will change depending on the 
-//  group the User has been added to in the backend logic. The third slot
-//  is a selection panel that changes based on user input. In the second slot,
-//  the panel will contain a list of SINs. If the user clicks on one, that
-//  SIN's details will be shown in the third slotted panel.
-//
-//  In other words, a selection_event will be emitted from the component in
-//  in the second slot, passed up to the parent component, i.e. this component,
-//  processed, and then passed down to the panel in the third slot. This is what
-//  is meant by saying the UserDisplayComponent is the central hub of the UI
-//  application.
+// See docs/FRONTEND.md for full component documentation
 
 @Component({
   selector: 'app-user-display',

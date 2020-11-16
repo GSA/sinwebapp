@@ -5,43 +5,7 @@ import { Status } from 'src/app/models/status';
 import { LogService } from 'src/app/services/log.service';
 import { StatusService } from 'src/app/services/status.service';
 
-// EditDisplayComponent
-// 
-//  Description
-//    
-//  This component allows an authenticated user with valid group permissions
-//  to edit the fields on a SIN submission. This component consumes user input
-//  and passes it onto backend for processing. Once it is done with the user,
-//  it will emit an event signalling to the parent component what type of 
-//  transaction has occured. See Output Events for more information.
-//
-//  HTML Attribute Input
-//  
-//  As input, This component requires a SIN to edit and the user permission group
-//    associated with the user currently using the form. They must be specified in the
-//    HTML inline. For example, if thisSIN and thisGroup were variables in another 
-//    Angular component, then in that component's HTML template the following tag,
-//
-//        <app-edit-display [input_SIN]="thisSIN" [user_group] ></app-edit-display>
-//    
-//    will create an HTML component binded to the Angular component defined in this
-//    this class. 
-//
-//  Output Events
-//
-//   This component emits two types of events: save_events and cancel_events. Save_events
-//    occur when the user saves their edits. Cancel_events occur when the user wishes to 
-//    exit editing without saving. These events can be captured by the parent Angular
-//    component by binding a method to these events and injecting in the emitted $event.
-//    If doThis(object: Object) and doThat(object: Object) are methods in the parent component, 
-//    then you can listen to the save_event and cancel_event with the following tag,
-//
-//        <app-edit-display [input_SIN]="thisSIN" [user_group] ></app-edit-display
-//                      (save_event)="doThis($event)" (cancel_event)="doThat($event)"></app-edit-display>
-//
-//    The case of a save_event, the event Object will contain the SIN object the user edited
-//    and passed to the backend application for persisting in the database. A cancel_event
-//    will contain a null SIN
+// See docs/FRONTEND.md for full component documentation
 
 @Component({
   selector: 'app-edit-display',
