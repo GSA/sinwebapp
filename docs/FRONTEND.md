@@ -25,29 +25,29 @@ Bottom Level:
 Optional:
 - LoggerDisplayComponent
 
-Think of the UserDisplayComponent as the main container for the rest of the application. The UserDisplayComponent contains information about the state of the overall application and the user associated with the current sessions. The UserDisplayComponent processes events generated in its child components. 
+Think of the <i>UserDisplayComponent</i> as the main container for the rest of the application. The <i>UserDisplayComponent</i>contains information about the state of the overall application and the user associated with the current sessions. The <i>UserDisplayComponent</i> processes events generated in its child components. 
 
-For example, while viewing a list of SINs within the UserDisplayComponent, the user may select a SIN, which will then be feed as input into EditDisplayComponent. From within the EditDisplayComponent, the user can opt to edit the SIN information or clear the selection. Either type of event propagates up to the UserDisplayComponent, signalling to it to clear the user selection or display an appropriate 'saved' message to the user. 
+For example, while viewing a list of SINs within the <i>UserDisplayComponent</i>, the user may select a SIN, which will then be feed as input into <I>EditDisplayComponent</i>. From within the <i>EditDisplayComponent</i>, the user can opt to edit the SIN information or clear the selection. Either type of event propagates up to the <i>UserDisplayComponent</i>, signalling to it to clear the user selection or display an appropriate 'saved' message to the user. 
 
 Each component, its function and life-cycle are described in more detail below.
 
 ### UserDisplayComponent
 
-Implemented Hierarchy : AppComponent -> UserDisplayComponent
+<b>Implemented Hierarchy : AppComponent -> UserDisplayComponent</b>
 
-UserDisplayComponent is a child of the main AppComponent.
+<i>UserDisplayComponent</i> is a child of the main <i>AppComponent</i>.
  
 <b>Description</b>
   
-The UserDisplayComponent is the central hub of the UI application. All other components plug into it, receive information from it and pass information back to it. The UserDisplayComponent controls the flow of the application.
+The <i>UserDisplayComponent</i> is the central hub of the UI application. All other components plug into it, receive information from it and pass information back to it. The UserDisplayComponent controls the flow of the application.
 
-Think of the UserDisplayComponent as a grid with three slots. In the the first slot a panel has been inserted containing information about the currently logged in user. In the second slot is a panel containing group specific displays, i.e. displays formatted for submitters, reviewers or approvers. This second slot will change depending on the group the User has been added to in the backend logic. The third slot is a selection panel that changes based on user input. In the second slot, the panel will contain a list of SINs. If the user clicks on one, that SIN's details will be shown in the third slotted panel. In other words, a selection_event will be emitted from the component in the second slot, passed up to the parent component, i.e. this component, processed, and then passed down to the panel in the third slot. This is what is meant by saying the UserDisplayComponent is the central hub of the UI application.
+Think of the <i>UserDisplayComponent</i> as a grid with three slots. In the the first slot a panel has been inserted containing information about the currently logged in user. In the second slot is a panel containing group specific displays, i.e. displays formatted for submitters, reviewers or approvers. This second slot will change depending on the group the User has been added to in the backend logic. The third slot is a selection panel that changes based on user input. In the second slot, the panel will contain a list of SINs. If the user clicks on one, that SIN's details will be shown in the third slotted panel. In other words, a selection_event will be emitted from the component in the second slot, passed up to the parent component, i.e. this component, processed, and then passed down to the panel in the third slot. This is what is meant by saying the <i>UserDisplayComponent</i> is the central hub of the UI application.
 
 ### SubmitDisplayComponent
 
-Implemented Hierarchy : App -> UserDisplay -> SubmitDisplay
+<b>Implemented Hierarchy : AppComponent -> UserDisplayComponent -> SubmitDisplayComponent </b>
   
-SubmitDisplayComponent is a child of the UserDisplayComponent. It receives information through input and passes information back to the parent through events the parent registers to listen to. Within UserDisplay Component, this component is only exposed to users with 'submitter' group privileges. 
+<i>SubmitDisplayComponent</i> is a child of the <i>UserDisplayComponent</i>. It receives information through input and passes information back to the parent through events the parent registers to listen to. Within UserDisplay Component, this component is only exposed to users with 'submitter' group privileges. 
 
 <b>Description</b>
 
@@ -86,9 +86,9 @@ A selection_event will contain the SIN that has been selected by the user. A cle
 
 ### ReviewDisplayComponent
 
-Implemented Hierarchy : App -> UserDisplay -> ReviewDisplay
+<b>Implemented Hierarchy : AppComponent -> UserDisplayComponent -> ReviewDisplayComponent </b>
 
-ReviewDisplayComponent is a child of the UserDisplayComponent. It receives information through input and passes information back to the parent through events the parent registers to listen to.
+<i>ReviewDisplayComponent</i> is a child of the <i>UserDisplayComponent</i>. It receives information through input and passes information back to the parent through events the parent registers to listen to.
 
 <b>Description</b>
 
@@ -116,6 +116,10 @@ This component emits a selection_event. selection_events occur when the user cli
 
 
 ### EditDisplayComponent
+
+<b>Implemented Hierarchy : AppComponent -> UserDisplayComponent -> Edit DisplayComponent </b>
+ 
+<i>EditDisplayComponent</i> is a child of the <i>UserDisplayComponent</i>. It receives information through input and passes information back to the parent through events the parent registers to listen to.
 
 <b>Description</b>
 
