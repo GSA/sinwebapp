@@ -16,7 +16,8 @@ In other words, the Angular applications enters on the page the user is redirect
 The Angular frontend application currently has the following component hierachy,
 
 Top Level: 
-- UserDisplayComponent
+- UserDisplayComponent<br>
+
 Bottom Level: 
 - SubmitDisplayComponent 
 - ReviewDisplayComponent
