@@ -13,6 +13,8 @@ Listed below are the current routes used by each component of the application, t
 ## Application API Endpoints
 You must be logged in and authenticated through <i>cloud.gov</i> in order to access any of the endpoints given below. The backend tracks the user's login session through a cookie called <b>session_id</b>. This cookie is sent in the <i>Set-Cookie</i> response header after the user logs onto the site.
 
+### Authentication Endpoints
+
 - <i>/api/user</i> - retrieves information about the currently signed-in user associated with an incoming request.<br>
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
@@ -20,8 +22,6 @@ You must be logged in and authenticated through <i>cloud.gov</i> in order to acc
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
 >}<br>
-
-
 
 - <i>/api/users</i> - retrieves information about a collection of users identified by the array of IDs provided in the query parameter. The array is specified by repeated instances of the same <i>ids</i> query parameter, i.e.,
 
@@ -38,7 +38,30 @@ will return an array of JSONs containing information on the Users with ID = 3, 7
 > ]<br>
 > }<br>
 
+- <i>/api/sinUser</i> - GET endpoint that exchanges a User ID for a response containing the entire User object.
 
+> localhost:8000/api/sinUser?user_id=123
+
+will return a response containing information about the User with ID = 123.
+
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
+>}<br>
+
+- <i>/api/userStatuses</i> - returns an array of JSONs for all statuses available to given role. For example, the user requesting the statuses is a <i>submitter</i>, the response will only contain the <b>submitted</b> status. If the user requesting the status is a <i>reviewer</i>, then the response will contain the <b>submitted</b>, <b>reviewed</b> and <b>change</b> statuses. If the user is an <i>approver</i> or <i>admin</i>, the response will contain all statuses. 
+> <b>GET RESPONSE FORMAT</b><br><br>
+> { <br>
+> [<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
+> ]<br>
+> }
+
+### Model Endpoints
 
 - <i>/api/sin</i> - exposes a <b>GET</b> and <b>POST</b> endpoint. 
 
@@ -72,9 +95,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >}<br>
 
-
-
-
 - <i>/api/sins</i> - retrieves a JSON array of all SINs
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
@@ -86,9 +106,6 @@ will return a JSON formatted response containing information about SIN Number 12
 >   ]<br>
 >}
 
-
-
-
 - <i>/api/updateSIN/</i> - POST endpoint to update an existing SIN within the database.
 > <b>POST REQUEST/RESPONSE FORMAT</b><br><br>
 > { <br>
@@ -98,32 +115,7 @@ will return a JSON formatted response containing information about SIN Number 12
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status_id' 'user status' &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
 >}<br>
 
-
-- <i>/api/sinUser</i> - GET endpoint that exchanges a User ID for a response containing the entire User object.
-
-> localhost:8000/api/sinUser?user_id=123
-
-will return a response containing information about the User with ID = 123.
-
-> <b>GET RESPONSE FORMAT</b><br><br>
-> { <br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'email': 'user(at)domain.com', &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'groups': 'user_groups_list' &nbsp;&nbsp;&nbsp;&nbsp;(<i>JSON List</i>)<br>
->}<br>
-
-
 - <i>/api/statuses</i> - returns an array of JSONs for all statuses.
-> <b>GET RESPONSE FORMAT</b><br><br>
-> { <br>
-> [<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id': 'ID', &nbsp;&nbsp;&nbsp;&nbsp;(<i>Int</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name': 'Status name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
-> ]<br>
-> }
-
-- <i>/api/userStatuses</i> - returns an array of JSONs for all statuses available to given role. For example, the user requesting the statuses is a <i>submitter</i>, the response will only contain the <b>submitted</b> status. If the user requesting the status is a <i>reviewer</i>, then the response will contain the <b>submitted</b>, <b>reviewed</b> and <b>change</b> statuses. If the user is an <i>approver</i> or <i>admin</i>, the response will contain all statuses. 
 > <b>GET RESPONSE FORMAT</b><br><br>
 > { <br>
 > [<br>
@@ -146,8 +138,45 @@ will return a JSON containing the ID's status name and description in the follow
 >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'description': 'Status description' &nbsp;&nbsp;&nbsp;&nbsp;(<i>String</i>)<br>
 >}
 
+### S3 Storage Endpoints
 
-<h1>TODO: add FILES endpoints</h1>
+Note: currently the application is only able to associate and store a single file in relation to a given SIN submission. In the future the application will allow multiple files to associated with a single SIN submission. See [S3](S3.md) for more details.
+
+- <i>/files/upload</i> - a form-encoded file (an HTML enctype="multipart/form-data" form) can be uploaded to this endpoint. Currently, the endpoint does <i>not</i> check for the mimetype, although in the future, it will only accept form-encoded files that have a mimetype of "application/pdf". See the TODO in <i>/sinwebapp/files/views.py</i> on lines 29-31.
+
+> localhost:8000/api/status?id=3
+> <b>POST REQUEST FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body': <form-data> &nbsp;&nbsp;&nbsp;&nbsp;<br>
+>}
+
+- <i>/files/download</i> - this endpoint accepts a <i>sin_number</i> as a query parameter and returns the attachment associated with that particular submission in the body of the response. Currently, only one attachment can be associated with any given SIN submission. In the future, multiple attachments will be associated with a single SIN, so this endpoint will need to be modified to facilite a response with multiple pdf's in its body. 
+
+In its current implementation the following request,
+
+> localhost:8000/files/download?sin_number=12345
+
+will return a PDF file with the filename "12345.pdf" in the body of the response.
+
+> <b>POST REQUEST FORMAT</b><br><br>
+> { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body': <form-data> &nbsp;&nbsp;&nbsp;&nbsp;<br>
+>}
+
+- <i>/files/list</i> - this endpoint accepts a <i>sin_number</i> as a query parameter or no query parameters at all. If supplied with a <i>sin_number</i>, the response will contain a list of all the filenames associated with a given SIN. If no query parameter is supplied, all filenames within the S3 storage bucket are listed in the response. 
+
+Keep in mind, multiple file attachments to a given SIN has not yet been implemented. Only a single file can currently be associated with a given SIN, so technically every list return will only be 1 item long.
+
+> localhost:8000/files/list?sin_number=12345
+
+will return a response with all the files associated with SIN # 12345 in the format given below,
+
+> <b>RESPONSEFORMAT</b><br><br>
+> { <br>
+>   { <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'index': 'filename' &nbsp;&nbsp;&nbsp;&nbsp;<br>
+>   } <br>
+>}
 
 ## Third Party Endpoints
 - <i>/auth/login</i> - redirect endpoint for cloud.gov OAuth2 authorization and authentication.<br>

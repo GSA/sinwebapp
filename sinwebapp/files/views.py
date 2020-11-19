@@ -26,10 +26,9 @@ def upload_file(request):
 
             logger.info('Form Validated')
             logger.info('Verifying MIME Type')
-                # request.FILES['file'].read() clears file buffer, so that
-                # subsequent calls to file object are empty; therefore, copy it 
-                # into another object for mimetype validation.
-                # except it odesn't work!
+                # TODO: request.FILES['file'].read() clears file buffer, so that
+                # subsequent calls to file object are empty; need to figure 
+                # how to solve this.
             mime_type = "application/pdf"
             # mime_type = magic.from_buffer(request.FILES['file'].read(), mime=True)
             logger.info('Form MIME Type: %s', mime_type)
@@ -117,7 +116,7 @@ def download_file(request):
         if 'sin_number' in request.GET:
             sin_number = request.GET.get('sin_number')
             if APP_ENV == 'cloud':
-                # todo: download multiple files for a given sin
+                # TODO: download multiple files for a given sin
                 s3_file = download(f'{sin_number}.pdf')['Body']
                 return FileResponse(s3_file, as_attachment=True, filename=f"{sin_number}.pdf")
                     

@@ -32,7 +32,7 @@ urlpatterns= [
     path('status/', views_private.status_info),
     path('userStatuses/', views_private.user_status_info),
     path('statuses/', views_private.status_info_all),
-    path('groups/', views_private.group_info_all)
+    path('groups/', views_private.group_info_all),
     # public endpoints
     path(f'{VERSION_STRING}/sins', SinViewSet.as_view()),
     path(f'{VERSION_STRING}/status', StatusViewSet.as_view()),
