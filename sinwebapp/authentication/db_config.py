@@ -6,6 +6,9 @@ from django.contrib.auth.models import Group
 
 User = get_user_model()
 
+# Allow users with admin privileges to assign users to groups through 
+# Django's admin site. 
+
 class GroupAdminForm(forms.ModelForm):
     class Meta:
         model = Group

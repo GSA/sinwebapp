@@ -502,6 +502,38 @@ def sin_info_all(request):
         response = { 'message' : "Method Not Allowed" }
         return JsonResponse(response, status=405, safe=False)
 
+# GET: /api/groups
+#
+# Description: retrieves information on all SIN numbers
+@login_required
+def group_info_all(request):
+    logger = DebugLogger("sinwebapp.api.views.group_info_all").get_logger()
+
+    logger.info('Verifying Request Method')
+
+    if verify_method(request, ["GET"]):
+        logger.info('Request Method Verified')
+        logger.info('Retrieving All Group Info')
+
+        try:
+            retrieved_groups = list(Group.objects.values())
+            if len(retrieved_groups) == 0:
+                retrieved_groups = { 'message': '0 Groups found' }
+                logger.info('0 Groups Found!')
+                return JsonResponse(retrieved_groups, status=404, safe=False)
+
+            else:
+                logger.info('Groups Found!')
+                return JsonResponse(retrieved_groups, safe=False)
+
+        except Group.DoesNotExist:
+            retrieved_sins = { 'message': 'Groups Do Not Exist' }
+            logger.info('Groups Not Found!')
+            return JsonResponse(retrieved_groups, status=404, safe=False)
+    else:
+        logger.info('Request Method Rejected')
+        response = { 'message' : "Method Not Allowed" }
+        return JsonResponse(response, status=405, safe=False)
 
 # GET: /api/status?id=1
 # 

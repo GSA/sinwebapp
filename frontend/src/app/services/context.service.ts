@@ -71,6 +71,10 @@ export class ContextService {
     return `${Context.USER_STATUS_ENDPOINT}`
   }
 
+  public getGroupsUrl(): string{
+    return `${Context.GROUPS_ENDPOINT}`
+  }
+
   public getFileUploadUrl(): string{
     return `${Context.FILE_UPLOAD_ENDPOINT}/`
   }
