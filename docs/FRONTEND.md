@@ -31,6 +31,8 @@ For example, while viewing a list of SINs within the <i>UserDisplayComponent</i>
 
 Each component, its function and life-cycle are described in more detail below.
 
+### Components
+
 ### UserDisplayComponent
 
 <b>Implemented Hierarchy : AppComponent -> UserDisplayComponent</b>
@@ -140,3 +142,22 @@ This component emits two types of events: save_events and cancel_events. save_ev
 > <app-edit-display [input_SIN]="thisSIN" [user_group] (save_event)="doThis($event)" (cancel_event)="doThat($event)"></app-edit-display>
 
 In the case of a save_event, the event object will contain the SIN object the user edited and passed to the backend application for persisting in the database. A cancel_event will contain a null SIN object.
+
+### Services 
+### ContextService
+todo: document
+### FileService
+todo: document
+### SinService
+todo: document
+### StatusService
+todo: document
+### UserService
+todo: document
+
+### Interceptors
+### AuthInterceptor
+todo: document
+
+### Documentation Navigation
+[<< S3](S3.md) | [^ ReadMe ^](../README.md) | [API >>](API.md)

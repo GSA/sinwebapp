@@ -134,3 +134,6 @@ All of the scripts are BASH scripts and so must be executed with a UNIX/Linux en
 ### B. Work Flows
 
 The artifacts from the Angular build are outputted into the <i>/sinwebapp/static/</i> directory, where the Django web framework serves them up through <b>gunicorn</b>. The HTML templates in the Django backend are configured to load in these artifacts; since the Angular app enters through these Django templates, there is no <i>index.html</i> in the <i>/frontend/</i> folder. In other words, each Angular app launched from a different Django template is an entirely distinct instance of a separate Angular application.
+
+### Documentation Navigation
+[<< Setup](SETUP.md) | [^ ReadMe ^](../README.md) | [S3 >>](S3.md)
