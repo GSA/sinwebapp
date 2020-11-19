@@ -31,7 +31,7 @@ For example, while viewing a list of SINs within the <i>UserDisplayComponent</i>
 
 Each component, its function and life-cycle are described in more detail below.
 
-### Components
+## Components
 
 ### UserDisplayComponent
 
@@ -143,7 +143,7 @@ This component emits two types of events: save_events and cancel_events. save_ev
 
 In the case of a save_event, the event object will contain the SIN object the user edited and passed to the backend application for persisting in the database. A cancel_event will contain a null SIN object.
 
-### Services 
+## Services 
 ### ContextService
 todo: document
 ### FileService
@@ -155,7 +155,7 @@ todo: document
 ### UserService
 todo: document
 
-### Interceptors
+## Interceptors
 ### AuthInterceptor
 todo: document
 
