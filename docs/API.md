@@ -158,14 +158,14 @@ will return a JSON containing the ID's status name and description in the follow
 
 ### S3 Storage Endpoints
 
-Note: currently the application is only able to associate and store a single file in relation to a given SIN submission. In the future the application will allow multiple files to associated with a single SIN submission. See [S3](S3.md) for more details.
+Note: currently the application is only able to associate and store a single file in relation to a given SIN submission. In the future the application will allow multiple files to associated with a single SIN submission. See [S3](S3.md#future-todos) for more details.
 
 - <i>/files/upload</i> - <b>POST</b> - a form-encoded file (an HTML enctype="multipart/form-data" form) can be uploaded to this endpoint. Currently, the endpoint does <i>not</i> check for the mimetype, although in the future, it will only accept form-encoded files that have a mimetype of "application/pdf". See the TODO in <i>/sinwebapp/files/views.py</i> on lines 29-31.
 
 > localhost:8000/api/status?id=3
 > <b>POST REQUEST FORMAT</b><br><br>
 > { <br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body': <form-data> &nbsp;&nbsp;&nbsp;&nbsp;<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body': 'form-data' &nbsp;&nbsp;&nbsp;&nbsp;<br>
 >}
 
 - <i>/files/download</i> - <b>GET</b> - this endpoint accepts a <i>sin_number</i> as a query parameter and returns the attachment associated with that particular submission in the body of the response. Currently, only one attachment can be associated with any given SIN submission. In the future, multiple attachments will be associated with a single SIN, so this endpoint will need to be modified to facilite a response with multiple pdf's in its body. 
@@ -178,7 +178,7 @@ will return a PDF file with the filename "12345.pdf" in the body of the response
 
 > <b>POST REQUEST FORMAT</b><br><br>
 > { <br>
->   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body': <form-data> &nbsp;&nbsp;&nbsp;&nbsp;<br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'body': 'form-data' &nbsp;&nbsp;&nbsp;&nbsp;<br>
 >}
 
 - <i>/files/list</i> - <b>GET</b> - this endpoint accepts a <i>sin_number</i> as a query parameter or no query parameters at all. If supplied with a <i>sin_number</i>, the response will contain a list of all the filenames associated with a given SIN. If no query parameter is supplied, all filenames within the S3 storage bucket are listed in the response. 
