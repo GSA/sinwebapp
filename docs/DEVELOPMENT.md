@@ -117,7 +117,7 @@ Ensure the new app's config file is included in the <i>core/settings.py</i> <b>I
 
 First, make sure the new directory also gets created in the Docker Image by adding to the <i>mkdir</i> bash commands within the section of the Dockerfile labeled <b>CREATE PROJECT DIRECTORY STRUCTURE</b>.
 
-Next, underneath the section of the Dockerfile labeled <b>BUILD BACKEND<b>, ensure the local application gets copied into its corresponding spot in the Docker image, i.e., add the following line,
+Next, underneath the section of the Dockerfile labeled <b>BUILD BACKEND</b>, ensure the local application gets copied into its corresponding spot in the Docker image, i.e., add the following line,
 
 > COPY /sinwebapp/NEW_APP/ /home/sinwebapp/NEW_APP/
 
