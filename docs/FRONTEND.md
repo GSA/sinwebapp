@@ -21,7 +21,7 @@ Top Level:
 Bottom Level: 
 - SubmitDisplayComponent 
 - ReviewDisplayComponent
-- EditDisplayComponent
+- EditDisplayComponent<br>
 Optional:
 - LoggerDisplayComponent
 
