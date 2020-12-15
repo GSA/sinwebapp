@@ -24,7 +24,7 @@ else
     else
         formatted_print ">> Clearing $1 Existing Service" $SCRIPT_NAME
 
-        cf unbind-service "$1" "$1-sql"l
+        cf unbind-service "$1" "$1-sql"
         cf delete-service-key "$1-sql" SERVICE_CONNECT -f
         cf delete-service "$1-sql" -f
 

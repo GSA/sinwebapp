@@ -5,8 +5,15 @@ from debug import DebugLogger
 import os, sys
 
 GROUPS = {
-    'submitter':'submitter_group', 'reviewer': 'reviewer_group', 
-    'approver': 'approver_group', 'admin': 'admin_group'
+    'submitter':'submitter_group', 
+    'reviewer': 'reviewer_group', 
+    'approver': 'approver_group', 
+    'admin': 'admin_group',
+    'portfolio': 'portfolio_group', 
+    'steward': 'steward_group',
+    'pmo_approver': 'pmo_appover_group', 
+    'opc_approver': 'opc_approver_group',
+    'system_approver': 'system_approver_group'
 }
 
 def init_groups(apps, schema_editor):
@@ -17,6 +24,10 @@ def init_groups(apps, schema_editor):
     submitter_group = Group.objects.get_or_create(name=GROUPS['submitter'])
     reviewer_group = Group.objects.get_or_create(name=GROUPS['reviewer'])
     approver_group = Group.objects.get_or_create(name=GROUPS['approver'])
+    portfolio_group = Group.objects.get_or_create(name=GROUPS['portfolio'])
+    steward_group = Group.objects.get_or_create(name=GROUPS['pmo_approver'])
+    pmo_appover = Group.objects.get_or_create(name=GROUPS['opc_approver'])
+    system_approver = Group.objects.get_or_create(name=GROUPS['system_approver'])    
 
 def init_permissions(apps, schema_editor):
     logger = DebugLogger("authentication.db_init.init_permissions").get_logger()
