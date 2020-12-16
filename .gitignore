@@ -3,6 +3,7 @@
 /env/container.env
 /env/local.env
 sinwebapp/static/*
+!sinwebapp/static/.gitkeep
 sinwebapp/util/*
 sinwebapp/init-app.sh
 sinwebapp/init-migrations.sh
