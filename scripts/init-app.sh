@@ -68,7 +68,7 @@ else
         then
             formatted_print ">> Development Detected, Deploying Angular Dev Server On 0.0.0.0:4200"
             cd $SCRIPT_DIR/../frontend
-            nohup ng serve --host 0.0.0.0 --port 4200 > /dev/null 2>&1
+            nohup ng serve --host 0.0.0.0 --port 4200 > /dev/null 2>&1 &
             cd $SCRIPT_DIR/../sinwebapp/
         fi
         formatted_print '>> Collecting Static Files' $SCRIPT_NAME
