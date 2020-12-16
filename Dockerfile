@@ -8,7 +8,7 @@ LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@g
 LABEL version="prototype-1.0.0"
 LABEL description="Internal GSA application for managing SIN data"
 
-## DEPENDENCIES
+## OS DEPENDENCIES
     ## TODO: replace version with ARG
         ## NOTE: provider env var as ARGS in build-container.sh
 RUN apt-get update -y && apt-get install -y curl wait-for-it
@@ -16,10 +16,11 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 RUN npm install -g @angular/cli@10.1.1
 
+## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
-RUN mkdir ./sinwebapp/ && mkdir ./frontend/
+RUN mkdir ./sinwebapp/ && mkdir ./frontend/ && mkdir ./scripts
 
-    # FRONTEND DEPENDENCIES
+# APPLICATION DEPENDENCIES
 COPY /frontend/package.json /home/frontend/package.json
 WORKDIR /home/frontend/
 RUN npm install
@@ -27,22 +28,13 @@ RUN npm install
 WORKDIR /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
-COPY /sinwebapp/metadata.json /home/sinwebapp/metadata.json
-
-## CREATE PROJECT DIRECTORY STRUCTURE
-WORKDIR /home/
-RUN mkdir ./scripts/
-WORKDIR /home/sinwebapp/
-RUN mkdir ./authentication/ && mkdir ./core/ && \
-    mkdir ./static/ && mkdir ./api/ && mkdir ./db/ && \
-    mkdir ./files/ && mkdir ./notification/ && mkdir ./tests/
 
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
 COPY /frontend/  /home/frontend/
 RUN ng build --prod --output-hashing none
 
-## BUILD BACKEND
+COPY /scripts/ /home/scripts/
 VOLUME /home/sinwebapp/ /home/frontend/ /home/scripts/
 
 # PRODUCTION SERVER / DEVELOPMENT SERVER PORT

@@ -63,6 +63,14 @@ else
 
     if [ "$1" == "container" ]
     then 
+        # to lower case
+        if [ "${DEVELOPMENT,,}" == "true" ] 
+        then
+            formatted_print ">> Development Detected, Deploying Angular Dev Server On 0.0.0.0:4200"
+            cd $SCRIPT_DIR/../frontend
+            nohup ng serve --host 0.0.0.0 --port 4200 > /dev/null 2>&1
+            cd $SCRIPT_DIR/../sinwebapp/
+        fi
         formatted_print '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
         formatted_print '>> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
