@@ -66,7 +66,9 @@ else
         # to lower case
         if [ "${DEVELOPMENT,,}" == "true" ] 
         then
-            formatted_print ">> Development Detected, Deploying Angular Dev Server On 0.0.0.0:4200"
+            formatted_print ">> Development Mode Detected, Configuring Frontend For Live Re-loading" $SCRIPT_NAME
+            bash $SCRIPT_DIR/setup/setup-frontend-env.sh development
+            formatted_print "Deploying Angular Dev Server Onto 0.0.0.0:4200" $SCRIPT_NAME
             cd $SCRIPT_DIR/../frontend
             nohup ng serve --host 0.0.0.0 --port 4200 > /dev/null 2>&1 &
             cd $SCRIPT_DIR/../sinwebapp/

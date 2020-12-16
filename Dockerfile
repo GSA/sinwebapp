@@ -35,6 +35,7 @@ COPY /frontend/  /home/frontend/
 RUN ng build --prod --output-hashing none
 
 COPY /scripts/ /home/scripts/
+COPY /sinwebapp/ /home/sinwebapp/
 VOLUME /home/sinwebapp/ /home/frontend/ /home/scripts/
 
 # PRODUCTION SERVER / DEVELOPMENT SERVER PORT

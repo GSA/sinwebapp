@@ -4,6 +4,12 @@ export interface User{
     groups: string[];
 }
 
+export const devUser : User = {
+    id: -1,
+    email: "devUser@gsa.gov",
+    groups: ['admin_group']  
+}
+
 export const GROUPS = {
     submitter: 'submitter_group',
     reviewer: 'reviewer_group',

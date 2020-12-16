@@ -28,6 +28,11 @@ PRODUCTION_URL=metadata['production_url']
 VERSION=metadata['version']
 MAINTAINER=metadata['maintainer']
 
+# Development Mode Configuration
+DEVELOPMENT_MODE=os.environ.setdefault('DEVELOPMENT', 'false')
+DEV_EMAIL="chinchalinchin@gmail.com"
+DEV_GROUP="admin_group"
+
 # Email Configuration
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST=os.getenv('EMAIL_HOST')
