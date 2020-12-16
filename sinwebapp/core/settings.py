@@ -157,8 +157,8 @@ CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_PATH = '/'
 
 # Miscellanous Header Properties
-ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['localhost:4200', 'localhost:8000', PRODUCTION_URL]
+CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS
 REFERRER_POLICY = 'origin'
 
 # cloud.gov OAuth2 properties
