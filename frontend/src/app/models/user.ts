@@ -6,7 +6,7 @@ export interface User{
 
 export const devUser : User = {
     id: -1,
-    email: "devUser@gsa.gov",
+    email: "chinchalinchin@gmail.com",
     groups: ['admin_group']  
 }
 
