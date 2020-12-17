@@ -2,6 +2,10 @@
 ## OPTIONAL
 # clean - wipes application before pushing to cloud,
     # i.e. removes artifacts from previous builds.
+# fresh - BE CAREFUL USING THIS FLAG. It will tear 
+    # all existing services and applications on
+    # the cloud and recreate them. You will lose
+    # all data in the SQL cloud service.
 # build - builds the application before pushing to
     # the cloud
 # dispose - wipes application after pushing to cloud,

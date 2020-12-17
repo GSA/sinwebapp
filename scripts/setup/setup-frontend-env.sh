@@ -28,7 +28,11 @@ then
 elif [ "$1" == "container" ]
 then
     formatted_print '>> Setting Up Container Frontend Environment' $SCRIPT_NAME
-    cp $SCRIPT_DIR/../../frontend/src/environments/environment.local.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
+    cp $SCRIPT_DIR/../../frontend/src/environments/environment.container.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
+elif [ "$1" == "development" ]
+then
+    formatted_print ">> Setting Up Development Mode Frontend Enviroment" $SCRIPT_NAME
+    cp $SCRIPT_DIR/../../frontend/src/environments/environment.development.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
 elif [ "$1" == "cloud" ]
 then
     formatted_print '>> Setting Up Cloud Frontend Environment' $SCRIPT_NAME

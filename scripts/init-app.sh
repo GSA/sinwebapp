@@ -63,6 +63,16 @@ else
 
     if [ "$1" == "container" ]
     then 
+        # to lower case
+        if [ "${DEVELOPMENT,,}" == "true" ] 
+        then
+            formatted_print ">> Development Mode Detected, Configuring Frontend For Live Re-loading" $SCRIPT_NAME
+            bash $SCRIPT_DIR/setup/setup-frontend-env.sh development
+            formatted_print "Deploying Angular Dev Server Onto 0.0.0.0:4200" $SCRIPT_NAME
+            cd $SCRIPT_DIR/../frontend
+            nohup ng serve --host 0.0.0.0 --port 4200 > /dev/null 2>&1 &
+            cd $SCRIPT_DIR/../sinwebapp/
+        fi
         formatted_print '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
         formatted_print '>> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME

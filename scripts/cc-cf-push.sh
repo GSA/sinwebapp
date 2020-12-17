@@ -1,7 +1,10 @@
 ### ARGUMENTS
 # $1: Required: dev, staging or prod
 
-### Note: $CF_DEV_USER, $CF_DEV_PASSWORD store the CloudFoundry dev login
+### NOTE: This script is only executed within the CircleCi pipeline
+##          environment to push application builds to the cloud.
+
+### NOTE: $CF_DEV_USER, $CF_DEV_PASSWORD store the CloudFoundry dev login
 ### credentials on the CircleCi environment. $CF_ORGANIZATION, 
 ### $CF_DEV_SPACE, $CF_STAGING_SPACE and $CF_PROD_SPACE store the
 ### attributes used to target an organization and space on 

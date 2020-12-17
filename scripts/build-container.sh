@@ -15,6 +15,7 @@ then
 else
     formatted_print '>> Initializing Local Environment' $SCRIPT_NAME
     source $SCRIPT_DIR/init-env.sh
+    SCRIPT_NAME='\e[4mbuild-container\e[0m'
     formatted_print ">> Python Version: ${PYTHON_VERSION}" $SCRIPT_NAME
     formatted_print ">> Angular Version: ${ANGULAR_VERSION}" $SCRIPT_NAME
 
