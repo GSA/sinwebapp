@@ -12,6 +12,12 @@ from api.models import Sin, Status
 from debug import DebugLogger
 
 
+def liveness(request):
+    return JsonResponse({'message': 'live'})
+
+def readiness(request):
+    return JsonResponse({'message': 'ready'})
+    
 def search(request):
     logger = DebugLogger("sinwebapp.api.views.user_info").get_logger()
     logger.info('Verifying Request Method')
