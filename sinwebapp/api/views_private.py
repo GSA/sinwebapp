@@ -48,7 +48,7 @@ def user_info(request):
         logger.info('Verifying Request Method')
 
         if verify_method(request, ["GET"]):
-            logger.info('Request Method Verified')4
+            logger.info('Request Method Verified')
 
             if hasattr(request.user, 'email') and hasattr(request.user, 'groups'):
                 logger.info('Request Email: %s', request.user.email)

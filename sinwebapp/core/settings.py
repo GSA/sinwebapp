@@ -53,9 +53,12 @@ if APP_ENV == 'cloud':
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 elif APP_ENV == 'mcaas':
-    # TODO
-    
-    pass
+    DEBUG = True
+    aws_creds={
+        'bucket': os.getenv('AWS_BUCKET_NAME'),
+        'region': os.getenv('AWS_DEFAULT_REGION'),
+    }
+    # TODO: pull correct mcaas DB & S3 credentials
 elif APP_ENV == 'local' or APP_ENV == 'container':
     DEBUG = True
     aws_creds={
@@ -85,8 +88,25 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
         }
     }
 elif APP_ENV == 'mcaas':
-    # TODO:
-
+    # TODO: change env vars to MCaas equivalents
+    db_creds={
+        'host': os.getenv('POSTGRES_HOST'),
+        'db_name': os.getenv('POSTGRES_DB'),
+        'username': os.getenv('POSTGRES_USER'),
+        'password': os.getenv('POSTGRES_PASSWORD'),
+        'port': os.getenv('POSTGRES_PORT')
+    }
+    # TODO: change engine to MySql
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': db_creds['host'],
+        'NAME': db_creds['db_name'],
+        'USER': db_creds['username'],
+        'PASSWORD': db_creds['password'],
+        'PORT': db_creds['port']
+        }
+    }
     pass
 
 # General Application Configuration
@@ -146,7 +166,6 @@ elif APP_ENV == 'mcaas':
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
-    pass
 
 # Template Configuration
 TEMPLATES = [
@@ -207,6 +226,7 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
 
 elif APP_ENV == 'mcaas':
     AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+    LOGIN_REDIRECT_URL = '/success'
 
     
     pass

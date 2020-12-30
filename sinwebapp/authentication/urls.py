@@ -14,7 +14,7 @@ if settings.APP_ENV != 'mcaas':
 else:
     urlpatterns = [
         path('', views.login_page, name='login'),
-        path('login/', auth_views.login, {'template_name': 'authenticatoin/login_form.html'}, name='login-form'),
+        path('auth/login/', auth_views.LoginView.as_view(template_name='login_form.html'), name='login-form'),
         path('logout/', views.logout_page, name='logout-splash'),
         path('success/', views.login_success_page, name='success')
     ]

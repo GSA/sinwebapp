@@ -39,7 +39,7 @@ else
         log ">> Navigating To Project Root: $(pwd)" $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
-    elif [ "$1" == "container" ]
+    elif [ "$1" == "container" ] || [ "$1" == "mcaas"] 
     then
         log '>> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-migrations.sh $1
@@ -77,12 +77,21 @@ else
         python manage.py collectstatic --noinput
         log '>> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
         gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3
+
     elif [ "$1" == "local" ]
     then
         log '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
         log '>> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration' $SCRIPT_NAME
         gunicorn core.wsgi:application --workers 3
+    
+    elif [ "$1" == "mcaas" ]
+    then
+        log '>> Colleting Static Files' $SCRIPT_NAME
+        python manage.py collect static --noinput
+        log '>> Binding Gunicorn Server to Non-Loopback Address for Container Configuration'
+        gunicorn core.wsgi:application --bind=0.0.0.0 --workers=3
+
     elif [ "$1" == "cloud" ]
     then
         # log '>> Testing Email Service' $SCRIPT_NAME

@@ -42,10 +42,15 @@ class DebugLogger():
         self.logger.info('> AWS Bucket Name: %s', config.aws_creds['bucket'])
         self.logger.info('> AWS Region: %s', config.aws_creds['region'])
         self.logger.info("-------------------------------------------------")
-        self.logger.info("# UAA OAuth2 Configuration")
-        self.logger.info('> UAA Authorization URLL: %s', config.UAA_AUTH_URL)
-        self.logger.info('> UAA Token URL: %s', config.UAA_TOKEN_URL)
-        self.logger.info('> UAA Login Redirect URL: %s', config.LOGIN_REDIRECT_URL)
+        if config.APP_ENV != 'mcaas':
+            self.logger.info("# UAA OAuth2 Configuration")
+            self.logger.info('> UAA Authorization URLL: %s', config.UAA_AUTH_URL)
+            self.logger.info('> UAA Token URL: %s', config.UAA_TOKEN_URL)
+            self.logger.info('> UAA Login Redirect URL: %s', config.LOGIN_REDIRECT_URL)
+        else: 
+            self.logger.info("# Auth Configuration")
+            self.logger.info('> Login Redirect URL: %s', config.LOGIN_REDIRECT_URL)
+
         self.logger.info("-------------------------------------------------")
         self.logger.info("# Email Configuration")
         self.logger.info("> Email Host: %s", config.EMAIL_HOST)

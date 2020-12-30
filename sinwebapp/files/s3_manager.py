@@ -1,6 +1,7 @@
 import boto3, sys
 from botocore.exceptions import ClientError
 
+from core import settings
 from core.settings import aws_creds
 
 from debug import DebugLogger
@@ -9,17 +10,25 @@ from debug import DebugLogger
 def get_s3_client():
     logger = DebugLogger("sinwebapp.files.s3_manager.get_s3_client").get_logger()
     logger.info('Instantiating boto3 S3 Client')
-    return boto3.client('s3', aws_access_key_id=aws_creds['access_key_id'],
-                        aws_secret_access_key=aws_creds['secret_access_key'],
-                        region_name=aws_creds['region'])
+    
+    # NOTE: MCaas environment has AWS S3 Role
+    if settings.APP_ENV != 'mcaas':
+        return boto3.client('s3', aws_access_key_id=aws_creds['access_key_id'],
+                            aws_secret_access_key=aws_creds['secret_access_key'],
+                            region_name=aws_creds['region'])
+    else:
+        return boto3.client('s3', region_name=aws_creds['region'])
 
 # Returns an S3 Session authenticated with credentials in settings.py      
 def get_s3_session():
     logger = DebugLogger("sinwebapp.files.s3_manager.get_s3_session").get_logger()
     logger.info('Instantiating boto3 S3 Session')
-    return boto3.session.Session(aws_access_key_id=aws_creds['access_key_id'],
-                                aws_secret_access_key=aws_creds['secret_access_key'],
-                                region_name=aws_creds['region'])
+    if settings.APP_ENV != 'mcaas':
+        return boto3.session.Session(aws_access_key_id=aws_creds['access_key_id'],
+                                    aws_secret_access_key=aws_creds['secret_access_key'],
+                                    region_name=aws_creds['region'])
+    else:
+        return boto3.session.Session(region_name=aws_creds['region'])
                                 
 # Returns True if 'bucket_name' is created successfully. Returns False if 'bucket_name' 
 # creation fails
