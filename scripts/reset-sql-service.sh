@@ -19,26 +19,26 @@ then
 else
     if [ "$#" -ne 1 ]; 
     then
-        formatted_print "ERROR: No Argument Provided. Please run script with --help flag for more${nl}\
+        log "ERROR: No Argument Provided. Please run script with --help flag for more${nl}\
          information" $SCRIPT_NAME
     else
-        formatted_print ">> Clearing $1 Existing Service" $SCRIPT_NAME
+        log ">> Clearing $1 Existing Service" $SCRIPT_NAME
 
         cf unbind-service "$1" "$1-sql"
         cf delete-service-key "$1-sql" SERVICE_CONNECT -f
         cf delete-service "$1-sql" -f
 
-        formatted_print '>> Creating New SQL Service' $SCRIPT_NAME
+        log '>> Creating New SQL Service' $SCRIPT_NAME
         cf create-service aws-rds medium-psql "$1-sql"
 
         while [[ "$(cf service $1-sql)" == *"create in progress"* ]]
         do  
-            formatted_print '>> Waiting On SQL Service Creation' $SCRIPT_NAME
-            formatted_print '>> SQL Service Status:' $SCRIPT_NAME
+            log '>> Waiting On SQL Service Creation' $SCRIPT_NAME
+            log '>> SQL Service Status:' $SCRIPT_NAME
             cf service "$1-sql"
             sleep 15s
         done
 
-        formatted_print '>> SQL Service Created' $SCRIPT_NAME
+        log '>> SQL Service Created' $SCRIPT_NAME
     fi
 fi

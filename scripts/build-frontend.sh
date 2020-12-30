@@ -14,9 +14,9 @@ then
 else
     cd $SCRIPT_DIR/../frontend
 
-    formatted_print '>> Installing Angular Dependencies' $SCRIPT_NAME
+    log '>> Installing Angular Dependencies' $SCRIPT_NAME
     npm install
 
-    formatted_print '>> Building Angular Frontend' $SCRIPT_NAME
+    log '>> Building Angular Frontend' $SCRIPT_NAME
     ng build --prod --output-hashing none
 fi

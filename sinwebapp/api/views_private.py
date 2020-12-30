@@ -36,7 +36,6 @@ def verify_method(request, allowed_methods):
 def user_info(request):
     logger = DebugLogger("sinwebapp.api.views.user_info").get_logger()
 
-    logger.info('Verifying Request Method')
     if settings.DEVELOPMENT_MODE:
         response = {
             'id': -1,
@@ -44,14 +43,15 @@ def user_info(request):
             'groups': settings.DEV_GROUP
         }
         return JsonResponse(response, safe=False)
-    else:
-        if verify_method(request, ["GET"]):
 
-            logger.info('Request Method Verified')
-            logger.info('Request Email: %s', request.user.email)
+    else:
+        logger.info('Verifying Request Method')
+
+        if verify_method(request, ["GET"]):
+            logger.info('Request Method Verified')4
 
             if hasattr(request.user, 'email') and hasattr(request.user, 'groups'):
-
+                logger.info('Request Email: %s', request.user.email)
                 group_list = list(request.user.groups.values_list('name',flat = True)) 
                 response = {
                         'id': request.user.id,

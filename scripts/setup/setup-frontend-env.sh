@@ -13,28 +13,28 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME='\e[4msetup-frontend-env\e[0m'
 source "$SCRIPT_DIR/../util/logging.sh"
 
-formatted_print '>> Initializing Frontend Environment' $SCRIPT_NAME
+log '>> Initializing Frontend Environment' $SCRIPT_NAME
 
 if [ -f "$SCRIPT_DIR/../../frontend/src/environments/environment.ts" ]
 then
-    formatted_print '>> Cleaning Current Frontend Environment' $SCRIPT_NAME
+    log '>> Cleaning Current Frontend Environment' $SCRIPT_NAME
     rm $SCRIPT_DIR/../../frontend/src/environments/environment.ts
 fi
 
 if [ "$1" == "local" ]
 then
-    formatted_print '>> Setting Up Local Frontend Environment' $SCRIPT_NAME
+    log '>> Setting Up Local Frontend Environment' $SCRIPT_NAME
     cp $SCRIPT_DIR/../../frontend/src/environments/environment.local.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
 elif [ "$1" == "container" ]
 then
-    formatted_print '>> Setting Up Container Frontend Environment' $SCRIPT_NAME
+    log '>> Setting Up Container Frontend Environment' $SCRIPT_NAME
     cp $SCRIPT_DIR/../../frontend/src/environments/environment.container.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
 elif [ "$1" == "development" ]
 then
-    formatted_print ">> Setting Up Development Mode Frontend Enviroment" $SCRIPT_NAME
+    log ">> Setting Up Development Mode Frontend Enviroment" $SCRIPT_NAME
     cp $SCRIPT_DIR/../../frontend/src/environments/environment.development.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
 elif [ "$1" == "cloud" ]
 then
-    formatted_print '>> Setting Up Cloud Frontend Environment' $SCRIPT_NAME
+    log '>> Setting Up Cloud Frontend Environment' $SCRIPT_NAME
     cp $SCRIPT_DIR/../../frontend/src/environments/environment.cloud.sample.ts $SCRIPT_DIR/../../frontend/src/environments/environment.ts
 fi

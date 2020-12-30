@@ -23,8 +23,8 @@ USE_TZ = True
 
 # Application Configuration 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-APP_ENV = os.environ.setdefault('ENVIRONMENT','local')
-SECRET_KEY = os.environ.setdefault('SECRET_KEY', 'xxxx')
+APP_ENV = os.environ.setdefault('APP_ENV','local')
+SECRET_KEY = os.environ.setdefault('SECRET_KEY', 'xxxxxxxxxx')
 
 meta_file = os.path.join(BASE_DIR, 'metadata.json')
 with open(meta_file) as f:
@@ -35,7 +35,7 @@ VERSION=metadata['version']
 MAINTAINER=metadata['maintainer']
 
 # Development Mode Configuration
-DEVELOPMENT_MODE=os.environ.setdefault('DEVELOPMENT', 'false')
+DEVELOPMENT_MODE=os.environ.setdefault('DEVELOPMENT', 'False')
 DEV_EMAIL="chinchalinchin@gmail.com"
 DEV_GROUP="admin_group"
 
@@ -52,7 +52,11 @@ if APP_ENV == 'cloud':
     DEBUG = False
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
-else:
+elif APP_ENV == 'mcaas':
+    # TODO
+    
+    pass
+elif APP_ENV == 'local' or APP_ENV == 'container':
     DEBUG = True
     aws_creds={
         'access_key_id': os.getenv('AWS_ACCESS_KEY_ID'),
@@ -69,16 +73,21 @@ else:
     }
 
 # Database Configuration Settings
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'HOST': db_creds['host'],
-    'NAME': db_creds['db_name'],
-    'USER': db_creds['username'],
-    'PASSWORD': db_creds['password'],
-    'PORT': db_creds['port']
+if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': db_creds['host'],
+        'NAME': db_creds['db_name'],
+        'USER': db_creds['username'],
+        'PASSWORD': db_creds['password'],
+        'PORT': db_creds['port']
+        }
     }
-}
+elif APP_ENV == 'mcaas':
+    # TODO:
+
+    pass
 
 # General Application Configuration
 ROOT_URLCONF = 'core.urls'
@@ -92,39 +101,52 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'drf_yasg',
     'rest_framework',
     'corsheaders',
-
-    'uaa_client',
-
     'authentication.apps.AuthenticationConfig',
     'api.apps.ApiConfig',
     'files.apps.FilesConfig'
 ]
+if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
+    INSTALLED_APPS += ['uaa_client']
+elif APP_ENV == 'mcaas':
+    # TODO
+
+    pass
 
 # Middleware Order Configuration
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
-    
-    'django.middleware.security.SecurityMiddleware',
-    
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    
-    'core.middleware.DebugMiddleware',
-    
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'uaa_client.middleware.UaaRefreshMiddleware',
-
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
+    MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
+        'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
+        'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'core.middleware.DebugMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'uaa_client.middleware.UaaRefreshMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ]
+elif APP_ENV == 'mcaas':
+    # TODO
+    MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
+        'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
+        'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'core.middleware.DebugMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ]
+    pass
 
 # Template Configuration
 TEMPLATES = [
@@ -166,21 +188,29 @@ REFERRER_POLICY = 'origin'
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', PRODUCTION_URL]
 
 # Authentication Configuration
-AUTHENTICATION_BACKENDS = [ 'uaa_client.authentication.UaaBackend' ]
-LOGIN_URL = 'uaa_client:login'
-LOGIN_REDIRECT_URL = '/success'
-UAA_APPROVED_DOMAINS = ['gsa.gov']
-UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID', 'fakeclientid')
-UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET', 'fakeclientsecret')
+if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
+    AUTHENTICATION_BACKENDS = [ 'uaa_client.authentication.UaaBackend' ]
+    LOGIN_URL = 'uaa_client:login'
+    LOGIN_REDIRECT_URL = '/success'
+    UAA_APPROVED_DOMAINS = ['gsa.gov']
+    UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID', 'fakeclientid')
+    UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET', 'fakeclientsecret')
 
-if APP_ENV == 'cloud':
-    UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'
-    UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
-    UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
+    if APP_ENV == 'cloud':
+        UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'
+        UAA_AUTH_URL = 'https://login.fr.cloud.gov/oauth/authorize'
+        UAA_TOKEN_URL = 'https://uaa.fr.cloud.gov/oauth/token'
 
-else:
-    UAA_AUTH_URL = 'fake:'
-    UAA_TOKEN_URL = 'fake:'
+    elif APP_ENV == 'local' or APP_ENV == 'container':
+        UAA_AUTH_URL = 'fake:'
+        UAA_TOKEN_URL = 'fake:'
+
+elif APP_ENV == 'mcaas':
+    AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+
+    
+    pass
+ 
 
 # Static Configuration
 STATIC_URL = '/static/'

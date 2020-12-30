@@ -16,6 +16,6 @@ else
         source $SCRIPT_DIR/../env/local.env
         set +o allexport
     else
-        formatted_print 'Please Configure \e[4mlocal.env\e[0m File' $SCRIPT_NAME
+        log 'Please Configure \e[4mlocal.env\e[0m File' $SCRIPT_NAME
     fi
 fi

@@ -16,5 +16,7 @@ urlpatterns = [
     path('', include('authentication.urls', namespace='authentication')),
     path('api/', include('api.urls', namespace='api')),
     path('files/', include('files.urls', namespace='files')),
-    path('auth/', include('uaa_client.urls', namespace='uaa_client'))
 ]
+
+if settings.APP_ENV  != 'mcaas':
+    urlpatterns += [path('auth/', include('uaa_client.urls', namespace='uaa_client'))]
