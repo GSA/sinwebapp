@@ -11,7 +11,7 @@ LABEL description="Internal GSA application for managing SIN data"
 ## OS DEPENDENCIES
     ## TODO: replace version with ARG
         ## NOTE: provider env var as ARGS in build-container.sh
-RUN apt-get update -y && apt-get install -y curl wait-for-it
+RUN apt-get update -y && apt-get install -y curl wait-for-it build-essential python-dev default-libmysqlclient-dev
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 RUN npm install -g @angular/cli@10.1.1

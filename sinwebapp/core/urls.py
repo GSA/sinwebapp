@@ -7,8 +7,6 @@ from django.views.generic.base import RedirectView
 
 from . import settings
 
-admin.site.login = staff_login_required(admin.site.login)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'))),
@@ -18,5 +16,6 @@ urlpatterns = [
     path('files/', include('files.urls', namespace='files')),
 ]
 
-if settings.APP_ENV  != 'mcaas':
+if not(settings.APP_ENV  == 'mcaas' or settings.APP_ENV == 'local_mcaas'):
+    admin.site.login = staff_login_required(admin.site.login)
     urlpatterns += [path('auth/', include('uaa_client.urls', namespace='uaa_client'))]

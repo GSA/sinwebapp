@@ -52,6 +52,7 @@ if APP_ENV == 'cloud':
     DEBUG = False
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
+
 elif APP_ENV == 'mcaas':
     DEBUG = True
     # TODO: pull correct mcaas S3 credentials
@@ -60,12 +61,27 @@ elif APP_ENV == 'mcaas':
         'region': os.getenv('AWS_DEFAULT_REGION'),
     }
     db_creds={
-        'host': os.getenv('mMCAAS_AURORA_HOSTNAME'),
+        'host': os.getenv('MCAAS_AURORA_HOSTNAME'),
         'db_name': os.getenv('CCDA_DB_NAME'),
         'username': os.getenv('CCDA_DB_USER'),
         'password': os.getenv('CCDA_DB_PASSWORD'),
         'port': 5432
     }
+
+elif APP_ENV == 'local_mcaas':
+    DEBUG = True
+    aws_creds={
+        'bucket': os.getenv('AWS_BUCKET_NAME'),
+        'region': os.getenv('AWS_DEFAULT_REGION'),
+    }
+    db_creds={
+        'host': os.getenv('MYSQL_HOST'),
+        'db_name': os.getenv('MYSQL_DATABASE'),
+        'username': os.getenv('MYSQL_USER'),
+        'password': os.getenv('MYSQL_PASSWORD'),
+        'port': os.getenv('MYSQL_PORT')
+    }
+
 elif APP_ENV == 'local' or APP_ENV == 'container':
     DEBUG = True
     aws_creds={
@@ -94,7 +110,8 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
         'PORT': db_creds['port']
         }
     }
-elif APP_ENV == 'mcaas':
+
+elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -148,7 +165,8 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
-elif APP_ENV == 'mcaas':
+
+elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
     # TODO
     MIDDLEWARE = [
         'corsheaders.middleware.CorsMiddleware',
@@ -221,13 +239,9 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
         UAA_AUTH_URL = 'fake:'
         UAA_TOKEN_URL = 'fake:'
 
-elif APP_ENV == 'mcaas':
+elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
     AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
     LOGIN_REDIRECT_URL = '/success'
-
-    
-    pass
- 
 
 # Static Configuration
 STATIC_URL = '/static/'

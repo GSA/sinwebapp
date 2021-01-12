@@ -42,7 +42,7 @@ class DebugLogger():
         self.logger.info('> AWS Bucket Name: %s', config.aws_creds['bucket'])
         self.logger.info('> AWS Region: %s', config.aws_creds['region'])
         self.logger.info("-------------------------------------------------")
-        if config.APP_ENV != 'mcaas':
+        if not (config.APP_ENV == 'mcaas' or config.APP_ENV == 'local_mcaas'):
             self.logger.info("# UAA OAuth2 Configuration")
             self.logger.info('> UAA Authorization URLL: %s', config.UAA_AUTH_URL)
             self.logger.info('> UAA Token URL: %s', config.UAA_TOKEN_URL)
