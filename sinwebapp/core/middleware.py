@@ -12,7 +12,7 @@ class DebugMiddleware:
     def __call__(self, request: HttpRequest):
 
         if settings.DEBUG:
-            if ('liveness' not in request.path) or ('readiness' not in request.path):
+            if ('liveness' not in request.path) and ('readiness' not in request.path):
                 self.logger.info('> Request Path: %s', request.path)
                 self.logger.info('> Request Host: %s', request.META["HTTP_HOST"])
 
