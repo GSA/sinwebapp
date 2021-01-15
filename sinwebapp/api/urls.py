@@ -23,8 +23,8 @@ schema_view = get_schema_view(
 
 urlpatterns= [
     # Kubernetes Probe endpoints,
-    path('/liveness', views_public.liveness),
-    path('/readiness', views_public.readiness),
+    path('liveness/', views_public.liveness),
+    path('readiness/', views_public.readiness),
     # application endpoints
     path('user/', views_private.user_info),
     path('users/', views_private.user_info_filtered),
