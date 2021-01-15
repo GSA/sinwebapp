@@ -20,7 +20,7 @@ if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" ==
 then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
-    log ">> $1 Environment Detected" $SCRIPT_NAME
+    log ">> $1 Argument Provided, Ensuring Environment Initialized" $SCRIPT_NAME
 
     if [ "$1" == "local" ]
     then
@@ -61,9 +61,13 @@ else
     log '>> Printing Configuration' $SCRIPT_NAME
     python debug.py
 
-    if [ "$1" == "container" ]
+    # NOTE: Check APP_ENV variable, since Dockerfile specifies an argument of 
+    # 'container' for this script. The Dockerfile is used to launch application
+    # in MCaaS **and** locally, so script needs to differentiate these enviroments
+    # by using APP_ENV instead of argument to script.
+    if [ "$APP_ENV" == "container" ]
     then 
-        # to lower case
+        # $DEVELOPMENT to lower case
         if [ "${DEVELOPMENT,,}" == "true" ] 
         then
             log ">> Development Mode Detected, Configuring Frontend For Live Re-loading" $SCRIPT_NAME
@@ -78,21 +82,21 @@ else
         log '>> Binding Gunicorn Server To Non-Loopback Address For Container Configuration' $SCRIPT_NAME
         gunicorn core.wsgi:application --bind=0.0.0.0 --workers 3
 
-    elif [ "$1" == "local" ]
+    elif [ "$APP_ENV" == "local" ]
     then
         log '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
         log '>> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration' $SCRIPT_NAME
         gunicorn core.wsgi:application --workers 3
     
-    elif [ "$1" == "mcaas" ]
+    elif [ "$APP_ENV" == "mcaas" ]
     then
         log '>> Colleting Static Files' $SCRIPT_NAME
         python manage.py collect static --noinput
         log '>> Binding Gunicorn Server to Non-Loopback Address for Container Configuration'
-        gunicorn core.wsgi:application --bind=0.0.0.0 --workers=3
+        ddtrace-run gunicorn core.wsgi:application --bind=0.0.0.0 --workers=3
 
-    elif [ "$1" == "cloud" ]
+    elif [ "$APP_ENV" == "cloud" ]
     then
         # log '>> Testing Email Service' $SCRIPT_NAME
         # python ./tests/email_test.py
