@@ -53,7 +53,7 @@ if APP_ENV == 'cloud':
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 
-elif APP_ENV == 'mcaas':
+elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
     DEBUG = True
     # TODO: pull correct mcaas S3 credentials
     aws_creds={
@@ -61,26 +61,18 @@ elif APP_ENV == 'mcaas':
         'region': os.getenv('AWS_DEFAULT_REGION'),
     }
     db_creds={
-        'host': os.getenv('MCAAS_AURORA_HOSTNAME'),
         'db_name': os.getenv('CCDA_DB_NAME'),
         'username': os.getenv('CCDA_DB_USER'),
         'password': os.getenv('CCDA_DB_PASSWORD'),
-        'port': 5432
-    }
-
-elif APP_ENV == 'local_mcaas':
-    DEBUG = True
-    aws_creds={
-        'bucket': os.getenv('AWS_BUCKET_NAME'),
-        'region': os.getenv('AWS_DEFAULT_REGION'),
-    }
-    db_creds={
-        'host': os.getenv('MYSQL_HOST'),
-        'db_name': os.getenv('MYSQL_DATABASE'),
-        'username': os.getenv('MYSQL_USER'),
-        'password': os.getenv('MYSQL_PASSWORD'),
         'port': os.getenv('MYSQL_PORT')
     }
+
+    if APP_ENV == 'local_mcaas':
+        db_creds['host'] = os.getenv('MYSQL_HOST')
+    
+    elif APP_ENV == 'mcaas':   
+        db_creds['host'] = os.getenv('MCAAS_AURORA_HOSTNAME'),
+
 
 elif APP_ENV == 'local' or APP_ENV == 'container':
     DEBUG = True
