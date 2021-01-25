@@ -39,7 +39,7 @@ else
         log ">> Navigating To Project Root: $(pwd)" $SCRIPT_NAME
         cd $SCRIPT_DIR/../sinwebapp/
 
-    elif [ "$1" == "container" ] || [ "$1" == "mcaas"] 
+    elif [ "$1" == "container" ] || [ "$1" == "mcaas" ] 
     then
         log '>> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-migrations.sh $1
