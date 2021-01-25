@@ -23,7 +23,7 @@ jobs:
             - checkout
             - run: 
                 name: Install OS Dependencies
-                command: apt-get update -y && apt-get install -y curl netcat
+                command: apt-get update -y && apt-get install -y curl netcat build-essential python-dev default-libmysqlclient-dev
             - run:
                 name: Clean Application
                 command: bash ./scripts/clean-app.sh
