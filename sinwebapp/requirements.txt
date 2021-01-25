@@ -5,6 +5,7 @@ whitenoise==5.1.0
 
 # Database Dependencies
 psycopg2-binary==2.8.5
+mysqlclient==2.0.3
 
 # Http Dependencies
 requests>=2.20.0
@@ -21,3 +22,6 @@ cg-django-uaa==2.0.0
 # S3 Dependencies
 boto3==1.14.58
 python-magic==0.4.18
+
+# Datadog Dependency
+ddtrace==0.45.0
