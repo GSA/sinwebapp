@@ -10,4 +10,4 @@ services:
     - ccda-s3
 command: bash ./init-app.sh cloud
 env:
-    ENVIRONMENT: cloud
+    APP_ENV: cloud
