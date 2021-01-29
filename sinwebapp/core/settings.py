@@ -47,14 +47,15 @@ EMAIL_PORT=587
 EMAIL_HOST_USER=os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=os.getenv('EMAIL_HOST_PASSWORD')
 
+# Debug Configuration
+DEBUG = True if os.getenv('DEBUG').lower() == 'true' else False
+
 # Environment Specific Configuration
 if APP_ENV == 'cloud':
-    DEBUG = True
     aws_creds = json.loads(os.getenv('VCAP_SERVICES'))['s3'][0]['credentials']
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 
 elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
-    DEBUG = True
     # TODO: pull correct mcaas S3 credentials
     aws_creds={
         'bucket': os.getenv('AWS_BUCKET_NAME'),
@@ -75,7 +76,6 @@ elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
 
 
 elif APP_ENV == 'local' or APP_ENV == 'container':
-    DEBUG = True
     aws_creds={
         'access_key_id': os.getenv('AWS_ACCESS_KEY_ID'),
         'secret_access_key': os.getenv('AWS_SECRET_ACCESS_KEY'),

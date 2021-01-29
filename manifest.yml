@@ -11,3 +11,4 @@ services:
 command: bash ./init-app.sh cloud
 env:
     APP_ENV: cloud
+    DEBUG: False
