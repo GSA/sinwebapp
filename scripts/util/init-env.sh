@@ -4,7 +4,7 @@ nl=$'\n'
 SCRIPT_DES="This script will activate the local environment variables found in ${nl}\
    \e[3mlocal.env\e[0m file. Source this script through bash, e.g. ${nl}${nl}\
            source \e[3m$SCRIPT_DIR/init-env.sh\e[0m"
-source "$SCRIPT_DIR/util/logging.sh"
+source "$SCRIPT_DIR/logging.sh"
 
 if [ "$1" == "--help" ] || [ "$1" == "--h" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]
 then
