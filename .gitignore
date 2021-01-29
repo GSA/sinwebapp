@@ -1,7 +1,7 @@
 *.venv
 *.pyc
-/env/container.env
-/env/local.env
+/env/*
+!/env/.sample.env
 sinwebapp/static/*
 !sinwebapp/static/.gitkeep
 sinwebapp/util/*
@@ -9,4 +9,4 @@ sinwebapp/init-app.sh
 sinwebapp/init-migrations.sh
 sinwebapp/files/local_uploads/*
 frontend/node_modules/*
-scripts/aws/sync/
+scripts/aws/sync/*
