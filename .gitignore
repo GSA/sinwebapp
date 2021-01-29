@@ -8,5 +8,6 @@ sinwebapp/util/*
 sinwebapp/init-app.sh
 sinwebapp/init-migrations.sh
 sinwebapp/files/local_uploads/*
+sinwebapp/
 frontend/node_modules/*
 scripts/aws/sync/*
