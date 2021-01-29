@@ -21,9 +21,6 @@ services:
             - type: bind
               source: ./frontend
               target: /home/frontend
-            - type: bind
-              source: ./scripts
-              target: /home/scripts
         command: ["wait-for-it", "database:5432", "--","wait-for-it","mcaas_db:3306","--","bash","./init-app.sh","container"]
 
     database:

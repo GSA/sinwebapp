@@ -17,6 +17,7 @@ else
     source $SCRIPT_DIR/util/init-env.sh
         # reset because sourcing overrides it
     SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    SCRIPT_NAME='\e[4mbuild-container\e[0m'
 
     log ">> Python Version: ${PYTHON_VERSION}" $SCRIPT_NAME
     log ">> Angular Version: ${ANGULAR_VERSION}" $SCRIPT_NAME

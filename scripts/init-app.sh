@@ -41,6 +41,9 @@ else
 
     elif [ "$1" == "container" ] || [ "$1" == "mcaas" ] 
     then
+        log '>> Invoking \e[3mbuild-frontend.sh\e[0m Script' $SCRIPT_NAME
+        bash $SCRIPT_DIR/build-frontend.sh
+
         log '>> Invoking \e[3minit-migrations.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/init-migrations.sh $1
         
@@ -49,6 +52,8 @@ else
 
     elif [ "$1" == "cloud" ]
     then
+        # Frontend gets built in CircleCi
+        
         log ">> Cloud Specific Pre-App Configuration Goes Here" $SCRIPT_NAME
         # python manage.py clearsessions
         # python ./files/s3_manager.py create_bucket
@@ -67,7 +72,7 @@ else
     # by using APP_ENV instead of argument to script.
     if [ "$APP_ENV" == "container" ]
     then 
-        # $DEVELOPMENT to lower case
+            # $DEVELOPMENT to lower case
         if [ "${DEVELOPMENT,,}" == "true" ] 
         then
             log ">> Development Mode Detected, Configuring Frontend For Live Re-loading" $SCRIPT_NAME
@@ -84,6 +89,19 @@ else
 
     elif [ "$APP_ENV" == "local" ]
     then
+            # $DEVELOPMENT to lower case
+        if [ "${DEVELOPMENT,,}" == "true" ]
+        then
+            log ">> Development Mode Detected, Configuring Frontend For Live Re-loading" $SCRIPT_NAME
+            bash $SCRIPT_DIR/setup/setup-frontend-env.sh development
+            
+            log "Deploying Angular Dev Server Onto \e[3mlocalhost\e[0m:4200" $SCRIPT_NAME
+            cd $SCRIPT_DIR/../frontend
+            nohup ng serve --host 127.0.0.1 --port 4200 > /dev/null 2>&1 &
+            
+            cd $SCRIPT_DIR/../sinwebapp/
+        fi
+        
         log '>> Collecting Static Files' $SCRIPT_NAME
         python manage.py collectstatic --noinput
         log '>> Binding Gunicorn Server To \e[3mlocalhost\e[0m For Local Configuration' $SCRIPT_NAME

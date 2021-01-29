@@ -1,3 +1,5 @@
 /frontend/node_modules/
-/sinwebapp/static/
+/sinwebapp/static/*
 !/sinwebapp/static/.gitkeep
+*.pyc
+**/*.pyc

@@ -1,7 +1,4 @@
 # META DATA
-## TODO: replace version with ARG
-## provide env var as ARGS in build-container.sh
-
 FROM python:3.7.7-slim-stretch
 LABEL application="CCDA : Core Contract Data Automation"
 LABEL maintainers=["Grant Moore <grant.moore@gsa.gov>","Pramod Ganore <pganore@gsa.gov>","Theodros Desta <theodros.desta@gsa.gov>"]
@@ -9,38 +6,28 @@ LABEL version="prototype-1.0.0"
 LABEL description="Internal GSA application for managing SIN data"
 
 ## OS DEPENDENCIES
-    ## TODO: replace version with ARG
-        ## NOTE: provider env var as ARGS in build-container.sh
-RUN apt-get update -y && apt-get install -y curl wait-for-it build-essential python-dev default-libmysqlclient-dev
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs
-RUN npm install -g @angular/cli@10.1.1
+RUN apt-get update -y && apt-get install -y curl wait-for-it build-essential\ 
+    python-dev default-libmysqlclient-dev
 
 ## CREATE PROJECT DIRECTORY STRUCTURE
 WORKDIR /home/
 RUN mkdir ./sinwebapp/ && mkdir ./frontend/ && mkdir ./scripts
 
 # APPLICATION DEPENDENCIES
-COPY /frontend/package.json /home/frontend/package.json
-WORKDIR /home/frontend/
-RUN npm install
-
-WORKDIR /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
+WORKDIR /home/sinwebapp/
 RUN pip install -r ./requirements.txt
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get install -y nodejs
+RUN npm install -g @angular/cli@10.1.1
 
-COPY /scripts/ /home/scripts/
-COPY /sinwebapp/ /home/sinwebapp/
+# DEFINE VOLUMES
+VOLUME /home/sinwebapp/ /home/frontend/
 
-## BUILD FRONTEND
-WORKDIR /home/frontend/
-COPY /frontend/  /home/frontend/
-RUN ng build --prod --output-hashing none
-
-# PRODUCTION SERVER / DEVELOPMENT SERVER PORT
+# PRODUCTION / DEVELOPMENT SERVER PORT
 EXPOSE 8000 4200
 
-# MOUNT VOLUMES & START UP
-VOLUME /home/sinwebapp/ /home/frontend/ /home/scripts/
+# START UP SCRIPTS
 WORKDIR /home/scripts/
+COPY /scripts/ /home/scripts/
 CMD ["bash","./init-app.sh","container"]
