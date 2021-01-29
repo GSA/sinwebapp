@@ -20,7 +20,7 @@ else
         rm -r $SCRIPT_DIR/../sinwebapp/static/
         log '>> Restoring \e[4m/static/favicon.ico\e[0m' $SCRIPT_NAME
         mkdir $SCRIPT_DIR/../sinwebapp/static/
-        touch .gitkeep
+        touch $SCRIPT_DIR/../sinwebapp/static/.gitkeep
         cp $SCRIPT_DIR/../sinwebapp/favicon.ico $SCRIPT_DIR/../sinwebapp/static/favicon.ico
         rm $SCRIPT_DIR/../sinwebapp/favicon.ico
     fi

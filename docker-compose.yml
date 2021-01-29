@@ -8,8 +8,10 @@ services:
             - "4200:4200"
         links:
             - "database"
+            - "mcaas_db"
         depends_on: 
             - "database"
+            - "mcaas_db"
         env_file:
             - ./env/container.env
         volumes:

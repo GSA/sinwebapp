@@ -36,7 +36,7 @@ def upload_file(request):
             if mime_type in ALLOWED_MIMETYPES:
                 logger.info('MIME Type Validated')
                 # request.FILES['files'].seek(0)
-                if APP_ENV == "cloud":
+                if APP_ENV == "cloud" or APP_ENV == "mcass":
 
                     sin = str(request.POST['sin_number'])
                     file_name=f'{sin}.pdf'
@@ -52,7 +52,7 @@ def upload_file(request):
                         logger.warn('Error Uploading File')
                         response = { 'message': 'Error Uploading File To S3' }
                         return JsonResponse(response, status=500, safe=False)
-
+    
                 else:
 
                     if APP_ENV == "container":
