@@ -39,6 +39,10 @@ def upload_file(request):
                 if APP_ENV == "cloud" or APP_ENV == "mcass":
 
                     sin = str(request.POST['sin_number'])
+
+                    # TODO: logic for checking if sin-number exists and 
+                    #       and appending incremented integer to file name
+
                     file_name=f'{sin}.pdf'
                     logger.info('Uploading File: "%s" To S3 Storage Bucket', file_name)
                     upload_check = upload(request.FILES['file'], file_name)
@@ -63,6 +67,10 @@ def upload_file(request):
 
                     local_upload = request.FILES['file']
                     sin = str(request.POST['sin_number'])
+
+                    # TODO: logic for checking if sin-number exists and 
+                    #       and appending incremented integer to file name
+                    
                     save_file=os.path.join(LOCAL_SAVE_DIR,f"{sin}.pdf")
                     with open(save_file,'wb+') as destination:
                         for chunk in local_upload.chunks():

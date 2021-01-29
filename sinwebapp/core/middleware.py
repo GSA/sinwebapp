@@ -29,7 +29,7 @@ class DebugMiddleware:
                             print_value = value[:20]
                         else:
                             print_value = value
-                        self.logger.info('>>> Session Variable %s = %s', print_key, value)
+                        self.logger.info('>>> Session Variable %s = %s', print_key, print_value)
 
                 if hasattr(request, 'user'):
                     self.logger.info('>>> Session User: %s', request.user)
