@@ -29,18 +29,18 @@ WORKDIR /home/sinwebapp/
 COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
 
+COPY /scripts/ /home/scripts/
+COPY /sinwebapp/ /home/sinwebapp/
+
 ## BUILD FRONTEND
 WORKDIR /home/frontend/
 COPY /frontend/  /home/frontend/
 RUN ng build --prod --output-hashing none
 
-COPY /scripts/ /home/scripts/
-COPY /sinwebapp/ /home/sinwebapp/
-VOLUME /home/sinwebapp/ /home/frontend/ /home/scripts/
-
 # PRODUCTION SERVER / DEVELOPMENT SERVER PORT
 EXPOSE 8000 4200
 
-# START UP COMMAND
+# MOUNT VOLUMES & START UP
+VOLUME /home/sinwebapp/ /home/frontend/ /home/scripts/
 WORKDIR /home/scripts/
 CMD ["bash","./init-app.sh","container"]
