@@ -35,7 +35,7 @@ VERSION=metadata['version']
 MAINTAINER=metadata['maintainer']
 
 # Development Mode Configuration
-DEVELOPMENT_MODE=os.environ.setdefault('DEVELOPMENT', 'False')
+DEVELOPMENT_MODE = True if os.getenv('DEVELOPMENT_MODE').lower() == 'true' else False
 DEV_EMAIL="chinchalinchin@gmail.com"
 DEV_GROUP="admin_group"
 
