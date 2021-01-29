@@ -81,6 +81,11 @@ def init_default_users(app, schema_editor):
         reviewer_group.user_set.add(reviewer)
         reviewer.save()
 
+        dev = User.objects.create_user(username=settings.DEV_USER, email=settings.DEV_EMAIL)
+        dev_group = Group.objects.get(name=settings.DEV_GROUP)
+        dev_group.user_set.add(dev)
+        dev.save()
+
     logger.info("Creating Test Reviewer")
     try:
         test_reviewer = User.objects.create_user(username="test_reviewer", email="theodros.desta@gsa.gov")

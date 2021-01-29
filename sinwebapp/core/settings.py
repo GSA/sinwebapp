@@ -36,6 +36,7 @@ MAINTAINER=metadata['maintainer']
 
 # Development Mode Configuration
 DEVELOPMENT_MODE = True if os.getenv('DEVELOPMENT_MODE').lower() == 'true' else False
+DEV_USER="yahweh"
 DEV_EMAIL="chinchalinchin@gmail.com"
 DEV_GROUP="admin_group"
 
@@ -218,7 +219,12 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
     AUTHENTICATION_BACKENDS = [ 'uaa_client.authentication.UaaBackend' ]
     LOGIN_URL = 'uaa_client:login'
     LOGIN_REDIRECT_URL = '/success'
-    UAA_APPROVED_DOMAINS = ['gsa.gov']
+    
+    if DEVELOPMENT_MODE:
+        UAA_APPROVED_DOMAINS = ['*']
+    else:
+        UAA_APPROVED_DOMAINS = ['gsa.gov']
+
     UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID', 'fakeclientid')
     UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET', 'fakeclientsecret')
 
