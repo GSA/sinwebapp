@@ -82,7 +82,7 @@ jobs:
             - run:
                 name: Push to CloudFoundry 
                 command: |
-                    bash ./scripts/cc-cf-push.sh dev
+                    bash ./scripts/cloud/cc-cf-push.sh dev
 
 workflows: 
     build_and_deploy: 
