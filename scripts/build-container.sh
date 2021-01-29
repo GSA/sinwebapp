@@ -14,7 +14,7 @@ then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
     log '>> Initializing Local Environment' $SCRIPT_NAME
-    source $SCRIPT_DIR/init-env.sh
+    source $SCRIPT_DIR/util/init-env.sh
     SCRIPT_NAME='\e[4mbuild-container\e[0m'
     log ">> Python Version: ${PYTHON_VERSION}" $SCRIPT_NAME
     log ">> Angular Version: ${ANGULAR_VERSION}" $SCRIPT_NAME

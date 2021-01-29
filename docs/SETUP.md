@@ -39,7 +39,7 @@ Before you build the application, you will need to ensure <b>postgres</b> is run
 
 Make sure you activate your <i>local.env</i> file before running any commands through the <b>django-admin</b>. Make sure you have copied the <i>.sample.env</i> and adjusted the variable values. Source the <i>init-env.sh</i> script to get started, i.e.
 
-> source PROJECT_ROOT/scripts/init-env.sh
+> source PROJECT_ROOT/scripts/util/init-env.sh
 
 This will load in neccessary environment variables that will configure Django's connection to the database, email server, etc. Open the <i>local.env</i> for more documentation on all the configuration options.
 
@@ -59,7 +59,7 @@ Next, you will need to build the frontend and deploy it onto the server. You cou
 
 > bash init-app.sh local
 
-The environment file in <i>/env/local.env</i> defines the local environment configuration. It is loaded during the <i>init-app.sh</i> script if an argument of "local" is provided, in case you forgot to source the <i>/scripts/init-env.sh</i> script to set the environment variables.
+The environment file in <i>/env/local.env</i> defines the local environment configuration. It is loaded during the <i>init-app.sh</i> script if an argument of "local" is provided, in case you forgot to source the <i>/scripts/util/init-env.sh</i> script to set the environment variables.
 
 ## Container Environment
 

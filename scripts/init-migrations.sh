@@ -5,7 +5,7 @@ SCRIPT_DES="This script will scrub the existing migrations from the application,
     and then create fresh migrations to ensure the model is up to date. Ensure \e[3mlocal.env\e[0m${nl}\
      file is loaded if executing this script locally. In other words, before running this ${nl}\
     on your local computer, configure your \e[3mlocal.env\e[0m file and then execute \
-    ${nl}${nl}           source \e[3m$SCRIPT_DIR/init-env.sh\e[0m ${nl}${nl}\
+    ${nl}${nl}           source \e[3m$SCRIPT_DIR/util/init-env.sh\e[0m ${nl}${nl}\
     which will activate the \e[3mlocal.env\e[0m file.${nl}\
          This script will leave the terminal within the $SCRIPT_DIR/../sinwebapp/
 ${nl} 

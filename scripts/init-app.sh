@@ -25,7 +25,7 @@ else
     if [ "$1" == "local" ]
     then
         log '>> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
-        source $SCRIPT_DIR/init-env.sh
+        source $SCRIPT_DIR/util/init-env.sh
         
         log '>> Invoking \e[3msetup-frontend-env.sh\e[0m Script' $SCRIPT_NAME
         bash $SCRIPT_DIR/setup/setup-frontend-env.sh local
