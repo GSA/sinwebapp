@@ -19,7 +19,7 @@ def is_authenticated_or_dev_mode(request):
     if settings.DEVELOPMENT_MODE:
         return True
     else:
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return True
         else:
             return False
