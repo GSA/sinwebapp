@@ -14,7 +14,7 @@ then
     help_print "$SCRIPT_DES" $SCRIPT_NAME
 else
     log '>> Initializing Local Environment' $SCRIPT_NAME
-    source $SCRIPT_DIR/util/init-env.sh
+    source $SCRIPT_DIR/util/init-env.sh container
         # reset because sourcing overrides it
     SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     SCRIPT_NAME='\e[4mbuild-container\e[0m'

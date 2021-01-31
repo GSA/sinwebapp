@@ -65,7 +65,7 @@ else
     bash $SCRIPT_DIR/setup/setup-frontend-env.sh cloud
 
     log '>> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
-    source $SCRIPT_DIR/util/init-env.sh
+    source $SCRIPT_DIR/util/init-env.sh cloud
         # reset SCRIPT_NAME since 'source' overrides with 'init-env' local variable.
     SCRIPT_NAME='\e[4mcf-push\e[0m'
 

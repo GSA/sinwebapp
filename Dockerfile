@@ -14,20 +14,24 @@ WORKDIR /home/
 RUN mkdir ./sinwebapp/ && mkdir ./frontend/ && mkdir ./scripts
 
 # APPLICATION DEPENDENCIES
-COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 WORKDIR /home/sinwebapp/
+COPY /sinwebapp/requirements.txt /home/sinwebapp/requirements.txt
 RUN pip install -r ./requirements.txt
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 RUN npm install -g @angular/cli@10.1.1
 
-# DEFINE VOLUMES
-VOLUME /home/sinwebapp/ /home/frontend/
+# COPY APPLICATION (for production)
+COPY /sinwebapp /home/sinwebapp
+COPY /frontend /home/frontend
+
+# DEFINE VOLUMES (for development)
+VOLUME /home/frontend/ /home/sinwebapp/
 
 # PRODUCTION / DEVELOPMENT SERVER PORT
 EXPOSE 8000 4200
 
 # START UP SCRIPTS
 WORKDIR /home/scripts/
-COPY /scripts/ /home/scripts/
+COPY /scripts /home/scripts
 CMD ["bash","./init-app.sh","container"]

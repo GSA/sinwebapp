@@ -35,7 +35,7 @@ VERSION=metadata['version']
 MAINTAINER=metadata['maintainer']
 
 # Development Mode Configuration
-DEVELOPMENT_MODE = True if os.getenv('DEVELOPMENT_MODE').lower() == 'true' else False
+DEVELOPMENT_MODE = True if os.getenv('DEVELOPMENT').lower() == 'true' else False
 DEV_USER="yahweh"
 DEV_EMAIL="chinchalinchin@gmail.com"
 DEV_GROUP="admin_group"
@@ -73,7 +73,7 @@ elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
 
     elif APP_ENV == 'local_mcaas':
         db_creds={
-            'host': os.getenv('MCAAS_AURORA_HOSTNAME'),
+            'host': os.getenv('MYSQL_HOST'),
             'db_name': os.getenv('MYSQL_DATABASE'),
             'username': os.getenv('MYSQL_USER'),
             'password': os.getenv('MYSQL_PASSWORD'),

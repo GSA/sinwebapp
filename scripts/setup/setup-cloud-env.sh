@@ -60,7 +60,7 @@ else
     bash $SCRIPT_DIR/../init-scripts.sh
 
     log '>> Invoking \e[3minit-env.sh\e[0m Script' $SCRIPT_NAME
-    source $SCRIPT_DIR/../util/init-env.sh
+    source $SCRIPT_DIR/../util/init-env.sh cloud
 
     if [ "$2" == "rebuild" ]
     then

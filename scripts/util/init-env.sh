@@ -13,9 +13,9 @@ else
     if [ -f "$SCRIPT_DIR/../../env/local.env" ]
     then
         set -o allexport
-        source $SCRIPT_DIR/../../env/local.env
+        source $SCRIPT_DIR/../../env/$1.env
         set +o allexport
     else
-        log 'Please Configure \e[4mlocal.env\e[0m File' $SCRIPT_NAME
+        log "Please Configure \e[4m$1.env\e[0m File And Reinvoke Script." $SCRIPT_NAME
     fi
 fi

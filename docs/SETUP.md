@@ -7,17 +7,21 @@
 
 ## Quickstart Pointers
 
-1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/cf-push.sh</i> with the argument <i>build</i>, i.e.,
+1. After logging into the <i>cf cli</i> and making changes to the code, use <i>/scripts/cloud/cf-push.sh</i> with the argument <i>build</i>, i.e.,
 
-> bash PROECT_ROOT/scripts/cf-push.sh build
+> bash PROECT_ROOT/scripts/cloud/cf-push.sh build
 
-This will install dependencies and build the application properly before pushing to the cloud. This is done because the Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment. This script contains the commands to build the Angular frontend properly for production deployment.
+This will install dependencies and build the application properly before pushing to the cloud.gov. This is done because the Angular Frontend needs rebuilt and the artifacts deployed to the cloud in order for changes in code to be reflected in the deployment. This script contains the commands to build the Angular frontend properly for production deployment.
 
 2. In the <i>/env/</i>, you will find a <i>.sample.env</i> file that you will need to copy into <i>/env/local.env</i> and <i>/env/container.env</i>. These environment variables are pulled in through the <i>/sinwebapp/core/settings.py</i> to provide application-wide configuration for various features and functionality, such as the database connection, the email notification connection, etc. These files will automatically be created and copied if you run the <i>/scripts/setup/setup-local-env.sh</i> script, but they will still need adjusted for your specific environment. See .env files for more documentation.
 
-3. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. It will link to a <b>postgres</b> database over a Docker network on port 5432. The database is not directly exposed to localhost, so it can only be accessed through the application's api. Once you are done, use <i>docker-compose down</i> to remove the containers running the application through Docker Compose. Note: A useful script is the <i>/scripts/build-container.sh</i>, as it will automatically remove any running containers and purge any dangling containers leftover from previous builds, before building a fresh image of the application and orchestrating it with a postgres database. To accomplish this, use the script without any arguments,
+3. <i>docker-compose up</i> will create a local image of the application and run it on a container exposed at <i>localhost:8000</i>. It will link to a <b>postgres</b> database over a Docker network on port 5432. The database is not directly exposed to localhost, so it can only be accessed through the application's api. Once you are done, use <i>docker-compose down</i> to remove the containers running the application through Docker Compose. Note: A useful script is the <i>/scripts/build-container.sh</i>, as it will automatically remove any running containers and purge any dangling containers leftover from previous builds, before building a fresh image of the application. To accomplish this, use the script without any arguments,
 
 > bash PROJECT_ROOT/scripts/build-container.sh
+
+And then execute,
+
+> docker-compose up
 
 ## Prerequisites
 
@@ -37,9 +41,9 @@ This will install dependencies and build the application properly before pushing
 
 Before you build the application, you will need to ensure <b>postgres</b> is running on port 5432 and has an empty database the application can connect to. By default, the application searches for a database named <i>sinwebapp</i>. You can edit the .<i>.env</i> file to configure your database connection, which in turn gets feed into <b>db_creds</b> variable in <i>/sinwebapp/core/settings.py</i>. The models and migrations from Django will take care of the actual schema of the database, but you must ensure the database atleast exists first.
 
-Make sure you activate your <i>local.env</i> file before running any commands through the <b>django-admin</b>. Make sure you have copied the <i>.sample.env</i> and adjusted the variable values. Source the <i>init-env.sh</i> script to get started, i.e.
+Make sure you activate your <i>local.env</i> file before running any commands through the <b>django-admin</b>. Make sure you have copied the <i>.sample.env</i> and adjusted the variable values. Source the <i>init-env.sh</i> script and provide it an argumnet of <i>local</i> to get started, i.e.
 
-> source PROJECT_ROOT/scripts/util/init-env.sh
+> source PROJECT_ROOT/scripts/util/init-env.sh local
 
 This will load in neccessary environment variables that will configure Django's connection to the database, email server, etc. Open the <i>local.env</i> for more documentation on all the configuration options.
 
