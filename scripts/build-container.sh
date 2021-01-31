@@ -1,5 +1,5 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SCRIPT_NAME='\e[4mbuild-container\e[0m'
+SCRIPT_NAME='build-container'
 nl=$'\n'
 SCRIPT_DES="This script will stop and remove any Docker containers currently \
 running on your machine,${nl}   clear the Docker cache, configure the frontend \
@@ -37,6 +37,5 @@ else
     log '>> Deleting Dangling Images' $SCRIPT_NAME
     docker rmi $(docker images --filter "dangling=true" -q)
 
-    log '>> Orchestrating Images' $SCRIPT_NAME
-    docker-compose up
+    log ">> Application Image Built. Run \e[3mdocker-compose up\e[0m To Start \e[7mCCDA\e[0m" $SCRIPT_NAME
 fi 

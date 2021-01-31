@@ -23,7 +23,6 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         
         if form.is_valid():
-
             logger.info('Form Validated')
             logger.info('Verifying MIME Type')
                 # TODO: request.FILES['file'].read() clears file buffer, so that
