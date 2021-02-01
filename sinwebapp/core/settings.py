@@ -57,7 +57,6 @@ if APP_ENV == 'cloud':
     db_creds = json.loads(os.getenv('VCAP_SERVICES'))['aws-rds'][0]['credentials']
 
 elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
-    # TODO: pull correct mcaas S3 credentials
     aws_creds={
         'bucket': os.getenv('AWS_BUCKET_NAME'),
         'region': os.getenv('AWS_DEFAULT_REGION'),
@@ -79,7 +78,6 @@ elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
             'password': os.getenv('MYSQL_PASSWORD'),
             'port': os.getenv('MYSQL_PORT')
         }
-
 
 elif APP_ENV == 'local' or APP_ENV == 'container':
     aws_creds={
@@ -125,7 +123,9 @@ elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
 ROOT_URLCONF = 'core.urls'
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# Django Module Configuration
+# Django Module & Middleware Order Configuration
+
+    # Modules Used Across Environments
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -140,15 +140,10 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'files.apps.FilesConfig'
 ]
+
 if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
     INSTALLED_APPS += ['uaa_client']
-elif APP_ENV == 'mcaas':
-    # TODO
 
-    pass
-
-# Middleware Order Configuration
-if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
     MIDDLEWARE = [
         'corsheaders.middleware.CorsMiddleware',
         'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
@@ -165,7 +160,6 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
     ]
 
 elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
-    # TODO
     MIDDLEWARE = [
         'corsheaders.middleware.CorsMiddleware',
         'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
