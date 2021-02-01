@@ -61,6 +61,7 @@ elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
         'bucket': os.getenv('AWS_BUCKET_NAME'),
         'region': os.getenv('AWS_DEFAULT_REGION'),
     }
+
     if APP_ENV == 'mcaas':
         db_creds={
             'host': os.getenv('MCAAS_AURORA_HOSTNAME'),
@@ -124,6 +125,7 @@ ROOT_URLCONF = 'core.urls'
 WSGI_APPLICATION = 'core.wsgi.application'
 
 # Django Module & Middleware Order Configuration
+# NOTE: MIDDLEWARE ORDER MATTERS!
 
     # Modules Used Across Environments
 INSTALLED_APPS = [
@@ -140,39 +142,33 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'files.apps.FilesConfig'
 ]
+    # Middleware Use Across Enviroments
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'core.middleware.DebugMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware'
+]
 
+    # Environment Specific Modules and Middleware
 if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
     INSTALLED_APPS += ['uaa_client']
 
-    MIDDLEWARE = [
-        'corsheaders.middleware.CorsMiddleware',
-        'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
-        'django.middleware.security.SecurityMiddleware',
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'core.middleware.DebugMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'uaa_client.middleware.UaaRefreshMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+    MIDDLEWARE += [ 'uaa_client.middleware.UaaRefreshMiddleware']
 
 elif APP_ENV == 'mcaas' or APP_ENV == 'local_mcaas':
-    MIDDLEWARE = [
-        'corsheaders.middleware.CorsMiddleware',
-        'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
-        'django.middleware.security.SecurityMiddleware',
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'core.middleware.DebugMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+    # MCaas-specific Middleware Goes Here
+    pass
+
+MIDDLEWARE += [
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 # Template Configuration
 TEMPLATES = [
@@ -224,8 +220,8 @@ if APP_ENV == 'local' or APP_ENV == 'container' or APP_ENV == 'cloud':
     else:
         UAA_APPROVED_DOMAINS = ['gsa.gov']
 
-    UAA_CLIENT_ID = os.getenv('UAA_CLIENT_ID', 'fakeclientid')
-    UAA_CLIENT_SECRET = os.getenv('UAA_CLIENT_SECRET', 'fakeclientsecret')
+    UAA_CLIENT_ID = os.environ.setdefault('UAA_CLIENT_ID', 'fakeclientid')
+    UAA_CLIENT_SECRET = os.environ.setdefault('UAA_CLIENT_SECRET', 'fakeclientsecret')
 
     if APP_ENV == 'cloud':
         UAA_LOGOUT_URL = 'https://login.fr.cloud.gov/logout.do'

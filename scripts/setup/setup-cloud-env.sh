@@ -131,6 +131,8 @@ else
     cf set-env $1 EMAIL_HOST $EMAIL_HOST
     cf set-env $1 EMAIL_HOST_USER $EMAIL_HOST_USER
     cf set-env $1 EMAIL_HOST_PASSWORD $EMAIL_HOST_PASSWORD
+    cf set-env $1 DEVELOPMENT $DEVELOPMENT
+    cf set-env $1 DEBUG $DEBUG
 
     log '>> Environment built on the Cloud. Use \e[3mcf-push.sh\e[0m to push application onto the Cloud.'
 fi

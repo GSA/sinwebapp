@@ -28,6 +28,16 @@ else
     log '>> Clearing Docker Cache' $SCRIPT_NAME
     docker system prune -f
 
+    
+    for arg in "$@"
+    do 
+        if [ "$arg" == "--fresh" ] || [ "$arg" == "-f" ]
+        then
+            log "Pruning Docker Volumes From Prior Builds" $SCRIPT_NAME
+            bash $SCRIPT_DIR/clean-app.sh
+        fi
+    done
+
     log '>> Configuring Application Frontend' $SCRIPT_NAME
     bash $SCRIPT_DIR/setup/setup-frontend-env.sh container
 
