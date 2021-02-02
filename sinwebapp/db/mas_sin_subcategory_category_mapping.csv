@@ -201,6 +201,7 @@ OLM,G06,Complementary SINs,P,G,Miscellaneous
 4PL,G06,Complementary SINs,P,G,Miscellaneous
 541611,H01,Business Administrative Services,T,H,Professional Services
 561450,H01,Business Administrative Services,T,H,Professional Services
+" 562910RMI",H02,Environmental Services,T,H,Professional Services
 541620,H02,Environmental Services,T,H,Professional Services
 562112,H02,Environmental Services,T,H,Professional Services
 562910REM,H02,Environmental Services,T,H,Professional Services
@@ -229,11 +230,17 @@ OLM,G06,Complementary SINs,P,G,Miscellaneous
 541910,H08,Marketing and Public Relations,T,H,Professional Services
 541922,H08,Marketing and Public Relations,T,H,Professional Services
 561920,H08,Marketing and Public Relations,T,H,Professional Services
+541330EMI,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
 541330ENG,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
 541370GIS,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
 541420,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
 541690,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541713,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541714,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
 541715,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541715AIR,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541715APM,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
+541720,H09,Technical and Engineering Services (Non IT),T,H,Professional Services
 333318TDTM,H10,Training,2,H,Professional Services
 611TRAINAW,H10,Training,2,H,Professional Services
 611430,H10,Training,2,H,Professional Services
