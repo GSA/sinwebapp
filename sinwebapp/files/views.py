@@ -35,7 +35,7 @@ def upload_file(request):
             if mime_type in ALLOWED_MIMETYPES:
                 logger.info('MIME Type Validated')
                 # request.FILES['files'].seek(0)
-                if APP_ENV == "cloud" or APP_ENV == "mcass":
+                if APP_ENV == "cloud" or APP_ENV == "mcaas":
 
                     sin = str(request.POST['sin_number'])
 
