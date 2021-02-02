@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CCDA';
-  subtitle = 'Core Contract Data Automation';
+  subtitle = 'Core Contract Data Automation v1';
 }

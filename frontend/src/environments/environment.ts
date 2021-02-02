@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  development: false,
+  development: true,
   debug: true
 };
 
