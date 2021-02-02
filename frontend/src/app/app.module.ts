@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule } from '@angular/common/http';
-import {APP_BASE_HREF} from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpClientXsrfModule,
+} from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { UserDisplayComponent } from './components/user-display/user-display.component';
@@ -21,7 +25,7 @@ import { EditDisplayComponent } from './components/edit-display/edit-display.com
     SubmitDisplayComponent,
     ReviewDisplayComponent,
     LoggerComponent,
-    EditDisplayComponent
+    EditDisplayComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,15 +34,15 @@ import { EditDisplayComponent } from './components/edit-display/edit-display.com
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
-      headerName: 'X-CSRFToken'
+      headerName: 'X-CSRFToken',
     }),
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  providers: [     
-    CookieService,       
-    [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
-    [{provide: APP_BASE_HREF, useValue : '/' }]
+  providers: [
+    CookieService,
+    [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+    [{ provide: APP_BASE_HREF, useValue: '/' }],
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
